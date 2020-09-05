@@ -10,7 +10,7 @@
 
 ## How to use.
 
-First, make sure of enabling the `#native-file-system-api` flag in `chrome://flags`. Enter [chrome://flags/#native-file-system-api](chrome://flags/#native-file-system-api) in your address bar to change your setting. 
+First, make sure of enabling the `#native-file-system-api` flag in `chrome://flags`. Enter "[chrome://flags/#native-file-system-api](chrome://flags/#native-file-system-api)" in your address bar to change your setting. 
 
  This use localstorage to store URL lists temporary.  
 
