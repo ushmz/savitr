@@ -2,14 +2,17 @@
   "name": "savitri",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.3",
-    "typescript": "^3.7.5"
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chrome": "0.0.122",
+    "@types/webpack": "^4.41.21",
+    "copy-webpack-plugin": "^6.0.3",
+    "ts-loader": "^8.0.3",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
