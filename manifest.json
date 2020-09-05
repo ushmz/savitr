@@ -29,7 +29,6 @@
     "permissions": [
         "*://*.google.com/search?*",
         "downloads",
-        "filesystem",
         "storage"
     ]
 }
