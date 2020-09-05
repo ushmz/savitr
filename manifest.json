@@ -3,6 +3,10 @@
     "version": "0.0.1",
     "manifest_version": 2,
     "description": "",
+    "browser_action": {
+        "default_title": "text appear when hover the pointer",
+        "default_popup": "src/popup.html"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -10,14 +14,22 @@
                 "*://*.google.co.jp/search?*"
             ],
             "js": [
-                "src/index.js"
+                "src/collect.js"
             ]
         }
     ],
+    "background": {
+        "scripts": [
+            "src/background.js"
+        ]
+    },
     "web_accessible_resources": [
         ""
     ],
     "permissions": [
-        "*://*.google.com/search?*"
+        "*://*.google.com/search?*",
+        "downloads",
+        "filesystem",
+        "storage"
     ]
 }
