@@ -14,7 +14,7 @@ First, make sure of enabling the `#native-file-system-api` flag in `chrome://fla
 
  This use localstorage to store URL lists temporary.  
 
-![ScreenShot01](src/img/01.png)
+![ScreenShot01](public/img/01.png)
 
 Press `Export log file` to save all URLs listed.
 Press `Clear LocalStorage` to delete all URLs listed.
