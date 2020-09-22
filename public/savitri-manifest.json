@@ -1,0 +1,34 @@
+{
+    "name": "savitri",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "This is an extension expose data collecting and make them aware of their privacy.",
+    "browser_action": {
+        "default_title": "text appear when hover the pointer",
+        "default_popup": "src/popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.google.com/search?*",
+                "*://*.google.co.jp/search?*"
+            ],
+            "js": [
+                "src/index.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "src/background.js"
+        ]
+    },
+    "web_accessible_resources": [
+        ""
+    ],
+    "permissions": [
+        "*://*.google.com/search?*",
+        "downloads",
+        "storage"
+    ]
+}
