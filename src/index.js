@@ -16,45 +16,9 @@
       setTimeout( () => {
         let pnl = document.getElementById(`annotate${idx}`);
         pnl.remove();
-      }, 500)
+      }, 500);
     });
   });
- 
-  let param = collectURL();
-
-  async function writeFile(fileHandle, contents) {
-    const writable = await fileHandle.createWritable();
-    //await writer.truncate(0);
-    await writable.write(contents);
-    await writable.close();
-  }
-
-  const saveFileOptions = {
-    type: 'save-file',
-    accepts: [{
-      description: 'Json file',
-      mimeTypes: ['application/json'],
-      extentions: ['json']
-    }]
-  };
-
-  async function exportAll() {
-    const handle = await window.chooseFileSystemEntries(saveFileOptions);
-    let content = '';
-  
-    for (let i = 0; i < localStorage.length; i++) {
-      let k = localStorage.key(i);
-      if (k.match(/savitri/)) {
-        let v = localStorage.getItem(k);
-        console.log(`${k}: ${v}`);
-        content += `    "${k}": "${v}",\n`;
-      }
-    }
-    console.log(content);
-    await writeFile(handle, `{\n${content.slice(0, -1)}\n}`);
-  };
-
-  exportAll();
 
 })();
 
@@ -62,6 +26,10 @@ function createPanel(suffix, contents) {
   let panel = document.createElement('div');
   panel.id = `annotate${suffix}`;
   panel.style.backgroundColor = '#161821';
+  panel.style.width = '360px';
+  panel.style.height = '240px';
+  panel.style.position = 'absolute';
+  panel.style.left = '640px';
   let testp = document.createElement('p');
   testp.innerText = contents;
   testp.style.color = 'red';

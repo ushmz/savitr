@@ -1,10 +1,10 @@
 {
-    "name": "savitri",
+    "name": "gayatri",
     "version": "0.0.1",
     "manifest_version": 2,
-    "description": "",
+    "description": "This is an extension to collect various URL for `savitri`.",
     "browser_action": {
-        "default_title": "text appear when hover the pointer",
+        "default_title": "",
         "default_popup": "src/popup.html"
     },
     "content_scripts": [
@@ -14,7 +14,7 @@
                 "*://*.google.co.jp/search?*"
             ],
             "js": [
-                "src/index.js"
+                "src/collect.js"
             ]
         }
     ],
@@ -23,9 +23,6 @@
             "src/background.js"
         ]
     },
-    "web_accessible_resources": [
-        ""
-    ],
     "permissions": [
         "*://*.google.com/search?*",
         "downloads",
