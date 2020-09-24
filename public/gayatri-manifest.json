@@ -14,7 +14,7 @@
                 "*://*.google.co.jp/search?*"
             ],
             "js": [
-                "src/collect.js"
+                "src/index.js"
             ]
         }
     ],
