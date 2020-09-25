@@ -27,8 +27,6 @@
         ""
     ],
     "permissions": [
-        "*://*.google.com/search?*",
-        "downloads",
-        "storage"
+        "*://*.google.com/search?*"
     ]
 }

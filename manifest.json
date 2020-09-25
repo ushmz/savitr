@@ -24,7 +24,8 @@
         ]
     },
     "web_accessible_resources": [
-        ""
+        "src/SQLRepository.js",
+        "db/sql/*.sql"
     ],
     "permissions": [
         "*://*.google.com/search?*",
