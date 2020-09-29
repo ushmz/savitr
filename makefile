@@ -2,6 +2,7 @@
 savitri:
 	mkdir -p savitri/src
 	cp -r src/index.js savitri/src/index.js
+	cp -r src/savitri-popup.html savitri/src/popup.html 
 	cp public/savitri-manifest.json savitri/manifest.json
 	cp package.json savitri/package.json
 	mkdir -p savitri/db/sql
@@ -17,7 +18,7 @@ gayatri:
 	cp -r src/collect.js gayatri/src/index.js
 	cp -r src/background.js gayatri/src/background.js
 	cp -r src/lsHandler.js gayatri/src/lsHandler.js
-	cp -r src/popup.html gayatri/src/popup.html
+	cp -r src/gayatri-popup.html gayatri/src/popup.html
 	cp public/gayatri-manifest.json gayatri/manifest.json
 	cp package.json gayatri/package.json
 	cd gayatri
@@ -26,3 +27,14 @@ gayatri:
 clean:
 	rm -rf ./savitri
 	rm -rf ./gayatri
+
+delusion:
+	rm -rf ./savitri
+	rm -rf ./gayatri
+
+cleansav:
+	rm -rf ./savitri
+
+cleangay:
+	rm -rf ./gayatri
+

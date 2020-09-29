@@ -4,10 +4,12 @@
     return elm.className === 'g'
   });
 
+  db = getConnection();
+
   Array.from(targets).map( (t, idx) => {
     let baseURL = t.children[t.children.length-1].children[0].children[0].href;
-    // let content = getCookieList(getDomain(baseURL));
-    const panel = createPanel(idx, baseURL);
+    let contents = getCookieList(db, getDomain(baseURL));
+    const panel = createPanel(idx, contents);
     t.addEventListener('mouseover', (eve) => {
       t.parentNode.insertBefore(panel, t);
       // eve.target.style.background='#161821';
@@ -20,9 +22,12 @@
       }, 500);
     });
   });
+
+
 })();
 
 function createPanel(suffix, contents) {
+  let text = contents ? contents.map( r => r.domain ).join(',') : 'No cookies';
   let panel = document.createElement('div');
   panel.id = `annotate${suffix}`;
   panel.style.backgroundColor = '#161821';
@@ -31,17 +36,16 @@ function createPanel(suffix, contents) {
   panel.style.position = 'absolute';
   panel.style.left = '640px';
   let testp = document.createElement('p');
-  testp.innerText = contents;
+  testp.innerText = text;
   testp.style.color = 'red';
   panel.appendChild(testp);
   return panel;
 }
 
 function getDomain(url) {
-  let re = /https?:\/\/[^\/]+\//;
+  let re = /(https?:\/\/[^\/]+)\//;
   let matched = url.match(re);
-  console.log(matched);
-  return url;
+  return matched[1];
 }
 
 function collectURL() {
@@ -74,50 +78,6 @@ function collectURL() {
  *  CONSTRAINT_ERR: 6
  *  TIMEOUT_ERR: 7
  */
-const CREATE_TABEL_COOKIE_QUERY = '\
-CREATE TABLE `cookie` (\
-  `id` INTEGER,\
-  `name` TEXT,\
-  `secure` TEXT,\
-  `path` TEXT,\
-  `domain` TEXT,\
-  `expires` TEXT,\
-  `httponly` TEXT,\
-  `expiry` TEXT,\
-  `value` TEXT,\
-  `captured` TEXT,\
-  `domain_id` INTEGER,\
-  PRIMARY KEY(`id`)\
-)'
-
-const CREATE_TABEL_PAGE_QUERY = '\
-CREATE TABLE `page` (\
-  `id` INTEGER,\
-  `time_series_num` INTEGER,\
-  `title` TEXT,\
-  `meta_desc` TEXT,\
-  `start_uri_md5` TEXT,\
-  `start_uri` TEXT,\
-  `start_uri_no_args` TEXT,\
-  `start_uri_args` TEXT,\
-  `final_uri_md5` TEXT,\
-  `final_uri` TEXT,\
-  `final_uri_no_args` TEXT,\
-  `final_uri_args` TEXT,\
-  `source` TEXT,\
-  `requested_uris` TEXT,\
-  `received_uris` TEXT,\
-  `domain_id` INTEGER,\
-  `accessed` TEXT,\
-  PRIMARY KEY(`id`)\
-)'
-
-const CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY = '\
-CREATE TABLE `page_cookie_junction` (\
-  `page_id` INTEGER,\
-  `cookie_id` INTEGER,\
-  PRIMARY KEY(`page_id`, `cookie_id`)\
-)'
 
 const GET_COOKIE_LIST_QUERY = '\
   SELECT\
@@ -129,11 +89,11 @@ const GET_COOKIE_LIST_QUERY = '\
     page_cookie_junction,\
     page\
   WHERE\
-    page.final_uri_no_args = ?\
-  AND\
     page.id = page_cookie_junction.page_id\
   AND\
     page_cookie_junction.cookie_id = cookie.id\
+  AND\
+    page.start_uri = ?\
 '
 
 const GET_REQUESTED_URIS_QUERY ='\
@@ -155,88 +115,38 @@ function getConnection() {
   );
 }
 
-async function getQueryFromFile(url) {
-  let response = await fetch(url)
-  let initQuery = await response.text();
-  let initQueryArray = initQuery.split('\n');
-  return initQueryArray;
+function ping(db) {
+  if (!db) {
+    db = getConnection();
+  }
+  return db
 }
 
-async function initialize(db) {
-  const cookieFileUrl = chrome.runtime.getURL('db/sql/cookie_dump.sql');
-  const cookieTableQueries = await getQueryFromFile(cookieFileUrl);
-
-  const pageFileUrl = chrome.runtime.getURL('db/sql/page_dump.sql');
-  const pageTableQueries = await getQueryFromFile(pageFileUrl);
-
-  const junctionFileUrl = chrome.runtime.getURL('db/sql/page_cookie_junction_dump.sql');
-  const junctionTableQueries = await getQueryFromFile(junctionFileUrl);
-
-  await db.transaction( tx =>{
-    tx.executeSql('DROP TABLE IF EXISTS `cookie`', []);
-    tx.executeSql(CREATE_TABEL_COOKIE_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
-    );
-
-    tx.executeSql('DROP TABLE IF EXISTS `page`', []);
-    tx.executeSql(CREATE_TABEL_PAGE_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
-    );
-
-    tx.executeSql('DROP TABLE IF EXISTS `page_cookie_junction`', []);
-    tx.executeSql(CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
-    );
-  });
-  
-  await db.transaction( tx => {
-    cookieTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
-        (_, err) => {
-          if (err.code !== 5) {
-            console.log('Error: ', err.message);
-          }
+function getCookieList(db, target) {
+  return db.transaction( tx =>{
+    return tx.executeSql(GET_COOKIE_LIST_QUERY, [target],
+      (_, {rows}) => {
+        if (rows.length > 0) {
+          console.log('Found', target, rows)
+          return rows;
+        } else {
+          console.log('Error', target, 'Empty result set.');
+          return;
         }
-      );
-    });
-    pageTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
-        (_, err) => {
-          if (err.code !== 5) {
-            console.log('Error: ', err.message);
-          }
-        }
-      );
-    });
-    junctionTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
-        (_, err) => {
-          if (err.code !== 5) {
-            console.log('Error: ', err.message);
-          }
-        }
-      );
-    });
+      },
+      (_, err) => {console.log(err)}
+    );
   });
 }
 
-// function getCookieList(db, uri) {
-//   db.transaction( tx =>{
-//     tx.executeSql(GET_COOKIE_LIST_QUERY)
-//   });
-// }
-
-// function getRequestedUris(db, uri) {
-//   db.transaction( tx =>{
-//     tx.executeSql(GET_REQUESTED_URIS_QUERY)
-//   });
-// }
+function getRequestedUris(db, uri) {
+  db.transaction( tx =>{
+    tx.executeSql(GET_REQUESTED_URIS_QUERY, [uri],
+      (tx, result) => {},
+      (_, err) => {}
+    );
+  });
+}
 
 function encode4SQLQuery(query) {
   return query.replace(/;[^\n]/g, '\;').replace(/[^,(\s]'[^,)\s]/g, '__quote__').replace(/\n/g, '');
