@@ -1,3 +1,7 @@
+document.getElementById('initBtn').addEventListener('click', () => {
+  initialize();
+});
+
 const CREATE_TABEL_COOKIE_QUERY = '\
 CREATE TABLE `cookie` (\
   `id` INTEGER,\
