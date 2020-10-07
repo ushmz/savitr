@@ -23,7 +23,13 @@
     });
   });
 
-
+  chrome.runtime.sendMessage({method: 'history', max: 1000}, res => {
+    if (res.status) {
+      console.log(res.data);
+    } else {
+      console.log('Invalid method.');
+    }
+  });
 })();
 
 function createPanel(suffix, contents) {
@@ -154,4 +160,10 @@ function encode4SQLQuery(query) {
 
 function decode4SQLQuery(query) {
   return query.replace(/__semicolon__/g, ';').replace(/__quote__/g, '\'');
+}
+
+function saveHistory4Xray(histories) {
+  histories.array.forEach( history => {
+    chrome.runtime.sendMessage({method: 'set', key: `savitri${history.lastVisitTime}`, value: history.url});
+  });
 }

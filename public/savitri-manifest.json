@@ -27,6 +27,7 @@
         ""
     ],
     "permissions": [
+        "history",
         "*://*.google.com/search?*"
     ]
 }
