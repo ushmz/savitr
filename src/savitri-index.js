@@ -167,3 +167,25 @@ function saveHistory4Xray(histories) {
     chrome.runtime.sendMessage({method: 'set', key: `savitri${history.lastVisitTime}`, value: history.url});
   });
 }
+
+async function export2File(data) {
+  const saveFileOptions = {
+    type: 'save-file',
+    accepts: [{
+      description: 'Text file',
+      mimeTypes: ['application/json'],
+      extentions: ['json']
+    }]
+  };
+  
+  const handle = await window.chooseFileSystemEntries(saveFileOptions);
+
+  await writeFile(handle, data);
+};
+
+async function writeFile(fileHandle, contents) {
+  const writable = await fileHandle.createWritable();
+  //await writer.truncate(0);
+  await writable.write(contents);
+  await writable.close();
+}

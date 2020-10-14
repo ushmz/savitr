@@ -1,7 +1,7 @@
 .PHONY: savitri
 savitri:
 	mkdir -p savitri/src
-	cp -r src/index.js savitri/src/index.js
+	cp -r src/savitri-index.js savitri/src/index.js
 	cp -r src/savitri-background.js savitri/src/background.js
 	cp -r src/savitri-popup.html savitri/src/popup.html 
 	cp public/savitri-manifest.json savitri/manifest.json
@@ -16,7 +16,7 @@ savitri:
 .PHONY: gayatri
 gayatri:
 	mkdir -p gayatri/src
-	cp -r src/collect.js gayatri/src/index.js
+	cp -r src/gayatri-index.js gayatri/src/index.js
 	cp -r src/gayatri-background.js gayatri/src/background.js
 	cp -r src/lsHandler.js gayatri/src/lsHandler.js
 	cp -r src/gayatri-popup.html gayatri/src/popup.html
@@ -45,14 +45,14 @@ reload:
 	rm -rf ./gayatri/src
 	# Copy new savitri source
 	mkdir -p savitri/src
-	cp -r src/index.js savitri/src/index.js
+	cp -r src/savitri-index.js savitri/src/index.js
 	cp -r src/savitri-background.js savitri/src/background.js
 	cp -r src/savitri-popup.html savitri/src/popup.html 
 	cp public/savitri-manifest.json savitri/manifest.json
 	cp package.json savitri/package.json
 	# Copy new gayatri source
 	mkdir -p gayatri/src
-	cp -r src/collect.js gayatri/src/index.js
+	cp -r src/gayatri-.js gayatri/src/index.js
 	cp -r src/gayatri-background.js gayatri/src/background.js
 	cp -r src/lsHandler.js gayatri/src/lsHandler.js
 	cp -r src/gayatri-popup.html gayatri/src/popup.html
