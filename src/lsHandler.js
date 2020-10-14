@@ -24,7 +24,7 @@ async function exportAll() {
     }]
   };
   
-  const handle = await window.chooseFileSystemEntries(saveFileOptions);
+  const handle = await window.showSaveFilePicker(saveFileOptions);
   let content = '';
   let length = await getLength();
 

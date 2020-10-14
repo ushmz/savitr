@@ -22,14 +22,6 @@
       }, 500);
     });
   });
-
-  chrome.runtime.sendMessage({method: 'history', max: 1000}, res => {
-    if (res.status) {
-      console.log(res.data);
-    } else {
-      console.log('Invalid method.');
-    }
-  });
 })();
 
 function createPanel(suffix, contents) {
@@ -70,20 +62,6 @@ function collectURL() {
   });
   return Object.fromEntries(linkEntries);
 }
-
-/**
- * Database functions
- * 
- * tx.executeSql -> Error Code
- *  UNKNOWN_ERR: 0
- *  DATABASE_ERR: 1
- *  VERSION_ERR: 2
- *  TOO_LARGE_ERR: 3
- *  QUOTA_ERR: 4
- *  SYNTAX_ERR: 5
- *  CONSTRAINT_ERR: 6
- *  TIMEOUT_ERR: 7
- */
 
 const GET_COOKIE_LIST_QUERY = '\
   SELECT\
@@ -152,40 +130,4 @@ function getRequestedUris(db, uri) {
       (_, err) => {}
     );
   });
-}
-
-function encode4SQLQuery(query) {
-  return query.replace(/;[^\n]/g, '\;').replace(/[^,(\s]'[^,)\s]/g, '__quote__').replace(/\n/g, '');
-}
-
-function decode4SQLQuery(query) {
-  return query.replace(/__semicolon__/g, ';').replace(/__quote__/g, '\'');
-}
-
-function saveHistory4Xray(histories) {
-  histories.array.forEach( history => {
-    chrome.runtime.sendMessage({method: 'set', key: `savitri${history.lastVisitTime}`, value: history.url});
-  });
-}
-
-async function export2File(data) {
-  const saveFileOptions = {
-    type: 'save-file',
-    accepts: [{
-      description: 'Text file',
-      mimeTypes: ['application/json'],
-      extentions: ['json']
-    }]
-  };
-  
-  const handle = await window.chooseFileSystemEntries(saveFileOptions);
-
-  await writeFile(handle, data);
-};
-
-async function writeFile(fileHandle, contents) {
-  const writable = await fileHandle.createWritable();
-  //await writer.truncate(0);
-  await writable.write(contents);
-  await writable.close();
 }

@@ -28,6 +28,8 @@
     ],
     "permissions": [
         "history",
+        "storage",
+        "downloads",
         "*://*.google.com/search?*"
     ]
 }

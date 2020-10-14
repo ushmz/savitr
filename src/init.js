@@ -1,6 +1,17 @@
 document.getElementById('initBtn').addEventListener('click', () => {
-  initialize();
+  initialize(getConnection());
 });
+
+const ERRORS = {
+  '0': 'UNKNOWN_ERR',
+  '1': 'DATABASE_ERR',
+  '2': 'VERSION_ERR',
+  '3': 'TOO_LARGE_ERR',
+  '4': 'QUOTA_ERR',
+  '5': 'SYNTAX_ERR',
+  '6': 'CONSTRAINT_ERR',
+  '7': 'TIMEOUT_ERR',
+}
 
 const CREATE_TABEL_COOKIE_QUERY = '\
 CREATE TABLE `cookie` (\
@@ -64,6 +75,18 @@ async function getQueryFromFile(url) {
   return initQueryArray;
 }
 
+function encode4SQLQuery(query) {
+  return query.replace(/;[^\n]/g, '\;').replace(/[^,(\s]'[^,)\s]/g, '__quote__').replace(/\n/g, '');
+}
+
+function decode4SQLQuery(query) {
+  return query.replace(/__semicolon__/g, ';').replace(/__quote__/g, '\'');
+}
+
+function logDBError(error) {
+  console.log(`${ERRORS[error.code]}(code=${error.code}): ${error.message}`);
+}
+
 async function initialize(db) {
   const cookieFileUrl = chrome.runtime.getURL('db/sql/cookie_dump.sql');
   const cookieTableQueries = await getQueryFromFile(cookieFileUrl);
@@ -75,54 +98,54 @@ async function initialize(db) {
   const junctionTableQueries = await getQueryFromFile(junctionFileUrl);
 
   // Initialize tables
-  await db.transaction( tx =>{
+  db.transaction(tx => {
     tx.executeSql('DROP TABLE IF EXISTS `cookie`', []);
     tx.executeSql(CREATE_TABEL_COOKIE_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
+      (_, __) => { },
+      (_, err) => {logDBError(err)}
     );
 
     tx.executeSql('DROP TABLE IF EXISTS `page`', []);
     tx.executeSql(CREATE_TABEL_PAGE_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
+      (_, __) => { },
+      (_, err) => logDBError(err)
     );
 
     tx.executeSql('DROP TABLE IF EXISTS `page_cookie_junction`', []);
     tx.executeSql(CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY, [],
-      (_, __) => {},
-      (_, err) => console.log('Error: ', err.message)
+      (_, __) => { },
+      (_, err) => logDBError(err) 
     );
   });
 
   // Initialize rows.
-  await db.transaction( tx => {
+  db.transaction(tx => {
     cookieTableQueries.forEach(query => {
       tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
+        (_, __) => { },
         (_, err) => {
           if (err.code !== 5) {
-            console.log('Error: ', err.message);
+            logDBError(err); 
           }
         }
       );
     });
     pageTableQueries.forEach(query => {
       tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
+        (_, __) => { },
         (_, err) => {
           if (err.code !== 5) {
-            console.log('Error: ', err.message);
+            logDBError(err);
           }
         }
       );
     });
     junctionTableQueries.forEach(query => {
       tx.executeSql(encode4SQLQuery(query), [],
-        (_, __) => {},
+        (_, __) => { },
         (_, err) => {
           if (err.code !== 5) {
-            console.log('Error: ', err.message);
+            logDBError(err);
           }
         }
       );
