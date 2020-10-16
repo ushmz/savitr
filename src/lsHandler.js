@@ -24,7 +24,7 @@ async function exportAll() {
     }]
   };
   
-  const handle = await window.chooseFileSystemEntries(saveFileOptions);
+  const handle = await window.showSaveFilePicker(saveFileOptions);
   let content = '';
   let length = await getLength();
 
@@ -32,11 +32,11 @@ async function exportAll() {
     let key = await getItemKey(i);
     if (key.match(/savitri/)) {
       let value = await getItemValue(key);
-      content += `    "${key}": "${value}",\n`;
+      content += `${value}\n`;
     }
   }
   console.log(content);
-  await writeFile(handle, `{\n${content.slice(0, -2)}\n}`);
+  await writeFile(handle, content);
 };
 
 async function writeFile(fileHandle, contents) {
