@@ -8,7 +8,7 @@
 
   Array.from(targets).map( (t, idx) => {
     let baseURL = t.children[t.children.length-1].children[0].children[0].href;
-    let contents = getCookieList(db, getDomain(baseURL));
+    let contents = getCookieList(db, getNoArgsURL(baseURL));
     const panel = createPanel(idx, contents);
     t.addEventListener('mouseover', (eve) => {
       t.parentNode.insertBefore(panel, t);
@@ -25,7 +25,7 @@
 })();
 
 function createPanel(suffix, contents) {
-  let text = contents ? contents.map( r => r.domain ).join(',') : 'No cookies';
+  let text = contents.map( r => r.domain ).join(',');
   let panel = document.createElement('div');
   panel.id = `annotate${suffix}`;
   panel.style.backgroundColor = '#161821';
@@ -40,10 +40,14 @@ function createPanel(suffix, contents) {
   return panel;
 }
 
-function getDomain(url) {
-  let re = /(https?:\/\/[^\/]+)\//;
+function getNoArgsURL(url) {
+  let re = /(https?:\/\/.+)\?/;
   let matched = url.match(re);
-  return matched[1];
+  if (matched) {
+    return matched[1];
+  } else {
+    return url;
+  }
 }
 
 function collectURL() {
@@ -107,20 +111,21 @@ function ping(db) {
 }
 
 function getCookieList(db, target) {
-  return db.transaction( tx =>{
-    return tx.executeSql(GET_COOKIE_LIST_QUERY, [target],
+  cookies = []
+  db.transaction( tx =>{
+    tx.executeSql(GET_COOKIE_LIST_QUERY, [target],
       (_, {rows}) => {
         if (rows.length > 0) {
           console.log('Found', target, rows)
-          return rows;
+          cookies = rows;
         } else {
           console.log('Error', target, 'Empty result set.');
-          return;
         }
       },
       (_, err) => {console.log(err)}
     );
   });
+  return cookies;
 }
 
 function getRequestedUris(db, uri) {
