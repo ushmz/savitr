@@ -16,47 +16,30 @@ const ERRORS = {
 const CREATE_TABEL_COOKIE_QUERY = '\
 CREATE TABLE `cookie` (\
   `id` INTEGER,\
-  `name` TEXT,\
-  `secure` TEXT,\
-  `path` TEXT,\
   `domain` TEXT,\
-  `expires` TEXT,\
   `httponly` TEXT,\
-  `expiry` TEXT,\
-  `value` TEXT,\
-  `captured` TEXT,\
-  `domain_id` INTEGER,\
-  PRIMARY KEY(`id`)\
-)'
+  `secure` INTEGER\
+);'
 
 const CREATE_TABEL_PAGE_QUERY = '\
 CREATE TABLE `page` (\
   `id` INTEGER,\
-  `time_series_num` INTEGER,\
   `title` TEXT,\
-  `meta_desc` TEXT,\
-  `start_uri_md5` TEXT,\
-  `start_uri` TEXT,\
   `start_uri_no_args` TEXT,\
-  `start_uri_args` TEXT,\
-  `final_uri_md5` TEXT,\
-  `final_uri` TEXT,\
   `final_uri_no_args` TEXT,\
-  `final_uri_args` TEXT,\
-  `source` TEXT,\
   `requested_uris` TEXT,\
-  `received_uris` TEXT,\
-  `domain_id` INTEGER,\
-  `accessed` TEXT,\
-  PRIMARY KEY(`id`)\
-)'
+  `received_uris` TEXT\
+);'
 
 const CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY = '\
 CREATE TABLE `page_cookie_junction` (\
   `page_id` INTEGER,\
-  `cookie_id` INTEGER,\
-  PRIMARY KEY(`page_id`, `cookie_id`)\
-)'
+  `cookie_id` INTEGER\
+);'
+
+const COOKIE_INSERT_QUERY = 'INSERT INTO cookie(id, domain, httponly, secure) values(?,?,?,?)';
+const PAGE_INSERT_QUERY = 'INSERT INTO `page` values(?,?,?,?,?,?)';
+const PC_JUNCTION_INSERT_QUERY = 'INSERT INTO `page_cookie_junction` values(?,?)';
 
 // name, version, description, size
 function getConnection() {
@@ -68,87 +51,101 @@ function getConnection() {
   );
 }
 
-async function getQueryFromFile(url) {
+async function getArgsFromFile(url) {
   let response = await fetch(url)
   let initQuery = await response.text();
   let initQueryArray = initQuery.split('\n');
+  console.log(initQueryArray);
   return initQueryArray;
 }
 
 function encode4SQLQuery(query) {
-  return query.replace(/;[^\n]/g, '\;').replace(/[^,(\s]'[^,)\s]/g, '__quote__').replace(/\n/g, '');
+  if (query.search(/([^,\(\s\\])([\[\];])([^,\)\s])/) != -1) {
+    return query.replace(/([^,\(\s\\])([\[\];])([^,\)\s])/g, /$1\$2$3/).replace(/\n/g, '');
+  } else {
+    return query.replace(/\n/g, '')
+  }
 }
 
 function decode4SQLQuery(query) {
   return query.replace(/__semicolon__/g, ';').replace(/__quote__/g, '\'');
 }
 
-function logDBError(error) {
-  console.log(`${ERRORS[error.code]}(code=${error.code}): ${error.message}`);
+function logDBError(line, error) {
+  console.log(`${ERRORS[error.code]}(code=${error.code}): ${error.message} at line${line}`);
 }
 
 async function initialize(db) {
-  const cookieFileUrl = chrome.runtime.getURL('db/sql/cookie_dump.sql');
-  const cookieTableQueries = await getQueryFromFile(cookieFileUrl);
+  console.log('Initializing...');
+  const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
+  const cookieTableArgs = await getArgsFromFile(cookieFileUrl);
 
-  const pageFileUrl = chrome.runtime.getURL('db/sql/page_dump.sql');
-  const pageTableQueries = await getQueryFromFile(pageFileUrl);
+  const pageFileUrl = chrome.runtime.getURL('init/page_essential.csv');
+  const pageTableArgs = await getArgsFromFile(pageFileUrl);
 
-  const junctionFileUrl = chrome.runtime.getURL('db/sql/page_cookie_junction_dump.sql');
-  const junctionTableQueries = await getQueryFromFile(junctionFileUrl);
+  const junctionFileUrl = chrome.runtime.getURL('init/pc_junction_essential.csv');
+  const junctionTableArgs = await getArgsFromFile(junctionFileUrl);
+  console.log('Queries OK.');
 
   // Initialize tables
   db.transaction(tx => {
     tx.executeSql('DROP TABLE IF EXISTS `cookie`', []);
     tx.executeSql(CREATE_TABEL_COOKIE_QUERY, [],
-      (_, __) => { },
-      (_, err) => {logDBError(err)}
+      (_, __) => { console.log('`cookie` table initialized.') },
+      (_, err) => {
+        logDBError('95', err);
+      }
     );
 
-    tx.executeSql('DROP TABLE IF EXISTS `page`', []);
-    tx.executeSql(CREATE_TABEL_PAGE_QUERY, [],
-      (_, __) => { },
-      (_, err) => logDBError(err)
-    );
+    // tx.executeSql('DROP TABLE IF EXISTS `page`', []);
+    // tx.executeSql(CREATE_TABEL_PAGE_QUERY, [],
+    //   (_, __) => { console.log('`page` table initialized.')},
+    //   (_, err) => {
+    //     logDBError('103', err);
+    //   } 
+    // );
 
-    tx.executeSql('DROP TABLE IF EXISTS `page_cookie_junction`', []);
-    tx.executeSql(CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY, [],
-      (_, __) => { },
-      (_, err) => logDBError(err) 
-    );
+    // tx.executeSql('DROP TABLE IF EXISTS `page_cookie_junction`', []);
+    // tx.executeSql(CREATE_TABEL_PAGE_COOKIE_JUNCTION_QUERY, [],
+    //   (_, __) => { console.log('`junction` table initialized.') },
+    //   (_, err) => {
+    //     logDBError('111', err);
+    //   }
+    // );
   });
 
   // Initialize rows.
   db.transaction(tx => {
-    cookieTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
+    cookieTableArgs.forEach(args => {
+      tx.executeSql(COOKIE_INSERT_QUERY, args.split(','),
         (_, __) => { },
         (_, err) => {
-          if (err.code !== 5) {
-            logDBError(err); 
+          if (err.code !== 15) {
+            logDBError('123', err); 
           }
         }
       );
     });
-    pageTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
+    pageTableArgs.forEach(args => {
+      tx.executeSql(PAGE_INSERT_QUERY, args.split(/[^\\],/),
         (_, __) => { },
         (_, err) => {
-          if (err.code !== 5) {
-            logDBError(err);
+          if (err.code !== 15) {
+            logDBError('133', err);
           }
         }
       );
     });
-    junctionTableQueries.forEach(query => {
-      tx.executeSql(encode4SQLQuery(query), [],
+    junctionTableArgs.forEach(args => {
+      tx.executeSql(PC_JUNCTION_INSERT_QUERY, args.split(','),
         (_, __) => { },
         (_, err) => {
-          if (err.code !== 5) {
-            logDBError(err);
+          if (err.code !== 15) {
+            logDBError('143', err);
           }
         }
       );
     });
   });
+  console.log('Rows initialize done');
 }

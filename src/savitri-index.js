@@ -7,20 +7,26 @@
   db = getConnection();
 
   Array.from(targets).map( (t, idx) => {
-    let baseURL = t.children[t.children.length-1].children[0].children[0].href;
-    let contents = getCookieList(db, getNoArgsURL(baseURL));
-    const panel = createPanel(idx, contents);
-    t.addEventListener('mouseover', (eve) => {
-      t.parentNode.insertBefore(panel, t);
-      // eve.target.style.background='#161821';
-      // setTimeout(() => {eve.target.style.background=''}, 500);
-    });
-    t.addEventListener('mouseleave', (eve) => {
-      setTimeout( () => {
-        let pnl = document.getElementById(`annotate${idx}`);
-        pnl.remove();
-      }, 500);
-    });
+    try{
+      let baseURL = t.children[t.children.length-1].children[0].children[0].href;
+      if (baseURL) {
+        let contents = getCookieList(db, getNoArgsURL(baseURL));
+        const panel = createPanel(idx, contents);
+        t.addEventListener('mouseover', (eve) => {
+          t.parentNode.insertBefore(panel, t);
+          // eve.target.style.background='#161821';
+          // setTimeout(() => {eve.target.style.background=''}, 500);
+        });
+        t.addEventListener('mouseleave', (eve) => {
+          setTimeout( () => {
+            let pnl = document.getElementById(`annotate${idx}`);
+            pnl.remove();
+          }, 500);
+        });
+      }
+    } catch(e) {
+      console.log('skipped');
+    }
   });
 })();
 
@@ -60,7 +66,7 @@ function collectURL() {
   const linkEntries = Array.from(targets).map( (t, idx) => {
     let k = 'savitri' + Date.now().toString() + idx;
     let v = t.children[t.children.length-1].children[0].children[0].href
-    console.log(`collected: ${v}`);
+    // console.log(`collected: ${v}`);
     localStorage.setItem(k, v);
     return [`link${idx}`, v];
   });
@@ -81,8 +87,8 @@ const GET_COOKIE_LIST_QUERY = '\
   AND\
     page_cookie_junction.cookie_id = cookie.id\
   AND\
-    page.start_uri = ?\
-'
+    page.final_uri = ?\
+;'
 
 const GET_REQUESTED_URIS_QUERY ='\
   SELECT\
@@ -115,14 +121,10 @@ function getCookieList(db, target) {
   db.transaction( tx =>{
     tx.executeSql(GET_COOKIE_LIST_QUERY, [target],
       (_, {rows}) => {
-        if (rows.length > 0) {
-          console.log('Found', target, rows)
-          cookies = rows;
-        } else {
-          console.log('Error', target, 'Empty result set.');
-        }
+        // console.log(target, rows);
+        cookies = rows;
       },
-      (_, err) => {console.log(err)}
+      (_, err) => {console.log(target, err)}
     );
   });
   return cookies;
