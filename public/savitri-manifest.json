@@ -20,7 +20,8 @@
     ],
     "background": {
         "scripts": [
-            "src/background.js"
+            "src/background.js",
+            "src/IdxDB.js"
         ]
     },
     "web_accessible_resources": [
@@ -29,6 +30,7 @@
     "permissions": [
         "history",
         "storage",
+        "tabs",
         "downloads",
         "*://*.google.com/search?*"
     ]

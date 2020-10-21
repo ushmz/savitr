@@ -75,7 +75,7 @@ function logDBError(line, error) {
   console.log(`${ERRORS[error.code]}(code=${error.code}): ${error.message} at line${line}`);
 }
 
-async function initialize(db) {
+async function init(db) {
   console.log('Initializing...');
   const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
   const cookieTableArgs = await getArgsFromFile(cookieFileUrl);

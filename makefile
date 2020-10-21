@@ -7,6 +7,7 @@ savitri:
 	cp -r src/init.js savitri/src/init.js
 	cp -r src/IdxDB.js savitri/src/IdxDB.js
 	cp -r src/savitri-popup.html savitri/src/popup.html 
+	cp -r src/addInitialize.js savitri/src/addInitialize.js
 	cp public/savitri-manifest.json savitri/manifest.json
 	cp package.json savitri/package.json
 
@@ -60,6 +61,7 @@ reload:
 	cp -r src/savitri-index.js savitri/src/index.js
 	cp -r src/init.js savitri/src/init.js
 	cp -r src/IdxDB.js savitri/src/IdxDB.js
+	cp -r src/addInitialize.js savitri/src/addInitialize.js
 	cp -r src/savitri-background.js savitri/src/background.js
 	cp -r src/savitri-fileSystemHandler.js savitri/src/fileSystemHandler.js
 	cp -r src/savitri-popup.html savitri/src/popup.html 
