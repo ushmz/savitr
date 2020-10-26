@@ -36,8 +36,8 @@
     } else {
       cookies.innerHTML = 'error occurred'
     }
-     cookies.style.color = 'white';
-    console.log('Recieve', message.annotateId, message.cookies)
+    cookies.style.color = 'white';
+    console.log('Recieve', message.annotateId, message.status, message.cookies)
     document.getElementById(message.annotateId).appendChild(cookies);
     return true;
   });
