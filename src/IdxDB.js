@@ -173,7 +173,7 @@ async function getCookieIds(pageId) {
           let junctions = getReq.result;
           resolve(junctions.map(junction => junction.cookie_id));
         } else {
-          reject({status: true, cookies: ['no cookie detected'], msg: 'No cookies detected.'});
+          reject({status: true, cookies: ['no cookie detected'], msg: 'No cookie detected.'});
         }
       }
       getReq.onerror = () => {
@@ -186,15 +186,31 @@ async function getCookieIds(pageId) {
   });
 }
 
-async function getCookies(cookieIdArray) {
+async function getCookies(cookieIds) {
+  const cookies = [];
+  for (const cookieId of cookieIds) {
+    const cookie = await getCookie(cookieId);
+    console.log('in for loop', cookie);
+    cookies.push(cookie);
+  }
+  // const cookieList = await cookieIds.map( async (cookieId) => {
+  //   const cookie = await getCookie(cookieId);
+  //   console.log(cookie);
+  //   return cookie;
+  // });
+  console.log('getCookies()', cookies, typeof cookies);
+  return cookies
+}
+
+async function getCookie(cookieId) {
   /**
    * Args:
-   *  cookieIds(Array<string>)  : Array of cookieId
+   *  cookieIds(string)  : cookieId
    * Return:
-   *  cookies(Arrsy<object>)    : Array of cookie
+   *  cookie(object)    : cookie information object
    */
   return new Promise( (resolve, reject) => {
-    if(!cookieIdArray) reject();
+    if(!cookieId) reject();
     const openReq = indexedDB.open('savitri', 1);
   
     openReq.onupgradeneeded = () => {
@@ -206,27 +222,17 @@ async function getCookies(cookieIdArray) {
       const tx = db.transaction('cookie', 'readonly');
 
       const cookieOS = tx.objectStore('cookie');
-      let cookies = cookieIdArray.map( cookieId => {
-        const request = cookieOS.get(cookieId);
-        request.onsuccess = async () => {
-          let cookie = await request.result;
-          return cookie;
-        }
-        request.onerror = () => {
-          reject({status: false, cookies: [], msg: 'There is an error in cookie table.'});
-        };
-      });
-      resolve(cookies);
+      const request = cookieOS.get(parseInt(cookieId));
+      request.onsuccess = () => {
+        resolve(request.result);
+      }
+      request.onerror = () => {
+        reject({status: false, cookies: [], msg: 'There is an error in cookie table.'});
+      };
     }
     
     openReq.onerror = () => {
       reject({status: false, cookies: [], msg: 'There is an error while connecting cookie table.'});
     }
   });
-}
-
-async function getPageIdDexie(target) {
-  let db = new Dexie('savitri');
-  let page = await db.table('page').get(1);
-  return page;
 }
