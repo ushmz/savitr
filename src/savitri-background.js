@@ -10,17 +10,17 @@ chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
       sendResponse({data: localStorage.setItem(request.key, request.value), key:request.key, value:request.value, status:true});
       return true;
     case 'getPageId':
-      getPageId(request.target)
-      .then( pageId => getCookieIds(pageId))
-      .then( cookieIds => getCookies(cookieIds))
-      .then( cookies => {
-        chrome.tabs.sendMessage(sender.tab.id, {cookies: cookies, annotateId: request.annotateId, target: request.target});
-        return true;
-      })
-      .catch( err => {
+      try {
+        const pageId = await getPageId(request.target);  
+        const cookieIds = await getCookieIds(pageId);
+        const cookies = await getCookies(cookieIds);
+        console.log('before sending', cookies[0], typeof cookies);
+        chrome.tabs.sendMessage(sender.tab.id, {cookies: cookies, annotateId: request.annotateId, target: request.target, status: true});
+      } catch(err) {
         console.log('NoPageFoundError: ', err.msg)
-        chrome.tabs.sendMessage(sender.tab.id, {cookies: err.cookies, annotateId: request.annotateId,target: request.target, status: err.status});
-      });
+        chrome.tabs.sendMessage(sender.tab.id, {cookies: err.cookies, annotateId: request.annotateId, target: request.target, status: err.status});
+        return true;
+      };
       return true;
     default:
       sendResponse({status: false, message: 'No match method.'});
