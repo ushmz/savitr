@@ -22,7 +22,7 @@
             pnl.style.visibility = 'hidden';
           }, 500);
         });
-        chrome.runtime.sendMessage({method: 'getPageId', target: getNoArgsURL(baseURL), annotateId: `annotate${idx}`});
+        chrome.runtime.sendMessage({method: 'getCookies', target: getNoArgsURL(baseURL), annotateId: `annotate${idx}`});
       }
     } catch(e) {
       console.log(e);

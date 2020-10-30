@@ -1,27 +1,30 @@
-chrome.runtime.onMessage.addListener( async (request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.method) {
+    // Get user's history and response it.
     case 'history':
       chrome.history.search({text:'', maxResults: request.max}, histories => {
-        console.log(histories);
         sendResponse({data: histories, status:true});
       });
       return true;
+    // Set given item to localstrage.
     case 'set':
       sendResponse({data: localStorage.setItem(request.key, request.value), key:request.key, value:request.value, status:true});
       return true;
-    case 'getPageId':
-      try {
-        const pageId = await getPageId(request.target);  
-        const cookieIds = await getCookieIds(pageId);
-        const cookies = await getCookies(cookieIds);
-        console.log('before sending', cookies[0], typeof cookies);
+    // Get cookies that given page contain.
+    case 'getCookies':
+      getPageId(request.target)
+      .then(pageId => getCookieIds(pageId))
+      .then(cookieIds => getCookies(cookieIds))
+      .then( cookies => {
         chrome.tabs.sendMessage(sender.tab.id, {cookies: cookies, annotateId: request.annotateId, target: request.target, status: true});
-      } catch(err) {
-        console.log('NoPageFoundError: ', err.msg)
+        return true;
+      })
+      .catch( err => {
+        console.log('NoPageFoundError: ', err)
         chrome.tabs.sendMessage(sender.tab.id, {cookies: err.cookies, annotateId: request.annotateId, target: request.target, status: err.status});
         return true;
-      };
-      return true;
+      });
+    // Default response
     default:
       sendResponse({status: false, message: 'No match method.'});
       return true;
