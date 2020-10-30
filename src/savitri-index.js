@@ -22,7 +22,7 @@
             pnl.style.visibility = 'hidden';
           }, 500);
         });
-        chrome.runtime.sendMessage({method: 'getPageId', target: getNoArgsURL(baseURL), annotateId: `annotate${idx}`});
+        chrome.runtime.sendMessage({method: 'getCookies', target: getNoArgsURL(baseURL), annotateId: `annotate${idx}`});
       }
     } catch(e) {
       console.log(e);
@@ -36,8 +36,8 @@
     } else {
       cookies.innerHTML = 'error occurred'
     }
-     cookies.style.color = 'white';
-    console.log('Recieve', message.annotateId, message.cookies)
+    cookies.style.color = 'white';
+    console.log('Recieve', message.annotateId, message.status, message.cookies)
     document.getElementById(message.annotateId).appendChild(cookies);
     return true;
   });

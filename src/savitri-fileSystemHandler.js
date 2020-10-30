@@ -1,5 +1,5 @@
 (async () => {
-  document.getElementById('history').addEventListener('click', async () => {
+  document.getElementById('histBtn').addEventListener('click', async () => {
 
     chrome.runtime.sendMessage({method: 'history', max: 1000}, async res => {
       if (res.status) {

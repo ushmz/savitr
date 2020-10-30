@@ -13,22 +13,60 @@ function formatString2Array(arrayLikeString) {
   }
 }
 
-async function initialize() {
+async function initializeClue() {
+  /**
+   * Initialize user history information as a clue.
+   */
+
+  // Open database named `history`.
+  const openReq = indexedDB.open('history', 1);
+  
+  // If database version > 1, nothing to do.
+  openReq.onsuccess = () => console.log('Already Done.');
+
+  // If there is an error while connecting, display it.
+  openReq.onerror = () => console.log(openReq.error);
+
+  // If table version < 1 (it means user dosen't have database)
+  // Initialize database.
+  openReq.onupgradeneeded = event => {
+    // Get database connection object.
+    const db = openReq.result;
+
+    // Create ObjectStore(table).
+    const historyStore = db.createObjectStore('history', {autoIncrement: true});
+    // Create index for ObjectStore
+    historyStore.createIndex('url', 'url', {unique: false});
+
+    // When ObjectStore structure is initialized,
+    // insert data into this ObjectStore. 
+    historyStore.transaction.oncomplete = event => {
+      // Send messageto runtime in order to get user's history
+      chrome.runtime.sendMessage({method: 'history', max: 100}, response => {
+        // Get history objects from response
+        const histories = response.data;
+
+        // Start transaction with `history` ObjectStore
+        const historyOS = db.transaction('history', 'readwrite').objectStore('history');
+
+        // Add each history object to ObjectStore
+        histories.forEach( history => {
+          historyOS.add(history);
+        });
+      });
+    }
+    console.log('History Loaded.');
+  }
+}
+
+async function initializeTable() {
   let openReq = indexedDB.open('savitri', 1);
   
   openReq.onupgradeneeded = async event => {
+  
     // When client DB version < 1 (= client doesn't have DB)
     // Initialize DB
     console.log('Initializing...');
-    // Create Object store
-    const db = openReq.result;
-    // const db_event = event.target.result;
-    db.createObjectStore('cookie', {autoIncrement: true})
-      .createIndex('domain', 'domain', {unique: false});
-    db.createObjectStore('page', {autoIncrement: true})
-      .createIndex('start_uri', 'start_uri', {unique: false});
-    db.createObjectStore('page_cookie_junction', {autoIncrement: true})
-      .createIndex('junction', 'page_id', {unique: false});
   
     // Get all arguments dumped from SQL
     const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
@@ -40,7 +78,16 @@ async function initialize() {
     const junctionFileUrl = chrome.runtime.getURL('init/pc_junction_essential.csv');
     const junctionTableArgs = await getArgsFromFile(junctionFileUrl);
     console.log('Arguments OK.');
-    
+  
+    // Create Object store
+    const db = openReq.result;
+    // const db_event = event.target.result;
+    db.createObjectStore('cookie', {autoIncrement: true})
+      .createIndex('domain', 'domain', {unique: false});
+    db.createObjectStore('page', {autoIncrement: true})
+      .createIndex('start_uri', 'start_uri', {unique: false});
+    db.createObjectStore('page_cookie_junction', {autoIncrement: true})
+      .createIndex('junction', 'page_id', {unique: false});
   
     // Start transaction
     const cookieTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
@@ -173,7 +220,7 @@ async function getCookieIds(pageId) {
           let junctions = getReq.result;
           resolve(junctions.map(junction => junction.cookie_id));
         } else {
-          reject({status: true, cookies: ['no cookie detected'], msg: 'No cookies detected.'});
+          reject({status: true, cookies: ['no cookie detected'], msg: 'No cookie detected.'});
         }
       }
       getReq.onerror = () => {
@@ -186,15 +233,29 @@ async function getCookieIds(pageId) {
   });
 }
 
-async function getCookies(cookieIdArray) {
+async function getCookies(cookieIds) {
+  const cookies = [];
+  for (const cookieId of cookieIds) {
+    const cookie = await getCookie(cookieId);
+    cookies.push(cookie);
+  }
+  // const cookieList = await cookieIds.map( async (cookieId) => {
+  //   const cookie = await getCookie(cookieId);
+  //   console.log(cookie);
+  //   return cookie;
+  // });
+  return cookies
+}
+
+async function getCookie(cookieId) {
   /**
    * Args:
-   *  cookieIds(Array<string>)  : Array of cookieId
+   *  cookieIds(string)  : cookieId
    * Return:
-   *  cookies(Arrsy<object>)    : Array of cookie
+   *  cookie(object)    : cookie information object
    */
   return new Promise( (resolve, reject) => {
-    if(!cookieIdArray) reject();
+    if(!cookieId) reject();
     const openReq = indexedDB.open('savitri', 1);
   
     openReq.onupgradeneeded = () => {
@@ -206,27 +267,17 @@ async function getCookies(cookieIdArray) {
       const tx = db.transaction('cookie', 'readonly');
 
       const cookieOS = tx.objectStore('cookie');
-      let cookies = cookieIdArray.map( cookieId => {
-        const request = cookieOS.get(cookieId);
-        request.onsuccess = async () => {
-          let cookie = await request.result;
-          return cookie;
-        }
-        request.onerror = () => {
-          reject({status: false, cookies: [], msg: 'There is an error in cookie table.'});
-        };
-      });
-      resolve(cookies);
+      const request = cookieOS.get(parseInt(cookieId));
+      request.onsuccess = () => {
+        resolve(request.result);
+      }
+      request.onerror = () => {
+        reject({status: false, cookies: [], msg: 'There is an error in cookie table.'});
+      };
     }
     
     openReq.onerror = () => {
       reject({status: false, cookies: [], msg: 'There is an error while connecting cookie table.'});
     }
   });
-}
-
-async function getPageIdDexie(target) {
-  let db = new Dexie('savitri');
-  let page = await db.table('page').get(1);
-  return page;
 }
