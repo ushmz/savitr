@@ -61,14 +61,34 @@ async function initializeClue() {
 
 async function initializeTable() {
   let openReq = indexedDB.open('savitri', 1);
+
+  // If database version > 1, nothing to do.
+  openReq.onsuccess = () => console.log('Already Done.');
+
+  // If there is an error while connecting, display it.
+  openReq.onerror = () => console.log(openReq.error);
   
+  // If table version < 1 (it means user dosen't have database)
+  // Initialize database.
   openReq.onupgradeneeded = async event => {
   
-    // When client DB version < 1 (= client doesn't have DB)
-    // Initialize DB
     console.log('Initializing...');
-  
-    // Get all arguments dumped from SQL
+
+    // Create database connection objest.
+    const db = openReq.result;
+
+    // Create ObjectStores(tables) and indexes.
+    db.createObjectStore('cookie', {autoIncrement: true})
+      .createIndex('domain', 'domain', {unique: false});
+
+    db.createObjectStore('page', {autoIncrement: true})
+      .createIndex('start_uri', 'start_uri', {unique: false});
+    
+    db.createObjectStore('page_cookie_junction', {autoIncrement: true})
+      .createIndex('junction', 'page_id', {unique: false});
+    console.log('Tables initialized.');
+
+    // Get all arguments dumped from SQL.
     const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
     const cookieTableArgs = await getArgsFromFile(cookieFileUrl);
   
@@ -79,20 +99,10 @@ async function initializeTable() {
     const junctionTableArgs = await getArgsFromFile(junctionFileUrl);
     console.log('Arguments OK.');
   
-    // Create Object store
-    const db = openReq.result;
-    // const db_event = event.target.result;
-    db.createObjectStore('cookie', {autoIncrement: true})
-      .createIndex('domain', 'domain', {unique: false});
-    db.createObjectStore('page', {autoIncrement: true})
-      .createIndex('start_uri', 'start_uri', {unique: false});
-    db.createObjectStore('page_cookie_junction', {autoIncrement: true})
-      .createIndex('junction', 'page_id', {unique: false});
-  
-    // Start transaction
+    // Start data insert transaction.
     const cookieTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
   
-    // Initialize `cookie` Object store data.
+    // Initialize `cookie` ObjectStore data.
     const cookieOS = cookieTransaction.objectStore('cookie');
     cookieTableArgs.forEach( argLine => {
       let args = argLine.split(',');
@@ -101,15 +111,13 @@ async function initializeTable() {
         httponly: args[2],
         secure: args[3]
       });
-      request.onsuccess =  () => {
-        // console.log(request.result);
-      };
+      request.onsuccess =  () => {};
       request.onerror = () => {
         console.log(request.error);
       };
     });
     
-    // Initialize `page` Object store data.
+    // Initialize `page` ObjectStore data.
     const pageOS = cookieTransaction.objectStore('page');
     pageTableArgs.forEach( argLine => {
       let args = argLine.split(/([^\\]),/);
@@ -121,15 +129,13 @@ async function initializeTable() {
         requested_uris: formatString2Array(args[8] + args[9]),
         recieved_uris: formatString2Array(args[10] + args[11])
       });
-      request.onsuccess =  () => {
-        // console.log(request.result);
-      };
+      request.onsuccess =  () => {};
       request.onerror = () => {
         console.log(request.error);
       };
     });
   
-    // Initialize `page_cookie_junction` Object store data.
+    // Initialize `page_cookie_junction` ObjectStore data.
     const pcjunctionOS = cookieTransaction.objectStore('page_cookie_junction');
     junctionTableArgs.forEach( argLine => {
       let args = argLine.split(',');
@@ -137,21 +143,21 @@ async function initializeTable() {
         page_id: args[0],
         cookie_id: args[1]
       });
-      request.onsuccess =  () => {
-        // console.log(request.result);
-      };
+      request.onsuccess =  () => {};
       request.onerror = () => {
         console.log(request.error);
       };
     });
+    
     // Transaction will be closed automatically.
     console.log('Initialize Done.')
-  }
-  
-  openReq.onsuccess = () => {
-    console.log('Already Done.')
-  }
+  }  
   return true;
+}
+
+// TODO: Refresh history ObjectStore with latest histories.
+async function refreshHistories() {
+
 }
 
 async function getPageId(target) {
