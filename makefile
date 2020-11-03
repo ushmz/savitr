@@ -22,7 +22,7 @@ savitri:
 
 	# Move initialize files
 	mkdir -p savitri/init
-	cp -r db/sql/*.csv savitri/init/
+	cp -r db/dumped/*.csv savitri/init/
 	cd savitri
 	npm install
 
