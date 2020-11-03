@@ -32,7 +32,16 @@
   chrome.runtime.onMessage.addListener( (message, sender, sendResponse) => {
     let cookies = document.createElement('p');
     if(message.status) {
-      cookies.innerHTML = message.cookies.join(',');
+      const domains = message.cookies.map( cookie => {
+        if (cookie.domain !== undefined){
+          return cookie.domain;
+        } else {
+          return
+        }
+      } );
+      cookies.innerHTML = domains.length > 0
+        ? `このページには"${domains.join(',')}"のcookieが含まれています。`
+        : `このページに含まれているサードパーティcookieはありません。` 
     } else {
       cookies.innerHTML = 'error occurred'
     }
@@ -49,7 +58,7 @@ function createPanel(suffix, contents) {
   panel.id = `annotate${suffix}`;
   panel.style.backgroundColor = '#161821';
   panel.style.width = '360px';
-  panel.style.height = '240px';
+  panel.style.height = '120px';
   panel.style.position = 'absolute';
   panel.style.left = '640px';
   panel.style.visibility = 'hidden';
