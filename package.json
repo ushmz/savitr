@@ -1,19 +1,33 @@
 {
   "name": "savitri",
   "version": "1.0.0",
-  "description": "",
+  "description": "savitri",
   "main": "index.js",
   "dependencies": {
     "puppeteer": "^5.4.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
     "@types/chrome": "0.0.122",
     "@types/webpack": "^4.41.21",
-    "ts-loader": "^8.0.3",
-    "typescript": "^3.9.7"
+    "babel-loader": "^8.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "copy-webpack-plugin": "^6.3.0",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "jsdoc": "^3.6.6",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "ts-loader": "^8.0.11",
+    "typescript": "^3.9.7",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
