@@ -9,14 +9,22 @@ function formatString2Array(arrayLikeString) {
   if (arrayLikeString){
     return arrayLikeString.slice(1, -1).split('\\,');
   } else {
-    return '';
+    return [];
   }
 }
 
-async function initializeClue() {
-  /**
-   * Initialize user history information as a clue.
-   */
+/**
+ * @typedef status
+ * @property {boolean} status - Method return value is proper or not.
+ * @property {Array<string>} cookies - Cookie domain list (Listed string).
+ * @property {string} error - Kinds of error.
+ * @property {string} message - Description of error.
+ */
+
+/**
+ * Initialize user history information.
+ */
+export async function initializeHistory() {
 
   // Open database named `history`.
   const openReq = indexedDB.open('history', 1);
@@ -59,7 +67,10 @@ async function initializeClue() {
   }
 }
 
-async function initializeTable() {
+/**
+ * Initialize table with collected page data.
+ */
+export async function initializeTable() {
   let openReq = indexedDB.open('savitri', 1);
 
   // If database version > 1, nothing to do.
@@ -160,13 +171,13 @@ async function refreshHistories() {
 
 }
 
-async function getPageId(target) {
-  /**
-   * Args:
-   *  target(string)  : Target page URI
-   * Return:
-   *  pageId(string)  : Target Page Id
-   */
+/**
+ * Get pageID from colected pages data.
+ * 
+ * @param {string} target - Page URI 
+ * @return {Promise<string|status>} pageID - PageID
+ */
+export async function getPageId(target) {
   return new Promise( (resolve, reject) => {
     const openReq = indexedDB.open('savitri', 1);
     
@@ -186,26 +197,25 @@ async function getPageId(target) {
           let page = request.result;
           resolve(page.id);
         } else {
-          reject({status: true, cookies: ['not collected'], msg: 'This page data not collected.'});
+          reject({status: true, cookies: [], error: 'NOT_COLLECTED', message: 'This page data not collected.'});
         }
       }
       request.onerror = event => {
-        reject({status: false, cookies: [], msg: 'There is an error in page table.'});
+        reject({status: false, cookies: [], error:'DB_QUERY_ERROR', message: 'There is an error in page table.'});
       }
     }
     openReq.onerror = () => {
-      reject({status: false, cookies: [], msg: 'There is an error while connecting page table.'});
+      reject({status: false, cookies: [], error:'DB_CONNECTION_ERROR', message: 'There is an error while connecting page table.'});
     }
   });
 }
 
-async function getCookieIds(pageId) {
-  /**
-   * Args:
-   *  pageId(string)            : Target page Id
-   * Return:
-   *  cookieIds(Arrsy<string>)  : Array of cookieId that target page contain
-   */
+/**
+ * Get IDs of cookie(domain) that given page contain
+ * @param {string} pageId - Oage ID get from `getPageId`
+ * @return {Promise<Array<string>|status>} - Listed cookie Id or (error) status object
+ */
+export async function getCookieIds(pageId) {
   return new Promise( (resolve, reject) => {
     if(!pageId) reject();
     const openReq = indexedDB.open('savitri', 1);
@@ -226,20 +236,34 @@ async function getCookieIds(pageId) {
           let junctions = getReq.result;
           resolve(junctions.map(junction => junction.cookie_id));
         } else {
-          reject({status: true, cookies: ['no cookie detected'], msg: 'No cookie detected.'});
+          reject({status: true, cookies: [], error:'NO_COOKIE_DETECTED', message: 'No cookie detected.'});
         }
       }
       getReq.onerror = () => {
-        reject({status: false, cookies: [], msg: 'There is an error in junction table.'});
+        reject({status: false, cookies: [], error:'DB_QUERY_ERROR', message: 'There is an error in junction table.'});
       }
     }
     openReq.onerror = () => {
-      reject({status: false, cookies: [], msg: 'There is an error while connecting junction table.'});
+      reject({status: false, cookies: [], error:'DB_CONNECTION_ERROR', message: 'There is an error while connecting junction table.'});
     }
   });
 }
 
-async function getCookies(cookieIds) {
+/**
+ * 
+ * @typedef cookie
+ * @property {string} domain - Domain that generate the cookie
+ * @property {string} httponly - "1" means true, "0" means false
+ * @property {string} secure - "1" means true, "0" means false
+ */
+
+/**
+ * Get cookie information from collected data
+ * 
+ * @param {Array<string>} cookieIds - Listed string of cookie ID
+ * @return {Promise<Array<cookie>>} cookies - Listed cookie informarion 
+ */
+export async function getCookies(cookieIds) {
   const cookies = [];
   for (const cookieId of cookieIds) {
     const cookie = await getCookie(cookieId);
@@ -253,13 +277,12 @@ async function getCookies(cookieIds) {
   return cookies
 }
 
-async function getCookie(cookieId) {
-  /**
-   * Args:
-   *  cookieIds(string)  : cookieId
-   * Return:
-   *  cookie(object)    : cookie information object
-   */
+/**
+ * Get cookie information of given cookie ID 
+ * @param {string} cookieId - Get from `getCookieID()`
+ * @return {Promise<cookie|status>} - Cookie information object or (error) status object
+ */
+export async function getCookie(cookieId) {
   return new Promise( (resolve, reject) => {
     if(!cookieId) reject();
     const openReq = indexedDB.open('savitri', 1);
@@ -278,12 +301,16 @@ async function getCookie(cookieId) {
         resolve(request.result);
       }
       request.onerror = () => {
-        reject({status: false, cookies: [], msg: 'There is an error in cookie table.'});
+        reject({status: false, cookies: [], error:'DB_QUERY_ERROR', message: 'There is an error in cookie table.'});
       };
     }
     
     openReq.onerror = () => {
-      reject({status: false, cookies: [], msg: 'There is an error while connecting cookie table.'});
+      reject({status: false, cookies: [], error:'DB_CONNECTION_ERROR', message: 'There is an error while connecting cookie table.'});
     }
   });
 }
+
+// window.getPageId = getPageId;
+// window.getCookieIds = getCookieIds;
+// window.getCookies = getCookies;

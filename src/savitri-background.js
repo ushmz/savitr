@@ -1,3 +1,5 @@
+import {getPageId, getCookieIds, getCookies} from './IdxDB';
+
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.method) {
     // Get user's history and response it.
@@ -20,8 +22,8 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         return true;
       })
       .catch( err => {
-        console.log('NoPageFoundError: ', err)
-        chrome.tabs.sendMessage(sender.tab.id, {cookies: err.cookies, annotateId: request.annotateId, target: request.target, status: err.status});
+        console.log(err.error, err.message);
+        chrome.tabs.sendMessage(sender.tab.id, {cookies: err.cookies, annotateId: request.annotateId, target: request.target, status: err.status, error: err});
         return true;
       });
     // Default response
