@@ -25,10 +25,11 @@
         chrome.runtime.sendMessage({method: 'getCookies', target: getNoArgsURL(baseURL), annotateId: `annotate${idx}`});
       }
     } catch(e) {
-      console.log(e);
+      // console.log(e);
     }
     
   });
+  radiograph();
   chrome.runtime.onMessage.addListener( (message, sender, sendResponse) => {
     let cookies = document.createElement('p');
     if(message.status) {
@@ -46,7 +47,7 @@
       cookies.innerHTML = 'error occurred'
     }
     cookies.style.color = 'white';
-    console.log('Recieve', message.annotateId, message.status, message.cookies)
+    // console.log('Recieve', message)
     document.getElementById(message.annotateId).appendChild(cookies);
     return true;
   });
@@ -79,19 +80,25 @@ function getNoArgsURL(url) {
   }
 }
 
-function collectURL() {
-  // May be make this block as a function
-  let elements = document.getElementsByClassName('g');
-  let targets = Array.prototype.filter.call(elements, (elm) => {
-    return elm.className === 'g'
-  });
+// function collectURL() {
+//   // May be make this block as a function
+//   let elements = document.getElementsByClassName('g');
+//   let targets = Array.prototype.filter.call(elements, (elm) => {
+//     return elm.className === 'g'
+//   });
 
-  const linkEntries = Array.from(targets).map( (t, idx) => {
-    let k = 'savitri' + Date.now().toString() + idx;
-    let v = t.children[t.children.length-1].children[0].children[0].href
-    // console.log(`collected: ${v}`);
-    localStorage.setItem(k, v);
-    return [`link${idx}`, v];
-  });
-  return Object.fromEntries(linkEntries);
+//   const linkEntries = Array.from(targets).map( (t, idx) => {
+//     let k = 'savitri' + Date.now().toString() + idx;
+//     let v = t.children[t.children.length-1].children[0].children[0].href
+//     // console.log(`collected: ${v}`);
+//     localStorage.setItem(k, v);
+//     return [`link${idx}`, v];
+//   });
+//   return Object.fromEntries(linkEntries);
+// }
+
+function radiograph(url) {
+  const targetDom = Document.open(url);
+  console.log(targetDom.cookie);
+  console.log(targetDom.location);
 }
