@@ -1,47 +1,14 @@
-<mxfile host="app.diagrams.net" modified="2020-11-16T09:41:59.623Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36" etag="2YOBzed_l3vNz6wSyC86" version="13.9.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-17T08:28:48.178Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36" etag="CuFt4KdrtFF1vTKxnMBC" version="13.9.9" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
-    <mxGraphModel dx="1208" dy="1445" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="868" dy="1239" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="1o43IpVnHSp4k4hgxvld-1" value="" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;glass=0;sketch=0;strokeColor=#000000;strokeWidth=2;arcSize=15;" parent="1" vertex="1">
           <mxGeometry x="1510.25" y="1091" width="482" height="300" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-980" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.browserWindow;rSize=0;strokeColor=#666666;strokeColor2=#008cff;strokeColor3=#c4c4c4;mainText=,;recursiveResize=0;rotation=90;" parent="1" vertex="1">
-          <mxGeometry x="1346.25" y="-158.75" width="810" height="1137.5" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-981" value="Search" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;fontSize=17;fontColor=#666666;align=left;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="894" y="266" width="110" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-982" value="https://example.com/search?query=hogehoge" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;rSize=0;fontSize=17;fontColor=#666666;align=left;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="616" y="566" width="570" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1008" value="TODO: Query with some implications" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.searchBox;strokeColor=#999999;mainText=;strokeColor2=#008cff;fontColor=#666666;fontSize=17;align=left;spacingLeft=3;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="498" y="499" width="640" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1010" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="118" y="429" width="610" height="180" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1011" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="126" y="443" width="588" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1012" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="-102" y="429" width="610" height="180" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1013" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="-94" y="443" width="588" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1014" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;gradientColor=#ffffff;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="-311" y="440" width="610" height="159" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1015" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="-314" y="443" width="588" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1016" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="335" y="430" width="610" height="180" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1009" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="7woP6Dkb5RwROd-9Klr0-980" vertex="1">
-          <mxGeometry x="346" y="443" width="588" height="154" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-980" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.browserWindow;rSize=0;strokeColor=#666666;strokeColor2=#008cff;strokeColor3=#c4c4c4;mainText=,;recursiveResize=0;rotation=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="1210" y="30" width="1090" height="780" as="geometry" />
         </mxCell>
         <mxCell id="7woP6Dkb5RwROd-9Klr0-1019" value="&lt;h1&gt;&lt;span style=&quot;font-size: 32px&quot;&gt;Tracking Finder&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;このページに訪れることで、過去に訪れた以下のページが紐付けられてしまいます．&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1531.25" y="1121" width="440" height="160" as="geometry" />
@@ -49,125 +16,161 @@
         <mxCell id="7woP6Dkb5RwROd-9Klr0-1020" value="&lt;ul style=&quot;font-size: 24px&quot;&gt;&lt;li&gt;https://rikon-bengoshi.com&lt;/li&gt;&lt;li&gt;https://my-best-cosmetic.com&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;overflow=hidden;align=left;imageVerticalAlign=top;" parent="1" vertex="1">
           <mxGeometry x="1532.25" y="1251" width="440" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-30" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-30" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="2530" y="1810" width="610" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-31" value="&lt;h1&gt;&lt;span style=&quot;font-size: 36px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使ってるし余裕...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-31" value="&lt;h1&gt;&lt;span style=&quot;font-size: 36px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使ってるし余裕...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="2539" y="1843" width="588" height="154" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-32" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-32" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="2530" y="2010" width="610" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-35" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 18px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-35" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 18px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="2539" y="2018" width="620" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-36" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-36" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="2539" y="1820" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-25" value="&lt;font style=&quot;font-size: 18px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&lt;br&gt;&lt;/span&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-25" value="&lt;font style=&quot;font-size: 18px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&lt;br&gt;&lt;/span&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="2550" y="2050" width="180" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-24" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=0;" vertex="1" parent="1">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-24" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=0;" parent="1" vertex="1">
           <mxGeometry x="2823" y="2160" width="24" height="6" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-40" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="1790" y="1840" width="520" height="180" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-38" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Collapse&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="1713" y="2058" width="80" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-41" value="&lt;h1 style=&quot;font-size: 30px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 30px&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 22px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="1799" y="1873" width="501" height="154" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-48" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=27;notch=0;strokeColor=#000000;fillColor=#ffffff;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="1728.75" y="2005" width="45" height="45" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-42" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1790" y="2020" width="520" height="140" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-51" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1240" y="2550" width="520" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-43" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=0;" vertex="1" parent="1">
-          <mxGeometry x="2038" y="2150" width="24" height="6" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-44" value="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&lt;br&gt;&lt;/span&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1810" y="2060" width="160" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-45" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1799" y="2028" width="520" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-46" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1799" y="1850" width="340" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1024" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" parent="1" vertex="1">
-          <mxGeometry x="1200" y="1840" width="520" height="180" as="geometry" />
-        </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1025" value="&lt;h1 style=&quot;font-size: 30px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 30px&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 22px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="1209" y="1873" width="501" height="154" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-13" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1200" y="2020" width="520" height="110" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-17" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-180;" vertex="1" parent="1">
-          <mxGeometry x="1448" y="2114" width="24" height="6" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-19" value="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&amp;nbsp; &amp;nbsp; ...他3件&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="2060" width="230" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-28" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1209" y="2028" width="520" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-29" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1209" y="1850" width="340" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-38" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Collapse&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
-          <mxGeometry x="1714" y="2000" width="80" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-48" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=27;notch=0;strokeColor=#000000;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="1729" y="1957" width="50" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-51" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="1200" y="2200" width="520" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-49" value="" style="whiteSpace=wrap;html=1;fontColor=#333333;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="FJNn8_TYYFnIQYhrpaoS-51">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-49" value="" style="whiteSpace=wrap;html=1;fontColor=#333333;strokeColor=none;fillColor=#E6E6E6;" parent="FJNn8_TYYFnIQYhrpaoS-51" vertex="1">
           <mxGeometry width="520" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-50" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-180;" vertex="1" parent="FJNn8_TYYFnIQYhrpaoS-51">
-          <mxGeometry x="247.5" y="7" width="24" height="6" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-50" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-180;" parent="FJNn8_TYYFnIQYhrpaoS-51" vertex="1">
+          <mxGeometry x="247.25" y="10" width="24" height="6" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-52" value="" style="group;rotation=-180;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="1200" y="2240" width="520" height="20" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-52" value="" style="group;rotation=-180;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="1240" y="2590" width="520" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-53" value="" style="whiteSpace=wrap;html=1;fontColor=#333333;strokeColor=none;fillColor=#E6E6E6;rotation=-180;" vertex="1" parent="FJNn8_TYYFnIQYhrpaoS-52">
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-53" value="" style="whiteSpace=wrap;html=1;fontColor=#333333;strokeColor=none;fillColor=#E6E6E6;rotation=-180;" parent="FJNn8_TYYFnIQYhrpaoS-52" vertex="1">
           <mxGeometry width="520" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-54" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-360;" vertex="1" parent="FJNn8_TYYFnIQYhrpaoS-52">
-          <mxGeometry x="249" y="7" width="24" height="6" as="geometry" />
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-54" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-360;" parent="FJNn8_TYYFnIQYhrpaoS-52" vertex="1">
+          <mxGeometry x="248.75" y="10" width="24" height="6" as="geometry" />
         </mxCell>
-        <mxCell id="FJNn8_TYYFnIQYhrpaoS-55" value="" style="group;rotation=90;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="2410" y="-50" width="960" height="1070" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-981" value="Search" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;fontSize=17;fontColor=#666666;align=left;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="42" width="110" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-983" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.window;align=left;verticalAlign=top;spacingLeft=8;strokeColor2=#008cff;strokeColor3=#c4c4c4;fontColor=#666666;mainText=;fontSize=17;labelBackgroundColor=none;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="107.5" y="-107.5" width="810" height="1135" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-982" value="https://example.com/search?query=hogehoge" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;rSize=0;fontSize=17;fontColor=#666666;align=left;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="1340" y="90" width="570" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-984" value="TODO: Query with some implications" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.searchBox;strokeColor=#999999;mainText=;strokeColor2=#008cff;fontColor=#666666;fontSize=17;align=left;spacingLeft=3;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="590" y="390" width="640" height="50" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-1008" value="TODO: Query with some implications" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.searchBox;strokeColor=#999999;mainText=;strokeColor2=#008cff;fontColor=#666666;fontSize=17;align=left;spacingLeft=3;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="161" width="640" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-998" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EFEFEF;strokeColor=none;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="430" y="320" width="610" height="180" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-3" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1261" y="274" width="540" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-999" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="438" y="334" width="588" height="154" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-1016" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;" parent="2LkXOtWLxF8HPB9se77F-3" vertex="1">
+          <mxGeometry width="540" height="150.00000000000003" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1000" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="210" y="320" width="610" height="180" as="geometry" />
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-1009" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" parent="2LkXOtWLxF8HPB9se77F-3" vertex="1">
+          <mxGeometry x="9.737704918032788" y="10.833333333333336" width="520.5245901639347" height="128.33333333333334" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1001" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="218" y="334" width="588" height="154" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-4" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1260" y="460" width="540" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1002" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="-10" y="320" width="610" height="180" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-5" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-4">
+          <mxGeometry width="540" height="150.00000000000003" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1003" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="-2" y="334" width="588" height="154" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-6" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-4">
+          <mxGeometry x="9.737704918032788" y="10.833333333333336" width="520.5245901639347" height="128.33333333333334" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1006" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;gradientColor=#ffffff;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="-230" y="320" width="610" height="180" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-8" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;gradientColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="650" width="540" height="150.00000000000003" as="geometry" />
         </mxCell>
-        <mxCell id="7woP6Dkb5RwROd-9Klr0-1007" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=90;" parent="FJNn8_TYYFnIQYhrpaoS-55" vertex="1">
-          <mxGeometry x="-222" y="334" width="588" height="154" as="geometry" />
+        <mxCell id="2LkXOtWLxF8HPB9se77F-9" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="1269.7377049180327" y="660.8333333333334" width="520.5245901639347" height="128.33333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-10" value="Window Title" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.window;align=left;verticalAlign=top;spacingLeft=8;strokeColor2=#008cff;strokeColor3=#c4c4c4;fontColor=#666666;mainText=;fontSize=17;labelBackgroundColor=none;gradientColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="2380" y="30" width="1090" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-11" value="TODO: Query with some implications" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.forms.searchBox;strokeColor=#999999;mainText=;strokeColor2=#008cff;fontColor=#666666;fontSize=17;align=left;spacingLeft=3;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="2470" y="161" width="640" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-12" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2481" y="274" width="540" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-13" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-12">
+          <mxGeometry width="540" height="150.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-14" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-12">
+          <mxGeometry x="9.737704918032788" y="10.833333333333336" width="520.5245901639347" height="128.33333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-15" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2480" y="460" width="540" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-16" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-15">
+          <mxGeometry width="540" height="150.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-17" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 24px&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" vertex="1" parent="2LkXOtWLxF8HPB9se77F-15">
+          <mxGeometry x="9.737704918032788" y="10.833333333333336" width="520.5245901639347" height="128.33333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-18" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#EFEFEF;rotation=0;gradientColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="2480" y="650" width="540" height="150.00000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-19" value="&lt;h1&gt;&lt;font style=&quot;font-size: 36px&quot;&gt;Heading&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="2489.7377049180327" y="660.8333333333334" width="520.5245901639347" height="128.33333333333334" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-21" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1268" y="1700" width="970" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-1024" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry width="970" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="7woP6Dkb5RwROd-9Klr0-1025" value="&lt;h1 style=&quot;font-size: 30px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 30px&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 22px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry x="16.502835538752365" y="33" width="918.6578449905481" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-13" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry y="180" width="970" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-17" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=-180;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry x="454.7448015122873" y="274" width="44.00756143667297" height="6" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-19" value="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&amp;nbsp; &amp;nbsp; ...他3件&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry x="36.67296786389414" y="220" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-28" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry x="16.502835538752365" y="188" width="520" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-29" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-21" vertex="1">
+          <mxGeometry x="16.502835538752365" y="10" width="340" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2LkXOtWLxF8HPB9se77F-22" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="1268" y="2090" width="970" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-40" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FFFFFF;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry width="970" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-41" value="&lt;h1 style=&quot;font-size: 30px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 30px&quot;&gt;5分でマスター！ビジネスメール...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 22px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry x="16.485822306238187" y="33" width="917.710775047259" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-42" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.textBox;align=left;fontSize=17;spacingLeft=4;spacingTop=-3;mainText=;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry y="180" width="970" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-43" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;fillColor=#c0c0c0;rotation=0;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry x="454.27599243856326" y="310" width="43.96219281663516" height="6" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-44" value="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;span&gt;ページタイトル - url&lt;/span&gt;&lt;br&gt;&lt;span&gt;ページタイトル - url&lt;br&gt;&lt;/span&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;br&gt;ページタイトル - url&lt;span&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry x="36.6351606805293" y="220" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-45" value="&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 18px&quot;&gt;&lt;span&gt;このページに訪れることで，過去に訪れた以下のページが&lt;/span&gt;&lt;span&gt;紐付けられます．&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry x="16.485822306238187" y="188" width="620" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="FJNn8_TYYFnIQYhrpaoS-46" value="&lt;font style=&quot;font-size: 16px&quot; color=&quot;#4d4d4d&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="2LkXOtWLxF8HPB9se77F-22" vertex="1">
+          <mxGeometry x="16.485822306238187" y="10" width="340" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
