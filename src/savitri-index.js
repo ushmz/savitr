@@ -96,9 +96,3 @@ function getNoArgsURL(url) {
 //   });
 //   return Object.fromEntries(linkEntries);
 // }
-
-function radiograph(url) {
-  const targetDom = Document.open(url);
-  console.log(targetDom.cookie);
-  console.log(targetDom.location);
-}
