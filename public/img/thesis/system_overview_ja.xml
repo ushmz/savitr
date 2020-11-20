@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-20T06:57:25.686Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36" etag="_QygD_d42WJW_kyfsCuq" version="13.10.0" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-20T07:20:14.174Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36" etag="_VWRxmul8sfnS-vqH_2i" version="13.10.0" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
-    <mxGraphModel dx="-1" dy="686" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="875" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -302,22 +302,22 @@
           <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-14" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
-          <mxGeometry x="10" y="160" width="860" height="120" as="geometry" />
+          <mxGeometry x="10" y="160" width="860" height="124" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-15" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
           <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-7" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
-          <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
+          <mxGeometry x="25" y="178" width="811.61" height="30" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-8" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
-          <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
+          <mxGeometry x="24.998749646869655" y="183.00422043579488" width="830" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-3" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
-          <mxGeometry x="29.99727609664751" y="205.00435794372743" width="740" height="50" as="geometry" />
+        <mxCell id="gGudjgz0TUMFjXf5161s-3" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+          <mxGeometry x="8.99727609664751" y="195.00435794372743" width="780" height="80" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-9" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-1">
-          <mxGeometry x="415" y="258" width="50" height="15.889999999999986" as="geometry" />
+          <mxGeometry x="415" y="263" width="50" height="15.889999999999986" as="geometry" />
         </mxCell>
         <mxCell id="gGudjgz0TUMFjXf5161s-10" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-9">
           <mxGeometry width="50" height="15.89" as="geometry" />
