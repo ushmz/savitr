@@ -3,21 +3,14 @@
 ## Install
 
 1. Clone this repository.
-2. Run each command for build.  
-
-    For savitri
+2. Run following command for build.  
     ```sh
-    make savitri
+    npm run build
     ```
-
-    For gayatri
-    ```sh
-    make gayatri
-    ```
-3. Go to Extentions section of Chrome.
+3. Go to Extentions setting in Chrome.
 4. Turn on Developer mode.
 5. Press `Load unpacked`.
-6. Select `savitri` or `gayatri` folder.
+6. Select `dist/savitri` folder.
 
 ## How to use.
 
@@ -25,7 +18,7 @@
 
 Now coding.
 
-### gayatri
+<!-- ### rig
 
 First, make sure of enabling the `#native-file-system-api` flag in `chrome://flags`. Enter "[chrome://flags/#native-file-system-api](chrome://flags/#native-file-system-api)" in your address bar to change your setting. 
 
@@ -33,8 +26,4 @@ First, make sure of enabling the `#native-file-system-api` flag in `chrome://fla
 
 ![ScreenShot01](public/img/01.png)
 
-Press `Export log file` to save all URLs listed. Press `Clear LocalStorage` to delete all URLs listed.
-
-## Troubleshooting 
-
-If you have some problem, `make clean` and rebuild.
+Press `Export log file` to save all URLs listed. Press `Clear LocalStorage` to delete all URLs listed. -->
