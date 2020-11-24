@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 async function getArgsFromFile(url) {
   let response = await fetch(url)
   let initQuery = await response.text();
@@ -30,7 +32,7 @@ export async function initializeHistory() {
   const openReq = indexedDB.open('history', 1);
   
   // If database version > 1, nothing to do.
-  openReq.onsuccess = () => console.log('Already Done.');
+  openReq.onsuccess = () => console.log('Successfully connected.');
 
   // If there is an error while connecting, display it.
   openReq.onerror = () => console.log(openReq.error);
@@ -50,17 +52,21 @@ export async function initializeHistory() {
     // insert data into this ObjectStore. 
     historyStore.transaction.oncomplete = event => {
       // Send messageto runtime in order to get user's history
-      chrome.runtime.sendMessage({method: 'history', max: 100}, response => {
+      chrome.runtime.sendMessage({method: 'history', max: 10}, async response => {
         // Get history objects from response
         const histories = response.data;
 
+        const axiosOptions = {headers: { 'content-type': 'application/x-www-form-urlencoded' }};
+        const hstrWithCookies = await axios.post('http://localhost:8000/analyze', {data: histories}, axiosOptions);
+        console.log('Cookies ready');
+
         // Start transaction with `history` ObjectStore
         const historyOS = db.transaction('history', 'readwrite').objectStore('history');
-
         // Add each history object to ObjectStore
-        histories.forEach( history => {
+        hstrWithCookies.data.forEach( history => {
           historyOS.add(history);
         });
+
       });
     }
     console.log('History Loaded.');
