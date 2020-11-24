@@ -8,10 +8,6 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
         sendResponse({data: histories, status:true});
       });
       return true;
-    // Set given item to localstrage.
-    case 'set':
-      sendResponse({data: localStorage.setItem(request.key, request.value), key:request.key, value:request.value, status:true});
-      return true;
     // Get cookies that given page contain.
     case 'getCookies':
       getPageId(request.target)

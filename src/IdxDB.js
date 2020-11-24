@@ -27,33 +27,19 @@ function formatString2Array(arrayLikeString) {
  * Initialize user history information.
  */
 export async function initializeHistory() {
-
-  // Open database named `history`.
   const openReq = indexedDB.open('history', 1);
-  
-  // If database version > 1, nothing to do.
   openReq.onsuccess = () => console.log('Successfully connected.');
-
-  // If there is an error while connecting, display it.
   openReq.onerror = () => console.log(openReq.error);
 
   // If table version < 1 (it means user dosen't have database)
   // Initialize database.
   openReq.onupgradeneeded = event => {
-    // Get database connection object.
     const db = openReq.result;
-
-    // Create ObjectStore(table).
     const historyStore = db.createObjectStore('history', {autoIncrement: true});
-    // Create index for ObjectStore
     historyStore.createIndex('url', 'url', {unique: false});
 
-    // When ObjectStore structure is initialized,
-    // insert data into this ObjectStore. 
     historyStore.transaction.oncomplete = event => {
-      // Send messageto runtime in order to get user's history
       chrome.runtime.sendMessage({method: 'history', max: 10}, async response => {
-        // Get history objects from response
         const histories = response.data;
 
         const axiosOptions = {headers: { 'content-type': 'application/x-www-form-urlencoded' }};
@@ -62,7 +48,6 @@ export async function initializeHistory() {
 
         // Start transaction with `history` ObjectStore
         const historyOS = db.transaction('history', 'readwrite').objectStore('history');
-        // Add each history object to ObjectStore
         hstrWithCookies.data.forEach( history => {
           historyOS.add(history);
         });
@@ -78,11 +63,7 @@ export async function initializeHistory() {
  */
 export async function initializeTable() {
   let openReq = indexedDB.open('savitri', 1);
-
-  // If database version > 1, nothing to do.
   openReq.onsuccess = () => console.log('Already Done.');
-
-  // If there is an error while connecting, display it.
   openReq.onerror = () => console.log(openReq.error);
   
   // If table version < 1 (it means user dosen't have database)
@@ -91,10 +72,7 @@ export async function initializeTable() {
   
     console.log('Initializing...');
 
-    // Create database connection objest.
     const db = openReq.result;
-
-    // Create ObjectStores(tables) and indexes.
     db.createObjectStore('cookie', {autoIncrement: true})
       .createIndex('domain', 'domain', {unique: false});
 
@@ -165,7 +143,6 @@ export async function initializeTable() {
         console.log(request.error);
       };
     });
-    
     // Transaction will be closed automatically.
     console.log('Initialize Done.')
   }  
@@ -173,9 +150,7 @@ export async function initializeTable() {
 }
 
 // TODO: Refresh history ObjectStore with latest histories.
-async function refreshHistories() {
-
-}
+async function refreshHistories() { }
 
 /**
  * Get pageID from colected pages data.
@@ -275,11 +250,6 @@ export async function getCookies(cookieIds) {
     const cookie = await getCookie(cookieId);
     cookies.push(cookie);
   }
-  // const cookieList = await cookieIds.map( async (cookieId) => {
-  //   const cookie = await getCookie(cookieId);
-  //   console.log(cookie);
-  //   return cookie;
-  // });
   return cookies
 }
 
@@ -316,7 +286,3 @@ export async function getCookie(cookieId) {
     }
   });
 }
-
-// window.getPageId = getPageId;
-// window.getCookieIds = getCookieIds;
-// window.getCookies = getCookies;

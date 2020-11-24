@@ -79,20 +79,3 @@ function getNoArgsURL(url) {
     return url;
   }
 }
-
-// function collectURL() {
-//   // May be make this block as a function
-//   let elements = document.getElementsByClassName('g');
-//   let targets = Array.prototype.filter.call(elements, (elm) => {
-//     return elm.className === 'g'
-//   });
-
-//   const linkEntries = Array.from(targets).map( (t, idx) => {
-//     let k = 'savitri' + Date.now().toString() + idx;
-//     let v = t.children[t.children.length-1].children[0].children[0].href
-//     // console.log(`collected: ${v}`);
-//     localStorage.setItem(k, v);
-//     return [`link${idx}`, v];
-//   });
-//   return Object.fromEntries(linkEntries);
-// }
