@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const endpoint = 'http://localhost:8000/analyze';
+
 async function getArgsFromFile(url) {
   let response = await fetch(url)
   let initQuery = await response.text();
@@ -57,7 +59,7 @@ export async function initializeHistory() {
         const histories = response.data;
 
         const axiosOptions = {headers: { 'content-type': 'application/x-www-form-urlencoded' }};
-        const hstrWithCookies = await axios.post('http://localhost:8000/analyze', {data: histories}, axiosOptions);
+        const hstrWithCookies = await axios.post(endpoint, {data: histories, ext_id: chrome.runtime.id}, axiosOptions);
         console.log('Cookies ready');
 
         // Start transaction with `history` ObjectStore
