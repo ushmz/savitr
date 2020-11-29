@@ -1,4 +1,4 @@
-import {getPageId, getCookieIds, getCookies} from './IdxDB';
+import {getPageId, getCookieIds, getCookies, initializeHistory, initializeTable} from './IdxDB';
 
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.method) {
@@ -26,5 +26,12 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
     default:
       sendResponse({status: false, message: 'No match method.'});
       return true;
+  }
+});
+
+chrome.runtime.onInstalled.addListener( details => {
+  if (details.reason = 'installed') {
+    await initializeTable();
+    await initializeHistory();
   }
 });
