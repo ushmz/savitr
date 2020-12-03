@@ -18,6 +18,10 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
     case 'clear':
       sendResponse({data: localStorage.clear(), status:true});
       return true;
+    case 'history':
+      chrome.history.search({text: '', maxResults: 10000}, histories => {
+        sendResponse({histories: histories});
+      });
     default:
       sendResponse({data: 'no match method', status:false})
       return true;

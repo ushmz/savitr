@@ -1,4 +1,4 @@
-import {getPageId, getCookieIds, getCookies} from './IdxDB';
+import {getPageId, getCookieIds, getCookies, initializeHistory, initializeTable} from './IdxDB';
 
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.method) {
@@ -7,10 +7,6 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
       chrome.history.search({text:'', maxResults: request.max}, histories => {
         sendResponse({data: histories, status:true});
       });
-      return true;
-    // Set given item to localstrage.
-    case 'set':
-      sendResponse({data: localStorage.setItem(request.key, request.value), key:request.key, value:request.value, status:true});
       return true;
     // Get cookies that given page contain.
     case 'getCookies':
@@ -30,5 +26,12 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
     default:
       sendResponse({status: false, message: 'No match method.'});
       return true;
+  }
+});
+
+chrome.runtime.onInstalled.addListener( details => {
+  if (details.reason = 'installed') {
+    await initializeTable();
+    await initializeHistory();
   }
 });
