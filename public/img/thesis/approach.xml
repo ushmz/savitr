@@ -1,1 +1,84 @@
-<mxfile host="app.diagrams.net" modified="2020-12-03T06:19:28.162Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" version="13.10.6" etag="FjojfX0AYBBjfTsOwGVq" type="github"><diagram id="5L2Be4Ge2-lzxPpOeVez">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-12-03T08:18:45.529Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="Tt-NsXF39hGr3bqnUhoE" version="13.10.6" type="github">
+  <diagram id="5L2Be4Ge2-lzxPpOeVez" name="Page-1">
+    <mxGraphModel dx="895" dy="582" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sfblKOOVScVPYLMxwzdn-33" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F6F6F6;" vertex="1" parent="1">
+          <mxGeometry x="530" y="80" width="250" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-32" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F6F6F6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="450" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-16" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#F6F6F6;" vertex="1" parent="1">
+          <mxGeometry x="360" y="115" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-15" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#F6F6F6;" vertex="1" parent="1">
+          <mxGeometry x="550" y="165" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-14" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="550" y="125" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-13" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#F6F6F6;" vertex="1" parent="1">
+          <mxGeometry x="550" y="85" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-2" value="doubleclick.net" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-3" value="閲覧履歴1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="680" y="95" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-4" value="閲覧履歴2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="680" y="135" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-6" value="閲覧履歴3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="680" y="175" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-10" value="doubleclick.net" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="90" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-11" value="&amp;nbsp;flashtalking.com" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="130" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-12" value="doubleclick.net" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="170" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-24" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=0;" edge="1" parent="1" source="sfblKOOVScVPYLMxwzdn-2" target="sfblKOOVScVPYLMxwzdn-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="310" as="sourcePoint" />
+            <mxPoint x="450" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="145" />
+              <mxPoint x="520" y="105" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-25" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=0;" edge="1" parent="1" source="sfblKOOVScVPYLMxwzdn-2" target="sfblKOOVScVPYLMxwzdn-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="155.0000000000001" as="sourcePoint" />
+            <mxPoint x="560" y="115" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="145" />
+              <mxPoint x="520" y="185" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-26" value="ユーザの閲覧履歴" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="230" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-27" value="検索結果ウェブページ" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="230" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-28" value="&lt;h1 style=&quot;text-align: left ; font-size: 14px&quot;&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 14px&quot;&gt;5分でマスター！ビジネスメールの書き方...&lt;/font&gt;&lt;/h1&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;このページではビジネスメールのマナーを5分でマス&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left&quot;&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;ター&lt;/font&gt;&lt;span&gt;できるよう、&lt;/span&gt;&lt;span&gt;ルールを凝縮して紹介します！&lt;/span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="45" y="105" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-30" value="&lt;span style=&quot;color: rgb(51 , 157 , 57)&quot;&gt;&lt;font style=&quot;font-size: 12px&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="45" y="130" width="260" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="sfblKOOVScVPYLMxwzdn-34" value="&lt;font style=&quot;font-size: 10px&quot;&gt;含まれている&lt;br&gt;サードパーティクッキー&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="170" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
