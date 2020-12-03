@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-20T07:20:14.174Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36" etag="_VWRxmul8sfnS-vqH_2i" version="13.10.0" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-23T01:10:50.681Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36" etag="_D987-b2XdlgslbP5v03" version="13.10.0" type="github">
   <diagram id="6a731a19-8d31-9384-78a2-239565b7b9f0" name="Page-1">
-    <mxGraphModel dx="875" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="241" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -289,200 +289,206 @@
         <mxCell id="k-jDGypwbnW55GXJXJMO-37" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=0;rotation=90;" parent="k-jDGypwbnW55GXJXJMO-27" vertex="1">
           <mxGeometry x="-56" y="220" width="122.5" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-1" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-1" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2480" y="1100" width="880" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-4" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-4" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry width="879.99" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-5" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-5" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="14.98" y="14" width="833.41" height="109.16" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-6" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-6" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-14" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-14" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="10" y="160" width="860" height="124" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-15" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-15" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-7" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-7" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="25" y="178" width="811.61" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-8" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-8" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="24.998749646869655" y="183.00422043579488" width="830" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-3" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-3" value="&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 18px ; line-height: 150%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-1" vertex="1">
           <mxGeometry x="8.99727609664751" y="195.00435794372743" width="780" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-9" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-9" value="" style="group" parent="gGudjgz0TUMFjXf5161s-1" vertex="1" connectable="0">
           <mxGeometry x="415" y="263" width="50" height="15.889999999999986" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-10" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-9">
+        <mxCell id="gGudjgz0TUMFjXf5161s-10" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" parent="gGudjgz0TUMFjXf5161s-9" vertex="1">
           <mxGeometry width="50" height="15.89" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-11" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="gGudjgz0TUMFjXf5161s-9">
+        <mxCell id="gGudjgz0TUMFjXf5161s-11" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" parent="gGudjgz0TUMFjXf5161s-9" vertex="1">
           <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-16" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-16" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1314" y="1720" width="880" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-17" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-17" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry width="879.99" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-18" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-18" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="14.98" y="14" width="833.41" height="109.16" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-19" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-19" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-20" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-20" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="10" y="160" width="860" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-21" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-21" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-22" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-22" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-23" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-23" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-24" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-24" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="29.99727609664751" y="201.11435794372744" width="740" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-64" value="&lt;span style=&quot;font-size: 18px ; text-align: left ; color: rgb(49 , 50 , 169)&quot;&gt;レディースバッグ・鞄 - ファッション通販SHOPLIST（ショップリスト）&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-64" value="&lt;span style=&quot;font-size: 18px ; text-align: left ; color: rgb(49 , 50 , 169)&quot;&gt;レディースバッグ・鞄 - ファッション通販SHOPLIST（ショップリスト）&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="30" y="256.11000000000007" width="600" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-25" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-25" value="" style="group" parent="gGudjgz0TUMFjXf5161s-16" vertex="1" connectable="0">
           <mxGeometry x="415" y="304.11" width="50" height="15.889999999999986" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-26" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-25">
+        <mxCell id="gGudjgz0TUMFjXf5161s-26" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" parent="gGudjgz0TUMFjXf5161s-25" vertex="1">
           <mxGeometry width="50" height="15.89" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-27" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="gGudjgz0TUMFjXf5161s-25">
+        <mxCell id="gGudjgz0TUMFjXf5161s-27" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" parent="gGudjgz0TUMFjXf5161s-25" vertex="1">
           <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-65" value="&lt;font style=&quot;font-size: 14px&quot; color=&quot;#339d39&quot;&gt;http://w-health.jp/delicate/&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-65" value="&lt;font style=&quot;font-size: 14px&quot; color=&quot;#339d39&quot;&gt;http://w-health.jp/delicate/&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="47.29" y="227.11" width="170" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-66" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.acute_triangle;dx=0.5;rounded=1;strokeColor=#000000;fillColor=none;rotation=90;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-66" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.acute_triangle;dx=0.5;rounded=1;strokeColor=#000000;fillColor=none;rotation=90;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="38.72" y="234.11" width="8.57" height="6" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-69" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.acute_triangle;dx=0.5;rounded=1;strokeColor=#000000;fillColor=none;rotation=90;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-69" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.acute_triangle;dx=0.5;rounded=1;strokeColor=#000000;fillColor=none;rotation=90;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="38.72000000000003" y="283.2199999999999" width="8.57" height="6" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-70" value="&lt;font color=&quot;#339d39&quot; style=&quot;font-size: 14px&quot;&gt;https://shop-list.com/women/svc/product/Search/?genre_id1=7&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-16">
+        <mxCell id="gGudjgz0TUMFjXf5161s-70" value="&lt;font color=&quot;#339d39&quot; style=&quot;font-size: 14px&quot;&gt;https://shop-list.com/women/svc/product/Search/?genre_id1=7&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-16" vertex="1">
           <mxGeometry x="47.289999999999964" y="276.11" width="400" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-28" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-28" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1314" y="2100" width="880" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-29" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-29" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry width="879.99" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-30" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-30" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="14.98" y="14" width="833.41" height="109.16" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-31" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-31" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-32" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-32" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="10" y="160" width="860" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-33" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-33" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-34" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-34" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-35" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-35" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-36" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-36" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-28" vertex="1">
           <mxGeometry x="29.99727609664751" y="205.00435794372743" width="740" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-37" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-28">
+        <mxCell id="gGudjgz0TUMFjXf5161s-37" value="" style="group" parent="gGudjgz0TUMFjXf5161s-28" vertex="1" connectable="0">
           <mxGeometry x="415" y="258" width="50" height="15.889999999999986" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-38" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-37">
+        <mxCell id="gGudjgz0TUMFjXf5161s-38" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" parent="gGudjgz0TUMFjXf5161s-37" vertex="1">
           <mxGeometry width="50" height="15.89" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-39" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="gGudjgz0TUMFjXf5161s-37">
+        <mxCell id="gGudjgz0TUMFjXf5161s-39" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" parent="gGudjgz0TUMFjXf5161s-37" vertex="1">
           <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-40" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="2483" y="1723" width="880" height="310" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-41" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry width="879.99" height="310" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-42" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="14.98" y="14" width="833.41" height="109.16" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-43" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-44" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="10" y="160" width="860" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-45" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-46" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-47" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-48" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="29.99727609664751" y="205.00435794372743" width="740" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-49" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-40">
-          <mxGeometry x="415" y="258" width="50" height="15.889999999999986" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-50" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-49">
-          <mxGeometry width="50" height="15.89" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-51" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="gGudjgz0TUMFjXf5161s-49">
-          <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-52" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="gGudjgz0TUMFjXf5161s-52" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="2483" y="2103" width="880" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-53" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-53" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry width="879.99" height="310" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-54" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;&lt;font style=&quot;font-size: 20px&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/font&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
-          <mxGeometry x="14.98" y="14" width="833.41" height="109.16" as="geometry" />
+        <mxCell id="gGudjgz0TUMFjXf5161s-54" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
+          <mxGeometry x="14.98" y="14" width="833.41" height="36" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-55" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
-          <mxGeometry x="14.980000000000018" y="123.16203300190364" width="420" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-56" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-56" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry x="10" y="160" width="860" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-57" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-57" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-58" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-58" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-59" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-59" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-60" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-60" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
           <mxGeometry x="29.99727609664751" y="205.00435794372743" width="740" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-61" value="" style="group" vertex="1" connectable="0" parent="gGudjgz0TUMFjXf5161s-52">
+        <mxCell id="gGudjgz0TUMFjXf5161s-61" value="" style="group" parent="gGudjgz0TUMFjXf5161s-52" vertex="1" connectable="0">
           <mxGeometry x="415" y="258" width="50" height="15.889999999999986" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-62" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="gGudjgz0TUMFjXf5161s-61">
+        <mxCell id="gGudjgz0TUMFjXf5161s-62" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" parent="gGudjgz0TUMFjXf5161s-61" vertex="1">
           <mxGeometry width="50" height="15.89" as="geometry" />
         </mxCell>
-        <mxCell id="gGudjgz0TUMFjXf5161s-63" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="gGudjgz0TUMFjXf5161s-61">
+        <mxCell id="gGudjgz0TUMFjXf5161s-63" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" parent="gGudjgz0TUMFjXf5161s-61" vertex="1">
           <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-2" value="&lt;span style=&quot;font-size: 20px ; text-align: left&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹&lt;br&gt;&amp;nbsp; 介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="gGudjgz0TUMFjXf5161s-52">
+          <mxGeometry x="9.980000000000018" y="97" width="840" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gGudjgz0TUMFjXf5161s-55" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="gGudjgz0TUMFjXf5161s-52" vertex="1">
+          <mxGeometry x="18.389999999999873" y="57.00203300190333" width="420" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-3" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2483" y="1720" width="880" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-4" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FAFAFA;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry width="879.99" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-5" value="&lt;h1&gt;&lt;font color=&quot;#1d1a9e&quot; style=&quot;font-size: 27px&quot;&gt;5分でマスター！ビジネスメールの書き方 基礎編 ビジネスマナー...&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="14.98" y="14" width="833.41" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-6" value="" style="whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;rounded=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="10" y="160" width="860" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-7" value="✕" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="836" y="168" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-8" value="" style="whiteSpace=wrap;html=1;strokeColor=none;fillColor=#FF9999;rounded=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="18.39" y="171" width="811.61" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-9" value="&lt;font style=&quot;font-size: 24px&quot; color=&quot;#0c0c29&quot;&gt;このページに訪れることで，過去に訪れた以下のページが紐付けられます．&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="18.388749646869655" y="176.00422043579488" width="830" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-10" value="&lt;font style=&quot;font-size: 18px ; line-height: 130%&quot;&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;人に相談しにくいデリケートな悩み | 健康推進室 ヘルスケアラボ｜厚生労働省研究班監修&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(49 , 50 , 169)&quot;&gt;&lt;font style=&quot;font-size: 18px&quot;&gt;レディースバッグ・鞄  - ファッション通販SHOPLIST（ショップリスト）&lt;/font&gt;&lt;/span&gt;&lt;font color=&quot;#3132a9&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;...他2件&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="29.99727609664751" y="205.00435794372743" width="740" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-11" value="" style="group" vertex="1" connectable="0" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="415" y="258" width="50" height="15.889999999999986" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-12" value="" style="whiteSpace=wrap;html=1;rounded=1;strokeColor=none;fillColor=#E6E6E6;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-11">
+          <mxGeometry width="50" height="15.89" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-13" value="" style="html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;shadow=0;dashed=0;strokeWidth=2;shape=mxgraph.ios7.misc.expand;rotation=-180;fillColor=#999999;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-11">
+          <mxGeometry x="5.04146691224264" y="5.3736993441932555" width="39.92405770860599" height="5.443219801142375" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-14" value="&lt;span style=&quot;font-size: 20px ; text-align: left&quot;&gt;このページではビジネスメールのマナーを5分でマスターできるよう、ルールを凝縮して紹&lt;br&gt;&amp;nbsp; 介します！「普段からスマホでメールやLINEを使っているから大丈夫」なんて考えていま...&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="9.980000000000018" y="97" width="840" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dNU1vX6qg0Pq1kNgJBcP-15" value="&lt;font style=&quot;font-size: 20px&quot; color=&quot;#339d39&quot;&gt;https://business-manner.net/article/mail/91567&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="dNU1vX6qg0Pq1kNgJBcP-3">
+          <mxGeometry x="18.389999999999873" y="57.00203300190333" width="420" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
