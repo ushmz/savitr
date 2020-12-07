@@ -31,50 +31,48 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = [
   {
-    // Really???
-    // externals: nodeExternals(),
-    mode: 'development',
     entry: {
-      background: ['./src/IdxDB.js', './src/savitri-background.js'],
-      index: ['./src/savitri-index.js'],
-      popup: ['./src/addInitialize.js'],
-      // vender: ['puppeteer']
+      app: './src/index.tsx'
     },
     output: {
-      path: path.join(__dirname, 'dist', 'savitri'),
-      filename: '[name].bundle.js'
+      path: __dirname + '/dist/savitri',
     },
     target: 'node',
     module: {
       rules: [
         {
-          test: [/\.js$/, /\.ts$/],
-          use: [
-            {
-              loader: 'babel-loader',
-              options: { 
-                presets: [['@babel/preset-env']],
-                // presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3}]]
-                plugins: ['@babel/plugin-transform-runtime'],
-              }
-            }
-          ],
-          
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+          // use: [
+          //   {
+          //     loader: 'babel-loader',
+          //     options: { 
+          //       presets: [['@babel/preset-env']],
+          //       // presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3}]]
+          //       plugins: ['@babel/plugin-transform-runtime'],
+          //     }
+          //   }
+          // ],
           exclude: /node_modules/,
-        }
-      ]
+        },
+        // {
+        //   test: /\.html$/,
+        //   use: [
+        //     {
+        //       loader: 'html-loader',
+        //       options: {minimize: true},
+        //     },
+        //   ],
+        // },
+      ],
     },
+  
     plugins: [
-      // new webpack.ProgressPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
             from: './public/savitri-manifest.json',
             to: path.join(__dirname, 'dist', 'savitri', 'manifest.json')
-          },
-          {
-            from: './src/savitri-popup.html',
-            to: path.join(__dirname, 'dist', 'savitri', 'popup.html')
           },
           {
             context: 'db/dumped',
@@ -84,16 +82,12 @@ module.exports = [
         ]
       }),
       new HtmlWebpackPlugin({
-        filename: 'popup.html',
-        chunks: ['popup'],
-        template: path.join(__dirname, 'src', 'savitri-popup.html')
+        template: './public/index.html',
+        filename: './index.html',
+        chunks: ['app'],
       }),
       new CleanWebpackPlugin()
     ],
-    // resolve: {
-    //   extensions: ['.ts', '.js'],
-    //   modules: ['node_modules']
-    // },
     devServer: {
       inline: true,
       contentBase: path.join(__dirname, 'public'),
