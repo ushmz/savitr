@@ -6,7 +6,7 @@
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "browser_action": {
         "default_title": "text appear when hover the pointer",
-        "default_popup": "popup.html"
+        "default_popup": "index.html"
     },
     "content_scripts": [
         {
@@ -15,15 +15,11 @@
                 "*://*.google.co.jp/search?*"
             ],
             "js": [
-                "index.bundle.js"
+                "popup.js"
             ]
         }
     ],
-    "background": {
-        "scripts": [
-            "background.bundle.js"
-        ]
-    },
+    "options_page": "option.html",
     "web_accessible_resources": [
         ""
     ],
