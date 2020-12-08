@@ -32,7 +32,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = [
   {
     entry: {
-      app: './src/index.tsx'
+      popup: './src/popup/index.tsx',
+      option: [
+        './src/option/Attention.tsx', 
+        './src/option/Introduction.tsx',
+        './src/option/PostTask.tsx',
+        './src/option/PreTask.tsx',
+        './src/option/Task.tsx',
+        './src/option/index.tsx'
+      ]
     },
     output: {
       path: __dirname + '/dist/savitri',
@@ -66,7 +74,10 @@ module.exports = [
         // },
       ],
     },
-  
+    resolve: {
+      extensions: ['.ts', '.tsx', '.min.js', '.js', '.jsx'],
+      modules: [path.resolve(__dirname, 'src', 'option'), path.resolve(__dirname, 'src', 'popup'), 'node_modules']
+    },
     plugins: [
       new CopyWebpackPlugin({
         patterns: [
@@ -84,7 +95,12 @@ module.exports = [
       new HtmlWebpackPlugin({
         template: './public/index.html',
         filename: './index.html',
-        chunks: ['app'],
+        chunks: ['popup'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './public/option.html',
+        filename: './option.html',
+        chunks: ['option'],
       }),
       new CleanWebpackPlugin()
     ],
