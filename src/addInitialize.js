@@ -1,7 +1,7 @@
-import {initializeTable, initializeHistory} from './IdxDB';
+import {initializePageData, initializeHistory} from './IdxDB';
 
 document.getElementById('initBtn').addEventListener('click', async () => {
-  await initializeTable();  
+  await initializePageData();  
 })
 
 document.getElementById('histBtn').addEventListener('click', async () => {

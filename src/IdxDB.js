@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { getHistories, getHistoriesAsync } from './getHistory';
 
 async function getArgsFromFile(url) {
   let response = await fetch(url)
@@ -38,21 +38,28 @@ export async function initializeHistory() {
     const historyStore = db.createObjectStore('history', {autoIncrement: true});
     historyStore.createIndex('url', 'url', {unique: false});
 
-    historyStore.transaction.oncomplete = event => {
-      chrome.runtime.sendMessage({method: 'history', max: 10}, async response => {
-        const histories = response.data;
+    historyStore.transaction.oncomplete = async event => {
+      const histories = await getHistoriesAsync();
 
-        const axiosOptions = {headers: { 'content-type': 'application/x-www-form-urlencoded' }};
-        const hstrWithCookies = await axios.post('http://localhost:8000/analyze', {data: histories}, axiosOptions);
-        console.log('Cookies ready');
-
-        // Start transaction with `history` ObjectStore
-        const historyOS = db.transaction('history', 'readwrite').objectStore('history');
-        hstrWithCookies.data.forEach( history => {
-          historyOS.add(history);
+      const historiesWithCookies = histories.map( history => {
+        let cookies = [];
+        chrome.runtime.sendMessage({method: 'getCookies', target: history.url}, response => {
+          cookies = response.cookies;
         });
+        history.cookies = cookies;
+        return history;
+      })
 
+      const historiesWith3PCookies = historiesWithCookies.filter( history => {
+        return history.cookie.length > 0
       });
+
+      // Start transaction with `history` ObjectStore
+      const historyOS = db.transaction('history', 'readwrite').objectStore('history');
+      historiesWith3PCookies.forEach( history => {
+        historyOS.add(history);
+      });
+
     }
     console.log('History Loaded.');
   }
@@ -61,7 +68,7 @@ export async function initializeHistory() {
 /**
  * Initialize table with collected page data.
  */
-export async function initializeTable() {
+export async function initializePageData() {
   let openReq = indexedDB.open('savitri', 1);
   openReq.onsuccess = () => console.log('Already Done.');
   openReq.onerror = () => console.log(openReq.error);

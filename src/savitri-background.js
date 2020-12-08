@@ -1,4 +1,4 @@
-import {getPageId, getCookieIds, getCookies, initializeHistory, initializeTable} from './IdxDB';
+import {getPageId, getCookieIds, getCookies, initializeHistory, initializePageData} from './IdxDB';
 
 chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   switch (request.method) {
@@ -29,9 +29,9 @@ chrome.runtime.onMessage.addListener( (request, sender, sendResponse) => {
   }
 });
 
-chrome.runtime.onInstalled.addListener( details => {
+chrome.runtime.onInstalled.addListener( async details => {
   if (details.reason = 'installed') {
-    await initializeTable();
+    await initializePageData();
     await initializeHistory();
   }
 });
