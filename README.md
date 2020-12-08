@@ -1,5 +1,6 @@
 # savitri
 
+This bransh(`store/savitri-gayatri`) is used just for safety, will be deleted soon.
 ## Install
 
 1. Clone this repository.
