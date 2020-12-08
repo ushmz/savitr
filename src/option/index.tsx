@@ -1,3 +1,7 @@
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Attention } from './Attention';
@@ -14,24 +18,22 @@ const Option = () => {
   const pagination = () => {
     switch (page) {
       case 'Attention':
-        return <Attention />;
+        return <Attention setPage={setpage} />;
       case 'Introduntion':
-        return <Introduction />;
+        return <Introduction setPage={setpage} />;
       case 'PreTask':
-        return <PreTask />;
+        return <PreTask setPage={setpage} />;
       case 'Task':
-        return <Task />;
+        return <Task setPage={setpage} />;
       case 'PostTask':
-        return <PostTask />;
+        return <PostTask setPage={setpage} />;
       default:
-        return <Attention />;
+        return <Attention setPage={setpage} />;
     }
   };
 
   return (
     <>
-      <div>Option page</div>
-      {pagination()}
       <button
         onClick={() => {
           setpage('Attention');
@@ -67,6 +69,7 @@ const Option = () => {
       >
         タスク開始
       </button>
+      {pagination()}
     </>
   );
 };
