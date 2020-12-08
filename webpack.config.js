@@ -45,33 +45,22 @@ module.exports = [
     output: {
       path: __dirname + '/dist/savitri',
     },
-    target: 'node',
     module: {
       rules: [
         {
           test: /\.tsx?$/,
           loader: 'awesome-typescript-loader',
-          // use: [
-          //   {
-          //     loader: 'babel-loader',
-          //     options: { 
-          //       presets: [['@babel/preset-env']],
-          //       // presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3}]]
-          //       plugins: ['@babel/plugin-transform-runtime'],
-          //     }
-          //   }
-          // ],
-          exclude: /node_modules/,
-        },
-        // {
-        //   test: /\.html$/,
-        //   use: [
-        //     {
-        //       loader: 'html-loader',
-        //       options: {minimize: true},
-        //     },
-        //   ],
-        // },
+       },
+        {
+          test: /\.css/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: { url: false }
+            }
+          ]
+        }
       ],
     },
     resolve: {
