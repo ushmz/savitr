@@ -145,8 +145,10 @@ export async function initializeTable(): Promise<void> {
   openReq.onerror = () => console.log(openReq.error);
 }
 
-// TODO: Refresh history ObjectStore with latest histories.
-// async function refreshHistories() {}
+// TODO: Drop x-rayed and history ObjectStore.
+export async function dropAllDatabase() {
+  return;
+}
 
 /**
  * Get pageID from colected pages data.
