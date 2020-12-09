@@ -40,7 +40,8 @@ module.exports = [
         './src/option/PreTask.tsx',
         './src/option/Task.tsx',
         './src/option/index.tsx'
-      ]
+      ],
+      background: './src/background/RuntimeMessageListener.ts'
     },
     output: {
       path: __dirname + '/dist/savitri',
