@@ -9,67 +9,34 @@ import { Introduction } from './Introduction';
 import { PreTask } from './PreTask';
 import { Task } from './Task';
 import { PostTask } from './PostTask';
+import { Header } from '../shared/Header';
 
 type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
 
 const Option = () => {
-  const [page, setpage] = useState<Pages>('Attention');
+  const [page, setPage] = useState<Pages>('Attention');
 
   const pagination = () => {
     switch (page) {
       case 'Attention':
-        return <Attention setPage={setpage} />;
+        return <Attention setPage={setPage} />;
       case 'Introduntion':
-        return <Introduction setPage={setpage} />;
+        return <Introduction setPage={setPage} />;
       case 'PreTask':
-        return <PreTask setPage={setpage} />;
+        return <PreTask setPage={setPage} />;
       case 'Task':
-        return <Task setPage={setpage} />;
+        return <Task setPage={setPage} />;
       case 'PostTask':
-        return <PostTask setPage={setpage} />;
+        return <PostTask setPage={setPage} />;
       default:
-        return <Attention setPage={setpage} />;
+        return <Attention setPage={setPage} />;
     }
   };
 
   return (
     <>
-      <button
-        onClick={() => {
-          setpage('Attention');
-        }}
-      >
-        はじめに
-      </button>
-      <button
-        onClick={() => {
-          setpage('Introduntion');
-        }}
-      >
-        タスク説明
-      </button>
-      <button
-        onClick={() => {
-          setpage('PreTask');
-        }}
-      >
-        事前アンケート
-      </button>
-      <button
-        onClick={() => {
-          setpage('PostTask');
-        }}
-      >
-        事後アンケート
-      </button>
-      <button
-        onClick={() => {
-          setpage('Task');
-        }}
-      >
-        タスク開始
-      </button>
-      {pagination()}
+      <Header title="Admin pagination" setPage={setPage}></Header>
+      <div className="mb-5 pb-5">{pagination()}</div>
     </>
   );
 };

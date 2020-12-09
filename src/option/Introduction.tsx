@@ -13,33 +13,36 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
   const [isReady, setReady] = useState<boolean>(false);
 
   return (
-    <MDBContainer>
-      <MDBTypography tag="h1" className="mt-4">
-        タスク詳細
-      </MDBTypography>
+    <MDBContainer className="my-5">
+      <MDBTypography tag="h1">タスク詳細</MDBTypography>
       <MDBTypography tag="p">このページではタスクの詳細について説明します。</MDBTypography>
-      <MDBTypography tag="h2" className="mt-4">
+      <MDBTypography tag="h2" className="mt-5">
+        タスク内容
+      </MDBTypography>
+      <MDBTypography tag="p">
+        本実験では、ウェブ検索ユーザのプライバシーリスクへの意識づけを支援する提案インターフェースを検証するためのものです。
+        はじめに、プライバシー意識を測るアンケートに回答していただきます。続いて検索タスクを行っていただきます。（被験者間実験を行うなら説明文をタスクに応じて変えなければならない．）
+      </MDBTypography>
+      <MDBTypography tag="h2" className="mt-5">
         注意事項
       </MDBTypography>
       <MDBTypography tag="ul">
         <li className="my-3">
           本実験ではあなたのブラウザに保存された閲覧履歴データ（以下、ブラウザ履歴）にアクセスし、
           一部変更を加えた上でブラウザ内の一時的にアクセス可能な場所に保存します。本システムは
-          一時的に保存された情報（以下、履歴情報）を用いてタスクを生成します。
+          一時的に保存された情報（以下、履歴情報）を用いてタスクを生成します。本システムはあなたのブラウザ履歴、及び履歴情報に対し、
           {/* TODO: 具体例 */}
-          <text className="font-weight-bold">
-            本システムはあなたのブラウザ履歴、及び履歴情報に対し、一切の閲覧、収集、外部への送信を行いません。
-          </text>
+          <strong className="font-weight-bold">一切の閲覧、収集、外部への送信を行いません。</strong>
         </li>
         <li className="my-3">
           タスクの実行中、結果の分析のため、以下の情報を収集させていただきます。なお、以下の情報によっていかなる個人の特定も行われることはありません。
           <ol>
             {/* TODO: 具体例 */}
             <li>
-              あなたが<text className="font-weight-bold">実験中に</text>閲覧したページのタイトル及び内容
+              あなたが<strong className="font-weight-bold">実験中に</strong>閲覧したページのタイトル及び内容
             </li>
             <li>
-              あなたが閲覧したページに紐付けられた<text className="font-weight-bold">履歴情報の件数</text>
+              あなたが閲覧したページに紐付けられた<strong className="font-weight-bold">履歴情報の件数</strong>
               （履歴情報の詳細については収集いたしません）
             </li>
           </ol>
@@ -61,10 +64,9 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
       <div className="mx-auto my-3">
         <MDBBtn
           color="primary"
-          // className="mx-auto"
           onClick={async () => {
-            await initializeHistory();
             await initializeTable();
+            await initializeHistory();
             setReady(true);
           }}
         >
