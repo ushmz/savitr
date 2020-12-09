@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import axios from 'axios';
+import { ChromeRuntimeResponse, JunctionIDBTable, CookieIDBTable } from 'shared/types';
 
 async function getArgsFromFile(url: string): Promise<string[]> {
   const response = await fetch(url);
@@ -15,34 +15,6 @@ function formatString2Array(arrayLikeString: string): string[] {
     return [];
   }
 }
-
-type PageIDBTable = {
-  id: string;
-  title: string;
-  start_uri: string;
-  final_uri: string;
-  recieved_uri: string[];
-  requested_uri: string[];
-};
-
-type CookieIDBTable = {
-  domain: string[];
-  httponly: string;
-  secure: string;
-};
-
-type JunctionIDBTable = {
-  page_id: string;
-  cookie_id: string;
-};
-
-// TODO: Better name
-type CookieInformationStatus = {
-  status: boolean;
-  cookies: string[];
-  error: string;
-  message: string;
-};
 
 /**
  * Initialize user history information.
@@ -60,22 +32,17 @@ export async function initializeHistory(): Promise<void> {
     historyStore.createIndex('url', 'url', { unique: false });
 
     historyStore.transaction.oncomplete = () => {
-      chrome.runtime.sendMessage({ method: 'history', max: 10 }, async (response) => {
-        const histories = response.data;
+      chrome.runtime.sendMessage(
+        { method: 'history', query: { max: 1000 } },
+        async (response: ChromeRuntimeResponse) => {
+          const histories = response.data;
 
-        /**
-         * TODO : Update following code not to use external server.
-         * Only user stored data.
-         */
-        const axiosOptions = { headers: { 'content-type': 'application/x-www-form-urlencoded' } };
-        const hstrWithCookies = await axios.post('http://localhost:8000/analyze', { data: histories }, axiosOptions);
-        console.log('Cookies ready');
-
-        const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
-        hstrWithCookies.data.forEach((history: any) => {
-          historyOS.add(history);
-        });
-      });
+          const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
+          histories.forEach((history: object) => {
+            historyOS.add(history);
+          });
+        },
+      );
     };
     console.log('History Loaded.');
   };
@@ -92,12 +59,6 @@ export async function initializeHistory(): Promise<void> {
  */
 export async function initializeTable(): Promise<void> {
   const openReq: IDBOpenDBRequest = indexedDB.open('savitri', 1);
-
-  // If database version > 1, nothing to do.
-  openReq.onsuccess = () => console.log('Already Done.');
-
-  // If there is an error while connecting, display it.
-  openReq.onerror = () => console.log(openReq.error);
 
   // If table version < 1 (it means user dosen't have database)
   // Initialize database.
@@ -174,8 +135,14 @@ export async function initializeTable(): Promise<void> {
     });
 
     // Transaction will be closed automatically.
-    console.log('Initialize Done.');
+    console.log('Initialize Finished.');
   };
+
+  // If database version > 1, nothing to do.
+  openReq.onsuccess = () => console.log('Already Done.');
+
+  // If there is an error while connecting, display it.
+  openReq.onerror = () => console.log(openReq.error);
 }
 
 // TODO: Refresh history ObjectStore with latest histories.
