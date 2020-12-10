@@ -1,11 +1,20 @@
-export type RuntimeRequest<T> = {
+export interface RuntimeRequest<T> {
   method: string;
   query: T;
-};
+}
 
-export type HistoryQuery = {
+export interface HistoryQuery {
   max: number;
-};
+}
+
+export interface ChromeHistoryResponse {
+  id: string;
+  lastVisitTime: number;
+  title: string;
+  typedCount: number;
+  url: string;
+  visitCount: number;
+}
 
 export type PageIDBTable = {
   id: string;
@@ -28,15 +37,15 @@ export type JunctionIDBTable = {
 };
 
 // TODO: Better name
-export type CookieInformationStatus = {
+export interface CookieInformationStatus {
   status: boolean;
   cookies: string[];
   error: string;
   message: string;
-};
+}
 
-export type ChromeRuntimeResponse = {
-  data: Array<object>;
+export interface RuntimeMessageResponse<T> {
+  data: Array<T>;
   status: boolean;
   message?: string;
-};
+}
