@@ -66,7 +66,7 @@ module.exports = [
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.min.js', '.js', '.jsx'],
-      modules: [path.resolve(__dirname, 'src', 'option'), path.resolve(__dirname, 'src', 'popup'), 'node_modules']
+      modules: [path.resolve(__dirname, 'src', 'shared'), path.resolve(__dirname, 'src', 'option'), path.resolve(__dirname, 'src', 'popup'), 'node_modules']
     },
     plugins: [
       new CopyWebpackPlugin({
