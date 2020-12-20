@@ -11,6 +11,7 @@ type Props = {
 
 export const Introduction: React.FC<Props> = ({ setPage }) => {
   const [isReady, setReady] = useState<boolean>(false);
+  const [isProcessing, setProcessing] = useState<boolean>(false);
 
   return (
     <MDBContainer className="my-5">
@@ -65,12 +66,20 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
         <MDBBtn
           color="primary"
           onClick={async () => {
-            await initializeTable();
-            await initializeHistory();
+            setProcessing(true);
+            await initializeTable().then(() => initializeHistory());
+            // await initializeHistory();
             setReady(true);
+            setProcessing(false);
           }}
         >
-          履歴情報の作成
+          {isProcessing ? (
+            <div className="spinner-border" role="status">
+              <span className="sr-only">作成中...</span>
+            </div>
+          ) : (
+            '履歴情報の作成'
+          )}
         </MDBBtn>
       </div>
       <MDBTypography tag="p">「事前アンケート」ページへ進んでください。</MDBTypography>
