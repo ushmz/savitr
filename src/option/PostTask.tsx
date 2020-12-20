@@ -10,6 +10,7 @@ type Props = {
 
 export const PostTask: React.FC<Props> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);
+  const [isProcessing, setProcessing] = useState<boolean>(false);
 
   return (
     <MDBContainer className="my-5">
@@ -39,8 +40,22 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
       <MDBTypography tag="p">
         アンケートへの回答が終了しましたら、以下のボタンから実験に使用した履歴情報の削除を行ってください。
       </MDBTypography>
-      <MDBBtn color="primary" className="mb-5" onClick={async () => await dropAllDatabase()}>
-        履歴情報の削除
+      <MDBBtn
+        color="primary"
+        className="mb-5"
+        onClick={async () => {
+          setProcessing(true);
+          await dropAllDatabase();
+          setProcessing(false);
+        }}
+      >
+        {isProcessing ? (
+          <div className="spinner-border" role="status">
+            <span className="sr-only">削除中...</span>
+          </div>
+        ) : (
+          '履歴情報の削除'
+        )}
       </MDBBtn>
       <MDBTypography tag="p">
         実験は以上で終了となります。ご協力ありがとうございました。このタブを閉じ、本システムをアンインストールしてください。

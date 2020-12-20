@@ -26,7 +26,7 @@ export async function initializeTable(): Promise<void> {
     // If table version < 1 (it means user dosen't have database)
     // Initialize database.
     openReq.onupgradeneeded = async () => {
-      console.log('Initializing...');
+      // console.log('Initializing...');
 
       const db: IDBDatabase = openReq.result;
 
@@ -37,7 +37,7 @@ export async function initializeTable(): Promise<void> {
       db.createObjectStore('page_cookie_junction', { autoIncrement: true }).createIndex('junction', 'page_id', {
         unique: false,
       });
-      console.log('Tables initialized.');
+      // console.log('Tables initialized.');
 
       // Get all arguments dumped from SQL.
       const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
@@ -48,7 +48,7 @@ export async function initializeTable(): Promise<void> {
 
       const junctionFileUrl = chrome.runtime.getURL('init/pc_junction_essential.csv');
       const junctionTableArgs: string[] = await getArgsFromFile(junctionFileUrl);
-      console.log('Arguments OK.');
+      // console.log('Arguments OK.');
 
       // Start data insert transaction.
       const cookieTransaction: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
@@ -103,7 +103,10 @@ export async function initializeTable(): Promise<void> {
     };
 
     // If database version > 1, nothing to do.
-    openReq.onsuccess = () => console.log('Already Done.');
+    openReq.onsuccess = () => {
+      // console.log('Already Done.');
+      // resolve();
+    };
 
     // If there is an error while connecting, display it.
     openReq.onerror = () => {
@@ -114,8 +117,18 @@ export async function initializeTable(): Promise<void> {
 }
 
 // TODO: Drop x-rayed and history ObjectStore.
-export async function dropAllDatabase() {
-  return;
+export async function dropAllDatabase(): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const HistoryDBBDeleteRequest = indexedDB.deleteDatabase('history');
+    HistoryDBBDeleteRequest.onerror = () => {
+      console.log(HistoryDBBDeleteRequest.error);
+    };
+    const xrayedDBDeleteRequest = indexedDB.deleteDatabase('xrayed');
+    xrayedDBDeleteRequest.onerror = () => {
+      console.log(xrayedDBDeleteRequest.error);
+    };
+    resolve();
+  });
 }
 
 /**
@@ -126,6 +139,15 @@ export async function dropAllDatabase() {
  */
 export async function getPageId(target: string): Promise<string> {
   return new Promise((resolve, reject) => {
+    target = decodeURI(target);
+    let targetNoArgs: string;
+    try {
+      const matched = target.match(/^(.+?)\?.+$/);
+      targetNoArgs = matched ? matched[0] : target;
+    } catch {
+      targetNoArgs = target;
+    }
+
     const openReq: IDBOpenDBRequest = indexedDB.open('xrayed', 1);
 
     openReq.onupgradeneeded = () => {
@@ -138,7 +160,7 @@ export async function getPageId(target: string): Promise<string> {
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
       const pageIndex: IDBIndex = pageOS.index('start_uri');
-      const request: IDBRequest = pageIndex.get(target);
+      const request: IDBRequest = pageIndex.get(targetNoArgs);
       request.onsuccess = () => {
         if (request.result !== undefined) {
           const page = request.result;
@@ -283,24 +305,33 @@ export async function initializeHistory(): Promise<void> {
       historyStore.createIndex('url', 'url', { unique: false });
 
       historyStore.transaction.oncomplete = () => {
+        // TODO
+        // Callback of `sendMessage` seems not to wait until it finish.
+        // Why not using `tabs.sendMessage`?
         chrome.runtime.sendMessage(
           { method: 'history', query: { max: 1000 } },
           async (response: RuntimeMessageResponse<ChromeHistoryResponse>) => {
             const histories = response.data;
 
-            const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
             histories.forEach(async (history: ChromeHistoryResponse) => {
               try {
                 const pageid = await getPageId(history.url);
+                console.log('pageid: ', pageid);
                 const cookieids = await getCookieIds(pageid);
+                console.log('cookieids: ', cookieids);
                 const cookies = await getCookies(cookieids);
+                console.log('cookies: ', cookies);
+
                 const historyData: object = {
                   url: history.url,
                   cookies: cookies,
                 };
+                const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
                 historyOS.add(historyData);
-              } catch {
+              } catch (error) {
                 // Do nothing intentionally. (Pass the URL)
+                console.log('===== NO DATA =====');
+                console.log(error);
               }
             });
           },
@@ -311,7 +342,10 @@ export async function initializeHistory(): Promise<void> {
     };
 
     // If database version > 1, nothing to do.
-    openReq.onsuccess = () => console.log('Successfully connected.');
+    openReq.onsuccess = () => {
+      // console.log('Successfully connected.');
+      // resolve();
+    };
 
     // If there is an error while connecting, display it.
     openReq.onerror = () => {
