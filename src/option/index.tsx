@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import { Attention } from './Attention';
 import { Introduction } from './Introduction';
 import { PreTask } from './PreTask';
-import { Task } from './Task';
+import { Task } from './Task/index';
 import { PostTask } from './PostTask';
 import { Header } from '../shared/Header';
 
