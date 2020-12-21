@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { RuntimeMessageResponse, JunctionIDBTable, CookieIDBTable, ChromeHistoryResponse } from 'shared/types';
+import {
+  RuntimeMessageResponse,
+  JunctionIDBTable,
+  CookieIDBTable,
+  ChromeHistoryResponse,
+  SERPElement,
+} from 'shared/types';
 
 async function getArgsFromFile(url: string): Promise<string[]> {
   const response = await fetch(url);
@@ -323,6 +329,7 @@ export async function initializeHistory(): Promise<void> {
                 console.log('cookies: ', cookies);
 
                 const historyData: object = {
+                  title: history.title,
                   url: history.url,
                   cookies: cookies,
                 };
@@ -353,4 +360,66 @@ export async function initializeHistory(): Promise<void> {
       reject();
     };
   });
+}
+
+// Recieve cookie domains that SERPElement contain
+export async function getCollectedHistory(domains: string[]) {
+  const collected = [];
+  const openReq = indexedDB.open('history', 1);
+  openReq.onsuccess = () => {
+    const db = openReq.result;
+    const tx = db.transaction('history', 'readwrite');
+    const historyOS = tx.objectStore('history');
+    const historyCursol = historyOS.openCursor();
+    historyCursol.onsuccess = () => {
+      const row = historyCursol.result;
+      if (row) {
+        const cookies = row.value.cookies;
+        const product = cookies.filter((domain: string) => {
+          return domains.indexOf(domain) !== -1;
+        });
+        if (product) {
+          collected.push(row.value);
+        }
+        row.continue;
+      }
+    };
+  };
+}
+
+export async function initializeSearchResults(): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const openReq: IDBOpenDBRequest = indexedDB.open('serp', 1);
+
+    openReq.onupgradeneeded = () => {
+      const db: IDBDatabase = openReq.result;
+      // TODO: Get all records from file
+      const serpStore: IDBObjectStore = db.createObjectStore('pages', { autoIncrement: true });
+      serpStore.createIndex('url', 'url', { unique: false });
+
+      const serpTransaction: IDBTransaction = db.transaction(['pages'], 'readwrite');
+
+      const pagesOS: IDBObjectStore = serpTransaction.objectStore('pages');
+      // const request = pagesOS.add();
+      resolve(true);
+    };
+    openReq.onerror = () => reject(false);
+  });
+}
+
+export function getResultRanged(page: number): SERPElement[] {
+  const openReq = indexedDB.open('serp', 1);
+  openReq.onsuccess = () => {
+    const db: IDBDatabase = openReq.result;
+    const tx: IDBTransaction = db.transaction('pages', 'readonly');
+
+    const pagesOS: IDBObjectStore = tx.objectStore('pages');
+    // Perahps, it needs casting to string
+    const range = IDBKeyRange.bound(page * 10, (page + 1) * 10, false, true);
+    const request: IDBRequest = pagesOS.getAll(range);
+    request.onsuccess = () => {
+      return request.result;
+    };
+  };
+  return [];
 }
