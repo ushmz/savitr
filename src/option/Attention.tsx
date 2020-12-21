@@ -18,11 +18,7 @@ export const Attention: React.FC<Props> = ({ setPage }) => {
         注意事項
       </MDBTypography>
       <MDBTypography tag="p" className="lead">
-        <MDBTypography tag="ul">
-          <li>
-            実験中はブラウザの「進む・戻る」及び「再読み込み」の動作を行わないでください。実験が正しく行われない可能性があります。
-          </li>
-        </MDBTypography>
+        実験中はブラウザの「進む・戻る」及び「再読み込み」の動作を行わないでください。実験が正しく行われない可能性があります。
       </MDBTypography>
       <MDBTypography tag="p" className="my-5">
         上記の注意事項を確認し、実験に参加してくださる場合は以下のボタンから「タスク詳細」ページへ進んでください。
