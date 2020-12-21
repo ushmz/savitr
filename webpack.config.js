@@ -38,7 +38,7 @@ module.exports = [
         './src/option/Introduction.tsx',
         './src/option/PostTask.tsx',
         './src/option/PreTask.tsx',
-        './src/option/Task.tsx',
+        './src/option/Task/index.tsx',
         './src/option/index.tsx'
       ],
       background: './src/background/RuntimeMessageListener.ts'
