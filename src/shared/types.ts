@@ -1,3 +1,5 @@
+export type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
+
 export interface RuntimeRequest<T> {
   method: string;
   query: T;
@@ -49,3 +51,22 @@ export interface RuntimeMessageResponse<T> {
   status: boolean;
   message?: string;
 }
+
+export type HistoryAPIParams = {
+  text: string;
+  maxResults?: number;
+  startTime?: number;
+  endTime?: number;
+};
+
+export type SERPElement = {
+  title: string;
+  url: string;
+  snippet: string;
+  cookies: string[];
+  linkedPages: { title: string; url: string }[];
+};
+
+export type SetPageProp = {
+  setPage: React.Dispatch<React.SetStateAction<Pages>>;
+};
