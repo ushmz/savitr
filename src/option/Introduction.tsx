@@ -46,6 +46,12 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
               あなたが閲覧したページに紐付けられた<strong className="font-weight-bold">履歴情報の件数</strong>
               （履歴情報の詳細については収集いたしません）
             </li>
+            <li>
+              検索タスクの<strong className="font-weight-bold">所要時間</strong>
+            </li>
+            <li>
+              検索結果画面の<strong className="font-weight-bold">閲覧時間</strong>
+            </li>
           </ol>
         </li>
         <div style={{ padding: '10px' }}>
