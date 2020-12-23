@@ -3,28 +3,54 @@
   "version": "1.0.0",
   "description": "savitri",
   "main": "index.js",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
     "axios": "^0.21.0",
-    "core-js": "^3.7.0"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
-    "@types/chrome": "0.0.122",
+    "@babel/runtime": "^7.12.5",
+    "@types/chrome": "0.0.126",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.5",
     "@types/webpack": "^4.41.21",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-root-import": "^6.6.0",
+    "babel-plugin-styled-components": "^1.12.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.0",
+    "core-js": "^3.7.0",
     "css-loader": "^5.0.1",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prefer-arrow": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^4.5.0",
     "jsdoc": "^3.6.6",
+    "mdbreact": "^5.0.1",
+    "prettier": "^2.2.1",
     "style-loader": "^2.0.0",
+    "styled-components": "^5.2.1",
     "terser-webpack-plugin": "^5.0.3",
     "ts-loader": "^8.0.11",
-    "typescript": "^3.9.7",
+    "typescript": "^4.1.2",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
@@ -32,7 +58,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack --mode development --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -43,5 +69,17 @@
   "bugs": {
     "url": "https://github.com/rabhareit/savitri/issues"
   },
-  "homepage": "https://github.com/rabhareit/savitri#readme"
+  "homepage": "https://github.com/rabhareit/savitri#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

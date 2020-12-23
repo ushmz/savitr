@@ -31,50 +31,49 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = [
   {
-    // Really???
-    // externals: nodeExternals(),
-    mode: 'development',
     entry: {
-      background: ['./src/IdxDB.js', './src/savitri-background.js'],
-      index: ['./src/savitri-index.js'],
-      popup: ['./src/addInitialize.js'],
-      // vender: ['puppeteer']
+      popup: './src/popup/index.tsx',
+      option: [
+        './src/option/Attention.tsx', 
+        './src/option/Introduction.tsx',
+        './src/option/PostTask.tsx',
+        './src/option/PreTask.tsx',
+        './src/option/Task/index.tsx',
+        './src/option/index.tsx'
+      ],
+      background: './src/background/RuntimeMessageListener.ts'
     },
     output: {
-      path: path.join(__dirname, 'dist', 'savitri'),
-      filename: '[name].bundle.js'
+      path: __dirname + '/dist/savitri',
     },
-    target: 'node',
     module: {
       rules: [
         {
-          test: [/\.js$/, /\.ts$/],
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+       },
+        {
+          test: /\.css/,
           use: [
+            "style-loader",
             {
-              loader: 'babel-loader',
-              options: { 
-                presets: [['@babel/preset-env']],
-                // presets: [['@babel/preset-env', { useBuiltIns: 'usage', corejs: 3}]]
-                plugins: ['@babel/plugin-transform-runtime'],
-              }
+              loader: "css-loader",
+              options: { url: false }
             }
-          ],
-          
-          exclude: /node_modules/,
+          ]
         }
-      ]
+      ],
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.min.js', '.js', '.jsx'],
+      modules: [path.resolve(__dirname, 'src', 'shared'), path.resolve(__dirname, 'src', 'option'), path.resolve(__dirname, 'src', 'popup'), 'node_modules']
     },
     plugins: [
-      // new webpack.ProgressPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
             from: './public/savitri-manifest.json',
             to: path.join(__dirname, 'dist', 'savitri', 'manifest.json')
-          },
-          {
-            from: './src/savitri-popup.html',
-            to: path.join(__dirname, 'dist', 'savitri', 'popup.html')
           },
           {
             context: 'db/dumped',
@@ -84,16 +83,17 @@ module.exports = [
         ]
       }),
       new HtmlWebpackPlugin({
-        filename: 'popup.html',
+        template: './public/index.html',
+        filename: './index.html',
         chunks: ['popup'],
-        template: path.join(__dirname, 'src', 'savitri-popup.html')
+      }),
+      new HtmlWebpackPlugin({
+        template: './public/option.html',
+        filename: './option.html',
+        chunks: ['option'],
       }),
       new CleanWebpackPlugin()
     ],
-    // resolve: {
-    //   extensions: ['.ts', '.js'],
-    //   modules: ['node_modules']
-    // },
     devServer: {
       inline: true,
       contentBase: path.join(__dirname, 'public'),
