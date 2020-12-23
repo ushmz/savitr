@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import {
-  RuntimeMessageResponse,
-  JunctionIDBTable,
-  CookieIDBTable,
-  ChromeHistoryResponse,
-  SERPElement,
-} from 'shared/types';
+import { JunctionIDBTable, CookieIDBTable, SERPElement } from 'shared/types';
+import { getHistoriesAsync } from './getAllHistory';
 
 async function getArgsFromFile(url: string): Promise<string[]> {
   const response = await fetch(url);
@@ -310,39 +305,59 @@ export async function initializeHistory(): Promise<void> {
       const historyStore: IDBObjectStore = db.createObjectStore('history', { autoIncrement: true });
       historyStore.createIndex('url', 'url', { unique: false });
 
-      historyStore.transaction.oncomplete = () => {
-        // TODO
-        // Callback of `sendMessage` seems not to wait until it finish.
-        // Why not using `tabs.sendMessage`?
-        chrome.runtime.sendMessage(
-          { method: 'history', query: { max: 1000 } },
-          async (response: RuntimeMessageResponse<ChromeHistoryResponse>) => {
-            const histories = response.data;
+      historyStore.transaction.oncomplete = async () => {
+        const histories = await getHistoriesAsync();
 
-            histories.forEach(async (history: ChromeHistoryResponse) => {
-              try {
-                const pageid = await getPageId(history.url);
-                console.log('pageid: ', pageid);
-                const cookieids = await getCookieIds(pageid);
-                console.log('cookieids: ', cookieids);
-                const cookies = await getCookies(cookieids);
-                console.log('cookies: ', cookies);
+        histories.forEach(async (history: chrome.history.HistoryItem) => {
+          try {
+            const pageid = await getPageId(history.url || '');
+            const cookieids = await getCookieIds(pageid);
+            const cookies = await getCookies(cookieids);
 
-                const historyData: object = {
-                  title: history.title,
-                  url: history.url,
-                  cookies: cookies,
-                };
-                const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
-                historyOS.add(historyData);
-              } catch (error) {
-                // Do nothing intentionally. (Pass the URL)
-                console.log('===== NO DATA =====');
-                console.log(error);
-              }
-            });
-          },
-        );
+            const historyData: object = {
+              title: history.title,
+              url: history.url,
+              cookies: cookies,
+            };
+            const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
+            historyOS.add(historyData);
+          } catch (error) {
+            // Do nothing intentionally. (Pass the URL)
+          }
+        });
+
+        // // TODO
+        // // Callback of `sendMessage` seems not to wait until it finish.
+        // // Why not using `tabs.sendMessage`?
+        // chrome.runtime.sendMessage(
+        //   { method: 'history', query: { max: 1000 } },
+        //   async (response: RuntimeMessageResponse<ChromeHistoryResponse>) => {
+        //     const histories = response.data;
+
+        //     histories.forEach(async (history: ChromeHistoryResponse) => {
+        //       try {
+        //         const pageid = await getPageId(history.url);
+        //         console.log('pageid: ', pageid);
+        //         const cookieids = await getCookieIds(pageid);
+        //         console.log('cookieids: ', cookieids);
+        //         const cookies = await getCookies(cookieids);
+        //         console.log('cookies: ', cookies);
+
+        //         const historyData: object = {
+        //           title: history.title,
+        //           url: history.url,
+        //           cookies: cookies,
+        //         };
+        //         const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
+        //         historyOS.add(historyData);
+        //       } catch (error) {
+        //         // Do nothing intentionally. (Pass the URL)
+        //         console.log('===== NO DATA =====');
+        //         console.log(error);
+        //       }
+        //     });
+        //   },
+        // );
       };
       console.log('History Loaded.');
       resolve();
