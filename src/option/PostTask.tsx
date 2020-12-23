@@ -23,13 +23,9 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
       </MDBTypography>
       <MDBTypography tag="p" className="lead">
         <MDBTypography tag="ul">
-          <li>
-            アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
-            <text className="font-weight-bold">開いたままに</text>してください。
-          </li>
-          <li>
-            アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
-          </li>
+          アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
+          <div className="font-weight-bold">開いたままに</div>してください。
+          アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
         </MDBTypography>
       </MDBTypography>
       <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
