@@ -39,7 +39,7 @@ export function getHistories() {
   });
 }
 
-export async function getHistoriesAsync() {
+export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
   return new Promise((resolve, reject) => {
     getMoreHistory((cnt: number) => {
       console.log('got ' + cnt);
