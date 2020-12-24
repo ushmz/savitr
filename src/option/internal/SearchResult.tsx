@@ -91,19 +91,16 @@ type Props = {
 /**
  * Return single search result component used in web search task.
  * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
- * @param {Props} param0 - Data make single search result(For detail, see type `Props`)
- * @returns {React.FC<Props>} - Single search result in search task.
  */
-
 export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, cookies, linkedPages }) => {
   return (
     <SearchContainer>
-      <MDBCard className="ml-3">
+      <MDBCard className="ml-1">
         <MDBCardHeader>
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <URLText>{url}</URLText>
+            <URLText>{truncateText(url, 72)}</URLText>
             <MDBCardTitle>
-              <TitleText>{title}</TitleText>
+              <TitleText>{truncateText(title, 33)}</TitleText>
             </MDBCardTitle>
           </a>
           <MDBCardText>{truncateText(snippet, 125)}</MDBCardText>
@@ -124,8 +121,6 @@ type CollapseProps = {
  * Return Collapse menu component.
  * This component is too optimized for this search result,
  * so I don't separate this as (shared) component.
- * @param {CollapseProps} param0 - Listed string contents hidden in this Humburger menu.
- * @returns {React.FC<CollapseProps>} - Humburger menu component
  */
 const CollapseMenu: React.FC<CollapseProps> = ({ items }) => {
   const [collapsedID, setCollapsedID] = React.useState<string>('');

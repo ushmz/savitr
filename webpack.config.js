@@ -78,7 +78,12 @@ module.exports = [
           {
             context: 'db/dumped',
             from: '*.csv',
-            to: path.join(__dirname, 'dist','savitri', 'init')
+            to: path.join(__dirname, 'dist','savitri', 'init', 'xrayed')
+          },
+          {
+            context: 'db/serp/',
+            from: '*.csv',
+            to: path.join(__dirname, 'dist','savitri', 'init', 'serp')
           }
         ]
       }),
