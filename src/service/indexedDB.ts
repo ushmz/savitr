@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { JunctionIDBTable, CookieIDBTable, SERPElement } from 'shared/types';
+import { JunctionIDBTable, CookieIDBTable, SERPElement, PageIDBTable } from 'shared/types';
 import { getHistoriesAsync } from './getAllHistory';
 
-async function getArgsFromFile(url: string): Promise<string[]> {
+async function getLinesFromFile(url: string): Promise<string[]> {
   const response = await fetch(url);
-  const initQuery = await response.text();
-  const initQueryArray = initQuery.split('\n');
-  return initQueryArray;
+  const fileContents = await response.text();
+  const lines = fileContents.split('\n');
+  return lines;
 }
 
 function formatString2Array(arrayLikeString: string): string[] {
@@ -41,21 +41,21 @@ export async function initializeTable(): Promise<void> {
       // console.log('Tables initialized.');
 
       // Get all arguments dumped from SQL.
-      const cookieFileUrl = chrome.runtime.getURL('init/cookie_essential.csv');
-      const cookieTableArgs: string[] = await getArgsFromFile(cookieFileUrl);
+      const cookieFileUrl = chrome.runtime.getURL('init/xrayed/cookie_essential.csv');
+      const cookieTableArgs: string[] = await getLinesFromFile(cookieFileUrl);
 
-      const pageFileUrl = chrome.runtime.getURL('init/page_essential.csv');
-      const pageTableArgs: string[] = await getArgsFromFile(pageFileUrl);
+      const pageFileUrl = chrome.runtime.getURL('init/xrayed/page_essential.csv');
+      const pageTableArgs: string[] = await getLinesFromFile(pageFileUrl);
 
-      const junctionFileUrl = chrome.runtime.getURL('init/pc_junction_essential.csv');
-      const junctionTableArgs: string[] = await getArgsFromFile(junctionFileUrl);
+      const junctionFileUrl = chrome.runtime.getURL('init/xrayed/pc_junction_essential.csv');
+      const junctionTableArgs: string[] = await getLinesFromFile(junctionFileUrl);
       // console.log('Arguments OK.');
 
       // Start data insert transaction.
-      const cookieTransaction: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
+      const tx: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
 
       // Initialize `cookie` ObjectStore data.
-      const cookieOS: IDBObjectStore = cookieTransaction.objectStore('cookie');
+      const cookieOS: IDBObjectStore = tx.objectStore('cookie');
       cookieTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = cookieOS.add({
@@ -69,7 +69,7 @@ export async function initializeTable(): Promise<void> {
       });
 
       // Initialize `page` ObjectStore data.
-      const pageOS: IDBObjectStore = cookieTransaction.objectStore('page');
+      const pageOS: IDBObjectStore = tx.objectStore('page');
       pageTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(/([^\\]),/);
         const request: IDBRequest = pageOS.add({
@@ -86,7 +86,7 @@ export async function initializeTable(): Promise<void> {
       });
 
       // Initialize `page_cookie_junction` ObjectStore data.
-      const pcjunctionOS: IDBObjectStore = cookieTransaction.objectStore('page_cookie_junction');
+      const pcjunctionOS: IDBObjectStore = tx.objectStore('page_cookie_junction');
       junctionTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = pcjunctionOS.add({
@@ -127,6 +127,10 @@ export async function dropAllDatabase(): Promise<void> {
     const xrayedDBDeleteRequest = indexedDB.deleteDatabase('xrayed');
     xrayedDBDeleteRequest.onerror = () => {
       console.log(xrayedDBDeleteRequest.error);
+    };
+    const serpDBDeleteRequest = indexedDB.deleteDatabase('serp');
+    serpDBDeleteRequest.onerror = () => {
+      console.log(serpDBDeleteRequest.error);
     };
     resolve();
   });
@@ -402,39 +406,95 @@ export async function getCollectedHistory(domains: string[]) {
   };
 }
 
-export async function initializeSearchResults(): Promise<boolean> {
+export async function initializeSearchResults(): Promise<void> {
   return new Promise((resolve, reject) => {
     const openReq: IDBOpenDBRequest = indexedDB.open('serp', 1);
+    openReq.onupgradeneeded = async () => {
+      const db = openReq.result;
+      console.log('DB connected');
 
-    openReq.onupgradeneeded = () => {
-      const db: IDBDatabase = openReq.result;
-      // TODO: Get all records from file
-      const serpStore: IDBObjectStore = db.createObjectStore('pages', { autoIncrement: true });
-      serpStore.createIndex('url', 'url', { unique: false });
+      db.createObjectStore('cookie', { autoIncrement: true }).createIndex('domain', 'domain', { unique: false });
+      db.createObjectStore('page', { autoIncrement: true }).createIndex('start_uri', 'start_uri', { unique: false });
+      db.createObjectStore('page_cookie_junction', { autoIncrement: true }).createIndex('junction', 'page_id', {
+        unique: false,
+      });
+      console.log('table created');
 
-      const serpTransaction: IDBTransaction = db.transaction(['pages'], 'readwrite');
+      const cookieFileUrl = chrome.runtime.getURL('init/serp/cookie_essential.csv');
+      const serpCookieArgs: string[] = await getLinesFromFile(cookieFileUrl);
 
-      const pagesOS: IDBObjectStore = serpTransaction.objectStore('pages');
-      // const request = pagesOS.add();
-      resolve(true);
+      const pageFileUrl = chrome.runtime.getURL('init/serp/page_essential_decoded.csv');
+      const serpPageArgs: string[] = await getLinesFromFile(pageFileUrl);
+
+      const junctionFileUrl = chrome.runtime.getURL('init/serp/pc_junction_essential.csv');
+      const serpJunctionArgs: string[] = await getLinesFromFile(junctionFileUrl);
+      console.log('files ok');
+
+      const tx: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
+      const cookieOS: IDBObjectStore = tx.objectStore('cookie');
+      serpCookieArgs.forEach((argLine) => {
+        const args: string[] = argLine.split(',');
+        const request: IDBRequest = cookieOS.add({
+          domain: args[1],
+          httponly: args[2],
+          secure: args[3],
+        });
+        request.onerror = () => {
+          console.log(request.error);
+        };
+      });
+      console.log('cookie table');
+
+      const pageOS: IDBObjectStore = tx.objectStore('page');
+      serpPageArgs.forEach((argLine) => {
+        const args: string[] = argLine.split(/([^\\]),/);
+        const request: IDBRequest = pageOS.add({
+          id: args[0] + args[1],
+          title: args[2] + args[3],
+          start_uri: args[4] + args[5],
+          final_uri: args[6] + args[7],
+          requested_uris: formatString2Array(args[8] + args[9]),
+          recieved_uris: formatString2Array(args[10] + args[11]),
+        });
+        request.onerror = () => {
+          console.log(request.error);
+        };
+      });
+      console.log('page table');
+
+      const pcjunctionOS: IDBObjectStore = tx.objectStore('page_cookie_junction');
+      serpJunctionArgs.forEach((argLine) => {
+        const args: string[] = argLine.split(',');
+        const request: IDBRequest = pcjunctionOS.add({
+          page_id: args[0],
+          cookie_id: args[1],
+        });
+        request.onerror = () => {
+          console.log(request.error);
+        };
+      });
+      console.log('junction table');
+      resolve();
     };
-    openReq.onerror = () => reject(false);
+    openReq.onerror = () => reject();
   });
 }
 
-export function getResultRanged(page: number): SERPElement[] {
-  const openReq = indexedDB.open('serp', 1);
-  openReq.onsuccess = () => {
-    const db: IDBDatabase = openReq.result;
-    const tx: IDBTransaction = db.transaction('pages', 'readonly');
+export async function getResultRanged(page: number): Promise<PageIDBTable[]> {
+  return new Promise((resolve, reject) => {
+    const openReq = indexedDB.open('serp', 1);
+    openReq.onsuccess = () => {
+      const db: IDBDatabase = openReq.result;
+      const tx: IDBTransaction = db.transaction('page', 'readonly');
 
-    const pagesOS: IDBObjectStore = tx.objectStore('pages');
-    // Perahps, it needs casting to string
-    const range = IDBKeyRange.bound(page * 10, (page + 1) * 10, false, true);
-    const request: IDBRequest = pagesOS.getAll(range);
-    request.onsuccess = () => {
-      return request.result;
+      const pagesOS: IDBObjectStore = tx.objectStore('page');
+      // Perahps, it needs casting to string
+      const range = IDBKeyRange.bound(page * 10 + 1, (page + 1) * 10, false, true);
+      const request: IDBRequest = pagesOS.getAll(range);
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
     };
-  };
-  return [];
+    openReq.onerror = () => reject();
+  });
 }
