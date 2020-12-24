@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBox, MDBBtn } from 'mdbreact';
 
-import { initializeTable, initializeHistory } from '../service/indexedDB';
+import { initializeTable, initializeHistory, initializeSearchResults } from '../service/indexedDB';
 
 type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
 
@@ -73,8 +73,9 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
           color="primary"
           onClick={async () => {
             setProcessing(true);
-            await initializeTable().then(() => initializeHistory());
-            // await initializeHistory();
+            await initializeTable()
+              .then(async () => await initializeHistory())
+              .then(async () => await initializeSearchResults());
             setReady(true);
             setProcessing(false);
           }}
