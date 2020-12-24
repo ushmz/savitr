@@ -35,7 +35,7 @@ const Option = () => {
 
   return (
     <>
-      <Header title="Admin pagination" setPage={setPage}></Header>
+      {page !== 'Task' && <Header title="Admin pagination" setPage={setPage}></Header>}
       <div className="mb-5 pb-5">{pagination()}</div>
     </>
   );
