@@ -7,11 +7,3 @@ chrome.runtime.onMessage.addListener((request: RuntimeRequest<HistoryQuery>, sen
   });
   return true;
 });
-
-// 考えもの．保留．
-// chrome.runtime.onInstalled.addListener((details) => {
-//   if ((details.reason = 'installed')) {
-//     await initializeTable();
-//     await initializeHistory();
-//   }
-// });
