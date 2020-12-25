@@ -1,5 +1,5 @@
 (async () => {
-  await collectURL();
+  await collectSerp();
 })();
 
 async function collectURL() {
@@ -11,9 +11,31 @@ async function collectURL() {
 
   Array.from(targets).map( async (t, idx) => {
     let key = 'savitri' + Date.now().toString() + idx;
-    let value = t.children[t.children.length-1].children[0].children[0].href;
-    let result = await setItem(key, value);
+    let url = t.children[t.children.length-1].children[0].children[0].href;
+    // let snippet = t.children[t.children.length-1].children[1].children[0].href
+    let result = await setItem(key, url);
+
   });
+}
+
+async function collectSerp() {
+  let rcs = document.getElementsByClassName('rc');
+
+  Array.from(rcs).map( async (rc, idx) => {
+    let key = 'savitri' + Date.now().toString() + idx;
+    let url = '';
+    let snippet = '';
+    for (let i = 0; i< rc.children.length; i++) {
+      r = rc.children.item(i);
+      if (r.className === 'yuRUbf') {
+        url = r.children[0].href;
+      } else if (r.className === 'IsZvec') {
+        console.log(r);
+        snippet = r.children[0].children[0].children[1]?.innerHTML || r.children[0].children[0].children[0].innerHTML
+      }
+    }
+    let result = await setItem(key, `${url},${snippet}`);
+  }); 
 }
 
 function setItem(key, value) {

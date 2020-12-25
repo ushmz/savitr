@@ -32,9 +32,10 @@ async function export2File(data) {
 };
 
 async function writeFile(fileHandle, contents) {
-  console.log(contents)
   const writable = await fileHandle.createWritable();
-  await writable.write(contents.join('\n'));
+  // export history => array
+  // export log => string
+  await writable.write(contents)
   await writable.close();
 }
 
