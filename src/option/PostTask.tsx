@@ -16,7 +16,7 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">事後アンケート</MDBTypography>
       <MDBTypography tag="p">
-        事後アンケートにお答えください。質問は全部で48問あり、想定所要時間は{}分です。
+        事後アンケートにお答えください。質問は全部で48問あり、想定所要時間は10分です。
       </MDBTypography>
       <MDBTypography tag="h2" className="mt-5">
         注意事項
@@ -42,6 +42,9 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
         onClick={async () => {
           setProcessing(true);
           await dropAllDatabase();
+          // chrome.runtime.onMessage.addListener((msg, sneder, sendResponse) => {
+          //
+          // });
           setProcessing(false);
         }}
       >
