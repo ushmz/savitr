@@ -14,7 +14,7 @@ export const PreTask: React.FC<Props> = ({ setPage }) => {
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">事前アンケート</MDBTypography>
       <MDBTypography tag="p">
-        タスクを行う前に事前のアンケートにお答えください。質問は全部で48問あり、想定所要時間は{}分です。
+        タスクを行う前に事前のアンケートにお答えください。質問は全部で48問あり、想定所要時間は10分です。
       </MDBTypography>
       <MDBTypography tag="h2" className="mt-5">
         注意事項
