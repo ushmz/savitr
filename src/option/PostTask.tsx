@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import { dropAllDatabase } from '../service/indexedDB';
 
@@ -24,7 +26,7 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
       <MDBTypography tag="p" className="lead">
         <MDBTypography tag="ul">
           アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
-          <div className="font-weight-bold">開いたままに</div>してください。
+          <strong className="font-weight-bold">開いたままに</strong>してください。
           アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
         </MDBTypography>
       </MDBTypography>
@@ -42,10 +44,8 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
         onClick={async () => {
           setProcessing(true);
           await dropAllDatabase();
-          // chrome.runtime.onMessage.addListener((msg, sneder, sendResponse) => {
-          //
-          // });
           setProcessing(false);
+          toast('履歴情報の削除が完了しました。', { type: 'success' });
         }}
       >
         {isProcessing ? (
@@ -56,6 +56,7 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
           '履歴情報の削除'
         )}
       </MDBBtn>
+      <ToastContainer />
       <MDBTypography tag="p">
         実験は以上で終了となります。ご協力ありがとうございました。このタブを閉じ、本システムをアンインストールしてください。
       </MDBTypography>
