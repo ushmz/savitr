@@ -81,7 +81,7 @@ export const RightNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) =>
 export const Task: React.FC<Props> = ({ setPage, serpPage, setSerpPage, serpPages, linkedPages }) => {
   return (
     <>
-      <SearchHeader title={`${serpPage}`}></SearchHeader>
+      <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
       <SearchContainer>
         {serpPages.map((page) => {
           return (

@@ -1,12 +1,13 @@
 import React from 'react';
-import { MDBCol, MDBIcon, MDBNav, MDBNavbar, MDBNavbarBrand, MDBNavItem, MDBRow } from 'mdbreact';
+import { MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavItem } from 'mdbreact';
 import { Inlinediv, Moveddiv, SearchBarContainer } from './AdjustedComponents';
 
 type Props = {
   title: string;
+  placeholder?: string;
 };
 
-export const SearchHeader: React.FC<Props> = ({ title }) => {
+export const SearchHeader: React.FC<Props> = ({ title, placeholder }) => {
   return (
     <MDBNavbar
       light
@@ -22,7 +23,7 @@ export const SearchHeader: React.FC<Props> = ({ title }) => {
       <MDBNavItem tag="div">
         <SearchBarContainer>
           <Inlinediv>
-            <input className="form-control" type="text" placeholder="ウェブカメラ おすすめ" />
+            <input disabled className="form-control" type="text" placeholder={placeholder} />
             <Moveddiv>
               <Inlinediv>
                 <MDBIcon icon="times" size="lg" className="mx-1" />
