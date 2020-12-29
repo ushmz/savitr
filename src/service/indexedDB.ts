@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/camelcase */
-import { JunctionIDBTable, CookieIDBTable, PageIDBTable } from 'shared/types';
+import { JunctionIDBTable, CookieIDBTable, PageIDBTable, SerpPageTable } from 'shared/types';
 import { getHistoriesAsync } from './getAllHistory';
 
 async function getLinesFromFile(url: string): Promise<string[]> {
@@ -47,6 +47,8 @@ export async function initializeTable(): Promise<void> {
       const tx: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
 
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
+      cookieOS.clear();
+
       cookieTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = cookieOS.add({
@@ -60,6 +62,8 @@ export async function initializeTable(): Promise<void> {
       });
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
+      pageOS.clear();
+
       pageTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(/([^\\]),/);
         const request: IDBRequest = pageOS.add({
@@ -76,6 +80,8 @@ export async function initializeTable(): Promise<void> {
       });
 
       const pcjunctionOS: IDBObjectStore = tx.objectStore('page_cookie_junction');
+      pcjunctionOS.clear();
+  
       junctionTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = pcjunctionOS.add({
@@ -86,8 +92,6 @@ export async function initializeTable(): Promise<void> {
           console.log(request.error);
         };
       });
-
-      console.log('Initialize Finished.');
       resolve();
     };
 
@@ -280,10 +284,11 @@ export async function initializeHistory(): Promise<void> {
     openReq.onsuccess = async () => {
       const db: IDBDatabase = openReq.result;
       const tx: IDBTransaction = db.transaction('history', 'readwrite');
-      const historyStore: IDBObjectStore = tx.objectStore('history');
+      
+      const historyOS: IDBObjectStore = tx.objectStore('history');
+      historyOS.clear();
 
       const histories = await getHistoriesAsync();
-
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
           const pageid = await getPageId(history.url || '');
@@ -295,8 +300,7 @@ export async function initializeHistory(): Promise<void> {
             url: history.url,
             cookies: cookies,
           };
-          // const historyOS: IDBObjectStore = db.transaction('history', 'readwrite').objectStore('history');
-          historyStore.add(historyData);
+          historyOS.add(historyData);
         } catch (error) {
           // Do nothing intentionally. (Pass the URL)
         }
@@ -319,6 +323,7 @@ export async function getCollectedHistory(domains: string[]) {
     const db = openReq.result;
     const tx = db.transaction('history', 'readwrite');
     const historyOS = tx.objectStore('history');
+
     const historyCursol = historyOS.openCursor();
     historyCursol.onsuccess = () => {
       const row = historyCursol.result;
@@ -359,7 +364,10 @@ export async function initializeSearchResults(): Promise<void> {
 
       const db = openReq.result;
       const tx: IDBTransaction = db.transaction(['cookie', 'page', 'junction'], 'readwrite');
+
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
+      cookieOS.clear();
+
       serpCookieArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = cookieOS.add({
@@ -373,22 +381,26 @@ export async function initializeSearchResults(): Promise<void> {
       });
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
+      pageOS.clear();
+      
       serpPageArgs.forEach((argLine) => {
-        const args: string[] = argLine.split(/([^\\]),/);
+        const args: string[] = argLine.split(',');
         const request: IDBRequest = pageOS.add({
-          id: args[0] + args[1],
-          title: args[2] + args[3],
-          start_uri: args[4] + args[5],
-          final_uri: args[6] + args[7],
-          requested_uris: formatString2Array(args[8] + args[9]),
-          recieved_uris: formatString2Array(args[10] + args[11]),
+          id: args[0],
+          title: args[1],
+          start_uri: args[2],
+          final_uri: args[3],
+          snippet: args[4]
         });
+
         request.onerror = () => {
           console.log(request.error);
         };
       });
 
       const pcjunctionOS: IDBObjectStore = tx.objectStore('junction');
+      pcjunctionOS.clear();
+
       serpJunctionArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = pcjunctionOS.add({
@@ -406,7 +418,7 @@ export async function initializeSearchResults(): Promise<void> {
   });
 }
 
-export async function getResultRanged(page: number): Promise<PageIDBTable[]> {
+export async function getResultRanged(page: number): Promise<SerpPageTable[]> {
   return new Promise((resolve, reject) => {
     const openReq = indexedDB.open('serp', 1);
     openReq.onsuccess = () => {
