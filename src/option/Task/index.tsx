@@ -25,7 +25,7 @@ export const Task: React.FC<Props> = ({ setPage }) => {
     const serpElements = results.map((page) => {
       return {
         title: page.title,
-        snippet: sampleSnippet,
+        snippet: page.snippet || sampleSnippet,
         url: page.start_uri,
         cookies: sampleCookies,
         linkedPages: sampleLinkedPages,
