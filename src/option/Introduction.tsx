@@ -66,9 +66,7 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
         </div>
       </MDBTypography>
       <MDBTypography tag="p">
-        <text>
-          上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報を作成してください。（PCに負荷がかかる場合があります。）
-        </text>
+        上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報を作成してください。（PCに負荷がかかる場合があります。）
       </MDBTypography>
       <div className="mx-auto my-3">
         <MDBBtn
