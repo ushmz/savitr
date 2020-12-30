@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { dropAllDatabase } from '../service/indexedDB';
+import { ComponentLoader } from '../shared/ComponentLoader';
+import { SetPageProp } from 'shared/types';
 
-type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
-
-type Props = {
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-};
-
-export const PostTask: React.FC<Props> = ({ setPage }) => {
+export const PostTask: React.FC<SetPageProp> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);
   const [isProcessing, setProcessing] = useState<boolean>(false);
 
@@ -22,11 +20,9 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
         注意事項
       </MDBTypography>
       <MDBTypography tag="p" className="lead">
-        <MDBTypography tag="ul">
-          アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
-          <div className="font-weight-bold">開いたままに</div>してください。
-          アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
-        </MDBTypography>
+        アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
+        <strong className="font-weight-bold">開いたままに</strong>してください。
+        アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
       <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
         <a className="white-text" href="https://forms.gle/emKsudDBaUHPaGcq5" target="_blank" rel="noopener noreferrer">
@@ -42,20 +38,13 @@ export const PostTask: React.FC<Props> = ({ setPage }) => {
         onClick={async () => {
           setProcessing(true);
           await dropAllDatabase();
-          // chrome.runtime.onMessage.addListener((msg, sneder, sendResponse) => {
-          //
-          // });
           setProcessing(false);
+          toast('履歴情報の削除が完了しました。', { type: 'success' });
         }}
       >
-        {isProcessing ? (
-          <div className="spinner-border" role="status">
-            <span className="sr-only">削除中...</span>
-          </div>
-        ) : (
-          '履歴情報の削除'
-        )}
+        {isProcessing ? <ComponentLoader /> : '履歴情報の削除'}
       </MDBBtn>
+      <ToastContainer />
       <MDBTypography tag="p">
         実験は以上で終了となります。ご協力ありがとうございました。このタブを閉じ、本システムをアンインストールしてください。
       </MDBTypography>

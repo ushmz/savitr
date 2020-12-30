@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBox, MDBBtn } from 'mdbreact';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { initializeTable, initializeHistory, initializeSearchResults } from '../service/indexedDB';
 
@@ -64,9 +66,7 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
         </div>
       </MDBTypography>
       <MDBTypography tag="p">
-        <text>
-          上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報を作成してください。（PCに負荷がかかる場合があります。）
-        </text>
+        上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報を作成してください。（PCに負荷がかかる場合があります。）
       </MDBTypography>
       <div className="mx-auto my-3">
         <MDBBtn
@@ -78,6 +78,8 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
               .then(async () => await initializeSearchResults());
             setReady(true);
             setProcessing(false);
+            // 'info' is more suitable but little diffecult to see.
+            toast('履歴情報の作成が完了しました。', { type: 'success' });
           }}
         >
           {isProcessing ? (
@@ -88,6 +90,7 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
             '履歴情報の作成'
           )}
         </MDBBtn>
+        <ToastContainer />
       </div>
       <MDBTypography tag="p">「事前アンケート」ページへ進んでください。</MDBTypography>
       <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('Attention')}>

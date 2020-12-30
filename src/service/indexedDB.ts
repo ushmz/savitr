@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable, HistoryTable, PageIDBTable } from 'shared/types';
 import { hasIntersection } from '../shared/util';
@@ -24,14 +25,13 @@ export async function initializeXrayed(): Promise<void> {
 
     openReq.onupgradeneeded = async () => {
       const db: IDBDatabase = openReq.result;
-
       db.createObjectStore('cookie', { autoIncrement: true }).createIndex('domain', 'domain', { unique: false });
       db.createObjectStore('page', { autoIncrement: true }).createIndex('start_uri', 'start_uri', { unique: false });
       db.createObjectStore('junction', { autoIncrement: true }).createIndex('junction', 'page_id', { unique: false });
     };
 
     openReq.onsuccess = async () => {
-      const db = openReq.result;
+      const db: IDBDatabase = openReq.result;
 
       const cookieFileUrl = chrome.runtime.getURL('init/xrayed/cookie_essential.csv');
       const cookieTableArgs: string[] = await getLinesFromFile(cookieFileUrl);
@@ -45,6 +45,8 @@ export async function initializeXrayed(): Promise<void> {
       const tx: IDBTransaction = db.transaction(['cookie', 'page', 'junction'], 'readwrite');
 
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
+      cookieOS.clear();
+
       cookieTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = cookieOS.add({
@@ -58,6 +60,8 @@ export async function initializeXrayed(): Promise<void> {
       });
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
+      pageOS.clear();
+
       pageTableArgs.forEach((argLine) => {
         const args: string[] = argLine.split(/([^\\]),/);
         const request: IDBRequest = pageOS.add({
@@ -114,9 +118,6 @@ export async function dropAllDatabase(): Promise<void> {
 
 /**
  * Get pageID from colected pages data.
- *
- * @param {string} target - Page URI
- * @return {Promise<string|status>} pageID - PageID
  */
 export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -217,12 +218,6 @@ export async function getCookie(table: 'xrayed' | 'serp', cookieId: string): Pro
   });
 }
 
-/**
- * Get cookie information from collected data
- *
- * @param {Array<string>} cookieIds - Listed string of cookie ID
- * @return {Promise<Array<cookie>>} cookies - Listed cookie informarion
- */
 export async function getCookies(table: 'xrayed' | 'serp', cookieIds: string[]): Promise<CookieIDBTable[]> {
   const cookies = [];
   for (const cookieId of cookieIds) {
@@ -232,9 +227,6 @@ export async function getCookies(table: 'xrayed' | 'serp', cookieIds: string[]):
   return cookies;
 }
 
-/**
- * Get cookie information of given cookie ID
- */
 export async function getCookieDomain(table: 'xrayed' | 'serp', cookieId: string): Promise<string> {
   return new Promise((resolve, reject) => {
     if (!cookieId) reject();
@@ -278,10 +270,7 @@ export async function initializeHistory(): Promise<void> {
   return new Promise((resolve, reject) => {
     const openReq: IDBOpenDBRequest = indexedDB.open('history', 1);
 
-    // If table version < 1 (it means user dosen't have database)
-    // Initialize database.
     openReq.onupgradeneeded = () => {
-      // Get database connection object.
       const db: IDBDatabase = openReq.result;
       db.createObjectStore('history', { autoIncrement: true });
     };
@@ -319,13 +308,33 @@ export async function initializeHistory(): Promise<void> {
       resolve();
     };
 
-    // If database version > 1, nothing to do.
-    openReq.onsuccess = () => {
-      // console.log('Successfully connected.');
-      // resolve();
+    openReq.onsuccess = async () => {
+      const db: IDBDatabase = openReq.result;
+      const tx: IDBTransaction = db.transaction('history', 'readwrite');
+      
+      const historyOS: IDBObjectStore = tx.objectStore('history');
+      historyOS.clear();
+
+      const histories = await getHistoriesAsync();
+      histories.forEach(async (history: chrome.history.HistoryItem) => {
+        try {
+          const pageid = await getPageId(history.url || '');
+          const cookieids = await getCookieIds(pageid);
+          const cookies = await getCookies(cookieids);
+
+          const historyData: object = {
+            title: history.title,
+            url: history.url,
+            cookies: cookies,
+          };
+          historyOS.add(historyData);
+        } catch (error) {
+          // Do nothing intentionally. (Pass the URL)
+        }
+      });
+      resolve();
     };
 
-    // If there is an error while connecting, display it.
     openReq.onerror = () => {
       console.log(openReq.error);
       reject();
@@ -333,7 +342,6 @@ export async function initializeHistory(): Promise<void> {
   });
 }
 
-// Recieve cookie domains that SERPElement contain
 export async function getCollectedHistory(domains: string[]): Promise<HistoryTable[]> {
   return new Promise((resolve, reject) => {
     const openReq = indexedDB.open('history', 1);
@@ -354,10 +362,9 @@ export async function getCollectedHistory(domains: string[]): Promise<HistoryTab
 export async function initializeSearchResults(): Promise<void> {
   return new Promise((resolve, reject) => {
     const openReq: IDBOpenDBRequest = indexedDB.open('serp', 1);
+  
     openReq.onupgradeneeded = async () => {
       const db = openReq.result;
-      console.log('DB connected');
-
       db.createObjectStore('cookie', { autoIncrement: true }).createIndex('domain', 'domain', { unique: false });
       db.createObjectStore('page', { autoIncrement: true }).createIndex('start_uri', 'start_uri', { unique: false });
       db.createObjectStore('junction', { autoIncrement: true }).createIndex('junction', 'page_id', { unique: false });
@@ -366,6 +373,7 @@ export async function initializeSearchResults(): Promise<void> {
 
     openReq.onsuccess = async () => {
       const db = openReq.result;
+
       const cookieFileUrl = chrome.runtime.getURL('init/serp/cookie_essential.csv');
       const serpCookieArgs: string[] = await getLinesFromFile(cookieFileUrl);
 
@@ -374,10 +382,13 @@ export async function initializeSearchResults(): Promise<void> {
 
       const junctionFileUrl = chrome.runtime.getURL('init/serp/pc_junction_essential.csv');
       const serpJunctionArgs: string[] = await getLinesFromFile(junctionFileUrl);
-      console.log('files ok');
 
-      const tx: IDBTransaction = db.transaction(['cookie', 'page', 'page_cookie_junction'], 'readwrite');
+      const db = openReq.result;
+      const tx: IDBTransaction = db.transaction(['cookie', 'page', 'junction'], 'readwrite');
+
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
+      cookieOS.clear();
+
       serpCookieArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = cookieOS.add({
@@ -389,26 +400,28 @@ export async function initializeSearchResults(): Promise<void> {
           console.log(request.error);
         };
       });
-      console.log('cookie table');
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
+      pageOS.clear();
+      
       serpPageArgs.forEach((argLine) => {
-        const args: string[] = argLine.split(/([^\\]),/);
+        const args: string[] = argLine.split(',');
         const request: IDBRequest = pageOS.add({
-          id: args[0] + args[1],
-          title: args[2] + args[3],
-          start_uri: args[4] + args[5],
-          final_uri: args[6] + args[7],
-          requested_uris: formatString2Array(args[8] + args[9]),
-          recieved_uris: formatString2Array(args[10] + args[11]),
+          id: args[0],
+          title: args[1],
+          start_uri: args[2],
+          final_uri: args[3],
+          snippet: args[4]
         });
+
         request.onerror = () => {
           console.log(request.error);
         };
       });
-      console.log('page table');
 
-      const pcjunctionOS: IDBObjectStore = tx.objectStore('page_cookie_junction');
+      const pcjunctionOS: IDBObjectStore = tx.objectStore('junction');
+      pcjunctionOS.clear();
+
       serpJunctionArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = pcjunctionOS.add({
@@ -422,11 +435,12 @@ export async function initializeSearchResults(): Promise<void> {
       console.log('SERP Data Inserted.');
       resolve();
     };
+
     openReq.onerror = () => reject();
   });
 }
 
-export async function getResultRanged(page: number): Promise<PageIDBTable[]> {
+export async function getResultRanged(page: number): Promise<SerpPageTable[]> {
   return new Promise((resolve, reject) => {
     const openReq = indexedDB.open('serp', 1);
     openReq.onsuccess = () => {

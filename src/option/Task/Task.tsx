@@ -97,7 +97,6 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPag
                 />
               );
             })}
-
             <MDBPagination className="my-5 mx-a">
               <MDBPageItem disabled={serpPage === MIN_PAGE}>
                 <MDBPageNav aria-label="Previous" onClick={() => setSerpPage(serpPage - 1)}>
