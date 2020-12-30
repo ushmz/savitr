@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/camelcase */
-import { JunctionIDBTable, CookieIDBTable, HistoryTable, PageIDBTable } from 'shared/types';
+import { JunctionIDBTable, CookieIDBTable, HistoryTable, SerpPageTable } from 'shared/types';
 import { hasIntersection } from '../shared/util';
 import { getHistoriesAsync } from './getAllHistory';
 
@@ -318,9 +318,9 @@ export async function initializeHistory(): Promise<void> {
       const histories = await getHistoriesAsync();
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
-          const pageid = await getPageId(history.url || '');
-          const cookieids = await getCookieIds(pageid);
-          const cookies = await getCookies(cookieids);
+          const pageid = await getPageId('xrayed', history.url || '');
+          const cookieids = await getCookieIds('xrayed', pageid);
+          const cookies = await getCookies('xrayed', cookieids);
 
           const historyData: object = {
             title: history.title,
@@ -383,7 +383,6 @@ export async function initializeSearchResults(): Promise<void> {
       const junctionFileUrl = chrome.runtime.getURL('init/serp/pc_junction_essential.csv');
       const serpJunctionArgs: string[] = await getLinesFromFile(junctionFileUrl);
 
-      const db = openReq.result;
       const tx: IDBTransaction = db.transaction(['cookie', 'page', 'junction'], 'readwrite');
 
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
