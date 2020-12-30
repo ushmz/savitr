@@ -1,3 +1,18 @@
+export const getLinesFromFile = async (url: string): Promise<string[]> => {
+  const response = await fetch(url);
+  const fileContents = await response.text();
+  const lines = fileContents.split('\n');
+  return lines;
+};
+
+export const formatString2Array = (arrayLikeString: string): string[] => {
+  if (arrayLikeString) {
+    return arrayLikeString.slice(1, -1).split('\\,');
+  } else {
+    return [];
+  }
+};
+
 export const hasIntersection = (arr1: string[], arr2: string[]): boolean => {
   const set1 = new Set(arr1);
   const set2 = new Set(arr2);
