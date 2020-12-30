@@ -1,22 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable, HistoryTable, SerpPageTable } from 'shared/types';
-import { hasIntersection } from '../shared/util';
+import { formatString2Array, getLinesFromFile, hasIntersection } from '../shared/util';
 import { getHistoriesAsync } from './getAllHistory';
-
-async function getLinesFromFile(url: string): Promise<string[]> {
-  const response = await fetch(url);
-  const fileContents = await response.text();
-  const lines = fileContents.split('\n');
-  return lines;
-}
-
-function formatString2Array(arrayLikeString: string): string[] {
-  if (arrayLikeString) {
-    return arrayLikeString.slice(1, -1).split('\\,');
-  } else {
-    return [];
-  }
-}
 
 export async function initializeXrayed(): Promise<void> {
   return new Promise((resolve, reject) => {
