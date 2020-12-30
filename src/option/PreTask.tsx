@@ -1,13 +1,8 @@
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
+import { SetPageProp } from '../shared/types';
 
-type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
-
-type Props = {
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-};
-
-export const PreTask: React.FC<Props> = ({ setPage }) => {
+export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);
 
   return (
@@ -20,15 +15,9 @@ export const PreTask: React.FC<Props> = ({ setPage }) => {
         注意事項
       </MDBTypography>
       <MDBTypography tag="p" className="lead">
-        <MDBTypography tag="ul">
-          <li>
-            アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
-            <text className="font-weight-bold">開いたままに</text>してください。
-          </li>
-          <li>
-            アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
-          </li>
-        </MDBTypography>
+        アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
+        <strong className="font-weight-bold">開いたままに</strong>してください。
+        アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
       <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
         <a className="white-text" href="https://forms.gle/emKsudDBaUHPaGcq5" target="_blank" rel="noopener noreferrer">
