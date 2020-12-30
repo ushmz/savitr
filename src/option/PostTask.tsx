@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { dropAllDatabase } from '../service/indexedDB';
-import { ComponentLoader } from '../shared/ComponentLoader';
+import { dropAllDatabase } from '../repository/indexedDB';
+import { ComponentLoader } from './internal/ComponentLoader';
 import { SetPageProp } from '../shared/types';
 
 export const PostTask: React.FC<SetPageProp> = ({ setPage }) => {
