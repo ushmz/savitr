@@ -1,4 +1,4 @@
-import { HistoryAPIParams } from 'shared/types';
+import { HistoryAPIParams } from '../shared/types';
 
 let nextEndTimeToUse: number | undefined = 0;
 const allItems: Array<chrome.history.HistoryItem> = [];
@@ -32,7 +32,6 @@ function getMoreHistory(callback: Function) {
 
 export function getHistories() {
   return getMoreHistory((cnt: number) => {
-    console.log('got ' + cnt);
     if (cnt > 0) {
       getHistories();
     }
@@ -42,7 +41,6 @@ export function getHistories() {
 export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
   return new Promise((resolve, reject) => {
     getMoreHistory((cnt: number) => {
-      console.log('got ' + cnt);
       if (cnt > 0) {
         resolve(getHistoriesAsync());
       } else {
