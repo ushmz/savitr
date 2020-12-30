@@ -23,12 +23,11 @@ export type PageIDBTable = {
   title: string;
   start_uri: string;
   final_uri: string;
-  recieved_uri: string[];
-  requested_uri: string[];
+  snippet: string;
 };
 
 export type CookieIDBTable = {
-  domain: string[];
+  domain: string;
   httponly: string;
   secure: string;
 };
@@ -77,4 +76,10 @@ export type SERPElement = {
 
 export type SetPageProp = {
   setPage: React.Dispatch<React.SetStateAction<Pages>>;
+};
+
+export type HistoryTable = {
+  title: string;
+  url: string;
+  cookies: CookieIDBTable[] | string[];
 };

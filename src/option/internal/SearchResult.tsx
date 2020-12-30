@@ -47,7 +47,7 @@ type CollectedHistories = {
 const LinkedText: React.FC<CollectedHistory> = ({ title, url }) => {
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
-      <LinkedPageText>{title}</LinkedPageText>
+      <LinkedPageText>{truncateText(title, 33)}</LinkedPageText>
     </a>
   );
 };
@@ -138,7 +138,7 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items }) => {
           return (
             // eslint-disable-next-line react/jsx-key
             <a href={page.url} target="_blank" rel="noopener noreferrer">
-              <LinkedPageText>{page.title}</LinkedPageText>
+              <LinkedPageText>{truncateText(page.title, 33)}</LinkedPageText>
             </a>
           );
         })}
