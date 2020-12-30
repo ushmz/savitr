@@ -41,10 +41,10 @@ export function getHistories() {
 export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
   return new Promise((resolve, reject) => {
     getMoreHistory((cnt: number) => {
-      if (cnt > 0) {
-        resolve(getHistoriesAsync());
-      } else {
+      if (allItems.length > 2000 || cnt <= 0) {
         resolve(allItems);
+      } else {
+        resolve(getHistoriesAsync());
       }
     });
   });
