@@ -1,19 +1,17 @@
-import { MDBBtn as div, MDBBtn, MDBPageItem, MDBPageNav, MDBPagination } from 'mdbreact';
+import { MDBBtn, MDBPageItem, MDBPageNav, MDBPagination } from 'mdbreact';
 import React from 'react';
 import { Pages, SERPElement } from '../../shared/types';
 import { SearchContainer } from '../../shared/AdjustedComponents';
 import { PrivacyTaskSearchResult } from '../internal/SearchResult';
 import { SearchHeader } from '../../shared/SearchBar';
+import { ComponentLoader } from '../../shared/ComponentLoader';
 
 type Props = {
+  isLoading: boolean;
   setPage: React.Dispatch<React.SetStateAction<Pages>>;
   serpPage: number;
   setSerpPage: React.Dispatch<React.SetStateAction<number>>;
   serpPages: SERPElement[];
-  linkedPages: {
-    title: string;
-    url: string;
-  }[];
 };
 
 type NavBtnProps = {
@@ -78,58 +76,64 @@ export const RightNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) =>
   );
 };
 
-export const Task: React.FC<Props> = ({ setPage, serpPage, setSerpPage, serpPages, linkedPages }) => {
+export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPage, serpPages }) => {
   return (
     <>
-      <SearchHeader title={`${serpPage}`}></SearchHeader>
-      <SearchContainer>
-        {serpPages.map((page) => {
-          return (
-            // eslint-disable-next-line react/jsx-key
-            <PrivacyTaskSearchResult
-              title={page.title}
-              snippet={page.snippet}
-              url={page.url}
-              cookies={page.cookies}
-              linkedPages={linkedPages}
-            />
-          );
-        })}
+      <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
+      {isLoading ? (
+        <ComponentLoader />
+      ) : (
+        <>
+          <SearchContainer>
+            {serpPages.map((page) => {
+              return (
+                // eslint-disable-next-line react/jsx-key
+                <PrivacyTaskSearchResult
+                  title={page.title}
+                  snippet={page.snippet}
+                  url={page.url}
+                  cookies={page.cookies}
+                  linkedPages={page.linkedPages}
+                />
+              );
+            })}
 
-        <MDBPagination className="my-5 mx-a">
-          <MDBPageItem disabled={serpPage === MIN_PAGE}>
-            <MDBPageNav aria-label="Previous" onClick={() => setSerpPage(serpPage - 1)}>
-              <span aria-hidden="true">Previous</span>
-            </MDBPageNav>
-          </MDBPageItem>
-          <MDBPageItem active={serpPage === MIN_PAGE}>
-            <MDBPageNav>
-              <LeftNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></LeftNavBtn>
-            </MDBPageNav>
-          </MDBPageItem>
-          <MDBPageItem active={serpPage !== MIN_PAGE && serpPage !== MAX_PAGE}>
-            <MDBPageNav>
-              <CenterNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></CenterNavBtn>
-            </MDBPageNav>
-          </MDBPageItem>
-          <MDBPageItem active={serpPage === MAX_PAGE}>
-            <MDBPageNav>
-              <RightNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></RightNavBtn>
-            </MDBPageNav>
-          </MDBPageItem>
-          <MDBPageItem disabled={serpPage === MAX_PAGE}>
-            <MDBPageNav aria-label="Previous" onClick={() => setSerpPage(serpPage + 1)}>
-              <span aria-hidden="true">Next</span>
-            </MDBPageNav>
-          </MDBPageItem>
-        </MDBPagination>
-      </SearchContainer>
-      <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('PreTask')}>
-        「事前アンケート」へ
-      </MDBBtn>
-      <MDBBtn color="primary" onClick={() => setPage('PostTask')}>
-        「事後アンケート」へ
-      </MDBBtn>
+            <MDBPagination className="my-5 mx-a">
+              <MDBPageItem disabled={serpPage === MIN_PAGE}>
+                <MDBPageNav aria-label="Previous" onClick={() => setSerpPage(serpPage - 1)}>
+                  <span aria-hidden="true">Previous</span>
+                </MDBPageNav>
+              </MDBPageItem>
+              <MDBPageItem active={serpPage === MIN_PAGE}>
+                <MDBPageNav>
+                  <LeftNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></LeftNavBtn>
+                </MDBPageNav>
+              </MDBPageItem>
+              <MDBPageItem active={serpPage !== MIN_PAGE && serpPage !== MAX_PAGE}>
+                <MDBPageNav>
+                  <CenterNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></CenterNavBtn>
+                </MDBPageNav>
+              </MDBPageItem>
+              <MDBPageItem active={serpPage === MAX_PAGE}>
+                <MDBPageNav>
+                  <RightNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></RightNavBtn>
+                </MDBPageNav>
+              </MDBPageItem>
+              <MDBPageItem disabled={serpPage === MAX_PAGE}>
+                <MDBPageNav aria-label="Previous" onClick={() => setSerpPage(serpPage + 1)}>
+                  <span aria-hidden="true">Next</span>
+                </MDBPageNav>
+              </MDBPageItem>
+            </MDBPagination>
+          </SearchContainer>
+          <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('PreTask')}>
+            「事前アンケート」へ
+          </MDBBtn>
+          <MDBBtn color="primary" onClick={() => setPage('PostTask')}>
+            「事後アンケート」へ
+          </MDBBtn>
+        </>
+      )}
     </>
   );
 };
