@@ -1,10 +1,10 @@
 import { MDBBtn, MDBPageItem, MDBPageNav, MDBPagination } from 'mdbreact';
 import React from 'react';
 import { Pages, SERPElement } from '../../shared/types';
-import { SearchContainer } from '../../shared/AdjustedComponents';
+import { SearchContainer } from '../internal/AdjustedComponents';
 import { PrivacyTaskSearchResult } from '../internal/SearchResult';
-import { SearchHeader } from '../../shared/SearchBar';
-import { ComponentLoader } from '../../shared/ComponentLoader';
+import { SearchHeader } from '../internal/SearchBar';
+import { ComponentLoader } from '../internal/ComponentLoader';
 
 type Props = {
   isLoading: boolean;

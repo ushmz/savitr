@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable, HistoryTable, SerpPageTable } from 'shared/types';
 import { hasIntersection } from '../shared/util';
@@ -311,7 +310,7 @@ export async function initializeHistory(): Promise<void> {
     openReq.onsuccess = async () => {
       const db: IDBDatabase = openReq.result;
       const tx: IDBTransaction = db.transaction('history', 'readwrite');
-      
+
       const historyOS: IDBObjectStore = tx.objectStore('history');
       historyOS.clear();
 
@@ -362,7 +361,7 @@ export async function getCollectedHistory(domains: string[]): Promise<HistoryTab
 export async function initializeSearchResults(): Promise<void> {
   return new Promise((resolve, reject) => {
     const openReq: IDBOpenDBRequest = indexedDB.open('serp', 1);
-  
+
     openReq.onupgradeneeded = async () => {
       const db = openReq.result;
       db.createObjectStore('cookie', { autoIncrement: true }).createIndex('domain', 'domain', { unique: false });
@@ -402,7 +401,7 @@ export async function initializeSearchResults(): Promise<void> {
 
       const pageOS: IDBObjectStore = tx.objectStore('page');
       pageOS.clear();
-      
+
       serpPageArgs.forEach((argLine) => {
         const args: string[] = argLine.split(',');
         const request: IDBRequest = pageOS.add({
@@ -410,7 +409,7 @@ export async function initializeSearchResults(): Promise<void> {
           title: args[1],
           start_uri: args[2],
           final_uri: args[3],
-          snippet: args[4]
+          snippet: args[4],
         });
 
         request.onerror = () => {

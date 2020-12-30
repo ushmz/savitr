@@ -9,7 +9,7 @@ import { Introduction } from './Introduction';
 import { PreTask } from './PreTask';
 import { Task } from './Task';
 import { PostTask } from './PostTask';
-import { Header } from '../shared/Header';
+import { Header } from './internal/Header';
 
 type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
 

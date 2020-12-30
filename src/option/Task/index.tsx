@@ -6,7 +6,7 @@ import {
   getCookieIds,
   getPageId,
   getResultRanged,
-} from '../../service/indexedDB';
+} from '../../repository/indexedDB';
 import { Pages, SERPElement } from '../../shared/types';
 
 type Props = {
