@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/camelcase */
-import { JunctionIDBTable, CookieIDBTable, PageIDBTable, SerpPageTable } from 'shared/types';
+import { JunctionIDBTable, CookieIDBTable, SerpPageTable } from 'shared/types';
 import { getHistoriesAsync } from './getAllHistory';
 
 async function getLinesFromFile(url: string): Promise<string[]> {
@@ -21,7 +21,7 @@ function formatString2Array(arrayLikeString: string): string[] {
 /**
  * Initialize table with collected page data.
  */
-export async function initializeTable(): Promise<void> {
+export async function initializeXrayed(): Promise<void> {
   return new Promise((resolve, reject) => {
     const openReq: IDBOpenDBRequest = indexedDB.open('xrayed', 1);
 

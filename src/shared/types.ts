@@ -59,6 +59,14 @@ export type HistoryAPIParams = {
   endTime?: number;
 };
 
+export type SerpPageTable = {
+  id: string;
+  title: string;
+  start_uri: string;
+  final_uri: string;
+  snippet: string;
+};
+
 export type SERPElement = {
   title: string;
   url: string;

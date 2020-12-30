@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dropAllDatabase } from '../service/indexedDB';
 import { ComponentLoader } from '../shared/ComponentLoader';
-import { SetPageProp } from 'shared/types';
+import { SetPageProp } from '../shared/types';
 
 export const PostTask: React.FC<SetPageProp> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);

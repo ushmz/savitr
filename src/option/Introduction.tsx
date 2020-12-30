@@ -3,15 +3,11 @@ import { MDBContainer, MDBTypography, MDBBox, MDBBtn } from 'mdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { initializeTable, initializeHistory, initializeSearchResults } from '../service/indexedDB';
+import { initializeXrayed, initializeHistory, initializeSearchResults } from '../service/indexedDB';
+import { ComponentLoader } from '../shared/ComponentLoader';
+import { SetPageProp } from '../shared/types';
 
-type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
-
-type Props = {
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-};
-
-export const Introduction: React.FC<Props> = ({ setPage }) => {
+export const Introduction: React.FC<SetPageProp> = ({ setPage }) => {
   const [isReady, setReady] = useState<boolean>(false);
   const [isProcessing, setProcessing] = useState<boolean>(false);
 
@@ -73,7 +69,7 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
           color="primary"
           onClick={async () => {
             setProcessing(true);
-            await initializeTable()
+            await initializeXrayed()
               .then(async () => await initializeHistory())
               .then(async () => await initializeSearchResults());
             setReady(true);
@@ -82,13 +78,7 @@ export const Introduction: React.FC<Props> = ({ setPage }) => {
             toast('履歴情報の作成が完了しました。', { type: 'success' });
           }}
         >
-          {isProcessing ? (
-            <div className="spinner-border" role="status">
-              <span className="sr-only">作成中...</span>
-            </div>
-          ) : (
-            '履歴情報の作成'
-          )}
+          {isProcessing ? <ComponentLoader /> : '履歴情報の作成'}
         </MDBBtn>
         <ToastContainer />
       </div>
