@@ -47,6 +47,7 @@
     "jsdoc": "^3.6.6",
     "mdbreact": "^5.0.1",
     "prettier": "^2.2.1",
+    "react-timer-hook": "^2.0.7",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
     "terser-webpack-plugin": "^5.0.3",
