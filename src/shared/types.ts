@@ -83,3 +83,22 @@ export type HistoryTable = {
   url: string;
   cookies: CookieIDBTable[] | string[];
 };
+
+export type BehaviorLog = {
+  id: string;
+  timeOnPage: number;
+  // 閲覧した最大深度どう取るか・
+  positionOnPage: number;
+};
+
+export type DocumentClickLog = {
+  id: string;
+  pageUrl: string;
+  linkedPageNum: number;
+};
+
+export type HistoryClickLog = {
+  id: string;
+  linkedDocumentUrl: string;
+  linkedPageNum: number;
+};
