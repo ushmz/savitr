@@ -1,39 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCardTitle, MDBCollapse, MDBIcon } from 'mdbreact';
-
-const SearchContainer = styled.div`
-  width: 720px;
-  margin: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-`;
-
-const TitleText = styled.p`
-  color: #3132a9;
-  font-weight: bold;
-  font-size: 20px;
-`;
-
-const URLText = styled.p`
-  color: #339d39;
-  margin-bottom: 3px;
-`;
-
-const WarningText = styled.p`
-  background: #ff9999;
-  font-size: 20px;
-`;
-
-const LinkedPageText = styled.p`
-  font-size: 18px;
-`;
+import { WarningText, SearchContainer, URLText, TitleText } from './AdjustedComponents';
+import { HREFText } from './HREFText';
+import { truncateText } from '../../shared/util';
+import { sendDocumentClickLog, sendHistoryClickLog } from 'repository/logger';
 
 const warningMessage = 'このページに訪れることで、以下のページが紐付けられます。';
-
-const truncateText = (text: string, len: number): string => {
-  return text.length <= len ? text : text.substr(0, len) + '...';
-};
 
 type CollectedHistory = {
   title: string;
@@ -42,17 +14,10 @@ type CollectedHistory = {
 
 type CollectedHistories = {
   histories: CollectedHistory[];
+  documentURL: string;
 };
 
-const LinkedText: React.FC<CollectedHistory> = ({ title, url }) => {
-  return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
-      <LinkedPageText>{truncateText(title, 33)}</LinkedPageText>
-    </a>
-  );
-};
-
-const CollectedPages: React.FC<CollectedHistories> = ({ histories }) => {
+const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }) => {
   if (histories.length === 0) {
     return <>紐付けられる履歴情報はありません</>;
   } else if (histories.length < 3) {
@@ -61,20 +26,51 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories }) => {
         <WarningText>{warningMessage}</WarningText>
         {histories.map((history) => (
           // eslint-disable-next-line react/jsx-key
-          <LinkedText title={history.title} url={history.url}></LinkedText>
+          <HREFText
+            title={history.title}
+            url={history.url}
+            onClick={() =>
+              sendHistoryClickLog({
+                id: chrome.runtime.id,
+                linkedDocumentUrl: documentURL,
+                linkedPageNum: histories.length,
+              })
+            }
+          />
         ))}
       </>
     );
   } else {
-    const primary = histories.shift() || { title: '', url: '' };
-    const secondly = histories.shift() || { title: '', url: '' };
+    // DO NOT use `.shift()`
+    const primary = histories[0];
+    const secondly = histories[1];
 
     return (
       <>
         <WarningText>{warningMessage}</WarningText>
-        <LinkedText title={primary.title} url={primary.url}></LinkedText>
-        <LinkedText title={secondly.title} url={secondly.url}></LinkedText>
-        <CollapseMenu items={histories}></CollapseMenu>
+        <HREFText
+          title={primary.title}
+          url={primary.url}
+          onClick={() =>
+            sendHistoryClickLog({
+              id: chrome.runtime.id,
+              linkedDocumentUrl: documentURL,
+              linkedPageNum: histories.length,
+            })
+          }
+        />
+        <HREFText
+          title={secondly.title}
+          url={secondly.url}
+          onClick={() =>
+            sendHistoryClickLog({
+              id: chrome.runtime.id,
+              linkedDocumentUrl: documentURL,
+              linkedPageNum: histories.length,
+            })
+          }
+        />
+        <CollapseMenu items={histories.slice(2)} documentURL={documentURL} />
       </>
     );
   }
@@ -97,7 +93,18 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
     <SearchContainer>
       <MDBCard className="ml-1">
         <MDBCardHeader>
-          <a href={url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              sendDocumentClickLog({
+                id: chrome.runtime.id,
+                pageUrl: url,
+                linkedPageNum: linkedPages.length,
+              });
+            }}
+          >
             <URLText>{truncateText(url, 72)}</URLText>
             <MDBCardTitle>
               <TitleText>{truncateText(title, 33)}</TitleText>
@@ -106,7 +113,7 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
           <MDBCardText>{truncateText(snippet, 125)}</MDBCardText>
         </MDBCardHeader>
         <MDBCardBody className="border border-dark m-3 rounded-lg">
-          <CollectedPages histories={linkedPages}></CollectedPages>
+          <CollectedPages histories={linkedPages} documentURL={url}></CollectedPages>
         </MDBCardBody>
       </MDBCard>
     </SearchContainer>
@@ -115,6 +122,7 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
 
 type CollapseProps = {
   items: { title: string; url: string }[];
+  documentURL: string;
 };
 
 /**
@@ -122,7 +130,7 @@ type CollapseProps = {
  * This component is too optimized for this search result,
  * so I don't separate this as (shared) component.
  */
-const CollapseMenu: React.FC<CollapseProps> = ({ items }) => {
+const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL }) => {
   const [collapsedID, setCollapsedID] = React.useState<string>('');
 
   const toggleCollapse = (collapseID: string) => () => {
@@ -137,9 +145,17 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items }) => {
         {items.map((page) => {
           return (
             // eslint-disable-next-line react/jsx-key
-            <a href={page.url} target="_blank" rel="noopener noreferrer">
-              <LinkedPageText>{truncateText(page.title, 33)}</LinkedPageText>
-            </a>
+            <HREFText
+              title={page.title}
+              url={page.url}
+              onClick={() =>
+                sendHistoryClickLog({
+                  id: chrome.runtime.id,
+                  linkedDocumentUrl: documentURL,
+                  linkedPageNum: items.length + 2,
+                })
+              }
+            />
           );
         })}
       </MDBCollapse>
