@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
+
 import { Task as Component } from './Task';
-import {
-  getCollectedHistory,
-  getCookieDomains,
-  getCookieIds,
-  getPageId,
-  getResultRanged,
-} from '../../repository/indexedDB';
+import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
+import { getCollectedHistory } from '../../repository/historyIDB';
+import { getResultRanged } from '../../repository/serpIDB';
 import { Pages, SERPElement } from '../../shared/types';
 
 type Props = {

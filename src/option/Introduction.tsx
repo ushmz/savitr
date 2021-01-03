@@ -3,7 +3,9 @@ import { MDBContainer, MDBTypography, MDBBox, MDBBtn } from 'mdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { initializeXrayed, initializeHistory, initializeSearchResults } from '../repository/indexedDB';
+import { initializeXrayed } from '../repository/xrayedIDB';
+import { initializeHistory } from '../repository/historyIDB';
+import { initializeSearchResults } from '../repository/serpIDB';
 import { ComponentLoader } from './internal/ComponentLoader';
 import { SetPageProp } from '../shared/types';
 
