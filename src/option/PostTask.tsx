@@ -4,10 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dropAllDatabase } from '../repository/xrayedIDB';
 import { ComponentLoader } from './internal/ComponentLoader';
-import { SetPageProp } from '../shared/types';
 
-export const PostTask: React.FC<SetPageProp> = ({ setPage }) => {
-  const [clicked, isClicked] = useState<boolean>(false);
+export const PostTask: React.FC = () => {
   const [isProcessing, setProcessing] = useState<boolean>(false);
 
   return (
@@ -24,7 +22,7 @@ export const PostTask: React.FC<SetPageProp> = ({ setPage }) => {
         <strong className="font-weight-bold">開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
-      <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
+      <MDBBtn color="primary" className="mb-5">
         <a className="white-text" href="https://forms.gle/emKsudDBaUHPaGcq5" target="_blank" rel="noopener noreferrer">
           アンケートページへ
         </a>
