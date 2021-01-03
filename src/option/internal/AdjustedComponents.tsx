@@ -18,6 +18,15 @@ export const URLText = styled.p`
   margin-bottom: 3px;
 `;
 
+export const WarningText = styled.p`
+  background: #ff9999;
+  font-size: 20px;
+`;
+
+export const LinkedPageText = styled.p`
+  font-size: 18px;
+`;
+
 export const RootContainer = styled.div`
   width: 720px;
   margin: auto;
@@ -33,15 +42,6 @@ export const ExternalLinkText = styled.p`
 
 export const HyperLinkText = styled.text`
   color: #339d39;
-`;
-
-export const WarningText = styled.p`
-  background: #ff9999;
-  font-size: 20px;
-`;
-
-export const LinkedPageText = styled.p`
-  font-size: 18px;
 `;
 
 export const SearchBarContainer = styled.div`
