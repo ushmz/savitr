@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCardTitle, MDBCollapse, MDBIcon } from 'mdbreact';
+import { WARNING_MESSAGE } from 'shared/consts';
 
 const SearchContainer = styled.div`
   width: 720px;
@@ -29,8 +30,6 @@ const LinkedPageText = styled.p`
   font-size: 18px;
 `;
 
-const warningMessage = 'このページに訪れることで、以下のページが紐付けられます。';
-
 const truncateText = (text: string, len: number): string => {
   return text.length <= len ? text : text.substr(0, len) + '...';
 };
@@ -58,7 +57,7 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories }) => {
   } else if (histories.length < 3) {
     return (
       <>
-        <WarningText>{warningMessage}</WarningText>
+        <WarningText>{WARNING_MESSAGE}</WarningText>
         {histories.map((history) => (
           // eslint-disable-next-line react/jsx-key
           <LinkedText title={history.title} url={history.url}></LinkedText>
@@ -71,7 +70,7 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories }) => {
 
     return (
       <>
-        <WarningText>{warningMessage}</WarningText>
+        <WarningText>{WARNING_MESSAGE}</WarningText>
         <LinkedText title={primary.title} url={primary.url}></LinkedText>
         <LinkedText title={secondly.title} url={secondly.url}></LinkedText>
         <CollapseMenu items={histories}></CollapseMenu>
@@ -84,7 +83,6 @@ type Props = {
   title: string;
   url: string;
   snippet: string;
-  cookies: string[];
   linkedPages: { title: string; url: string }[];
 };
 
@@ -92,7 +90,7 @@ type Props = {
  * Return single search result component used in web search task.
  * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
  */
-export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, cookies, linkedPages }) => {
+export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
   return (
     <SearchContainer>
       <MDBCard className="ml-1">
@@ -142,6 +140,8 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items }) => {
             </a>
           );
         })}
+        {/* 余力and意味があれば */}
+        {/* <MDBTypography tag="p">{`このページから検出されたサードパーティクッキー：${cookies.join(',')}`}</MDBTypography> */}
       </MDBCollapse>
       <MDBBtn className="mx-auto" color={'light-blue'} onClick={toggleCollapse('hambgr')}>
         <MDBIcon
