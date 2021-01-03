@@ -4,10 +4,6 @@ let nextEndTimeToUse: number | undefined = 0;
 const allItems: Array<chrome.history.HistoryItem> = [];
 const itemIdToIndex: { [key: string]: unknown } = {};
 
-/**
- *
- * @param {callback} callback - Callback exetuted when once request finished
- */
 function getMoreHistory(callback: Function) {
   const params: HistoryAPIParams = { text: '', maxResults: 500 };
   params.startTime = 0;
@@ -39,7 +35,9 @@ export function getHistories() {
 }
 
 export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
-  return new Promise((resolve, reject) => {
+  // The way to reject safly
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return new Promise((resolve, _) => {
     getMoreHistory((cnt: number) => {
       if (allItems.length > 2000 || cnt <= 0) {
         resolve(allItems);
