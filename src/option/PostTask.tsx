@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { dropAllDatabase } from '../repository/indexedDB';
+import { dropAllDatabase } from '../repository/xrayedIDB';
 import { ComponentLoader } from './internal/ComponentLoader';
 import { SetPageProp } from '../shared/types';
 
