@@ -5,6 +5,7 @@ import { SearchContainer } from '../internal/AdjustedComponents';
 import { PrivacyTaskSearchResult } from '../internal/SearchResult';
 import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoader } from '../internal/ComponentLoader';
+import { sendDocumentClickLog } from '../../repository/logger';
 
 type Props = {
   isLoading: boolean;
@@ -80,11 +81,11 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPag
   return (
     <>
       <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
-      {isLoading ? (
-        <ComponentLoader />
-      ) : (
-        <>
-          <SearchContainer>
+      <SearchContainer>
+        {isLoading ? (
+          <ComponentLoader />
+        ) : (
+          <>
             {serpPages.map((page) => {
               return (
                 // eslint-disable-next-line react/jsx-key
@@ -124,15 +125,15 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPag
                 </MDBPageNav>
               </MDBPageItem>
             </MDBPagination>
-          </SearchContainer>
-          <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('PreTask')}>
-            「事前アンケート」へ
-          </MDBBtn>
-          <MDBBtn color="primary" onClick={() => setPage('PostTask')}>
-            「事後アンケート」へ
-          </MDBBtn>
-        </>
-      )}
+          </>
+        )}
+      </SearchContainer>
+      <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('PreTask')}>
+        「事前アンケート」へ
+      </MDBBtn>
+      <MDBBtn color="primary" onClick={() => setPage('PostTask')}>
+        「事後アンケート」へ
+      </MDBBtn>
     </>
   );
 };
