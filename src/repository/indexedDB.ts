@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable, HistoryTable, SerpPageTable } from 'shared/types';
 import { formatString2Array, getLinesFromFile, hasIntersection } from '../shared/util';
-import { getHistoriesAsync } from './getAllHistory';
+import { getHistoriesAsync } from './chromeHistoryAPI';
 
 export async function initializeXrayed(): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -28,6 +28,12 @@ export async function initializeXrayed(): Promise<void> {
 
       const tx: IDBTransaction = db.transaction(['cookie', 'page', 'junction'], 'readwrite');
 
+      /**
+       * In following three steps, reading data is enough small so that version change
+       * transactions is lasting until all data has been inserted. If `x-rayed` data
+       * gets too big and take longer time than version change transaction, begin (and end)
+       * transaction inside of `.forEach()` function.
+       */
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
       cookieOS.clear();
 
@@ -40,6 +46,7 @@ export async function initializeXrayed(): Promise<void> {
         });
         request.onerror = () => {
           console.log(request.error);
+          reject();
         };
       });
 
@@ -58,6 +65,7 @@ export async function initializeXrayed(): Promise<void> {
         });
         request.onerror = () => {
           console.log(request.error);
+          reject();
         };
       });
 
@@ -72,6 +80,7 @@ export async function initializeXrayed(): Promise<void> {
         });
         request.onerror = () => {
           console.log(request.error);
+          reject();
         };
       });
       console.log('X-rayed Data Inserted.');
@@ -87,22 +96,22 @@ export async function dropAllDatabase(): Promise<void> {
     const HistoryDBBDeleteRequest = indexedDB.deleteDatabase('history');
     HistoryDBBDeleteRequest.onerror = () => {
       console.log(HistoryDBBDeleteRequest.error);
+      reject();
     };
     const xrayedDBDeleteRequest = indexedDB.deleteDatabase('xrayed');
     xrayedDBDeleteRequest.onerror = () => {
       console.log(xrayedDBDeleteRequest.error);
+      reject();
     };
     const serpDBDeleteRequest = indexedDB.deleteDatabase('serp');
     serpDBDeleteRequest.onerror = () => {
       console.log(serpDBDeleteRequest.error);
+      reject();
     };
     resolve();
   });
 }
 
-/**
- * Get pageID from colected pages data.
- */
 export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     url = decodeURI(url);
@@ -117,7 +126,7 @@ export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<
     const openReq: IDBOpenDBRequest = indexedDB.open(table, 1);
 
     openReq.onupgradeneeded = () => {
-      alert('はじめに履歴情報を作成してください．');
+      alert('はじめに履歴情報を作成してください。');
     };
 
     openReq.onsuccess = () => {
@@ -285,7 +294,6 @@ export async function initializeHistory(): Promise<void> {
           historyStore.add(historyData);
         } catch (error) {
           // Do nothing intentionally. (Pass the URL)
-          console.log(error);
         }
       });
       console.log('History Data Inserted.');
@@ -329,6 +337,11 @@ export async function initializeHistory(): Promise<void> {
 export async function getCollectedHistory(domains: string[]): Promise<HistoryTable[]> {
   return new Promise((resolve, reject) => {
     const openReq = indexedDB.open('history', 1);
+
+    openReq.onupgradeneeded = () => {
+      alert('はじめに履歴情報を作成してください。');
+    };
+
     openReq.onsuccess = () => {
       const db = openReq.result;
       const tx = db.transaction('history', 'readwrite');
@@ -339,7 +352,9 @@ export async function getCollectedHistory(domains: string[]): Promise<HistoryTab
         const collected = histories.filter((h) => hasIntersection(h.cookies, domains));
         resolve(collected);
       };
+      historiesReq.onerror = () => reject();
     };
+    openReq.onerror = () => reject();
   });
 }
 
