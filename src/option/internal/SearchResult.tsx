@@ -23,9 +23,9 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
     return (
       <>
         <WarningText>{WARNING_MESSAGE}</WarningText>
-        {histories.map((history) => (
-          // eslint-disable-next-line react/jsx-key
+        {histories.map((history, idx) => (
           <HREFText
+            key={idx}
             title={history.title}
             url={history.url}
             onClick={() =>
@@ -140,10 +140,10 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL }) => {
   return (
     <>
       <MDBCollapse id={'hambgr'} isOpen={collapsedID}>
-        {items.map((page) => {
+        {items.map((page, idx) => {
           return (
-            // eslint-disable-next-line react/jsx-key
             <HREFText
+              key={idx}
               title={page.title}
               url={page.url}
               onClick={() =>

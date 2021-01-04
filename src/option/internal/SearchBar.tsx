@@ -36,7 +36,6 @@ export const SearchHeader: React.FC<Props> = ({ title, placeholder }) => {
           </Inlinediv>
         </SearchBarContainer>
       </MDBNavItem>
-      {/* <div className="text-center py-3"></div> */}
     </MDBNavbar>
   );
 };
