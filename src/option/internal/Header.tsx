@@ -1,7 +1,6 @@
 import React from 'react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem } from 'mdbreact';
-
-type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
+import { Pages } from '../../shared/types';
 
 type Props = {
   title: string;
@@ -16,57 +15,31 @@ export const Header: React.FC<Props> = ({ title, setPage }) => {
       </MDBNavbarBrand>
       <MDBNavbarNav left className={`${title.toLocaleLowerCase().match(/.*admin.*/) ? 'visible' : 'invisible'}`}>
         <MDBNavItem active>
-          <div
-            className="white-text mx-2"
-            onClick={() => {
-              setPage('Attention');
-            }}
-          >
+          <div className="white-text mx-2" onClick={() => setPage('Attention')}>
             はじめに
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div
-            className="white-text mx-2"
-            onClick={() => {
-              setPage('Introduntion');
-            }}
-          >
+          <div className="white-text mx-2" onClick={() => setPage('Introduntion')}>
             タスク説明
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div
-            className="white-text mx-2"
-            onClick={() => {
-              setPage('PreTask');
-            }}
-          >
+          <div className="white-text mx-2" onClick={() => setPage('PreTask')}>
             事前アンケート
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div
-            className="white-text mx-2"
-            onClick={() => {
-              setPage('PostTask');
-            }}
-          >
+          <div className="white-text mx-2" onClick={() => setPage('PostTask')}>
             事後アンケート
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div
-            className="white-text mx-2"
-            onClick={() => {
-              setPage('Task');
-            }}
-          >
+          <div className="white-text mx-2" onClick={() => setPage('Task')}>
             タスク開始
           </div>
         </MDBNavItem>
       </MDBNavbarNav>
-      <div className="footer-copyright text-center py-3"></div>
     </MDBNavbar>
   );
 };

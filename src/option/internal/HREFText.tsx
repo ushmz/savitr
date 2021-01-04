@@ -10,7 +10,6 @@ type Props = {
 
 export const HREFText: React.FC<Props> = ({ title, url, onClick }) => {
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <a href={url} target="_blank" rel="noopener noreferrer" onClick={onClick}>
       <LinkedPageText>{truncateText(title, 33)}</LinkedPageText>
     </a>
