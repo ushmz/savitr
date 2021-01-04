@@ -19,16 +19,16 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
         <strong className="font-weight-bold">開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
-      <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
-        <a
-          className="white-text"
-          href={`https://docs.google.com/forms/d/e/1FAIpQLSccnw0hsq3tLnEEj-i3LGZfug0p6Pud8wVQQtqGf1_GuhUTAg/viewform?usp=pp_url&entry.1616397789=${chrome.runtime.id}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      <a
+        className="white-text"
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSccnw0hsq3tLnEEj-i3LGZfug0p6Pud8wVQQtqGf1_GuhUTAg/viewform?usp=pp_url&entry.1616397789=${chrome.runtime.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
           アンケートページへ
-        </a>
-      </MDBBtn>
+        </MDBBtn>
+      </a>
       <MDBTypography tag="p">
         アンケートへの回答が終了しましたら、以下のボタンから「タスク」ページへ進んでください。
       </MDBTypography>
