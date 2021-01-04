@@ -7,12 +7,7 @@ import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoader } from '../internal/ComponentLoader';
 import { SERP_MAX_PAGE, SERP_MIN_PAGE } from '../../shared/consts';
 
-type NavBtnProps = {
-  serpPage: number;
-  setSerpPage: React.Dispatch<React.SetStateAction<number>>;
-};
-
-export const LeftNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) => {
+const getLeftIndicateNum = (serpPage: number) => {
   let indicate = 0;
   if (serpPage === SERP_MIN_PAGE) {
     indicate = serpPage;
@@ -22,15 +17,10 @@ export const LeftNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) => 
     indicate = serpPage - 1;
   }
 
-  return (
-    <div onClick={() => setSerpPage(indicate)}>
-      {indicate}
-      {serpPage == SERP_MIN_PAGE && <span className="sr-only">(current)</span>}
-    </div>
-  );
+  return indicate;
 };
 
-export const CenterNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) => {
+const getCenterIndicateNum = (serpPage: number) => {
   let indicate = 0;
   if (serpPage === SERP_MIN_PAGE) {
     indicate = serpPage + 1;
@@ -39,16 +29,10 @@ export const CenterNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) =
   } else {
     indicate = serpPage;
   }
-
-  return (
-    <div onClick={() => setSerpPage(indicate)}>
-      {indicate}
-      {serpPage != SERP_MIN_PAGE && serpPage != SERP_MAX_PAGE && <span className="sr-only">(current)</span>}
-    </div>
-  );
+  return indicate;
 };
 
-export const RightNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) => {
+const getRightindicateNum = (serpPage: number) => {
   let indicate = 0;
   if (serpPage === SERP_MIN_PAGE) {
     indicate = serpPage + 2;
@@ -57,13 +41,7 @@ export const RightNavBtn: React.FC<NavBtnProps> = ({ serpPage, setSerpPage }) =>
   } else {
     indicate = serpPage + 1;
   }
-
-  return (
-    <div onClick={() => setSerpPage(indicate)}>
-      {indicate}
-      {serpPage == SERP_MAX_PAGE && <span className="sr-only">(current)</span>}
-    </div>
-  );
+  return indicate;
 };
 
 type Props = {
@@ -75,6 +53,10 @@ type Props = {
 };
 
 export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPage, serpPages }) => {
+  const leftNum = getLeftIndicateNum(serpPage);
+  const centerNum = getCenterIndicateNum(serpPage);
+  const rightNum = getRightindicateNum(serpPage);
+
   return (
     <>
       <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
@@ -101,18 +83,21 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPag
                 </MDBPageNav>
               </MDBPageItem>
               <MDBPageItem active={serpPage === SERP_MIN_PAGE}>
-                <MDBPageNav>
-                  <LeftNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></LeftNavBtn>
+                <MDBPageNav onClick={() => setSerpPage(leftNum)}>
+                  {leftNum}
+                  {serpPage == SERP_MIN_PAGE && <span className="sr-only" />}
                 </MDBPageNav>
               </MDBPageItem>
               <MDBPageItem active={serpPage !== SERP_MIN_PAGE && serpPage !== SERP_MAX_PAGE}>
-                <MDBPageNav>
-                  <CenterNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></CenterNavBtn>
+                <MDBPageNav onClick={() => setSerpPage(centerNum)}>
+                  {centerNum}
+                  {serpPage != SERP_MIN_PAGE && serpPage != SERP_MAX_PAGE && <span className="sr-only">(current)</span>}
                 </MDBPageNav>
               </MDBPageItem>
               <MDBPageItem active={serpPage === SERP_MAX_PAGE}>
-                <MDBPageNav>
-                  <RightNavBtn serpPage={serpPage} setSerpPage={setSerpPage}></RightNavBtn>
+                <MDBPageNav onClick={() => setSerpPage(rightNum)}>
+                  {rightNum}
+                  {serpPage == SERP_MAX_PAGE && <span className="sr-only">(current)</span>}
                 </MDBPageNav>
               </MDBPageItem>
               <MDBPageItem disabled={serpPage === SERP_MAX_PAGE}>
