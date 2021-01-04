@@ -83,10 +83,10 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPage, setSerpPag
           <ComponentLoader />
         ) : (
           <>
-            {serpPages.map((page) => {
+            {serpPages.map((page, idx) => {
               return (
-                // eslint-disable-next-line react/jsx-key
                 <PrivacyTaskSearchResult
+                  key={idx}
                   title={page.title}
                   snippet={page.snippet}
                   url={page.url}
