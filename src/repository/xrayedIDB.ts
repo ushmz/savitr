@@ -139,6 +139,13 @@ export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<
         if (request.result !== undefined) {
           const page = request.result;
           resolve(page.id);
+        } else {
+          /**
+           * In my experiment, pages that doesn't have x-rayed data we collected
+           * are considered as if there is no risk to display. For this reason,
+           * it will be rejected although it supposed to be resolved by empty string.
+           */
+          reject();
         }
       };
 
@@ -170,6 +177,13 @@ export async function getCookieIds(table: 'xrayed' | 'serp', pageId: string): Pr
         if (getReq.result.length > 0) {
           const junctions: JunctionIDBTable[] = getReq.result;
           resolve(junctions.map((junction) => junction.cookie_id));
+        } else {
+          /**
+           * In my experiment, pages that doesn't have 3p-cookies are considered
+           * as if there is no risk to display. For this reason, it will be rejected
+           * although it supposed to be resolved empty array.
+           */
+          reject();
         }
       };
 
