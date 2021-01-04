@@ -6,7 +6,7 @@ import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xray
 import { getCollectedHistory } from '../../repository/historyIDB';
 import { getResultRanged } from '../../repository/serpIDB';
 import { SERPElement, SetPageProp } from '../../shared/types';
-import { sendBehaviorLog } from 'repository/logger';
+import { sendBehaviorLog } from '../../repository/logger';
 
 export const Task: React.FC<SetPageProp> = ({ setPage }) => {
   const [serpPage, setSerpPage] = useState<number>(1);
