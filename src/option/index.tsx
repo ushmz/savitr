@@ -27,7 +27,7 @@ const Option = () => {
       case 'Task':
         return <Task setPage={setPage} />;
       case 'PostTask':
-        return <PostTask setPage={setPage} />;
+        return <PostTask />;
       default:
         return <Attention setPage={setPage} />;
     }
