@@ -5,7 +5,7 @@ import { SearchContainer } from '../internal/AdjustedComponents';
 import { PrivacyTaskSearchResult } from '../internal/SearchResult';
 import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoader } from '../internal/ComponentLoader';
-import { SERP_MAX_PAGE, SERP_MIN_PAGE } from 'shared/consts';
+import { SERP_MAX_PAGE, SERP_MIN_PAGE } from '../../shared/consts';
 
 type NavBtnProps = {
   serpPage: number;

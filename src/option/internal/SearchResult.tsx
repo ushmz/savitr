@@ -3,10 +3,8 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCardTitle,
 import { WarningText, SearchContainer, URLText, TitleText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
 import { truncateText } from '../../shared/util';
-import { sendDocumentClickLog, sendHistoryClickLog } from 'repository/logger';
+import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logger';
 import { WARNING_MESSAGE } from '../../shared/consts';
-
-const warningMessage = 'このページに訪れることで、以下のページが紐付けられます。';
 
 type CollectedHistory = {
   title: string;
@@ -48,7 +46,7 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
 
     return (
       <>
-        <WarningText>{warningMessage}</WarningText>
+        <WarningText>{WARNING_MESSAGE}</WarningText>
         <HREFText
           title={primary.title}
           url={primary.url}
