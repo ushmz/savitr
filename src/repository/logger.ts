@@ -1,24 +1,24 @@
 import axios from 'axios';
 import { BehaviorLog, DocumentClickLog, HistoryClickLog } from '../shared/types';
 
-const ENDPOINT = 'http://localhost:8000';
+const ENDPOINT = 'http://ec2-52-5-208-93.compute-1.amazonaws.com/api/logs';
 
 export const sendBehaviorLog = async (behaviorLog: BehaviorLog) => {
-  const response = await axios.post(`${ENDPOINT}/storelog`, behaviorLog, {
+  const response = await axios.post(`${ENDPOINT}/behavior`, behaviorLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
   console.log(response.data);
 };
 
 export const sendDocumentClickLog = async (clickLog: DocumentClickLog) => {
-  const response = await axios.post(`${ENDPOINT}/storelog`, clickLog, {
+  const response = await axios.post(`${ENDPOINT}/click/docs`, clickLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
   console.log(response.data);
 };
 
 export const sendHistoryClickLog = async (clickLog: HistoryClickLog) => {
-  const response = await axios.post(`${ENDPOINT}/storelog`, clickLog, {
+  const response = await axios.post(`${ENDPOINT}/click/hstr`, clickLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
   console.log(response.data);
