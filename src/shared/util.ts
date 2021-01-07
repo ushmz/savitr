@@ -23,3 +23,12 @@ export const hasIntersection = (arr1: string[], arr2: string[]): boolean => {
 export const truncateText = (text: string, len: number): string => {
   return text.length <= len ? text : text.substr(0, len) + '...';
 };
+
+export function shuffle<T>(array: Array<T>): Array<T> {
+  for (let i = array.length; 1 < i; i--) {
+    const k = Math.floor(Math.random() * i);
+    [array[k], array[i - 1]] = [array[i - 1], array[k]];
+  }
+
+  return array;
+}
