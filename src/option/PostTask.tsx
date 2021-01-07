@@ -12,7 +12,7 @@ export const PostTask: React.FC = () => {
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">事後アンケート</MDBTypography>
       <MDBTypography tag="p">
-        事後アンケートにお答えください。質問は全部で48問あり、想定所要時間は10分です。
+        事後アンケートにお答えください。質問は全部で17問あり、想定所要時間は約5分です。
       </MDBTypography>
       <MDBTypography tag="h2" className="mt-5">
         注意事項
@@ -24,7 +24,7 @@ export const PostTask: React.FC = () => {
       </MDBTypography>
       <a
         className="white-text"
-        href={`https://docs.google.com/forms/d/e/1FAIpQLSccnw0hsq3tLnEEj-i3LGZfug0p6Pud8wVQQtqGf1_GuhUTAg/viewform?usp=pp_url&entry.1616397789=${chrome.runtime.id}`}
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSfhI4bdPXmMI1ojima5_EXJfvNVBNKzHe92gJsUZevOOc223g/viewform?usp=pp_url&entry.1200052101=${chrome.runtime.id}`}
         target="_blank"
         rel="noopener noreferrer"
       >

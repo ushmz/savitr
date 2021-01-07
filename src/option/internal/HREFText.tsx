@@ -1,6 +1,5 @@
 import React from 'react';
-import { truncateText } from '../../shared/util';
-import { LinkedPageText } from './AdjustedComponents';
+import TextTruncate from 'react-text-truncate';
 
 type Props = {
   title: string;
@@ -11,7 +10,9 @@ type Props = {
 export const HREFText: React.FC<Props> = ({ title, url, onClick }) => {
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" onClick={onClick}>
-      <LinkedPageText>{truncateText(title, 33)}</LinkedPageText>
+      <TextTruncate line={1} element="p" truncateText="..." text={title} />
+      {/* If text lines don't appear, use code below. */}
+      {/* <LinkedPageText>{truncateText(title, 33)}</LinkedPageText> */}
     </a>
   );
 };

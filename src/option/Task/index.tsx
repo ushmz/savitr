@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 import { Task as Component } from './Task';
-import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
+import { sendBehaviorLog } from '../../repository/logger';
 import { getCollectedHistory } from '../../repository/historyIDB';
 import { getResultRanged } from '../../repository/serpIDB';
+import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
 import { SERPElement, SetPageProp } from '../../shared/types';
-import { sendBehaviorLog } from '../../repository/logger';
+import { shuffle } from '../../shared/util';
 
 export const Task: React.FC<SetPageProp> = ({ setPage }) => {
   const [serpPage, setSerpPage] = useState<number>(1);
@@ -39,7 +40,7 @@ export const Task: React.FC<SetPageProp> = ({ setPage }) => {
           snippet: page.snippet,
           url: page.start_uri,
           cookies: cookieDomains,
-          linkedPages: linkedPages,
+          linkedPages: shuffle(linkedPages),
         };
       } catch (error) {
         return {
