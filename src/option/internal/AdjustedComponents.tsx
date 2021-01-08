@@ -10,7 +10,6 @@ import styled from 'styled-components';
  */
 export const SearchContainer = styled.div`
   width: 720px;
-  margin-left: 30px;
   padding-top: 60px;
   padding-bottom: 20px;
 `;
@@ -20,9 +19,8 @@ export const SearchContainer = styled.div`
  * Adjust position and size here.
  */
 export const RootContainer = styled.div`
-  width: 720px;
   margin: auto;
-  padding-top: 20px;
+  padding-top: 60px;
   padding-bottom: 20px;
 `;
 

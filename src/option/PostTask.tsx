@@ -3,10 +3,12 @@ import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dropAllDatabase } from '../repository/xrayedIDB';
-import { ComponentLoader } from './internal/ComponentLoader';
+import { ComponentLoaderCenter } from './internal/ComponentLoader';
 
 export const PostTask: React.FC = () => {
   const [isProcessing, setProcessing] = useState<boolean>(false);
+
+  const uid = localStorage.getItem('uid');
 
   return (
     <MDBContainer className="my-5">
@@ -17,14 +19,14 @@ export const PostTask: React.FC = () => {
       <MDBTypography tag="h2" className="mt-5">
         注意事項
       </MDBTypography>
-      <MDBTypography tag="p" className="lead">
+      <MDBTypography tag="p">
         アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
         <strong className="font-weight-bold">開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
       <a
         className="white-text"
-        href={`https://docs.google.com/forms/d/e/1FAIpQLSfhI4bdPXmMI1ojima5_EXJfvNVBNKzHe92gJsUZevOOc223g/viewform?usp=pp_url&entry.1200052101=${chrome.runtime.id}`}
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSduKki4WZT5FUA_gWLqpmBbGsJSDk7tbDCa1ItXGfUjn1cYvQ/viewform?usp=pp_url&entry.183922479=${uid}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -45,7 +47,7 @@ export const PostTask: React.FC = () => {
           toast('履歴情報の削除が完了しました。', { type: 'success' });
         }}
       >
-        {isProcessing ? <ComponentLoader /> : '履歴情報の削除'}
+        {isProcessing ? <ComponentLoaderCenter /> : '履歴情報の削除'}
       </MDBBtn>
       <ToastContainer />
       <MDBTypography tag="p">
