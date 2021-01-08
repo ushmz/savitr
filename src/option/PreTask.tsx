@@ -5,6 +5,8 @@ import { SetPageProp } from '../shared/types';
 export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);
 
+  const uid = localStorage.getItem('uid');
+
   return (
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">事前アンケート</MDBTypography>
@@ -14,14 +16,14 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
       <MDBTypography tag="h2" className="mt-5">
         注意事項
       </MDBTypography>
-      <MDBTypography tag="p" className="lead">
+      <MDBTypography tag="p">
         アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
         <strong className="font-weight-bold">開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </MDBTypography>
       <a
         className="white-text"
-        href={`https://docs.google.com/forms/d/e/1FAIpQLSfhI4bdPXmMI1ojima5_EXJfvNVBNKzHe92gJsUZevOOc223g/viewform?usp=pp_url&entry.1200052101=${chrome.runtime.id}`}
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSfhI4bdPXmMI1ojima5_EXJfvNVBNKzHe92gJsUZevOOc223g/viewform?usp=pp_url&entry.1200052101=${uid}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -30,13 +32,10 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
         </MDBBtn>
       </a>
       <MDBTypography tag="p">
-        アンケートへの回答が終了しましたら、以下のボタンから「タスク」ページへ進んでください。
+        アンケートへの回答が終了しましたら、以下のボタンから「タスク説明」ページへ進んでください。
       </MDBTypography>
-      <MDBBtn color="primary" className="float-left disabled" onClick={() => setPage('Introduntion')}>
-        タスク詳細へ
-      </MDBBtn>
-      <MDBBtn color="primary" className={`float-right ${clicked ? '' : 'disabled'}`} onClick={() => setPage('Task')}>
-        タスクへ
+      <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`} onClick={() => setPage('Introduntion')}>
+        タスク説明へ
       </MDBBtn>
     </MDBContainer>
   );

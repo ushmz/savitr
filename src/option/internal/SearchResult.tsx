@@ -1,6 +1,6 @@
 import React from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCardTitle, MDBCollapse, MDBIcon } from 'mdbreact';
-import { WarningText, SearchContainer, URLText, TitleText } from './AdjustedComponents';
+import { MDBBtn, MDBCollapse, MDBContainer, MDBIcon, MDBTypography } from 'mdbreact';
+import { WarningText, URLText, TitleText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
 import { truncateText } from '../../shared/util';
 import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logger';
@@ -18,10 +18,10 @@ type CollectedHistories = {
 
 const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }) => {
   if (histories.length === 0) {
-    return <>紐付けられる履歴情報はありません</>;
+    return <div className="m-3">紐付けられる履歴情報はありません</div>;
   } else if (histories.length < 3) {
     return (
-      <>
+      <div className="m-3">
         <WarningText>{WARNING_MESSAGE}</WarningText>
         {histories.map((history, idx) => (
           <HREFText
@@ -30,14 +30,14 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
             url={history.url}
             onClick={() =>
               sendHistoryClickLog({
-                id: chrome.runtime.id,
+                uid: chrome.runtime.id,
                 linkedDocumentUrl: documentURL,
                 linkedPageNum: histories.length,
               })
             }
           />
         ))}
-      </>
+      </div>
     );
   } else {
     // DO NOT use `.shift()`
@@ -45,14 +45,14 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
     const secondly = histories[1];
 
     return (
-      <>
+      <div className="m-3">
         <WarningText>{WARNING_MESSAGE}</WarningText>
         <HREFText
           title={primary.title}
           url={primary.url}
           onClick={() =>
             sendHistoryClickLog({
-              id: chrome.runtime.id,
+              uid: chrome.runtime.id,
               linkedDocumentUrl: documentURL,
               linkedPageNum: histories.length,
             })
@@ -63,14 +63,14 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
           url={secondly.url}
           onClick={() =>
             sendHistoryClickLog({
-              id: chrome.runtime.id,
+              uid: chrome.runtime.id,
               linkedDocumentUrl: documentURL,
               linkedPageNum: histories.length,
             })
           }
         />
         <CollapseMenu items={histories.slice(2)} documentURL={documentURL} />
-      </>
+      </div>
     );
   }
 };
@@ -88,33 +88,31 @@ type Props = {
  */
 export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
   return (
-    <SearchContainer>
-      <MDBCard className="ml-1">
-        <MDBCardHeader>
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              sendDocumentClickLog({
-                id: chrome.runtime.id,
-                pageUrl: url,
-                linkedPageNum: linkedPages.length,
-              });
-            }}
-          >
-            <URLText>{truncateText(url, 72)}</URLText>
-            <MDBCardTitle>
-              <TitleText>{truncateText(title, 33)}</TitleText>
-            </MDBCardTitle>
-          </a>
-          <MDBCardText>{truncateText(snippet, 125)}</MDBCardText>
-        </MDBCardHeader>
-        <MDBCardBody className="border border-dark m-3 rounded-lg">
-          <CollectedPages histories={linkedPages} documentURL={url}></CollectedPages>
-        </MDBCardBody>
-      </MDBCard>
-    </SearchContainer>
+    <MDBContainer className="py-3">
+      {/* <MDBCard className="ml-1"> */}
+      {/* <MDBCardHeader> */}
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => {
+          sendDocumentClickLog({
+            uid: chrome.runtime.id,
+            pageUrl: url,
+            linkedPageNum: linkedPages.length,
+          });
+        }}
+      >
+        <URLText>{truncateText(url, 72)}</URLText>
+        <TitleText>{truncateText(title, 33)}</TitleText>
+      </a>
+      <MDBTypography tag="p">{truncateText(snippet, 125)}</MDBTypography>
+      {/* </MDBCardHeader> */}
+      <div className="border border-dark m-3 rounded-lg">
+        <CollectedPages histories={linkedPages} documentURL={url} />
+      </div>
+      {/* </MDBCard> */}
+    </MDBContainer>
   );
 };
 
@@ -148,7 +146,7 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL }) => {
               url={page.url}
               onClick={() =>
                 sendHistoryClickLog({
-                  id: chrome.runtime.id,
+                  uid: chrome.runtime.id,
                   linkedDocumentUrl: documentURL,
                   linkedPageNum: items.length + 2,
                 })

@@ -44,33 +44,6 @@ export async function initializeHistory(): Promise<void> {
       resolve();
     };
 
-    openReq.onsuccess = async () => {
-      const db: IDBDatabase = openReq.result;
-      const tx: IDBTransaction = db.transaction('history', 'readwrite');
-
-      const historyOS: IDBObjectStore = tx.objectStore('history');
-      historyOS.clear();
-
-      const histories = await getHistoriesAsync();
-      histories.forEach(async (history: chrome.history.HistoryItem) => {
-        try {
-          const pageid = await getPageId('xrayed', history.url || '');
-          const cookieids = await getCookieIds('xrayed', pageid);
-          const cookies = await getCookies('xrayed', cookieids);
-
-          const historyData: object = {
-            title: history.title,
-            url: history.url,
-            cookies: cookies,
-          };
-          historyOS.add(historyData);
-        } catch (error) {
-          // Do nothing intentionally. (Pass the URL)
-        }
-      });
-      resolve();
-    };
-
     openReq.onerror = () => {
       console.log(openReq.error);
       reject();

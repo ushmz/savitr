@@ -17,11 +17,15 @@ export const Task: React.FC<SetPageProp> = ({ setPage }) => {
   const { seconds, minutes } = useStopwatch({ autoStart: true });
 
   useInterval(async () => {
+    const target = document.body;
+    const position = target.getBoundingClientRect();
+    console.log({ page: serpPage, y: position.top });
     if (!window.document.hidden) {
       await sendBehaviorLog({
-        id: chrome.runtime.id,
+        uid: localStorage.getItem('uid') || 'Does not have uid!!',
         timeOnPage: minutes * 60 + seconds,
-        positionOnPage: 0,
+        currentPage: serpPage,
+        positionOnPage: position.top,
       });
     }
   }, 1000);
@@ -54,6 +58,7 @@ export const Task: React.FC<SetPageProp> = ({ setPage }) => {
     });
 
     window.scrollTo(0, 0);
+    // たぶん意味がない(Promise<Object>[]じゃなくてPromise<Object[]>だからawaitだけでいい？)
     setSerpPages(await Promise.all(serpElements));
     setLoading(false);
   };

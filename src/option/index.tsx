@@ -9,9 +9,7 @@ import { Introduction } from './Introduction';
 import { PreTask } from './PreTask';
 import { Task } from './Task';
 import { PostTask } from './PostTask';
-import { Header } from './internal/Header';
-
-type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
+import { Pages } from '../shared/types';
 
 const Option = () => {
   const [page, setPage] = useState<Pages>('Attention');
@@ -33,12 +31,7 @@ const Option = () => {
     }
   };
 
-  return (
-    <>
-      {page !== 'Task' && <Header title="Admin pagination" setPage={setPage}></Header>}
-      <div className="mb-5 pb-5">{pagination()}</div>
-    </>
-  );
+  return <div className="mb-5 pb-5">{pagination()}</div>;
 };
 
 ReactDOM.render(<Option />, document.getElementById('root'));

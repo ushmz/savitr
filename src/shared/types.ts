@@ -85,20 +85,20 @@ export type HistoryTable = {
 };
 
 export type BehaviorLog = {
-  id: string;
+  uid: string;
   timeOnPage: number;
-  // 閲覧した最大深度どう取るか・
+  currentPage: number;
   positionOnPage: number;
 };
 
 export type DocumentClickLog = {
-  id: string;
+  uid: string;
   pageUrl: string;
   linkedPageNum: number;
 };
 
 export type HistoryClickLog = {
-  id: string;
+  uid: string;
   linkedDocumentUrl: string;
   linkedPageNum: number;
 };
