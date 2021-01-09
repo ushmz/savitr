@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBTypography } from 'mdbreact';
 import { toast, ToastContainer } from 'react-toastify';
 import { ComponentLoader } from './internal/ComponentLoader';
-import { initializeHistory } from '../repository/historyIDB';
+import { initializeHistory, initializeHistoryByAPI } from '../repository/historyIDB';
 import { initializeSearchResults } from '../repository/serpIDB';
 import { initializeXrayed } from '../repository/xrayedIDB';
 import { SetPageProp } from '../shared/types';
@@ -61,9 +61,7 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
           color="primary"
           onClick={async () => {
             setProcessing(true);
-            await initializeXrayed()
-              .then(async () => await initializeHistory())
-              .then(async () => await initializeSearchResults());
+            await initializeHistoryByAPI().then(async () => await initializeSearchResults());
             setReady(true);
             setProcessing(false);
             toast('履歴情報の作成が完了しました。', { type: 'success' });
