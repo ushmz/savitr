@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 import { Task as Component } from './Task';
-import { sendBehaviorLog } from '../../repository/logger';
+import { sendBehaviorLog } from '../../repository/logAPI';
 import { getCollectedHistory } from '../../repository/historyIDB';
 import { getResultRanged } from '../../repository/serpIDB';
 import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
