@@ -44,7 +44,7 @@ module.exports = [
       background: './src/background/RuntimeMessageListener.ts'
     },
     output: {
-      path: __dirname + '/dist/savitri',
+      path: __dirname + '/dist/savitr',
     },
     module: {
       rules: [
@@ -79,17 +79,17 @@ module.exports = [
         patterns: [
           {
             from: './public/savitri-manifest.json',
-            to: path.join(__dirname, 'dist', 'savitri', 'manifest.json')
+            to: path.join(__dirname, 'dist', 'savitr', 'manifest.json')
           },
           {
             context: 'db/dumped',
             from: '*.csv',
-            to: path.join(__dirname, 'dist','savitri', 'init', 'xrayed')
+            to: path.join(__dirname, 'dist','savitr', 'init', 'xrayed')
           },
           {
             context: 'db/serp/',
             from: '*.csv',
-            to: path.join(__dirname, 'dist','savitri', 'init', 'serp')
+            to: path.join(__dirname, 'dist','savitr', 'init', 'serp')
           }
         ]
       }),
