@@ -1,7 +1,8 @@
 import { HistoryTable } from '../shared/types';
 import { hasIntersection } from '../shared/util';
-import { getHistoriesAsync } from './chromeHistoryAPI';
-import { getPageId, getCookieIds, getCookieDomains, getCookies } from './xrayedIDB';
+import { analyse3pCookies } from './analyzeAPI';
+import { getAllHistoriesAsync, getHistoriesCallback } from './chromeHistoryAPI';
+import { getPageId, getCookieIds, getCookieDomains } from './xrayedIDB';
 
 export async function initializeHistory(): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -19,7 +20,7 @@ export async function initializeHistory(): Promise<void> {
       historyOS.clear();
       console.log('History Table Initialized.');
 
-      const histories = await getHistoriesAsync();
+      const histories = await getAllHistoriesAsync();
       console.log('History Data Loaded.');
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
@@ -72,5 +73,53 @@ export async function getCollectedHistory(domains: string[]): Promise<HistoryTab
       historiesReq.onerror = () => reject();
     };
     openReq.onerror = () => reject();
+  });
+}
+
+export async function initializeHistoryByAPI(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const openReq: IDBOpenDBRequest = indexedDB.open('history', 1);
+
+    openReq.onupgradeneeded = () => {
+      const db: IDBDatabase = openReq.result;
+      db.createObjectStore('history', { autoIncrement: true });
+    };
+
+    openReq.onsuccess = async () => {
+      const db: IDBDatabase = openReq.result;
+      const tx: IDBTransaction = db.transaction('history', 'readwrite');
+      const historyOS: IDBObjectStore = tx.objectStore('history');
+      historyOS.clear();
+      console.log('History Table Initialized.');
+
+      await getHistoriesCallback(150, (histories) => {
+        histories.forEach(async (history: chrome.history.HistoryItem) => {
+          try {
+            if (!history.url) throw Error;
+            const cookies = await analyse3pCookies(history.url);
+            console.log(cookies);
+
+            const historyData: HistoryTable = {
+              title: `${history.title}`,
+              url: `${history.url}`,
+              cookies: cookies[0].cookies,
+            };
+
+            const itx: IDBTransaction = db.transaction('history', 'readwrite');
+            const historyStore: IDBObjectStore = itx.objectStore('history');
+            historyStore.add(historyData);
+          } catch (error) {
+            // Do nothing intentionally. (Pass the URL)
+          }
+        });
+      });
+      console.log('History Data Inserted.');
+      resolve();
+    };
+
+    openReq.onerror = () => {
+      console.log(openReq.error);
+      reject();
+    };
   });
 }
