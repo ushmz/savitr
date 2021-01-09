@@ -3,7 +3,7 @@ import { MDBBtn, MDBCollapse, MDBContainer, MDBIcon, MDBTypography } from 'mdbre
 import { WarningText, URLText, TitleText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
 import { truncateText } from '../../shared/util';
-import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logger';
+import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logAPI';
 import { WARNING_MESSAGE } from '../../shared/consts';
 
 type CollectedHistory = {
