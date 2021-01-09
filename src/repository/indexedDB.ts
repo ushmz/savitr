@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable, HistoryTable, SerpPageTable } from 'shared/types';
 import { formatString2Array, getLinesFromFile, hasIntersection } from '../shared/util';
-import { getHistoriesAsync } from './chromeHistoryAPI';
+import { getAllHistoriesAsync } from './chromeHistoryAPI';
 
 export async function initializeXrayed(): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -275,7 +275,7 @@ export async function initializeHistory(): Promise<void> {
       historyOS.clear();
       console.log('History Table Initialized.');
 
-      const histories = await getHistoriesAsync();
+      const histories = await getAllHistoriesAsync();
       console.log('History Data Loaded.');
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
@@ -307,7 +307,7 @@ export async function initializeHistory(): Promise<void> {
       const historyOS: IDBObjectStore = tx.objectStore('history');
       historyOS.clear();
 
-      const histories = await getHistoriesAsync();
+      const histories = await getAllHistoriesAsync();
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
           const pageid = await getPageId('xrayed', history.url || '');
