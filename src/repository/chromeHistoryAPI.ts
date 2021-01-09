@@ -26,15 +26,15 @@ function getMoreHistory(callback: Function) {
   return allItems;
 }
 
-export function getHistories() {
+export function getAllHistories() {
   return getMoreHistory((cnt: number) => {
     if (cnt > 0) {
-      getHistories();
+      getAllHistories();
     }
   });
 }
 
-export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
+export async function getAllHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
   // The way to reject safly
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Promise((resolve, _) => {
@@ -42,8 +42,25 @@ export async function getHistoriesAsync(): Promise<Array<chrome.history.HistoryI
       if (allItems.length > 2000 || cnt <= 0) {
         resolve(allItems);
       } else {
-        resolve(getHistoriesAsync());
+        resolve(getAllHistoriesAsync());
       }
     });
   });
 }
+
+export async function getHistories(maxResults: number): Promise<chrome.history.HistoryItem[]> {
+  let historyItems: chrome.history.HistoryItem[] = [];
+  chrome.history.search({ text: '', maxResults: maxResults }, (histories) => {
+    console.log('chrome API responce : ', histories);
+    historyItems = histories;
+  });
+  return historyItems;
+}
+
+export async function getHistoriesCallback(maxResults: number, callback: HistoriesCallback) {
+  chrome.history.search({ text: '', maxResults: maxResults }, (histories) => {
+    callback(histories);
+  });
+}
+
+type HistoriesCallback = (histories: chrome.history.HistoryItem[]) => void;
