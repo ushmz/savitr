@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const nodeExternals = require('webpack-node-externals');
 
@@ -87,6 +88,11 @@ module.exports = [
             to: path.join(__dirname, 'dist','savitr', 'init', 'xrayed')
           },
           {
+            context: 'db/dumped',
+            from: 'domain_cookies.json',
+            to: path.join(__dirname, 'dist','savitr', 'init', 'xrayed')
+          },
+          {
             context: 'db/serp/',
             from: '*.csv',
             to: path.join(__dirname, 'dist','savitr', 'init', 'serp')
@@ -103,6 +109,7 @@ module.exports = [
         filename: './option.html',
         chunks: ['option'],
       }),
+      new Dotenv(),
       new CleanWebpackPlugin()
     ],
     devServer: {
