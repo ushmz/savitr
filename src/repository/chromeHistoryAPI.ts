@@ -34,12 +34,13 @@ export function getAllHistories() {
   });
 }
 
-export async function getAllHistoriesAsync(): Promise<Array<chrome.history.HistoryItem>> {
+export async function getAllHistoriesAsync(maxResults?: number): Promise<Array<chrome.history.HistoryItem>> {
   // The way to reject safly
+  const max = maxResults ? maxResults : 2000;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Promise((resolve, _) => {
     getMoreHistory((cnt: number) => {
-      if (allItems.length > 2000 || cnt <= 0) {
+      if (allItems.length > max || cnt <= 0) {
         resolve(allItems);
       } else {
         resolve(getAllHistoriesAsync());
@@ -51,7 +52,6 @@ export async function getAllHistoriesAsync(): Promise<Array<chrome.history.Histo
 export async function getHistories(maxResults: number): Promise<chrome.history.HistoryItem[]> {
   let historyItems: chrome.history.HistoryItem[] = [];
   chrome.history.search({ text: '', maxResults: maxResults }, (histories) => {
-    console.log('chrome API responce : ', histories);
     historyItems = histories;
   });
   return historyItems;
