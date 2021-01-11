@@ -1,3 +1,5 @@
+import crypto from 'crypto-js';
+
 export const getLinesFromFile = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
   const fileContents = await response.text();
@@ -12,6 +14,10 @@ export const formatString2Array = (arrayLikeString: string): string[] => {
     return [];
   }
 };
+
+export function deleteDuplicated<T>(arr: T[]): T[] {
+  return Array.from(new Set(arr));
+}
 
 export const hasIntersection = (arr1: string[], arr2: string[]): boolean => {
   const set1 = new Set(arr1);
@@ -33,6 +39,11 @@ export function shuffle<T>(array: Array<T>): Array<T> {
   return array;
 }
 
+export const extractDomain = (url: string) => {
+  const matched = url.match(/^https?:\/\/\.?(.*?)(\:[0-9].+)?($|\/|\?|\\\\|=)/);
+  return matched ? matched[1] : '';
+};
+
 export const uid = () => {
   let uid = '',
     i,
@@ -46,4 +57,17 @@ export const uid = () => {
     uid += (i == 12 ? 4 : i == 16 ? (random & 3) | 8 : random).toString(16);
   }
   return uid;
+};
+
+export const urlFilter = (url: string | undefined): boolean => {
+  if (!url) {
+    return false;
+  }
+  if (url.match('.+(pdf|ppt|pptx|doc|docx|txt|rtf|xls|xlsx|jpg|jepg|png|gif)$')) {
+    return false;
+  }
+  if (url.match(/^https?:\/\/www\.google\.com\/search.+/)) {
+    return false;
+  }
+  return true;
 };
