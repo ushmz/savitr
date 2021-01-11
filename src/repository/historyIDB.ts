@@ -102,7 +102,7 @@ export async function initializeHistoryByAPI(): Promise<void> {
             const historyData: HistoryTable = {
               title: `${history.title}`,
               url: `${history.url}`,
-              cookies: cookies[0].cookies,
+              cookies: cookies,
             };
 
             const itx: IDBTransaction = db.transaction('history', 'readwrite');
