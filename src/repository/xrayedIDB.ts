@@ -271,3 +271,72 @@ export async function getCookieDomains(table: 'xrayed' | 'serp', cookieIds: stri
   }
   return cookies;
 }
+
+export async function initializeXrayedDomainBase(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const openReq: IDBOpenDBRequest = indexedDB.open('xrayed', 1);
+
+    openReq.onupgradeneeded = async () => {
+      const db: IDBDatabase = openReq.result;
+      db.createObjectStore('domains', { autoIncrement: true }).createIndex('domain', 'domain', { unique: true });
+    };
+
+    openReq.onsuccess = async () => {
+      const db: IDBDatabase = openReq.result;
+
+      const junctionFileUrl = chrome.runtime.getURL('init/xrayed/domain_cookies.json');
+      const response = await fetch(junctionFileUrl);
+      const fileContents = await response.text();
+      const junctionTableArgs = JSON.parse(fileContents);
+      const tx: IDBTransaction = db.transaction('domains', 'readwrite');
+
+      const domainsOS: IDBObjectStore = tx.objectStore('domains');
+      domainsOS.clear();
+
+      Object.keys(junctionTableArgs).forEach((domain) => {
+        const request: IDBRequest = domainsOS.add({
+          domain: domain,
+          cookie_domains: junctionTableArgs[domain],
+        });
+        request.onerror = () => {
+          console.log(request.error);
+          reject();
+        };
+      });
+      console.log('X-rayed Data Inserted.');
+      resolve();
+    };
+
+    openReq.onerror = () => reject();
+  });
+}
+
+export async function get3pCookieDomainNames(domain: string): Promise<string[] | undefined> {
+  return new Promise((resolve, reject) => {
+    const openReq = indexedDB.open('xrayed', 1);
+
+    openReq.onupgradeneeded = () => alert('はじめに履歴情報を作成してください．');
+
+    openReq.onsuccess = () => {
+      const db: IDBDatabase = openReq.result;
+      const tx: IDBTransaction = db.transaction('domains', 'readonly');
+
+      const domainOS: IDBObjectStore = tx.objectStore('domains');
+      const domainIndex = domainOS.index('domain');
+      const request: IDBRequest = domainIndex.get(domain);
+
+      request.onsuccess = () => {
+        if (request.result) {
+          resolve(request.result.cookie_domains);
+        } else {
+          resolve(undefined);
+        }
+      };
+
+      request.onerror = () => {
+        resolve(undefined);
+      };
+    };
+    openReq.onerror = () => reject();
+  });
+}
