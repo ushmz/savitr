@@ -50,21 +50,13 @@ export const uid = () => {
   return uid;
 };
 
-// ???
-const encrypt = (text: string) => {
-  const key = process.env.ENCRYPTION_KEY || '';
-  if (!key) {
+export const encryptText = (text: string) => {
+  const encKey = process.env.ENCRYPTION_KEY || '';
+  if (!encKey) {
     throw Error('Configuration Error');
   }
-
-  const encrypted = crypto.AES.encrypt(text, key);
-  console.log('encrypted', encrypted);
-  return encrypted.iv.toString() + ':' + encrypted.ciphertext.toString();
-};
-
-export const encryptText = (text: string) => {
   const iv = crypto.lib.WordArray.random(16); // Generate a random 16 bytes IV
-  const key = crypto.enc.Base64.parse('aR1h7EefwlPNVkvTHwfs6w=='); // Interpret key as Base64 encoded
+  const key = crypto.enc.Base64.parse(encKey); // Interpret key as Base64 encoded
 
   const encrypted = crypto.AES.encrypt(text, key, { iv: iv }); // Use CBC-mode and PKCS7-padding
   const joinedData = iv.clone().concat(encrypted.ciphertext); // Concat IV and Ciphertext
