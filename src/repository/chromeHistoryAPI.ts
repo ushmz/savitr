@@ -34,16 +34,15 @@ export function getAllHistories() {
   });
 }
 
-export async function getAllHistoriesAsync(maxResults?: number): Promise<Array<chrome.history.HistoryItem>> {
+export async function getAllHistoriesAsync(maxResults = 2000): Promise<Array<chrome.history.HistoryItem>> {
   // The way to reject safly
-  const max = maxResults ? maxResults : 2000;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Promise((resolve, _) => {
     getMoreHistory((cnt: number) => {
-      if (allItems.length > max || cnt <= 0) {
+      if (allItems.length > maxResults || cnt <= 0) {
         resolve(allItems);
       } else {
-        resolve(getAllHistoriesAsync());
+        resolve(getAllHistoriesAsync(maxResults));
       }
     });
   });
