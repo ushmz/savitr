@@ -42,7 +42,11 @@ export const PostTask: React.FC = () => {
         className="mb-5"
         onClick={async () => {
           setProcessing(true);
-          await dropAllDatabase();
+          try {
+            await dropAllDatabase();
+          } catch (error) {
+            console.log(error);
+          }
           setProcessing(false);
           toast('履歴情報の削除が完了しました。', { type: 'success' });
         }}
