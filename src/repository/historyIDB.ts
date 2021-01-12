@@ -1,7 +1,7 @@
 import { HistoryTable } from '../shared/types';
 import { hasIntersection } from '../shared/util';
 import { analyse3pCookies } from './analyzeAPI';
-import { getAllHistoriesAsync, getHistoriesCallback } from './chromeHistoryAPI';
+import { getAllHistories, getAllHistoriesAsync, getHistoriesCallback } from './chromeHistoryAPI';
 import { getPageId, getCookieIds, getCookieDomains } from './xrayedIDB';
 
 export async function initializeHistory(): Promise<void> {
@@ -92,26 +92,26 @@ export async function initializeHistoryByAPI(): Promise<void> {
       historyOS.clear();
       console.log('History Table Initialized.');
 
-      await getHistoriesCallback(150, (histories) => {
-        histories.forEach(async (history: chrome.history.HistoryItem) => {
-          try {
-            if (!history.url) throw Error;
-            const cookies = await analyse3pCookies(history.url);
-            console.log(cookies);
+      const histories = await getAllHistoriesAsync(30);
+      histories.forEach(async (history: chrome.history.HistoryItem) => {
+        try {
+          if (!history.url) throw Error;
 
-            const historyData: HistoryTable = {
-              title: `${history.title}`,
-              url: `${history.url}`,
-              cookies: cookies,
-            };
+          const cookies = await analyse3pCookies(history.url);
+          const historyData: HistoryTable = {
+            title: `${history.title}`,
+            url: `${history.url}`,
+            cookies: cookies,
+          };
 
+          if (historyData.cookies.length !== 0) {
             const itx: IDBTransaction = db.transaction('history', 'readwrite');
             const historyStore: IDBObjectStore = itx.objectStore('history');
             historyStore.add(historyData);
-          } catch (error) {
-            // Do nothing intentionally. (Pass the URL)
           }
-        });
+        } catch (error) {
+          // Do nothing intentionally. (Pass the URL)
+        }
       });
       console.log('History Data Inserted.');
       resolve();
