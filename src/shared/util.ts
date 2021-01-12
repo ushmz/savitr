@@ -31,7 +31,6 @@ export function shuffle<T>(array: Array<T>): Array<T> {
     const k = Math.floor(Math.random() * i);
     [array[k], array[i - 1]] = [array[i - 1], array[k]];
   }
-
   return array;
 }
 
@@ -50,19 +49,20 @@ export const uid = () => {
   return uid;
 };
 
-export const encryptText = (text: string) => {
+export const encryptText = (text: string): string => {
   const encKey = process.env.ENCRYPTION_KEY || '';
   if (!encKey) {
     throw Error('Configuration Error');
   }
-  const iv = crypto.lib.WordArray.random(16); // Generate a random 16 bytes IV
-  const key = crypto.enc.Base64.parse(encKey); // Interpret key as Base64 encoded
+  const iv = crypto.lib.WordArray.random(16);
+  // Interpret key as Base64 encoded
+  const key = crypto.enc.Base64.parse(encKey);
 
-  const encrypted = crypto.AES.encrypt(text, key, { iv: iv }); // Use CBC-mode and PKCS7-padding
-  const joinedData = iv.clone().concat(encrypted.ciphertext); // Concat IV and Ciphertext
+  // Use CBC-mode and PKCS7-padding
+  const encrypted = crypto.AES.encrypt(text, key, { iv: iv });
+  // Concat IV and Ciphertext
+  const joinedData = iv.clone().concat(encrypted.ciphertext);
   const joinedDataB64 = crypto.enc.Base64.stringify(joinedData);
 
-  console.log(joinedDataB64);
-  console.log(joinedDataB64.replace(/(.{64})/g, '$1\n'));
   return joinedDataB64;
 };
