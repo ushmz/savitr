@@ -30,13 +30,11 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
           本実験ではあなたのブラウザに保存された閲覧履歴データ（以下、ブラウザ履歴）にアクセスし、
           一部変更を加えた上でブラウザ内の一時的にアクセス可能な場所に保存します。本システムは
           一時的に保存された情報（以下、履歴情報）を用いてタスクを生成します。本システムはあなたのブラウザ履歴、及び履歴情報に対し、
-          {/* TODO: 具体例 */}
-          <strong className="font-weight-bold">一切の収集行動、及び外部への送信を行いません。</strong>
+          <strong className="font-weight-bold">一切の収集行動を行いません。</strong>
         </li>
         <li className="my-3">
           タスクの実行中、結果の分析のため、以下の情報を収集させていただきます。なお、以下の情報によっていかなる個人の特定も行われることはありません。
           <ol>
-            {/* TODO: 具体例 */}
             <li>
               あなたが<strong className="font-weight-bold">実験中に</strong>閲覧したページのタイトル及び内容
             </li>
@@ -61,10 +59,23 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
           color="primary"
           onClick={async () => {
             setProcessing(true);
+            // Use analyze API for each history.
             await initializeHistoryByAPI().then(async () => await initializeSearchResults());
-            setReady(true);
-            setProcessing(false);
-            toast('履歴情報の作成が完了しました。', { type: 'success' });
+            setTimeout(() => {
+              setReady(true);
+              setProcessing(false);
+              toast('履歴情報の作成が完了しました。', { type: 'success' });
+            }, 90000);
+
+            // Use domain base initialize.
+            // await initializeXrayedDomainBase()
+            //   .then(async () => initializeHistoryDomainBase())
+            //   .then(async () => initializeSearchResults());
+
+            // Use black-list initialize.
+            // await initializeXrayed()
+            //   .then(() => initializeHistory())
+            //   .then(() => initializeSearchResults());
           }}
         >
           {isProcessing ? <ComponentLoader /> : '履歴情報の作成'}
