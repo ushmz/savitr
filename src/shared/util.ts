@@ -1,3 +1,5 @@
+import crypto from 'crypto-js';
+
 export const getLinesFromFile = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
   const fileContents = await response.text();
@@ -29,7 +31,6 @@ export function shuffle<T>(array: Array<T>): Array<T> {
     const k = Math.floor(Math.random() * i);
     [array[k], array[i - 1]] = [array[i - 1], array[k]];
   }
-
   return array;
 }
 
@@ -46,4 +47,22 @@ export const uid = () => {
     uid += (i == 12 ? 4 : i == 16 ? (random & 3) | 8 : random).toString(16);
   }
   return uid;
+};
+
+export const encryptText = (text: string): string => {
+  const encKey = process.env.ENCRYPTION_KEY || '';
+  if (!encKey) {
+    throw Error('Configuration Error');
+  }
+  const iv = crypto.lib.WordArray.random(16);
+  // Interpret key as Base64 encoded
+  const key = crypto.enc.Base64.parse(encKey);
+
+  // Use CBC-mode and PKCS7-padding
+  const encrypted = crypto.AES.encrypt(text, key, { iv: iv });
+  // Concat IV and Ciphertext
+  const joinedData = iv.clone().concat(encrypted.ciphertext);
+  const joinedDataB64 = crypto.enc.Base64.stringify(joinedData);
+
+  return joinedDataB64;
 };

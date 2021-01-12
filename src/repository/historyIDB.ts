@@ -96,8 +96,8 @@ export async function initializeHistoryByAPI(): Promise<void> {
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
           if (!history.url) throw Error;
-          const cookies = await analyse3pCookies(history.url);
 
+          const cookies = await analyse3pCookies(history.url);
           const historyData: HistoryTable = {
             title: `${history.title}`,
             url: `${history.url}`,
