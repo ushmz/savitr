@@ -49,6 +49,25 @@ export const uid = () => {
   return uid;
 };
 
+export const isNotNeed = (url: string): boolean => {
+  if (url.match(/.+(pdf|ppt|pptx|doc|docx|txt|rtf|xls|xlsx|jpg|jepg|png|gif)$/)) {
+    return true;
+  }
+  if (url.match(/https?:\/\/[a-zA-Z0-9]+\.google\.com\/.+/)) {
+    return true;
+  }
+  if (url.match(/^(?!http)/)) {
+    return true;
+  }
+  if (url.match(/https?:\/\/github\.com\/.*/)) {
+    return true;
+  }
+  if (url.match(/https?:\/\/zoom\.us\/.*/)) {
+    return true;
+  }
+  return false;
+};
+
 export const encryptText = (text: string): string => {
   const encKey = process.env.ENCRYPTION_KEY || '';
   if (!encKey) {
