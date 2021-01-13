@@ -64,11 +64,9 @@ export const Task: React.FC<SetPageProp> = ({ setPage }) => {
     });
 
     window.scrollTo(0, 0);
-    // たぶん意味がない(Promise<Object>[]じゃなくてPromise<Object[]>だからawaitだけでいい？)
     const allSerpPages = (await Promise.all(serpElements)) as SerpPage[];
     const riskyPages = allSerpPages.filter((p) => p.linkedPages.length !== 0) || [];
     const saftyPages = allSerpPages.filter((p) => p.linkedPages.length === 0) || [];
-    console.log(riskyPages.length, saftyPages.length);
 
     const showSerpPages: SerpPage[] = [];
     if (saftyPages.length >= 10) {

@@ -7,21 +7,21 @@ export const sendBehaviorLog = async (behaviorLog: BehaviorLog) => {
   const response = await axios.post(`${ENDPOINT}/api/logs/behavior`, behaviorLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
-  console.log(response.data);
+  if (!response.data.status) console.log('Failed to log data');
 };
 
 export const sendDocumentClickLog = async (clickLog: DocumentClickLog) => {
   const response = await axios.post(`${ENDPOINT}/api/logs/click/docs`, clickLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
-  console.log(response.data);
+  if (!response.data.status) console.log('Failed to log data');
 };
 
 export const sendHistoryClickLog = async (clickLog: HistoryClickLog) => {
   const response = await axios.post(`${ENDPOINT}/api/logs/click/hstr`, clickLog, {
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
   });
-  console.log(response.data);
+  if (!response.data.status) console.log('Failed to log data');
 };
 
 export const challenge = async () => {
