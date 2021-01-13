@@ -89,8 +89,6 @@ type Props = {
 export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
   return (
     <MDBContainer className="py-3">
-      {/* <MDBCard className="ml-1"> */}
-      {/* <MDBCardHeader> */}
       <a
         href={url}
         target="_blank"
@@ -107,11 +105,13 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
         <TitleText>{truncateText(title, 33)}</TitleText>
       </a>
       <MDBTypography tag="p">{truncateText(snippet, 125)}</MDBTypography>
-      {/* </MDBCardHeader> */}
-      <div className="border border-dark m-3 rounded-lg">
-        <CollectedPages histories={linkedPages} documentURL={url} />
-      </div>
-      {/* </MDBCard> */}
+      {linkedPages.length === 0 ? (
+        <></>
+      ) : (
+        <div className="border border-dark m-3 rounded-lg">
+          <CollectedPages histories={linkedPages} documentURL={url} />
+        </div>
+      )}
     </MDBContainer>
   );
 };

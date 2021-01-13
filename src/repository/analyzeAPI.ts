@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { encryptText } from '../shared/util';
 
-const ENDPOINT = 'http://ec2-52-5-208-93.compute-1.amazonaws.com';
+const ENDPOINT = process.env.API_ENDPOINT || 'http://localhost:8000';
 
 const isNotNeed = (url: string): boolean => {
   if (url.match(/.+(pdf|ppt|pptx|doc|docx|txt|rtf|xls|xlsx|jpg|jepg|png|gif)$/)) {
@@ -13,7 +13,7 @@ const isNotNeed = (url: string): boolean => {
   if (url.match(/^(?!http)/)) {
     return true;
   }
-  if (url.match(/https?:\/\/github\.com\/.+/)) {
+  if (url.match(/https?:\/\/github\.com\/.*/)) {
     return true;
   }
   return false;
