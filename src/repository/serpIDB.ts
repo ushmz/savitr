@@ -82,6 +82,23 @@ export async function initializeSearchResults(): Promise<void> {
   });
 }
 
+export async function getAllPage(): Promise<SerpPageTable[]> {
+  return new Promise((resolve, reject) => {
+    const openReq = indexedDB.open('serp', 1);
+    openReq.onsuccess = () => {
+      const db: IDBDatabase = openReq.result;
+      const tx: IDBTransaction = db.transaction('page', 'readonly');
+
+      const pagesOS: IDBObjectStore = tx.objectStore('page');
+      const request: IDBRequest = pagesOS.getAll();
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+    };
+    openReq.onerror = () => reject();
+  });
+}
+
 export async function getResultRanged(page: number): Promise<SerpPageTable[]> {
   return new Promise((resolve, reject) => {
     const openReq = indexedDB.open('serp', 1);
