@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { encryptText } from '../shared/util';
 
 const ENDPOINT = process.env.API_ENDPOINT || 'http://localhost:8000';
 
@@ -21,14 +22,9 @@ const isNotNeed = (url: string): boolean => {
 export const analyse3pCookies = async (url: string): Promise<string[]> => {
   if (isNotNeed(url)) return [];
   const response = await axios.post(
-    `${ENDPOINT}/analyze`,
-    { uid: localStorage.getItem('uid'), urls: url },
+    `${ENDPOINT}/api/wbxr/analyze`,
+    { uid: localStorage.getItem('uid'), url: encryptText(url) },
     { headers: { accept: 'application/json', 'Content-Type': 'application/json' } },
   );
   return response.data.cookies;
-};
-
-type CookiesAPIResponse = {
-  url: string;
-  cookies: string[];
 };
