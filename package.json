@@ -9,7 +9,6 @@
   "dependencies": {
     "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
-    "dotenv-webpack": "^6.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-text-truncate": "^0.16.0",
@@ -39,6 +38,7 @@
     "copy-webpack-plugin": "^6.3.0",
     "core-js": "^3.7.0",
     "css-loader": "^5.0.1",
+    "dotenv-webpack": "^6.0.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-jest": "^24.1.3",
@@ -66,7 +66,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode development --config webpack.config.js"
+    "build": "webpack --mode development --env status=dev --config webpack.config.js",
+    "build:dev": "webpack --mode development --env status=dev --config webpack.config.js",
+    "build:prod": "webpack --env status=prod --config webpack.config.js"
   },
   "repository": {
     "type": "git",
