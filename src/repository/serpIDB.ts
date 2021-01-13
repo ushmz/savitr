@@ -20,7 +20,7 @@ export async function initializeSearchResults(): Promise<void> {
       const cookieFileUrl = chrome.runtime.getURL('init/serp/cookie_essential.csv');
       const serpCookieArgs: string[] = await getLinesFromFile(cookieFileUrl);
 
-      const pageFileUrl = chrome.runtime.getURL('init/serp/page_essential_decoded.csv');
+      const pageFileUrl = chrome.runtime.getURL('init/serp/page_essential.csv');
       const serpPageArgs: string[] = await getLinesFromFile(pageFileUrl);
 
       const junctionFileUrl = chrome.runtime.getURL('init/serp/pc_junction_essential.csv');
