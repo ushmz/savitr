@@ -1,11 +1,11 @@
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBRow, MDBTypography } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBRow, MDBTypography } from 'mdbreact';
 import React, { useState } from 'react';
 import { Pages, SERPElement } from '../../shared/types';
-import { RootContainer, SearchContainer } from '../internal/AdjustedComponents';
-import { PrivacyTaskSearchResult } from '../internal/SearchResult';
+import { SearchResult } from '../internal/SearchResult';
 import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoaderCenter } from '../internal/ComponentLoader';
 import { ConfirmPopup } from '../internal/ConfirmPopup';
+import { SizedText } from '../internal/AdjustedComponents';
 
 type Props = {
   isLoading: boolean;
@@ -22,14 +22,14 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPages }) => {
         <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
       </MDBRow>
       <MDBRow>
-        <MDBCol md="7">
-          <SearchContainer className="ml-3 mt-3">
-            {isLoading ? (
-              <ComponentLoaderCenter />
-            ) : (
-              serpPages.map((page, idx) => {
+        {isLoading ? (
+          <ComponentLoaderCenter />
+        ) : (
+          <>
+            <div className="pl-5 pt-3 ml-5">
+              {serpPages.map((page, idx) => {
                 return (
-                  <PrivacyTaskSearchResult
+                  <SearchResult
                     key={idx}
                     title={page.title}
                     snippet={page.snippet}
@@ -37,38 +37,41 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPages }) => {
                     linkedPages={page.linkedPages}
                   />
                 );
-              })
-            )}
-          </SearchContainer>
-        </MDBCol>
-        <MDBCol md="5">
-          <RootContainer className="ml-3 mt-3">
-            <MDBCard className="position-fixed">
-              <MDBCardBody>
-                <MDBCardTitle>タスク内容</MDBCardTitle>
-                <MDBTypography tag="p">
-                  リモートでのやり取りが増えたので、ウェブカメラを購入したいと思ったとします。
-                  どれを購入するか迷ったあなたは、ひとまずウェブカメラについての情報収集のために、ウェブ検索することにしました。
-                  タスク画面では、「ウェブカメラ おすすめ」というワードでウェブ検索した際の検索結果画面を想定し、
-                  自分が購入したいウェブカメラを検索してください。自分が購入したいウェブカメラが決まったら検索を終了してください。
-                </MDBTypography>
-                <MDBTypography tag="ul">
-                  <li>検索クエリは変更できません。</li>
-                  <li>
-                    検索結果は新規タブで開かれます。自由に閲覧していただいて構いませんが、新たなリンクをたどることはしないでください。
-                  </li>
-                  <li>
-                    検索タスクの終了時には「購入したいと思った商品名」「一番参考になったページのURL」「決め手となった理由」
-                    の3点をお尋ねします。
-                  </li>
-                  <li>制限時間はありませんので、納得のいくまで検索を行ってください。</li>
-                </MDBTypography>
-                <MDBBtn onClick={() => toggle(!isOpen)}>回答する</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-            <ConfirmPopup isOpen={isOpen} toggle={toggle} confirmationCallback={() => setPage('PostTask')} />
-          </RootContainer>
-        </MDBCol>
+              })}
+            </div>
+            <div className="mt-3 ml-3">
+              <MDBCard className="position-fixed border border-dark m-3 rounded-lg" style={{ width: '400px' }}>
+                <MDBCardBody>
+                  <MDBCardTitle>タスク内容</MDBCardTitle>
+                  <SizedText size="14px">
+                    リモートでのやり取りが増えたので、ウェブカメラの購入を考えています。
+                    次に表示される検索結果から、自分が購入したいウェブカメラを選択してください。
+                  </SizedText>
+                  <MDBTypography tag="ul">
+                    <li>
+                      <SizedText size="13px">検索クエリは変更できません。</SizedText>
+                    </li>
+                    <li>
+                      <SizedText size="13px">
+                        表示された検索結果リスト及び、そのリンク先のページのみ閲覧してください。検索結果は新規タブで開かれます。
+                      </SizedText>
+                    </li>
+                    <li>
+                      <SizedText size="13px">
+                        検索タスクの終了時には「購入したいと思った商品名」「一番参考になったページのURL」「決め手となった理由」の3点をお尋ねします。
+                      </SizedText>
+                    </li>
+                    <li>
+                      <SizedText size="13px">制限時間はありませんので、納得のいくまで検索を行ってください。</SizedText>
+                    </li>
+                  </MDBTypography>
+                  <MDBBtn onClick={() => toggle(!isOpen)}>回答する</MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+              <ConfirmPopup isOpen={isOpen} toggle={toggle} confirmationCallback={() => setPage('PostTask')} />
+            </div>
+          </>
+        )}
       </MDBRow>
     </>
   );

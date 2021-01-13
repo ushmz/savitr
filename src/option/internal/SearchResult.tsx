@@ -1,6 +1,6 @@
 import React from 'react';
-import { MDBBtn, MDBCollapse, MDBContainer, MDBIcon, MDBTypography } from 'mdbreact';
-import { WarningText, URLText, TitleText } from './AdjustedComponents';
+import { MDBBtn, MDBCollapse, MDBIcon } from 'mdbreact';
+import { WarningText, URLText, TitleText, SearchResultContainer, SizedText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
 import { truncateText } from '../../shared/util';
 import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logAPI';
@@ -18,11 +18,11 @@ type CollectedHistories = {
 
 const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }) => {
   if (histories.length === 0) {
-    return <div className="m-3">紐付けられる履歴情報はありません</div>;
+    return <></>;
   } else if (histories.length < 3) {
     return (
       <div className="m-3">
-        <WarningText>{WARNING_MESSAGE}</WarningText>
+        <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
         {histories.map((history, idx) => (
           <HREFText
             key={idx}
@@ -40,13 +40,12 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
       </div>
     );
   } else {
-    // DO NOT use `.shift()`
     const primary = histories[0];
     const secondly = histories[1];
 
     return (
       <div className="m-3">
-        <WarningText>{WARNING_MESSAGE}</WarningText>
+        <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
         <HREFText
           title={primary.title}
           url={primary.url}
@@ -86,9 +85,9 @@ type Props = {
  * Return single search result component used in web search task.
  * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
  */
-export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
+export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
   return (
-    <MDBContainer className="py-3">
+    <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
       <a
         href={url}
         target="_blank"
@@ -101,10 +100,10 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
           });
         }}
       >
-        <URLText>{truncateText(url, 72)}</URLText>
-        <TitleText>{truncateText(title, 33)}</TitleText>
+        <URLText size="14px">{truncateText(url, 72)}</URLText>
+        <TitleText size="18px">{truncateText(title, 33)}</TitleText>
       </a>
-      <MDBTypography tag="p">{truncateText(snippet, 125)}</MDBTypography>
+      <SizedText size="14px">{truncateText(snippet, 125)}</SizedText>
       {linkedPages.length === 0 ? (
         <></>
       ) : (
@@ -112,7 +111,7 @@ export const PrivacyTaskSearchResult: React.FC<Props> = ({ title, snippet, url, 
           <CollectedPages histories={linkedPages} documentURL={url} />
         </div>
       )}
-    </MDBContainer>
+    </SearchResultContainer>
   );
 };
 
