@@ -23,6 +23,7 @@ export const hasIntersection = (arr1: string[], arr2: string[]): boolean => {
 };
 
 export const truncateText = (text: string, len: number): string => {
+  if (!text) return '';
   return text.length <= len ? text : text.substr(0, len) + '...';
 };
 
