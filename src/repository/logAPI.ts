@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BehaviorLog, DocumentClickLog, HistoryClickLog } from '../shared/types';
 
-const ENDPOINT = process.env.API_ENDPOINT || 'http://localhost:8000';
+const ENDPOINT = process.env.LOG_ENDPOINT || 'http://localhost:8000';
 
 export const sendBehaviorLog = async (behaviorLog: BehaviorLog) => {
   const response = await axios.post(`${ENDPOINT}/api/logs/behavior`, behaviorLog, {
