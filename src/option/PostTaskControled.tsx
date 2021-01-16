@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { dropAllDatabase } from '../repository/xrayedIDB';
-import { ComponentLoaderCenter } from './internal/ComponentLoader';
 
 export const PostTask: React.FC = () => {
-  const [isProcessing, setProcessing] = useState<boolean>(false);
-
   const uid = localStorage.getItem('uid');
 
   return (
@@ -26,34 +22,14 @@ export const PostTask: React.FC = () => {
       </MDBTypography>
       <a
         className="white-text"
-        href={`https://docs.google.com/forms/d/e/1FAIpQLSe-S36BVjkqZi-rNth3_lITdpMlhLXs3HRjcimf1RetXU8y4A/viewform?usp=pp_url&entry.183922479=${uid}`}
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSduKki4WZT5FUA_gWLqpmBbGsJSDk7tbDCa1ItXGfUjn1cYvQ/viewform?usp=pp_url&entry.183922479=${uid}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <MDBBtn color="primary" className="mb-5">
+        <MDBBtn color="primary" className="mb-5" onClick={() => dropAllDatabase()}>
           アンケートページへ
         </MDBBtn>
       </a>
-      <MDBTypography tag="p">
-        アンケートへの回答が終了しましたら、以下のボタンから実験に使用した履歴情報の削除を行ってください。
-      </MDBTypography>
-      <MDBBtn
-        color="primary"
-        className="mb-5"
-        onClick={async () => {
-          setProcessing(true);
-          try {
-            await dropAllDatabase();
-          } catch (error) {
-            console.log(error);
-          }
-          setProcessing(false);
-          toast('履歴情報の削除が完了しました。', { type: 'success' });
-        }}
-      >
-        {isProcessing ? <ComponentLoaderCenter /> : '履歴情報の削除'}
-      </MDBBtn>
-      <ToastContainer />
       <MDBTypography tag="p">
         実験は以上で終了となります。ご協力ありがとうございました。このタブを閉じ、本システムをアンインストールしてください。
       </MDBTypography>

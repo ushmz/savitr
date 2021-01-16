@@ -68,7 +68,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode development --env status=dev --config webpack.config.js",
     "build:dev": "webpack --mode development --env status=dev --config webpack.config.js",
-    "build:prod": "webpack --env status=prod --config webpack.config.js"
+    "build:prod": "webpack --env status=prod --config webpack.config.js",
+    "build:control:dev": "webpack --mode development --env status=dev --config webpack.controled.config.js",
+    "build:control:prod": "webpack --env status=prod --config webpack.controled.config.js"
   },
   "repository": {
     "type": "git",
