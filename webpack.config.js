@@ -40,7 +40,7 @@ module.exports = (env) => {
         popup: './src/popup/index.tsx',
         option: [
           './src/option/Attention.tsx', 
-          './src/option/Introduction.tsx',
+          './src/option/Introduction/index.tsx',
           './src/option/PostTask.tsx',
           './src/option/PreTask.tsx',
           './src/option/Task/index.tsx',
@@ -92,9 +92,14 @@ module.exports = (env) => {
               to: path.join(distRoot, 'img')
             },
             {
-              context: 'db/serp/',
+              context: 'db/serp/webcam',
               from: '*.csv',
-              to: path.join(distRoot, 'init', 'serp')
+              to: path.join(distRoot, 'init', 'serp', 'webcam')
+            },
+            {
+              context: 'db/serp/tounyou',
+              from: '*.csv',
+              to: path.join(distRoot, 'init', 'serp', 'tounyou')
             }
           ]
         }),

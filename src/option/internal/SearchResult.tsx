@@ -14,9 +14,11 @@ type CollectedHistory = {
 type CollectedHistories = {
   histories: CollectedHistory[];
   documentURL: string;
+  getTimeOnPage: () => number;
+  taskName: string;
 };
 
-const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }) => {
+const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, getTimeOnPage, taskName }) => {
   if (histories.length === 0) {
     return <></>;
   } else if (histories.length < 3) {
@@ -31,8 +33,11 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
             onClick={() =>
               sendHistoryClickLog({
                 uid: chrome.runtime.id,
+                taskName: taskName,
+                timeOnPage: getTimeOnPage(),
                 linkedDocumentUrl: documentURL,
                 linkedPageNum: histories.length,
+                collapse: false,
               })
             }
           />
@@ -52,8 +57,11 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
           onClick={() =>
             sendHistoryClickLog({
               uid: chrome.runtime.id,
+              taskName: taskName,
+              timeOnPage: getTimeOnPage(),
               linkedDocumentUrl: documentURL,
               linkedPageNum: histories.length,
+              collapse: false,
             })
           }
         />
@@ -63,12 +71,20 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL }
           onClick={() =>
             sendHistoryClickLog({
               uid: chrome.runtime.id,
+              taskName: taskName,
+              timeOnPage: getTimeOnPage(),
               linkedDocumentUrl: documentURL,
               linkedPageNum: histories.length,
+              collapse: false,
             })
           }
         />
-        <CollapseMenu items={histories.slice(2)} documentURL={documentURL} />
+        <CollapseMenu
+          items={histories.slice(2)}
+          documentURL={documentURL}
+          getTimeOnPage={getTimeOnPage}
+          taskName={taskName}
+        />
       </div>
     );
   }
@@ -79,13 +95,15 @@ type Props = {
   url: string;
   snippet: string;
   linkedPages: { title: string; url: string }[];
+  getTimeOnPage: () => number;
+  taskName: string;
 };
 
 /**
  * Return single search result component used in web search task.
  * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
  */
-export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages }) => {
+export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages, getTimeOnPage, taskName }) => {
   return (
     <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
       <a
@@ -95,6 +113,8 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
         onClick={() => {
           sendDocumentClickLog({
             uid: chrome.runtime.id,
+            taskName: taskName,
+            timeOnPage: getTimeOnPage(),
             pageUrl: url,
             linkedPageNum: linkedPages.length,
           });
@@ -103,12 +123,12 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
         <URLText size="14px">{truncateText(url, 72)}</URLText>
         <TitleText size="18px">{truncateText(title, 33)}</TitleText>
       </a>
-      <SizedText size="14px">{truncateText(snippet, 125)}</SizedText>
+      <SizedText size="14px">{truncateText(snippet || '', 125)}</SizedText>
       {linkedPages.length === 0 ? (
         <></>
       ) : (
         <div className="border border-dark m-3 rounded-lg">
-          <CollectedPages histories={linkedPages} documentURL={url} />
+          <CollectedPages histories={linkedPages} documentURL={url} getTimeOnPage={getTimeOnPage} taskName={taskName} />
         </div>
       )}
     </SearchResultContainer>
@@ -118,6 +138,8 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
 type CollapseProps = {
   items: { title: string; url: string }[];
   documentURL: string;
+  getTimeOnPage: () => number;
+  taskName: string;
 };
 
 /**
@@ -125,10 +147,18 @@ type CollapseProps = {
  * This component is too optimized for this search result,
  * so I don't separate this as (shared) component.
  */
-const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL }) => {
+const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL, getTimeOnPage, taskName }) => {
   const [collapsedID, setCollapsedID] = React.useState<string>('');
 
   const toggleCollapse = (collapseID: string) => () => {
+    sendHistoryClickLog({
+      uid: localStorage.getItem('uid') || '',
+      taskName: taskName,
+      timeOnPage: getTimeOnPage(),
+      linkedDocumentUrl: documentURL,
+      linkedPageNum: items.length + 2,
+      collapse: true,
+    });
     setCollapsedID((prevState) => {
       return prevState !== collapseID ? collapseID : '';
     });
@@ -146,8 +176,11 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL }) => {
               onClick={() =>
                 sendHistoryClickLog({
                   uid: chrome.runtime.id,
+                  taskName: taskName,
+                  timeOnPage: getTimeOnPage(),
                   linkedDocumentUrl: documentURL,
                   linkedPageNum: items.length + 2,
+                  collapse: false,
                 })
               }
             />

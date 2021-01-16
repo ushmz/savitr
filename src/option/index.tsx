@@ -7,9 +7,11 @@ import ReactDOM from 'react-dom';
 import { Attention } from './Attention';
 import { Introduction } from './Introduction';
 import { PreTask } from './PreTask';
-import { Task } from './Task';
+import { Task as PrimaryTask } from './Task';
+import { Task as SecondaryTask } from './Task2';
 import { PostTask } from './PostTask';
 import { Pages } from '../shared/types';
+import { Header } from './internal/Header';
 
 const Option = () => {
   const [page, setPage] = useState<Pages>('Attention');
@@ -18,12 +20,16 @@ const Option = () => {
     switch (page) {
       case 'Attention':
         return <Attention setPage={setPage} />;
-      case 'Introduntion':
-        return <Introduction setPage={setPage} />;
+      case 'Introduction1':
+        return <Introduction taskNum={1} setPage={setPage} />;
+      case 'Introduction2':
+        return <Introduction taskNum={2} setPage={setPage} />;
       case 'PreTask':
         return <PreTask setPage={setPage} />;
-      case 'Task':
-        return <Task setPage={setPage} />;
+      case 'Task1':
+        return <PrimaryTask taskName="webcam" setPage={setPage} />;
+      case 'Task2':
+        return <SecondaryTask taskName="tounyou" setPage={setPage} />;
       case 'PostTask':
         return <PostTask />;
       default:

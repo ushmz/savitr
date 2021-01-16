@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
-import { PrimaryTask as Component } from './Task';
+import { SecondaryTask as Component } from './SecondaryTask';
 import { sendBehaviorLog } from '../../repository/logAPI';
 import { getCollectedHistory } from '../../repository/historyIDB';
 import { getAllPageIn } from '../../repository/serpIDB';
 import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
-import { HistoryTable, Pages, SERPElement, SetPageProp } from '../../shared/types';
+import { HistoryTable, Pages, SERPElement } from '../../shared/types';
 import { shuffle } from '../../shared/util';
 
 type SerpPage = {
@@ -76,14 +76,15 @@ export const Task: React.FC<TasProps> = ({ taskName, setPage }) => {
     const riskyPages = allSerpPages.filter((p) => p.linkedPages.length !== 0) || [];
     const saftyPages = allSerpPages.filter((p) => p.linkedPages.length === 0) || [];
 
-    const showSerpPages: SerpPage[] = [];
+    // const showSerpPages: SerpPage[] = [];
     if (saftyPages.length >= 10) {
-      const riskyPageSample = shuffle(riskyPages).slice(0, saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
-      setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
+      const riskyPageSample = shuffle(riskyPages).slice(0, 10);
+      const safetyPageSample = shuffle(saftyPages).slice(0, 10);
+      // showSerpPages.concat(riskyPageSample, safetyPageSample);
+      setSerpPages(shuffle(riskyPageSample.concat(safetyPageSample)));
     } else {
       const riskyPageSample = shuffle(riskyPages).slice(0, 20 - saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
+      // showSerpPages.concat(riskyPageSample, saftyPages);
       setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
     }
     setLoading(false);
