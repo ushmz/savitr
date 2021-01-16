@@ -5,7 +5,7 @@ const allItems: Array<chrome.history.HistoryItem> = [];
 const itemIdToIndex: { [key: string]: unknown } = {};
 
 function getMoreHistory(callback: Function) {
-  const params: HistoryAPIParams = { text: '', maxResults: 500 };
+  const params: HistoryAPIParams = { text: '', maxResults: 50 };
   params.startTime = 0;
   if (nextEndTimeToUse && nextEndTimeToUse > 0) params.endTime = nextEndTimeToUse;
 
