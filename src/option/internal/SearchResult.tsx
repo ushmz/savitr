@@ -112,7 +112,7 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
         rel="noopener noreferrer"
         onClick={() => {
           sendDocumentClickLog({
-            uid: chrome.runtime.id,
+            uid: localStorage.getItem('uid') || '',
             taskName: taskName,
             timeOnPage: getTimeOnPage(),
             pageUrl: url,
@@ -175,7 +175,7 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL, getTimeOnPa
               url={page.url}
               onClick={() =>
                 sendHistoryClickLog({
-                  uid: chrome.runtime.id,
+                  uid: localStorage.getItem('uid') || '',
                   taskName: taskName,
                   timeOnPage: getTimeOnPage(),
                   linkedDocumentUrl: documentURL,
