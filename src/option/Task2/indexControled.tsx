@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
-import { PrimaryTask as Component } from './Task';
+import { SecondaryTask as Component } from './SecondaryTaskControled';
 import { sendBehaviorLog } from '../../repository/logAPI';
-import { getCollectedHistory } from '../../repository/historyIDB';
 import { getAllPageIn } from '../../repository/serpIDB';
 import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
-import { HistoryTable, Pages, SERPElement, SetPageProp } from '../../shared/types';
+import { HistoryTable, Pages, SERPElement } from '../../shared/types';
 import { shuffle } from '../../shared/util';
 
 type SerpPage = {
@@ -52,13 +51,12 @@ export const Task: React.FC<TasProps> = ({ taskName, setPage }) => {
         const pageId = await getPageId(taskName, page.start_uri);
         const cookieIds = await getCookieIds(taskName, pageId);
         const cookieDomains = await getCookieDomains(taskName, cookieIds);
-        const linkedPages = await getCollectedHistory(cookieDomains);
         return {
           title: page.title,
           snippet: page.snippet,
           url: page.start_uri,
           cookies: cookieDomains,
-          linkedPages: shuffle(linkedPages),
+          linkedPages: [],
         };
       } catch (error) {
         return {
@@ -73,19 +71,7 @@ export const Task: React.FC<TasProps> = ({ taskName, setPage }) => {
 
     window.scrollTo(0, 0);
     const allSerpPages = (await Promise.all(serpElements)) as SerpPage[];
-    const riskyPages = allSerpPages.filter((p) => p.linkedPages.length !== 0) || [];
-    const saftyPages = allSerpPages.filter((p) => p.linkedPages.length === 0) || [];
-
-    const showSerpPages: SerpPage[] = [];
-    if (saftyPages.length >= 10) {
-      const riskyPageSample = shuffle(riskyPages).slice(0, saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
-      setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
-    } else {
-      const riskyPageSample = shuffle(riskyPages).slice(0, 20 - saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
-      setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
-    }
+    setSerpPages(shuffle(allSerpPages).slice(0, 20));
     setLoading(false);
   };
 

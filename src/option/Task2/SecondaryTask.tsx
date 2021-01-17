@@ -6,7 +6,6 @@ import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoaderCenter } from '../internal/ComponentLoader';
 import { ConfirmPopup } from '../internal/ConfirmPopup';
 import { SizedText } from '../internal/AdjustedComponents';
-import { Task } from '.';
 
 type Props = {
   isLoading: boolean;
@@ -16,13 +15,13 @@ type Props = {
   taskName: string;
 };
 
-export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOnPage, taskName }) => {
+export const SecondaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOnPage, taskName }) => {
   const [isOpen, toggle] = useState<boolean>(false);
 
   return (
     <>
       <MDBRow>
-        <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
+        <SearchHeader title="Custom Search" placeholder="糖尿病 症状"></SearchHeader>
       </MDBRow>
       <MDBRow className="pt-5">
         {isLoading ? (
@@ -49,8 +48,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                 <MDBCardBody>
                   <MDBCardTitle>タスク内容</MDBCardTitle>
                   <SizedText size="14px">
-                    リモートでのやり取りが増えたので、ウェブカメラの購入を考えています。
-                    次に表示される検索結果から、自分が購入したいウェブカメラを選択してください。
+                    「すぐに喉が渇く」「動悸・息切れ」などの症状は糖尿病に該当するか調べてください。
                   </SizedText>
                   <MDBTypography tag="ul">
                     <li>
@@ -63,7 +61,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                     </li>
                     <li>
                       <SizedText size="13px">
-                        検索タスクの終了時には「購入したいと思った商品名」「決め手となった理由」の2点をお尋ねします。
+                        検索タスクの終了時には「糖尿病に該当するかどうか」「決め手となった理由」の2点をお尋ねします。
                       </SizedText>
                     </li>
                     <li>
@@ -73,7 +71,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                   <MDBBtn onClick={() => toggle(!isOpen)}>回答する</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
-              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} setPage={setPage} goto="Introduction2" />
+              <ConfirmPopup answer="糖尿病かどうか" isOpen={isOpen} toggle={toggle} setPage={setPage} goto="PostTask" />
             </div>
           </>
         )}

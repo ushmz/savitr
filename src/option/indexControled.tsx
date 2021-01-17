@@ -4,12 +4,12 @@ import 'mdbreact/dist/css/mdb.css';
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Attention } from './Attention';
-import { Introduction } from './Introduction';
+import { Attention } from './AttentionControled';
+import { Introduction } from './IntroductionControled';
 import { PreTask } from './PreTask';
-import { Task as PrimaryTask } from './Task';
-import { Task as SecondaryTask } from './Task2';
-import { PostTask } from './PostTask';
+import { Task as PrimaryTask } from './Task/indexControled';
+import { Task as SecondaryTask } from './Task2/indexControled';
+import { PostTask } from './PostTaskControled';
 import { Pages } from '../shared/types';
 import { Header } from './internal/Header';
 

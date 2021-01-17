@@ -8,10 +8,8 @@ import styled from 'styled-components';
  * Root component of search results.
  * Adjust position and size here.
  */
-export const SearchContainer = styled.div`
+export const SearchResultContainer = styled.div`
   width: 720px;
-  padding-top: 60px;
-  padding-bottom: 20px;
 `;
 
 /**
@@ -19,7 +17,6 @@ export const SearchContainer = styled.div`
  * Adjust position and size here.
  */
 export const RootContainer = styled.div`
-  margin: auto;
   padding-top: 60px;
   padding-bottom: 20px;
 `;
@@ -54,9 +51,16 @@ export const Moveddiv = styled.div`
  *****************************************/
 
 /**
+ * Recieve font size as prop, return text element as <p>
+ */
+export const SizedText = styled.p<{ size: string }>`
+  font-size: ${(props) => props.size};
+`;
+
+/**
  * Colored text like Google search results' URL text.
  */
-export const HyperLinkText = styled.p`
+export const HyperLinkText = styled(SizedText)`
   color: #339d39;
 `;
 
@@ -64,10 +68,9 @@ export const HyperLinkText = styled.p`
  * Colored text like Google search results' title text.
  * Adjust position and size here.
  */
-export const TitleText = styled.p`
+export const TitleText = styled(SizedText)`
   color: #3132a9;
   font-weight: bold;
-  font-size: 20px;
 `;
 
 /**
@@ -75,7 +78,8 @@ export const TitleText = styled.p`
  * This is asjusted for SERP(`SearchResult.tsx`) usage.
  * Expecting margin property, this is same to `HyperLinkText`.
  */
-export const URLText = styled.p`
+
+export const URLText = styled(SizedText)`
   color: #339d39;
   margin-bottom: 3px;
 `;
@@ -84,9 +88,8 @@ export const URLText = styled.p`
  * Colored text for warning messages.
  * Adjust position and size here.
  */
-export const WarningText = styled.p`
+export const WarningText = styled(SizedText)`
   background: #ff9999;
-  font-size: 20px;
 `;
 
 /**

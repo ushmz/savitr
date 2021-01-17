@@ -32,19 +32,19 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env) => {
   const envFile = env ? `.env.${env.status}` : '.env.dev';
-  const distRoot = path.resolve(__dirname, 'dist', `savitr-${env.status}`);
+  const distRoot = path.resolve(__dirname, 'dist', `savitr-controled-${env.status}`);
 
   return [
     {
       entry: {
         popup: './src/popup/index.tsx',
         option: [
-          './src/option/Attention.tsx', 
-          './src/option/Introduction/index.tsx',
-          './src/option/PostTask.tsx',
+          './src/option/AttentionControled.tsx', 
+          './src/option/IntroductionControled/index.tsx',
+          './src/option/PostTaskControled.tsx',
           './src/option/PreTask.tsx',
-          './src/option/Task/index.tsx',
-          './src/option/index.tsx'
+          './src/option/Task/indexControled.tsx',
+          './src/option/indexControled.tsx'
         ],
         background: './src/background/RuntimeMessageListener.ts'
       },

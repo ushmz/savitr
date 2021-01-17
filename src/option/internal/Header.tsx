@@ -20,8 +20,13 @@ export const Header: React.FC<Props> = ({ title, setPage }) => {
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div className="white-text mx-2" onClick={() => setPage('Introduntion')}>
-            タスク説明
+          <div className="white-text mx-2" onClick={() => setPage('Introduction1')}>
+            タスク説明1
+          </div>
+        </MDBNavItem>
+        <MDBNavItem active>
+          <div className="white-text mx-2" onClick={() => setPage('Introduction2')}>
+            タスク説明2
           </div>
         </MDBNavItem>
         <MDBNavItem active>
@@ -30,13 +35,18 @@ export const Header: React.FC<Props> = ({ title, setPage }) => {
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div className="white-text mx-2" onClick={() => setPage('PostTask')}>
-            事後アンケート
+          <div className="white-text mx-2" onClick={() => setPage('Task1')}>
+            タスク1開始
           </div>
         </MDBNavItem>
         <MDBNavItem active>
-          <div className="white-text mx-2" onClick={() => setPage('Task')}>
-            タスク開始
+          <div className="white-text mx-2" onClick={() => setPage('Task2')}>
+            タスク2開始
+          </div>
+        </MDBNavItem>
+        <MDBNavItem active>
+          <div className="white-text mx-2" onClick={() => setPage('PostTask')}>
+            事後アンケート
           </div>
         </MDBNavItem>
       </MDBNavbarNav>

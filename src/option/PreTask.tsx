@@ -34,7 +34,7 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
       <MDBTypography tag="p">
         アンケートへの回答が終了しましたら、以下のボタンから「タスク説明」ページへ進んでください。
       </MDBTypography>
-      <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`} onClick={() => setPage('Introduntion')}>
+      <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`} onClick={() => setPage('Introduction1')}>
         タスク説明へ
       </MDBBtn>
     </MDBContainer>

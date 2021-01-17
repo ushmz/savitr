@@ -92,10 +92,12 @@ export async function initializeHistoryByAPI(): Promise<void> {
       historyOS.clear();
       console.log('History Table Initialized.');
 
+      let n = 0;
       const histories = await getAllHistoriesAsync(30);
       histories.forEach(async (history: chrome.history.HistoryItem) => {
         try {
           if (!history.url) throw Error;
+          if (n > 30) throw Error;
 
           const cookies = await analyse3pCookies(history.url);
           const historyData: HistoryTable = {
@@ -109,6 +111,7 @@ export async function initializeHistoryByAPI(): Promise<void> {
             const historyStore: IDBObjectStore = itx.objectStore('history');
             historyStore.add(historyData);
           }
+          n++;
         } catch (error) {
           // Do nothing intentionally. (Pass the URL)
         }

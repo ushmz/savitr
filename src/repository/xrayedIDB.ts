@@ -111,7 +111,7 @@ export async function dropAllDatabase(): Promise<void> {
   });
 }
 
-export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<string> {
+export async function getPageId(table: string, url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     url = decodeURI(url);
     let targetNoArgs: string;
@@ -156,7 +156,7 @@ export async function getPageId(table: 'xrayed' | 'serp', url: string): Promise<
   });
 }
 
-export async function getCookieIds(table: 'xrayed' | 'serp', pageId: string): Promise<string[]> {
+export async function getCookieIds(table: string, pageId: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     if (!pageId) reject();
     const openReq: IDBOpenDBRequest = indexedDB.open(table, 1);
@@ -194,7 +194,7 @@ export async function getCookieIds(table: 'xrayed' | 'serp', pageId: string): Pr
   });
 }
 
-export async function getCookie(table: 'xrayed' | 'serp', cookieId: string): Promise<CookieIDBTable> {
+export async function getCookie(table: string, cookieId: string): Promise<CookieIDBTable> {
   return new Promise((resolve, reject) => {
     if (!cookieId) reject();
     const openReq: IDBOpenDBRequest = indexedDB.open(table, 1);
@@ -233,7 +233,7 @@ export async function getCookies(table: 'xrayed' | 'serp', cookieIds: string[]):
   return cookies;
 }
 
-export async function getCookieDomain(table: 'xrayed' | 'serp', cookieId: string): Promise<string> {
+export async function getCookieDomain(table: string, cookieId: string): Promise<string> {
   return new Promise((resolve, reject) => {
     if (!cookieId) reject();
     const openReq: IDBOpenDBRequest = indexedDB.open(table, 1);
@@ -247,8 +247,9 @@ export async function getCookieDomain(table: 'xrayed' | 'serp', cookieId: string
       const tx: IDBTransaction = db.transaction('cookie', 'readonly');
 
       const cookieOS: IDBObjectStore = tx.objectStore('cookie');
-      const request: IDBRequest = cookieOS.get(parseInt(cookieId));
+      const request: IDBRequest = cookieOS.get(cookieId);
       request.onsuccess = () => {
+        console.log(table, cookieId, request.result);
         resolve(request.result.domain);
       };
 
@@ -263,7 +264,7 @@ export async function getCookieDomain(table: 'xrayed' | 'serp', cookieId: string
   });
 }
 
-export async function getCookieDomains(table: 'xrayed' | 'serp', cookieIds: string[]): Promise<string[]> {
+export async function getCookieDomains(table: string, cookieIds: string[]): Promise<string[]> {
   const cookies = [];
   for (const cookieId of cookieIds) {
     const cookie = await getCookieDomain(table, cookieId);

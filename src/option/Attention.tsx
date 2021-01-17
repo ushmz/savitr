@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBTypography } from 'mdbreact';
 import { toast, ToastContainer } from 'react-toastify';
 import { ComponentLoader } from './internal/ComponentLoader';
-import { initializeHistory, initializeHistoryByAPI } from '../repository/historyIDB';
-import { initializeSearchResults } from '../repository/serpIDB';
-import { initializeXrayed } from '../repository/xrayedIDB';
+import { initializeHistoryByAPI } from '../repository/historyIDB';
+import { initializeSERP } from '../repository/serpIDB';
 import { SetPageProp } from '../shared/types';
 
 export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
@@ -59,23 +58,19 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
           color="primary"
           onClick={async () => {
             setProcessing(true);
-            // Use analyze API for each history.
-            await initializeHistoryByAPI().then(async () => await initializeSearchResults());
+            // Use analyze API and multiple tasks.
+            await initializeHistoryByAPI()
+              .then(async () => await initializeSERP('webcam', 'webcam'))
+              .then(async () => await initializeSERP('tounyou', 'tounyou'));
+
+            // Initialize only SERP data for controled group.
+            await initializeSERP('webcam', 'webcam').then(async () => await initializeSERP('tounyou', 'tounyou'));
+
             setTimeout(() => {
               setReady(true);
               setProcessing(false);
               toast('履歴情報の作成が完了しました。', { type: 'success' });
             }, 90000);
-
-            // Use domain base initialize.
-            // await initializeXrayedDomainBase()
-            //   .then(async () => initializeHistoryDomainBase())
-            //   .then(async () => initializeSearchResults());
-
-            // Use black-list initialize.
-            // await initializeXrayed()
-            //   .then(() => initializeHistory())
-            //   .then(() => initializeSearchResults());
           }}
         >
           {isProcessing ? <ComponentLoader /> : '履歴情報の作成'}

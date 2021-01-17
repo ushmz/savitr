@@ -1,4 +1,4 @@
-export type Pages = 'Attention' | 'Introduntion' | 'PreTask' | 'Task' | 'PostTask';
+export type Pages = 'Attention' | 'Introduction1' | 'Introduction2' | 'PreTask' | 'Task1' | 'Task2' | 'PostTask';
 
 export interface RuntimeRequest<T> {
   method: string;
@@ -86,6 +86,7 @@ export type HistoryTable = {
 
 export type BehaviorLog = {
   uid: string;
+  taskName: string;
   timeOnPage: number;
   currentPage: number;
   positionOnPage: number;
@@ -93,12 +94,17 @@ export type BehaviorLog = {
 
 export type DocumentClickLog = {
   uid: string;
+  taskName: string;
+  timeOnPage: number;
   pageUrl: string;
   linkedPageNum: number;
 };
 
 export type HistoryClickLog = {
   uid: string;
+  taskName: string;
+  timeOnPage: number;
   linkedDocumentUrl: string;
   linkedPageNum: number;
+  collapse: boolean;
 };

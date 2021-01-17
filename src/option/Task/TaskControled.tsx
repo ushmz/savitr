@@ -6,7 +6,6 @@ import { SearchHeader } from '../internal/SearchBar';
 import { ComponentLoaderCenter } from '../internal/ComponentLoader';
 import { ConfirmPopup } from '../internal/ConfirmPopup';
 import { SizedText } from '../internal/AdjustedComponents';
-import { Task } from '.';
 
 type Props = {
   isLoading: boolean;
@@ -29,7 +28,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
           <ComponentLoaderCenter />
         ) : (
           <>
-            <div className="pl-5 pt-3 ml-5">
+            <div className="pl-5 pt-5 ml-5">
               {serpPages.map((page, idx) => {
                 return (
                   <SearchResult
@@ -37,7 +36,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                     title={page.title}
                     snippet={page.snippet}
                     url={page.url}
-                    linkedPages={page.linkedPages}
+                    linkedPages={[]}
                     getTimeOnPage={getTimeOnPage}
                     taskName={taskName}
                   />
