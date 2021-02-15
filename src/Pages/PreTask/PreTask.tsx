@@ -1,6 +1,6 @@
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
-import { SetPageProp } from '../shared/types';
+import { SetPageProp } from '../../shared/types';
 
 export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
   const [clicked, isClicked] = useState<boolean>(false);
@@ -23,6 +23,7 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
       </MDBTypography>
       <a
         className="white-text"
+        // Or import from `src/shared/config.ts`
         href={`https://docs.google.com/forms/d/e/1FAIpQLSfhI4bdPXmMI1ojima5_EXJfvNVBNKzHe92gJsUZevOOc223g/viewform?usp=pp_url&entry.1200052101=${uid}`}
         target="_blank"
         rel="noopener noreferrer"

@@ -2,9 +2,9 @@ import React from 'react';
 import { MDBBtn, MDBCollapse, MDBIcon } from 'mdbreact';
 import { WarningText, URLText, TitleText, SearchResultContainer, SizedText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
-import { truncateText } from '../../shared/util';
-import { sendDocumentClickLog, sendHistoryClickLog } from '../../repository/logAPI';
-import { WARNING_MESSAGE } from '../../shared/consts';
+import { truncateText } from '../shared/util';
+import { sendDocumentClickLog, sendHistoryClickLog } from '../repository/logAPI';
+import { WARNING_MESSAGE } from '../shared/consts';
 
 type CollectedHistory = {
   title: string;
@@ -32,7 +32,7 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
             url={history.url}
             onClick={() =>
               sendHistoryClickLog({
-                uid: chrome.runtime.id,
+                uid: localStorage.getItem('uid') || '',
                 taskName: taskName,
                 timeOnPage: getTimeOnPage(),
                 linkedDocumentUrl: documentURL,

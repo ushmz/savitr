@@ -1,34 +1,41 @@
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBRow, MDBTypography } from 'mdbreact';
 import React, { useState } from 'react';
 import { Pages, SERPElement } from '../../shared/types';
-import { SearchResult } from '../internal/SearchResult';
-import { SearchHeader } from '../internal/SearchBar';
-import { ComponentLoaderCenter } from '../internal/ComponentLoader';
-import { ConfirmPopup } from '../internal/ConfirmPopup';
-import { SizedText } from '../internal/AdjustedComponents';
+import { SearchResult } from '../../Components/SearchResult';
+import { SearchHeader } from '../../Components/SearchBar';
+import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
+import { ConfirmPopup } from '../../Components/ConfirmPopup';
+import { SizedText } from '../../Components/AdjustedComponents';
 
 type Props = {
   isLoading: boolean;
   setPage: React.Dispatch<React.SetStateAction<Pages>>;
   serpPages: SERPElement[];
   getTimeOnPage: () => number;
-  taskName: string;
+  task: {
+    id: number;
+    slug: string;
+    task: string;
+    requiements: string[];
+    placeholder: string;
+  };
 };
 
-export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOnPage, taskName }) => {
+// TODO: User react-router
+export const Task: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOnPage, task }) => {
   const [isOpen, toggle] = useState<boolean>(false);
 
   return (
     <>
       <MDBRow>
-        <SearchHeader title="Custom Search" placeholder="ウェブカメラ おすすめ"></SearchHeader>
+        <SearchHeader title="Custom Search" placeholder={task.placeholder}></SearchHeader>
       </MDBRow>
       <MDBRow className="pt-5">
         {isLoading ? (
           <ComponentLoaderCenter />
         ) : (
           <>
-            <div className="pl-5 pt-5 ml-5">
+            <div className="pl-5 pt-3 ml-5">
               {serpPages.map((page, idx) => {
                 return (
                   <SearchResult
@@ -36,9 +43,9 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                     title={page.title}
                     snippet={page.snippet}
                     url={page.url}
-                    linkedPages={[]}
+                    linkedPages={page.linkedPages}
                     getTimeOnPage={getTimeOnPage}
-                    taskName={taskName}
+                    taskName={task.slug}
                   />
                 );
               })}
@@ -47,10 +54,7 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
               <MDBCard className="position-fixed border border-dark m-3 rounded-lg" style={{ width: '400px' }}>
                 <MDBCardBody>
                   <MDBCardTitle>タスク内容</MDBCardTitle>
-                  <SizedText size="14px">
-                    リモートでのやり取りが増えたので、ウェブカメラの購入を考えています。
-                    次に表示される検索結果から、自分が購入したいウェブカメラを選択してください。
-                  </SizedText>
+                  <SizedText size="14px">{task.task}</SizedText>
                   <MDBTypography tag="ul">
                     <li>
                       <SizedText size="13px">検索クエリは変更できません。</SizedText>
@@ -62,7 +66,12 @@ export const PrimaryTask: React.FC<Props> = ({ isLoading, setPage, serpPages, ge
                     </li>
                     <li>
                       <SizedText size="13px">
-                        検索タスクの終了時には「購入したいと思った商品名」「決め手となった理由」の2点をお尋ねします。
+                        検索タスクの終了時には
+                        {task.requiements.map((r) => {
+                          // eslint-disable-next-line react/jsx-key
+                          return <strong className="font-weight-bold">{`「${r}」`}</strong>;
+                        })}
+                        の{task.requiements.length}点を お尋ねします。
                       </SizedText>
                     </li>
                     <li>

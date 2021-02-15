@@ -1,6 +1,6 @@
 import { MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import React, { useState } from 'react';
-import { Pages } from 'shared/types';
+import { Pages } from '../shared/types';
 
 type Props = {
   answer: string;
@@ -10,6 +10,7 @@ type Props = {
   goto: Pages;
 };
 
+// TODO: Send answers to log server
 export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, setPage, goto }) => {
   const [name, setName] = useState<string>('');
   const [reason, setReason] = useState<string>('');

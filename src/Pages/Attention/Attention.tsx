@@ -1,15 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MDBContainer, MDBBtn, MDBTypography } from 'mdbreact';
-import { toast, ToastContainer } from 'react-toastify';
-import { ComponentLoader } from './internal/ComponentLoader';
-import { initializeHistoryByAPI } from '../repository/historyIDB';
-import { initializeSERP } from '../repository/serpIDB';
-import { SetPageProp } from '../shared/types';
 
-export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
-  const [isReady, setReady] = useState<boolean>(false);
-  const [isProcessing, setProcessing] = useState<boolean>(false);
-
+export const Attention: React.FC = () => {
   return (
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">はじめに</MDBTypography>
@@ -28,8 +20,8 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
         <li className="my-3">
           本実験ではあなたのブラウザに保存された閲覧履歴データ（以下、ブラウザ履歴）にアクセスし、
           一部変更を加えた上でブラウザ内の一時的にアクセス可能な場所に保存します。本システムは
-          一時的に保存された情報（以下、履歴情報）を用いてタスクを生成します。本システムはあなたのブラウザ履歴、及び履歴情報に対し、
-          <strong className="font-weight-bold">一切の収集行動を行いません。</strong>
+          一時的に保存された情報（以下、履歴情報）を用いてタスクを生成します。本システムはあなたのブラウザ履歴、及び履歴情報を、
+          <strong className="font-weight-bold">学術研究目的以外の用途で使用致しません。</strong>
         </li>
         <li className="my-3">
           タスクの実行中、結果の分析のため、以下の情報を収集させていただきます。なお、以下の情報によっていかなる個人の特定も行われることはありません。
@@ -51,36 +43,16 @@ export const Attention: React.FC<SetPageProp> = ({ setPage }) => {
         </li>
       </MDBTypography>
       <MDBTypography tag="p">
-        上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報を作成してください。（PCに負荷がかかる場合があります。）
+        上記の注意事項を確認し、実験にご協力して頂ける場合は、以下のボタンから実験用の履歴情報をアップロードしてください。
       </MDBTypography>
       <div className="mx-auto my-3">
         <MDBBtn
           color="primary"
-          onClick={async () => {
-            setProcessing(true);
-            // Use analyze API and multiple tasks.
-            await initializeHistoryByAPI()
-              .then(async () => await initializeSERP('webcam', 'webcam'))
-              .then(async () => await initializeSERP('tounyou', 'tounyou'));
-
-            // Initialize only SERP data for controled group.
-            await initializeSERP('webcam', 'webcam').then(async () => await initializeSERP('tounyou', 'tounyou'));
-
-            setTimeout(() => {
-              setReady(true);
-              setProcessing(false);
-              toast('履歴情報の作成が完了しました。', { type: 'success' });
-            }, 90000);
-          }}
+          // onClick={}
         >
-          {isProcessing ? <ComponentLoader /> : '履歴情報の作成'}
+          履歴情報のアップロード
         </MDBBtn>
-        <ToastContainer />
       </div>
-      <MDBTypography tag="p">履歴情報の作成が完了しましたら、「事前アンケート」ページへ進んでください。</MDBTypography>
-      <MDBBtn color="primary" className={`float-right ${isReady ? '' : 'disabled'}`} onClick={() => setPage('PreTask')}>
-        「事前アンケート」へ
-      </MDBBtn>
     </MDBContainer>
   );
 };

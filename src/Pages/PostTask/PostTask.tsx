@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
-import 'react-toastify/dist/ReactToastify.css';
-import { dropAllDatabase } from '../repository/xrayedIDB';
 
 export const PostTask: React.FC = () => {
   const uid = localStorage.getItem('uid');
@@ -22,17 +20,16 @@ export const PostTask: React.FC = () => {
       </MDBTypography>
       <a
         className="white-text"
-        href={`https://docs.google.com/forms/d/e/1FAIpQLSduKki4WZT5FUA_gWLqpmBbGsJSDk7tbDCa1ItXGfUjn1cYvQ/viewform?usp=pp_url&entry.183922479=${uid}`}
+        // Or import from `src/shared/config.ts`
+        href={`https://docs.google.com/forms/d/e/1FAIpQLSe-S36BVjkqZi-rNth3_lITdpMlhLXs3HRjcimf1RetXU8y4A/viewform?usp=pp_url&entry.183922479=${uid}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <MDBBtn color="primary" className="mb-5" onClick={() => dropAllDatabase()}>
+        <MDBBtn color="primary" className="mb-5">
           アンケートページへ
         </MDBBtn>
       </a>
-      <MDBTypography tag="p">
-        実験は以上で終了となります。ご協力ありがとうございました。このタブを閉じ、本システムをアンインストールしてください。
-      </MDBTypography>
+      <MDBTypography tag="p">実験は以上で終了となります。ご協力ありがとうございました。</MDBTypography>
     </MDBContainer>
   );
 };
