@@ -11,6 +11,7 @@ type Props = {
     slug: string;
     task: string;
     requiements: string[];
+    placeholder: string;
   };
 };
 
