@@ -1,8 +1,8 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Introduction as Component } from './Introduction';
-import tasks from '../../Assets/json/tasks.json';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import tasks from '../constants/tasks';
+import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 
 type Props = RouteComponentProps<{ taskid?: string }>;
 
