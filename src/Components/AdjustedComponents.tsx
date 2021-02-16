@@ -8,6 +8,14 @@ import styled from 'styled-components';
  * Root component of search results.
  * Adjust position and size here.
  */
+export const Toppage = styled.div`
+  width: 960px;
+`;
+
+/**
+ * Root component of search results.
+ * Adjust position and size here.
+ */
 export const SearchResultContainer = styled.div`
   width: 720px;
 `;
