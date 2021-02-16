@@ -4,21 +4,17 @@ import { useInterval } from 'use-interval';
 import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
 import { sendBehaviorLog } from '../../repository/logAPI';
-import { getCollectedHistory } from '../../repository/historyIDB';
-import { getAllPageIn } from '../../repository/serpIDB';
-import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
-import { HistoryTable, SERPElement } from '../../shared/types';
-import { shuffle } from '../../shared/util';
-import tasks from '../../Assets/json/tasks.json';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { SERPElement } from '../../shared/types';
+import tasks from '../constants/tasks';
+import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 
-type SerpPage = {
-  title: string;
-  snippet: string;
-  url: string;
-  cookies: string[];
-  linkedPages: HistoryTable[];
-};
+// type SerpPage = {
+//   title: string;
+//   snippet: string;
+//   url: string;
+//   cookies: string[];
+//   linkedPages: HistoryTable[];
+// };
 
 type Props = RouteComponentProps<{ taskid?: string }>;
 
@@ -47,6 +43,7 @@ export const Task: React.FC<Props> = (props) => {
   }, 1000);
 
   // TODO: Fix logic
+  /*
   const getSerp = async () => {
     if (!taskId) return;
 
@@ -93,9 +90,10 @@ export const Task: React.FC<Props> = (props) => {
     }
     setLoading(false);
   };
+  */
 
   useEffect(() => {
-    getSerp();
+    // getSerp();
   }, []);
 
   return taskId === '1' || taskId === '2' ? (
