@@ -7,6 +7,10 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import history from '../shared/browserHistory';
 import { Top } from '../Pages/Top';
+import { Signup } from '../Pages/Signup';
+import { Signin } from '../Pages/Signin';
+import { User } from '../Pages/User';
+import { Upload } from '../Pages/Upload';
 
 const Routes = () => {
   return (
@@ -17,6 +21,10 @@ const Routes = () => {
         <Route exact path="/pretask" component={PreTask}></Route>
         <Route exact path="/posttask" component={PostTask}></Route>
         <Route exact path="/task/:taskid" component={Task}></Route>
+        <Route exact path="/signin" component={Signin}></Route>
+        <Route exact path="/signup" component={Signup}></Route>
+        <Route exact path="/user/:username" component={User}></Route>
+        <Route exact path="/user/:username/upload" component={Upload}></Route>
         <Route exact path="/" component={Top}></Route>
         <Route path="*" component={Top} />
       </Switch>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Signin as Component } from './Signin';
 
-export const Top: React.FC = () => {
+export const Signin: React.FC = () => {
   return <Component />;
 };

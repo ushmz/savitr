@@ -27,7 +27,7 @@ export const Task: React.FC<Props> = (props) => {
   const getTimeOnPage = () => minutes * 60 + seconds;
 
   const taskId = props.match.params.taskid;
-  const taskName = taskId ? tasks[+taskId].slug : '';
+  const taskName = taskId ? tasks[+taskId - 1].slug : '';
   useInterval(async () => {
     const target = document.body;
     const position = target.getBoundingClientRect();
@@ -97,7 +97,7 @@ export const Task: React.FC<Props> = (props) => {
   }, []);
 
   return taskId === '1' || taskId === '2' ? (
-    <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={tasks[+taskId]} />
+    <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={tasks[+taskId - 1]} />
   ) : (
     <ComponentLoaderCenter />
   );

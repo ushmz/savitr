@@ -10,7 +10,7 @@ type Props = RouteComponentProps<{ taskid?: string }>;
 export const Introduction: React.FC<Props> = (props) => {
   const taskId = props.match.params.taskid;
   if (taskId === '1' || taskId === '2') {
-    return <Component task={tasks[+taskId]} />;
+    return <Component task={tasks[+taskId - 1]} />;
   } else {
     return <ComponentLoaderCenter />;
   }

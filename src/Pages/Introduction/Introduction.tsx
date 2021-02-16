@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 
 import { SizedText } from '../../Components/AdjustedComponents';
@@ -15,6 +15,7 @@ type Props = {
 };
 
 export const Introduction: React.FC<Props> = ({ task }) => {
+  const history = useHistory();
   return (
     <MDBContainer className="my-5">
       <h1 className="mt-5">タスク内容</h1>
@@ -62,11 +63,9 @@ export const Introduction: React.FC<Props> = ({ task }) => {
         サードパーティcookieを検出することで、紐付けられる情報を判定しています。
       </p>
       <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-        <Link to={`/task/${task.id}`}>
-          <MDBBtn color="primary" className="float-right">
-            タスクを開始する
-          </MDBBtn>
-        </Link>
+        <MDBBtn color="primary" className="float-right" onClick={() => history.push(`/task/${task.id}`)}>
+          タスクを開始する
+        </MDBBtn>
       </div>
     </MDBContainer>
   );

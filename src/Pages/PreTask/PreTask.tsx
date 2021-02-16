@@ -1,9 +1,10 @@
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
+  const history = useHistory();
 
   const uid = localStorage.getItem('uid');
 
@@ -36,7 +37,11 @@ export const PreTask: React.FC = () => {
         アンケートへの回答が終了しましたら、以下のボタンから「タスク説明」ページへ進んでください。
       </MDBTypography>
       <Link to="/introduction/1">
-        <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`}>
+        <MDBBtn
+          color="primary"
+          className={`${clicked ? '' : 'disabled'}`}
+          onClick={() => history.push('/introduction/1')}
+        >
           タスク説明へ
         </MDBBtn>
       </Link>

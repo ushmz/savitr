@@ -1,6 +1,6 @@
 import React from 'react';
 import { Upload as Component } from './Upload';
 
-export const Top: React.FC = () => {
+export const Upload: React.FC = () => {
   return <Component />;
 };
