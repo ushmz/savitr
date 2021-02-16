@@ -1,11 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MDBContainer, MDBTypography, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 
-import { Pages } from '../../shared/types';
 import { SizedText } from '../../Components/AdjustedComponents';
 
 type Props = {
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
   task: {
     id: number;
     slug: string;
@@ -15,7 +14,7 @@ type Props = {
   };
 };
 
-export const Introduction: React.FC<Props> = ({ setPage, task }) => {
+export const Introduction: React.FC<Props> = ({ task }) => {
   return (
     <MDBContainer className="my-5">
       <MDBTypography tag="h1">タスク詳細</MDBTypography>
@@ -73,9 +72,11 @@ export const Introduction: React.FC<Props> = ({ setPage, task }) => {
         サードパーティcookieを検出することで、紐付けられる情報を判定しています。
       </MDBTypography>
       <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-        <MDBBtn color="primary" className="float-right" onClick={() => setPage('Task1')}>
-          タスクを開始する
-        </MDBBtn>
+        <Link to={`/task/${task.id}`}>
+          <MDBBtn color="primary" className="float-right">
+            タスクを開始する
+          </MDBBtn>
+        </Link>
       </div>
     </MDBContainer>
   );

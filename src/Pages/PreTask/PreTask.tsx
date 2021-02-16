@@ -1,8 +1,8 @@
 import { MDBContainer, MDBTypography, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
-import { SetPageProp } from '../../shared/types';
+import { Link } from 'react-router-dom';
 
-export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
+export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
 
   const uid = localStorage.getItem('uid');
@@ -35,9 +35,11 @@ export const PreTask: React.FC<SetPageProp> = ({ setPage }) => {
       <MDBTypography tag="p">
         アンケートへの回答が終了しましたら、以下のボタンから「タスク説明」ページへ進んでください。
       </MDBTypography>
-      <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`} onClick={() => setPage('Introduction1')}>
-        タスク説明へ
-      </MDBBtn>
+      <Link to="/introduction/1">
+        <MDBBtn color="primary" className={`${clicked ? '' : 'disabled'}`}>
+          タスク説明へ
+        </MDBBtn>
+      </Link>
     </MDBContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBRow, MDBTypography } from 'mdbreact';
 import React, { useState } from 'react';
-import { Pages, SERPElement } from '../../shared/types';
+import { SERPElement } from '../../shared/types';
 import { SearchResult } from '../../Components/SearchResult';
 import { SearchHeader } from '../../Components/SearchBar';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
@@ -9,7 +9,6 @@ import { SizedText } from '../../Components/AdjustedComponents';
 
 type Props = {
   isLoading: boolean;
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
   serpPages: SERPElement[];
   getTimeOnPage: () => number;
   task: {
@@ -22,8 +21,9 @@ type Props = {
 };
 
 // TODO: User react-router
-export const Task: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOnPage, task }) => {
+export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, task }) => {
   const [isOpen, toggle] = useState<boolean>(false);
+  const linkTo = task.id === 1 ? '/introduction/2' : '/posttask';
 
   return (
     <>
@@ -81,7 +81,7 @@ export const Task: React.FC<Props> = ({ isLoading, setPage, serpPages, getTimeOn
                   <MDBBtn onClick={() => toggle(!isOpen)}>回答する</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
-              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} setPage={setPage} goto="Introduction2" />
+              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} linkTo={linkTo} />
             </div>
           </>
         )}
