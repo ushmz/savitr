@@ -1,4 +1,3 @@
-import crypto from 'crypto-js';
 
 export const getLinesFromFile = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
@@ -69,6 +68,7 @@ export const isNotNeed = (url: string): boolean => {
   return false;
 };
 
+/*
 export const encryptText = (text: string): string => {
   const encKey = process.env.ENCRYPTION_KEY || '';
   if (!encKey) {
@@ -86,3 +86,5 @@ export const encryptText = (text: string): string => {
 
   return joinedDataB64;
 };
+*/
+
