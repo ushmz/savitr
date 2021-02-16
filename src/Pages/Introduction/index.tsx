@@ -1,18 +1,16 @@
 import React from 'react';
-import { Pages } from 'shared/types';
+import { RouteComponentProps } from 'react-router-dom';
 import { Introduction as Component } from './Introduction';
-import scripts from './internal/scripts.json';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import tasks from '../../constants/tasks';
+import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 
-type Props = {
-  taskNum: number;
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-};
+type Props = RouteComponentProps<{ taskid?: string }>;
 
 // TODO: Use react-router
-export const Introduction: React.FC<Props> = ({ taskNum, setPage }) => {
-  if (taskNum === 1 || taskNum === 2) {
-    return <Component setPage={setPage} task={scripts[taskNum]} />;
+export const Introduction: React.FC<Props> = (props) => {
+  const taskId = props.match.params.taskid;
+  if (taskId === '1' || taskId === '2') {
+    return <Component task={tasks[+taskId - 1]} />;
   } else {
     return <ComponentLoaderCenter />;
   }

@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
+import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
 import { sendBehaviorLog } from '../../repository/logAPI';
-import { getCollectedHistory } from '../../repository/historyIDB';
-import { getAllPageIn } from '../../repository/serpIDB';
-import { getCookieDomains, getCookieIds, getPageId } from '../../repository/xrayedIDB';
-import { HistoryTable, Pages, SERPElement } from '../../shared/types';
-import { shuffle } from '../../shared/util';
+import { SERPElement } from '../../shared/types';
+import tasks from '../../constants/tasks';
+import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 
-type SerpPage = {
-  title: string;
-  snippet: string;
-  url: string;
-  cookies: string[];
-  linkedPages: HistoryTable[];
-};
+// type SerpPage = {
+//   title: string;
+//   snippet: string;
+//   url: string;
+//   cookies: string[];
+//   linkedPages: HistoryTable[];
+// };
 
-type TasProps = {
-  task: {
-    id: number;
-    slug: string;
-    task: string;
-    requiements: string[];
-    placeholder: string;
-  };
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-};
+type Props = RouteComponentProps<{ taskid?: string }>;
 
-export const Task: React.FC<TasProps> = ({ task, setPage }) => {
+export const Task: React.FC<Props> = (props) => {
   const [serpPages, setSerpPages] = useState<SERPElement[]>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -36,13 +26,15 @@ export const Task: React.FC<TasProps> = ({ task, setPage }) => {
 
   const getTimeOnPage = () => minutes * 60 + seconds;
 
+  const taskId = props.match.params.taskid;
+  const taskName = taskId ? tasks[+taskId - 1].slug : '';
   useInterval(async () => {
     const target = document.body;
     const position = target.getBoundingClientRect();
     if (!window.document.hidden) {
       await sendBehaviorLog({
         uid: localStorage.getItem('uid') || '',
-        taskName: task.slug,
+        taskName: taskName,
         timeOnPage: minutes * 60 + seconds,
         currentPage: 1,
         positionOnPage: position.top,
@@ -51,14 +43,17 @@ export const Task: React.FC<TasProps> = ({ task, setPage }) => {
   }, 1000);
 
   // TODO: Fix logic
+  /*
   const getSerp = async () => {
+    if (!taskId) return;
+
     setLoading(true);
-    const results = await getAllPageIn(task.slug);
+    const results = await getAllPageIn(taskName);
     const serpElements = results.map(async (page) => {
       try {
-        const pageId = await getPageId(task.slug, page.start_uri);
-        const cookieIds = await getCookieIds(task.slug, pageId);
-        const cookieDomains = await getCookieDomains(task.slug, cookieIds);
+        const pageId = await getPageId(taskName, page.start_uri);
+        const cookieIds = await getCookieIds(taskName, pageId);
+        const cookieDomains = await getCookieDomains(taskName, cookieIds);
         const linkedPages = await getCollectedHistory(cookieDomains);
         return {
           title: page.title,
@@ -95,18 +90,15 @@ export const Task: React.FC<TasProps> = ({ task, setPage }) => {
     }
     setLoading(false);
   };
+  */
 
   useEffect(() => {
-    getSerp();
+    // getSerp();
   }, []);
 
-  return (
-    <Component
-      isLoading={isLoading}
-      setPage={setPage}
-      serpPages={serpPages}
-      getTimeOnPage={getTimeOnPage}
-      task={task}
-    />
+  return taskId === '1' || taskId === '2' ? (
+    <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={tasks[+taskId - 1]} />
+  ) : (
+    <ComponentLoaderCenter />
   );
 };

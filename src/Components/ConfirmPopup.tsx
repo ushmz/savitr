@@ -1,19 +1,19 @@
 import { MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import React, { useState } from 'react';
-import { Pages } from '../shared/types';
+import { Link, useHistory } from 'react-router-dom';
 
 type Props = {
   answer: string;
   isOpen: boolean;
   toggle: React.Dispatch<React.SetStateAction<boolean>>;
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-  goto: Pages;
+  linkTo: string;
 };
 
 // TODO: Send answers to log server
-export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, setPage, goto }) => {
+export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }) => {
   const [name, setName] = useState<string>('');
   const [reason, setReason] = useState<string>('');
+  const history = useHistory();
 
   return (
     <MDBContainer>
@@ -59,18 +59,20 @@ export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, setPage,
           <MDBBtn color="secondary" className="float-left" onClick={() => toggle(!isOpen)}>
             キャンセル
           </MDBBtn>
-          <MDBBtn
-            disabled={name !== '' && reason !== '' ? false : true}
-            color="primary"
-            onClick={(e) => {
-              e.preventDefault();
-              e.currentTarget.className += ' was-validated';
-              toggle(!isOpen);
-              setPage(goto);
-            }}
-          >
-            検索タスクを終了する
-          </MDBBtn>
+          <Link to={linkTo}>
+            <MDBBtn
+              disabled={name !== '' && reason !== '' ? false : true}
+              color="primary"
+              onClick={(e) => {
+                e.preventDefault();
+                e.currentTarget.className += ' was-validated';
+                toggle(!isOpen);
+                history.push(linkTo);
+              }}
+            >
+              検索タスクを終了する
+            </MDBBtn>
+          </Link>
         </MDBModalFooter>
       </MDBModal>
     </MDBContainer>
