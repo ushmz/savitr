@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
 import { sendBehaviorLog } from '../../repository/logAPI';
 import { SERPElement } from '../../shared/types';
-import tasks from '../constants/tasks';
+import tasks from '../../constants/tasks';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 
 // type SerpPage = {
