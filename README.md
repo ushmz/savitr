@@ -1,4 +1,4 @@
-# savitri
+# savitr
 
 This is experiment system for my graduate thesis.
 The purpose is to collect behavior logs of user in information retrieval with proposal interface.
