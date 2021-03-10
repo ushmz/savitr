@@ -1,27 +1,46 @@
 import { MDBBtn, MDBCloseIcon, MDBCol, MDBContainer, MDBProgress, MDBRow } from 'mdbreact';
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 
 export const Upload: React.FC = () => {
   const history = useHistory();
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone();
+  const [uploaded, setUploaded] = useState<File[]>([]);
+
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      return setUploaded([...uploaded, ...acceptedFiles]);
+    },
+    [uploaded],
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: onDrop, multiple: false });
+
+  const removeFile = (file: File) => () => {
+    const newFiles = [...uploaded];
+    newFiles.splice(newFiles.indexOf(file), 1);
+    setUploaded(newFiles);
+  };
+
+  const removeAll = () => {
+    setUploaded([]);
+  };
 
   // eslint-disable-next-line react/jsx-key
-  const files = acceptedFiles.map((file, idx) => {
+  const files = uploaded.map((file, idx) => {
     return (
-      <div key={idx} className="border border-dark rounded-lg mx-3" style={{ width: '600px' }}>
+      <div key={idx} className="border border-dark rounded-lg mx-3">
         <MDBRow>
           {/* <MDBProgress value={0} className="my-2" /> */}
           <MDBCol>
-            <input className="mx-4 my-1" defaultValue={file.name} />
+            <input className="ml-4 my-1" defaultValue={file.name} />
           </MDBCol>
           <MDBCol>
-            <p className="mx-4 my-1">{`${file.size} bytes`}</p>
+            <p className="my-1">{`(${file.size} bytes)`}</p>
           </MDBCol>
           <MDBCol>
-            <span className="float-md-right">
-              <MDBCloseIcon onClick={() => acceptedFiles.splice(idx, 1)} />
+            <span>
+              <MDBCloseIcon onClick={removeFile(file)} />
             </span>
           </MDBCol>
         </MDBRow>
@@ -35,7 +54,7 @@ export const Upload: React.FC = () => {
       <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
       <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
       <MDBRow className="border border-dark rounded-lg p-3">
-        {files.length !== 0 ? <div className="my-2">{files}</div> : <></>}
+        {files.length !== 0 ? <div className="">{files}</div> : <></>}
         {/* <div className="input-group-prepend">
               <span className="input-group-text">ファイルを選択</span>
             </div> */}
