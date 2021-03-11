@@ -11,6 +11,7 @@ import { Signup } from '../Pages/Signup';
 import { Signin } from '../Pages/Signin';
 import { User } from '../Pages/User';
 import { Upload } from '../Pages/Upload';
+import { NotFound } from '../Pages/NotFound';
 
 const Routes = () => {
   return (
@@ -26,7 +27,7 @@ const Routes = () => {
         <Route exact path="/user/:username" component={User}></Route>
         <Route exact path="/user/:username/upload" component={Upload}></Route>
         <Route exact path="/" component={Top}></Route>
-        <Route path="*" component={Top} />
+        <Route path="*" component={NotFound} />
       </Switch>
     </Router>
   );
