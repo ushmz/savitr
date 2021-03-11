@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBBtn, MDBCollapse, MDBIcon } from 'mdbreact';
-import { WarningText, URLText, TitleText, SearchResultContainer, SizedText } from './AdjustedComponents';
+import { URLText, TitleText, SearchResultContainer, SizedText, WarningText } from './AdjustedComponents';
 import { HREFText } from './HREFText';
 import { truncateText } from '../shared/util';
 import { sendDocumentClickLog, sendHistoryClickLog } from '../repository/logAPI';
