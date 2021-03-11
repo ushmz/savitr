@@ -67,7 +67,7 @@ export const Upload: React.FC = () => {
           )}
         </div>
       </MDBRow>
-      <MDBRow>
+      <MDBRow className="my-3">
         <MDBBtn color="secondary" onClick={() => history.push('/user/rabhareit')}>
           戻る
         </MDBBtn>
