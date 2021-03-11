@@ -1,4 +1,4 @@
-import { MDBBtn, MDBCloseIcon, MDBCol, MDBContainer, MDBProgress, MDBRow } from 'mdbreact';
+import { MDBBtn, MDBIcon, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
@@ -29,18 +29,18 @@ export const Upload: React.FC = () => {
   // eslint-disable-next-line react/jsx-key
   const files = uploaded.map((file, idx) => {
     return (
-      <div key={idx} className="border border-dark rounded-lg mx-3">
+      <div key={idx} className="border border-dark rounded-lg mx-3 my-1 px-3">
         <MDBRow>
           {/* <MDBProgress value={0} className="my-2" /> */}
-          <MDBCol>
-            <input className="ml-4 my-1" defaultValue={file.name} />
+          <MDBCol md="10">
+            <div className="d-flex flex-row">
+              <input className="my-1" defaultValue={file.name} />
+              <p className="my-1">{`(${file.size} bytes)`}</p>
+            </div>
           </MDBCol>
-          <MDBCol>
-            <p className="my-1">{`(${file.size} bytes)`}</p>
-          </MDBCol>
-          <MDBCol>
-            <span>
-              <MDBCloseIcon onClick={removeFile(file)} />
+          <MDBCol md="2">
+            <span className="float-right">
+              <MDBIcon icon="times-circle" onClick={removeFile(file)} />
             </span>
           </MDBCol>
         </MDBRow>
@@ -54,11 +54,11 @@ export const Upload: React.FC = () => {
       <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
       <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
       <MDBRow className="border border-dark rounded-lg p-3">
-        {files.length !== 0 ? <div className="">{files}</div> : <></>}
+        {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
         {/* <div className="input-group-prepend">
               <span className="input-group-text">ファイルを選択</span>
             </div> */}
-        <div {...getRootProps({ className: 'custom-file' })}>
+        <div {...getRootProps({ className: 'custom-file my-3' })}>
           <input {...getInputProps()} />
           {isDragActive ? (
             <p className="custom-file-label">ここにファイルをドラッグ&ドロップ。</p>
@@ -68,8 +68,11 @@ export const Upload: React.FC = () => {
         </div>
       </MDBRow>
       <MDBRow>
-        <MDBBtn color="primary" onClick={() => history.goBack()}>
-          User Home
+        <MDBBtn color="secondary" onClick={() => history.push('/user/rabhareit')}>
+          戻る
+        </MDBBtn>
+        <MDBBtn color="primary" onClick={() => history.push('/upload/done')}>
+          アップロードする
         </MDBBtn>
       </MDBRow>
     </MDBContainer>
