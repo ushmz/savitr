@@ -34,69 +34,69 @@ module.exports = (env) => {
   const envFile = env ? `.env.${env.status}` : '.env';
 
   return {
-      entry: './src/index.tsx',
-      output: {
-        path: path.resolve(__dirname, 'build')
-      },
-      module: {
-        rules: [
-          {
-            test: /\.tsx?$/,
-            loader: 'awesome-typescript-loader'
-          },
-          {
-            test: /\.css$/,
-            use: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: { url: false }
-              }
-            ]
-          },
-          {
-            test: /\.(png|jp(e*)g|svg|gif)/,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {
-                  name: 'public/[name].[ext]'
-                }
-              }
-            ]
-          }
-       ],
-      },
-      resolve: {
-        modules: ['node_modules', path.resolve(__dirname, "src")],
-        extensions: ['.ts', '.tsx', '.min.js', '.js', '.jsx']
-      },
-      plugins: [
-        new CopyWebpackPlugin({
-          patterns: [
+    entry: './src/index.tsx',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+        },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',
             {
-              context: './public/img/samples',
-              from: '*.png',
-              to: path.resolve(__dirname, 'build', 'img')
+              loader: 'css-loader',
+              options: { url: false },
             },
+          ],
+        },
+        {
+          test: /\.(png|jp(e*)g|svg|gif)/,
+          use: [
             {
-              context: './public/img',
-              from: 'Task-rafiki.svg',
-              to: path.resolve(__dirname, 'build', 'img')
+              loader: 'file-loader',
+              options: {
+                name: 'public/[name].[ext]',
+              },
             },
-        ]
-        }),
-        new HtmlWebpackPlugin({
-          template: './public/index.html',
-        }),
-        new Dotenv({ path: envFile }),
-        new CleanWebpackPlugin()
+          ],
+        },
       ],
-      devServer: {
-        inline: true,
-        contentBase: path.join(__dirname, 'public'),
-        watchContentBase: true,
-	historyApiFallback: true
-      }
-    }
-}
+    },
+    resolve: {
+      modules: ['node_modules', path.resolve(__dirname, 'src')],
+      extensions: ['.ts', '.tsx', '.min.js', '.js', '.jsx'],
+    },
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            context: './public/img/samples',
+            from: '*.png',
+            to: path.resolve(__dirname, 'build', 'img'),
+          },
+          {
+            context: './public/img',
+            from: '*.svg',
+            to: path.resolve(__dirname, 'build', 'img'),
+          },
+        ],
+      }),
+      new HtmlWebpackPlugin({
+        template: './public/index.html',
+      }),
+      new Dotenv({ path: envFile }),
+      new CleanWebpackPlugin(),
+    ],
+    devServer: {
+      inline: true,
+      contentBase: path.join(__dirname, 'public'),
+      watchContentBase: true,
+      historyApiFallback: true,
+    },
+  };
+};
