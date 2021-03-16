@@ -7,6 +7,7 @@ import { sendBehaviorLog } from '../../repository/logAPI';
 import { SERPElement } from '../../shared/types';
 import tasks from '../../constants/tasks';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
+import { fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../repository/koolhaas';
 
 // type SerpPage = {
 //   title: string;
@@ -19,28 +20,40 @@ import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 type Props = RouteComponentProps<{ taskid?: string }>;
 
 export const Task: React.FC<Props> = (props) => {
-  const [serpPages, setSerpPages] = useState<SERPElement[]>([]);
+
+  const dummyTask: TaskInfo = {
+	query: "dummyQuery",
+	title: "dummyTitle",
+	description: "dummyDescription",
+	authorId: "dummyAuthorId",
+	searchUrl: "dummySearchUrl",
+	"type": "",
+    }
+ 
+  const [task, setTask] = useState<TaskInfo>(dummyTask);
+  const [serpPages, setSerpPages] = useState<Serp[]>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const { seconds, minutes } = useStopwatch({ autoStart: true });
 
   const getTimeOnPage = () => minutes * 60 + seconds;
 
-  const taskId = props.match.params.taskid;
-  const taskName = taskId ? tasks[+taskId - 1].slug : '';
-  useInterval(async () => {
-    const target = document.body;
-    const position = target.getBoundingClientRect();
-    if (!window.document.hidden) {
-      await sendBehaviorLog({
-        uid: localStorage.getItem('uid') || '',
-        taskName: taskName,
-        timeOnPage: minutes * 60 + seconds,
-        currentPage: 1,
-        positionOnPage: position.top,
-      });
-    }
-  }, 1000);
+  // const taskId = props.match.params.taskid;
+  // const taskName = taskId ? tasks[+taskId - 1].slug : '';
+  // useInterval(async () => {
+  //   const target = document.body;
+  //   const position = target.getBoundingClientRect();
+  //   if (!window.document.hidden) {
+  //     await sendBehaviorLog({
+  //       uid: localStorage.getItem('uid') || '',
+  //       taskName: taskName,
+  //       timeOnPage: minutes * 60 + seconds,
+  //       currentPage: 1,
+  //       positionOnPage: position.top,
+  //     });
+  //   }
+  // }, 1000);
+  
 
   // TODO: Fix logic
   /*
@@ -94,11 +107,10 @@ export const Task: React.FC<Props> = (props) => {
 
   useEffect(() => {
     // getSerp();
+    fetchSerp(5).then( (serp) => serp ? setSerpPages(serp) : setSerpPages([]));
+    fetchTaskInfo(5).then((taskInfo) => taskInfo ? setTask(taskInfo) : setTask(dummyTask));
   }, []);
 
-  return taskId === '1' || taskId === '2' ? (
-    <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={tasks[+taskId - 1]} />
-  ) : (
-    <ComponentLoaderCenter />
-  );
+  return <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={task} />;
 };
+

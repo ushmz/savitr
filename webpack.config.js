@@ -79,11 +79,11 @@ module.exports = (env) => {
             from: '*.png',
             to: path.resolve(__dirname, 'build', 'img'),
           },
-          {
-            context: './public/img',
-            from: '*.svg',
-            to: path.resolve(__dirname, 'build', 'img'),
-          },
+          //          {
+          //            context: './public/img',
+          //            from: '*.svg',
+          //            to: path.resolve(__dirname, 'build', 'img'),
+          //          },
         ],
       }),
       new HtmlWebpackPlugin({
