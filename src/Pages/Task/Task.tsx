@@ -36,14 +36,7 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
                     title={page.title}
                     snippet={page.snippet}
                     url={page.url}
-                    linkedPages={
-		    	page.leaks.map(leaks => {
-				return {
-					title: leaks.title,
-					url: leaks.url,
-				}
-			})
-		    }
+                    leakedPages={page.leaks}
                     getTimeOnPage={getTimeOnPage}
                     taskName={task.title}
                   />
