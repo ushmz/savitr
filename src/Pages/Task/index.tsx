@@ -4,8 +4,6 @@ import { useInterval } from 'use-interval';
 import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
 import { sendBehaviorLog } from '../../repository/logAPI';
-import { SERPElement } from '../../shared/types';
-import tasks from '../../constants/tasks';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 import { fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../repository/koolhaas';
 
@@ -53,61 +51,11 @@ export const Task: React.FC<Props> = (props) => {
   //     });
   //   }
   // }, 1000);
-  
 
-  // TODO: Fix logic
-  /*
-  const getSerp = async () => {
-    if (!taskId) return;
-
-    setLoading(true);
-    const results = await getAllPageIn(taskName);
-    const serpElements = results.map(async (page) => {
-      try {
-        const pageId = await getPageId(taskName, page.start_uri);
-        const cookieIds = await getCookieIds(taskName, pageId);
-        const cookieDomains = await getCookieDomains(taskName, cookieIds);
-        const linkedPages = await getCollectedHistory(cookieDomains);
-        return {
-          title: page.title,
-          snippet: page.snippet,
-          url: page.start_uri,
-          cookies: cookieDomains,
-          linkedPages: shuffle(linkedPages),
-        };
-      } catch (error) {
-        return {
-          title: page.title,
-          snippet: page.snippet,
-          url: page.start_uri,
-          cookies: [],
-          linkedPages: [],
-        };
-      }
-    });
-
-    window.scrollTo(0, 0);
-    const allSerpPages = (await Promise.all(serpElements)) as SerpPage[];
-    const riskyPages = allSerpPages.filter((p) => p.linkedPages.length !== 0) || [];
-    const saftyPages = allSerpPages.filter((p) => p.linkedPages.length === 0) || [];
-
-    const showSerpPages: SerpPage[] = [];
-    if (saftyPages.length >= 10) {
-      const riskyPageSample = shuffle(riskyPages).slice(0, saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
-      setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
-    } else {
-      const riskyPageSample = shuffle(riskyPages).slice(0, 20 - saftyPages.length);
-      showSerpPages.concat(riskyPageSample, saftyPages);
-      setSerpPages(shuffle(riskyPageSample.concat(saftyPages)));
-    }
-    setLoading(false);
-  };
-  */
 
   useEffect(() => {
     // getSerp();
-    fetchSerp(5).then( (serp) => serp ? setSerpPages(serp) : setSerpPages([]));
+    fetchSerp(5).then((serp) => setSerpPages(serp));
     fetchTaskInfo(5).then((taskInfo) => taskInfo ? setTask(taskInfo) : setTask(dummyTask));
   }, []);
 

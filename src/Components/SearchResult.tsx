@@ -5,6 +5,8 @@ import { HREFText } from './HREFText';
 import { truncateText } from '../shared/util';
 import { sendDocumentClickLog, sendHistoryClickLog } from '../repository/logAPI';
 import { WARNING_MESSAGE } from '../shared/consts';
+import { LeakedPage } from '../repository/koolhaas';
+import { ThumbPopup } from '../Components/ThumbPopup';
 
 type CollectedHistory = {
   title: string;
@@ -12,7 +14,7 @@ type CollectedHistory = {
 };
 
 type CollectedHistories = {
-  histories: CollectedHistory[];
+  histories: LeakedPage[];
   documentURL: string;
   getTimeOnPage: () => number;
   taskName: string;
@@ -26,22 +28,19 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
       <div className="m-3">
         <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
         {histories.map((history, idx) => (
-          <HREFText
-            key={idx}
-            title={history.title}
-            url={history.url}
-            onClick={() =>
-              sendHistoryClickLog({
-                uid: localStorage.getItem('uid') || '',
-                taskName: taskName,
-                timeOnPage: getTimeOnPage(),
-                linkedDocumentUrl: documentURL,
-                linkedPageNum: histories.length,
-                collapse: false,
-              })
-            }
-          />
-        ))}
+		<div key={idx}
+            		onClick={() => sendHistoryClickLog({
+                		uid: localStorage.getItem('uid') || '',
+                		taskName: taskName,
+                		timeOnPage: getTimeOnPage(),
+                		linkedDocumentUrl: documentURL,
+                		linkedPageNum: histories.length,
+                		collapse: false,
+              		})}
+		>
+		<ThumbPopup leaked={history}></ThumbPopup>
+	</div>
+       ))}
       </div>
     );
   } else {
@@ -94,7 +93,7 @@ type Props = {
   title: string;
   url: string;
   snippet: string;
-  linkedPages: { title: string; url: string }[];
+  leakedPages: LeakedPage[];
   getTimeOnPage: () => number;
   taskName: string;
 };
@@ -103,7 +102,7 @@ type Props = {
  * Return single search result component used in web search task.
  * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
  */
-export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages, getTimeOnPage, taskName }) => {
+export const SearchResult: React.FC<Props> = ({ title, snippet, url, leakedPages, getTimeOnPage, taskName }) => {
   return (
     <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
       <a
@@ -116,7 +115,7 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
             taskName: taskName,
             timeOnPage: getTimeOnPage(),
             pageUrl: url,
-            linkedPageNum: linkedPages.length,
+            linkedPageNum: leakedPages.length,
           });
         }}
       >
@@ -124,11 +123,11 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, linkedPages
         <TitleText size="18px">{truncateText(title, 33)}</TitleText>
       </a>
       <SizedText size="14px">{truncateText(snippet || '', 125)}</SizedText>
-      {linkedPages.length === 0 ? (
+      {leakedPages.length === 0 ? (
         <></>
       ) : (
         <div className="border border-dark m-3 rounded-lg">
-          <CollectedPages histories={linkedPages} documentURL={url} getTimeOnPage={getTimeOnPage} taskName={taskName} />
+          <CollectedPages histories={leakedPages} documentURL={url} getTimeOnPage={getTimeOnPage} taskName={taskName} />
         </div>
       )}
     </SearchResultContainer>
