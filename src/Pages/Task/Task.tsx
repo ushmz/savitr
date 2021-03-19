@@ -15,14 +15,13 @@ type Props = {
   task: TaskInfo;
 };
 
-// TODO: User react-router
 export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, task }) => {
   const [isOpen, toggle] = useState<boolean>(false);
 
   return (
     <>
       <MDBRow>
-        <SearchHeader title="Custom Search" placeholder={task.query}></SearchHeader>
+       <SearchHeader title="Custom Search" placeholder={task.query}></SearchHeader>
       </MDBRow>
       <MDBRow className="pt-5">
         {isLoading ? (
@@ -37,7 +36,14 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
                     title={page.title}
                     snippet={page.snippet}
                     url={page.url}
-                    linkedPages={[]}
+                    linkedPages={
+		    	page.leaks.map(leaks => {
+				return {
+					title: leaks.title,
+					url: leaks.url,
+				}
+			})
+		    }
                     getTimeOnPage={getTimeOnPage}
                     taskName={task.title}
                   />
