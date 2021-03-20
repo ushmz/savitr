@@ -39,7 +39,7 @@ export type Serp = {
         url: string,
         snippet: string,
         cookies: string[],
-	leaks: LeakedPage[]
+	leaks: { [key: string]: LeakedPage }
 }
 
 export const fetchSerp = async (taskId: number): Promise<Serp[]> => {
