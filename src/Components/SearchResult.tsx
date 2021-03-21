@@ -1,17 +1,12 @@
 import React from 'react';
-import { MDBBtn, MDBCollapse, MDBIcon } from 'mdbreact';
+import { MDBBtn, MDBCollapse, MDBIcon, MDBPopper  } from 'mdbreact';
 import { URLText, TitleText, SearchResultContainer, SizedText, WarningText } from './AdjustedComponents';
-import { HREFText } from './HREFText';
 import { truncateText } from '../shared/util';
 import { sendDocumentClickLog, sendHistoryClickLog } from '../repository/logAPI';
 import { WARNING_MESSAGE } from '../shared/consts';
 import { LeakedPage } from '../repository/koolhaas';
-import { ThumbPopup } from '../Components/ThumbPopup';
+import TextTruncate from 'react-text-truncate';
 
-type CollectedHistory = {
-  title: string;
-  url: string;
-};
 
 type CollectedHistories = {
   histories: LeakedPage[];
@@ -28,18 +23,24 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
       <div className="m-3">
         <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
         {histories.map((history, idx) => (
-		<div key={idx}
-            		onClick={() => sendHistoryClickLog({
-                		uid: localStorage.getItem('uid') || '',
-                		taskName: taskName,
-                		timeOnPage: getTimeOnPage(),
-                		linkedDocumentUrl: documentURL,
-                		linkedPageNum: histories.length,
-                		collapse: false,
-              		})}
-		>
-		<ThumbPopup leaked={history}></ThumbPopup>
-	</div>
+	  <div key={idx}
+            onClick={() => sendHistoryClickLog({
+              uid: localStorage.getItem('uid') || '',
+              taskName: taskName,
+              timeOnPage: getTimeOnPage(),
+              linkedDocumentUrl: documentURL,
+              linkedPageNum: histories.length,
+              collapse: false,
+            })}>
+	    <MDBPopper domElement placement="top">
+              <a href={history.url} target="_blank" rel="noopener noreferrer">
+	        <TextTruncate line={1} element="p" truncateText="..." text={history.title} />
+	      </a>
+	      <span>
+		<img src={history.thumb} width="240px" />
+	      </span>
+	    </MDBPopper>
+	  </div>
        ))}
       </div>
     );
@@ -50,10 +51,27 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
     return (
       <div className="m-3">
         <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
-        <HREFText
-          title={primary.title}
-          url={primary.url}
-          onClick={() =>
+        <div onClick={() =>
+            sendHistoryClickLog({
+              uid: chrome.runtime.id,
+              taskName: taskName,
+              timeOnPage: getTimeOnPage(),
+              linkedDocumentUrl: documentURL,
+              linkedPageNum: histories.length,
+              collapse: false,
+            })}
+	>
+	  <MDBPopper domElement placement="top">
+            <a href={primary.url} target="_blank" rel="noopener noreferrer">
+	      <TextTruncate line={1} element="p" truncateText="..." text={primary.title} />
+	    </a>
+	    <span>
+	      <img src={primary.thumb} width="240px" />
+	    </span>
+	  </MDBPopper>
+	</div>
+
+        <div onClick={() =>
             sendHistoryClickLog({
               uid: chrome.runtime.id,
               taskName: taskName,
@@ -63,21 +81,16 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
               collapse: false,
             })
           }
-        />
-        <HREFText
-          title={secondly.title}
-          url={secondly.url}
-          onClick={() =>
-            sendHistoryClickLog({
-              uid: chrome.runtime.id,
-              taskName: taskName,
-              timeOnPage: getTimeOnPage(),
-              linkedDocumentUrl: documentURL,
-              linkedPageNum: histories.length,
-              collapse: false,
-            })
-          }
-        />
+        >
+	  <MDBPopper domElement placement="top">
+            <a href={secondly.url} target="_blank" rel="noopener noreferrer">
+	      <TextTruncate line={1} element="p" truncateText="..." text={secondly.title} />
+	    </a>
+	    <span>
+              <img src={secondly.thumb} width="240px" />
+	    </span>
+	  </MDBPopper>
+	</div>
         <CollapseMenu
           items={histories.slice(2)}
           documentURL={documentURL}
@@ -135,7 +148,7 @@ export const SearchResult: React.FC<Props> = ({ title, snippet, url, leakedPages
 };
 
 type CollapseProps = {
-  items: { title: string; url: string }[];
+  items: LeakedPage[];
   documentURL: string;
   getTimeOnPage: () => number;
   taskName: string;
@@ -168,10 +181,7 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL, getTimeOnPa
       <MDBCollapse id={'hambgr'} isOpen={collapsedID}>
         {items.map((page, idx) => {
           return (
-            <HREFText
-              key={idx}
-              title={page.title}
-              url={page.url}
+            <div key={idx}
               onClick={() =>
                 sendHistoryClickLog({
                   uid: localStorage.getItem('uid') || '',
@@ -182,11 +192,18 @@ const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL, getTimeOnPa
                   collapse: false,
                 })
               }
-            />
+            >
+	    <MDBPopper domElement placement="top">
+              <a href={page.url} target="_blank" rel="noopener noreferrer">
+	        <TextTruncate line={1} element="p" truncateText="..." text={page.title} />
+	      </a>
+	      <span>
+		<img src={page.thumb} width="240px" />
+	      </span>
+	    </MDBPopper>
+	</div>
           );
         })}
-        {/* 余力and意味があれば */}
-        {/* <MDBTypography tag="p">{`このページから検出されたサードパーティクッキー：${cookies.join(',')}`}</MDBTypography> */}
       </MDBCollapse>
       <MDBBtn className="mx-auto" color={'light-blue'} onClick={toggleCollapse('hambgr')}>
         <MDBIcon
