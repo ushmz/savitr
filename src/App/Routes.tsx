@@ -12,6 +12,7 @@ import { Signin } from '../Pages/Signin';
 import { User } from '../Pages/User';
 import { Upload } from '../Pages/Upload';
 import { NotFound } from '../Pages/NotFound';
+import { Download } from 'Pages/Download';
 
 const Routes = () => {
   return (
@@ -26,6 +27,7 @@ const Routes = () => {
         <Route exact path="/signup" component={Signup}></Route>
         <Route exact path="/user/:username" component={User}></Route>
         <Route exact path="/user/:username/upload" component={Upload}></Route>
+        <Route exact path="/user/:username/download/crx" component={Download}></Route>
         <Route exact path="/" component={Top}></Route>
         <Route path="*" component={NotFound} />
       </Switch>
