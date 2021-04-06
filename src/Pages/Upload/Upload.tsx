@@ -26,6 +26,16 @@ export const Upload: React.FC = () => {
     setUploaded([]);
   };
 
+  const handleFileChange = (e: any) => {
+    const target = e.target as HTMLInputElement;
+
+    if (target.files == null) return;
+    const file = target.files.item(0);
+    if (file) {
+      // updateFile(this.props.dispatch, file);
+	} else {return}
+  }
+
   // eslint-disable-next-line react/jsx-key
   const files = uploaded.map((file, idx) => {
     return (
@@ -34,7 +44,7 @@ export const Upload: React.FC = () => {
           {/* <MDBProgress value={0} className="my-2" /> */}
           <MDBCol md="10">
             <div className="d-flex flex-row">
-              <input className="my-1" defaultValue={file.name} />
+              <input className="my-1" id={`fileInput${idx}`} defaultValue={file.name} />
               <p className="my-1">{`(${file.size} bytes)`}</p>
             </div>
           </MDBCol>
@@ -53,6 +63,8 @@ export const Upload: React.FC = () => {
       <p>User Home</p>
       <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
       <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
+	  <form method="post" action="/upload">
+
       <MDBRow className="border border-dark rounded-lg p-3">
         {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
         {/* <div className="input-group-prepend">
@@ -71,10 +83,12 @@ export const Upload: React.FC = () => {
         <MDBBtn color="secondary" onClick={() => history.push('/user/rabhareit')}>
           戻る
         </MDBBtn>
-        <MDBBtn color="primary" onClick={() => history.push('/upload/done')}>
+        <MDBBtn color="primary" type="submit" onClick={() => history.push('/upload/done')}>
           アップロードする
         </MDBBtn>
       </MDBRow>
+
+	  </form>
     </MDBContainer>
   );
 };
