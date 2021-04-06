@@ -30,8 +30,8 @@ const nodeExternals = require('webpack-node-externals');
 
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = (env) => {
-  const envFile = env ? `.env.${env.status}` : '.env';
+module.exports = () => {
+  const envFile = '.env';
 
   return {
     entry: './src/index.tsx',
