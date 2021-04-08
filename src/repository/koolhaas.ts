@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API_ENDPOINT = 'http://localhost:8080';
 
+const getJWT = () => localStorage.getItem('jwt') || '';
+
 export const createUser = async (uid: string): Promise<number> => {
   const response = await axios.post(`${API_ENDPOINT}/users/signup`, {
     uid: uid,
@@ -24,7 +26,11 @@ export type TaskInfo = {
 };
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/tasks/${taskId}`);
+  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/tasks/${taskId}`, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
 
   if (response.status === 200) {
     return response.data[0] as TaskInfo;
@@ -55,7 +61,11 @@ export type Serp = {
 };
 
 export const fetchSerp = async (taskId: number): Promise<Serp[]> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/serps/${taskId}`);
+  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/serps/${taskId}`, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
 
   if (response.status === 200) {
     return response.data as Serp[];
@@ -72,6 +82,7 @@ export const uploadUserFile = async (userId: string, file: File): Promise<void> 
 
   const headers = {
     accept: 'application/json',
+    Authorization: `Bearer ${getJWT()}`,
     'Content-Type': 'multipart/form-data',
   };
 
@@ -113,7 +124,11 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
     conditionId: param.conditionId,
   };
 
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog);
+  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.id}/logs`, timeLog, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
   if (response.status === 200) {
     return;
   } else {
@@ -151,7 +166,11 @@ export const createThumbnailWatchLog = async (param: ThumbnailWatchLogParam): Pr
     conditionId: param.conditionId,
   };
 
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog);
+  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
   if (response.status === 200) {
     return;
   } else {
