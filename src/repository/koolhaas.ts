@@ -96,7 +96,8 @@ export const uploadUserFile = async (userId: string, file: File): Promise<void> 
 };
 
 export type TaskTimeLogParam = {
-  userId: string;
+  id: string;
+  uid: string;
   timeOnPage: number;
   url: string;
   taskId: number;
@@ -105,7 +106,7 @@ export type TaskTimeLogParam = {
 
 export type TaskTimeLog = {
   id: string;
-  autherId: number;
+  authorId: number;
   uid: string;
   timeOnPage: number;
   url: string;
@@ -115,11 +116,11 @@ export type TaskTimeLog = {
 
 export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> => {
   const timeLog: TaskTimeLog = {
-    id: param.userId,
-    autherId: 2,
-    uid: param.userId,
+    id: param.id,
+    authorId: 2,
+    uid: param.uid,
     timeOnPage: param.timeOnPage,
-    url: '',
+    url: param.url,
     taskId: param.taskId,
     conditionId: param.conditionId,
   };

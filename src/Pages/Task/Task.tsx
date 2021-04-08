@@ -21,7 +21,7 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
   return (
     <>
       <MDBRow>
-       <SearchHeader title="Custom Search" placeholder={task.query}></SearchHeader>
+        <SearchHeader title="Custom Search" placeholder={task.query}></SearchHeader>
       </MDBRow>
       <MDBRow className="pt-5">
         {isLoading ? (
@@ -58,9 +58,7 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
                       </SizedText>
                     </li>
                     <li>
-                      <SizedText size="13px">
-                        検索タスクの終了時には理由をお尋ねします。
-                      </SizedText>
+                      <SizedText size="13px">検索タスクの終了時には理由をお尋ねします。</SizedText>
                     </li>
                     <li>
                       <SizedText size="13px">制限時間はありませんので、納得のいくまで検索を行ってください。</SizedText>
