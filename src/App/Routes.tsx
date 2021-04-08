@@ -12,7 +12,9 @@ import { Signup } from '../Pages/Signup';
 import { Signin } from '../Pages/Signin';
 import { User } from '../Pages/User';
 import { Upload } from '../Pages/Upload';
+import { Download } from '../Pages/Download';
 import { NotFound } from '../Pages/NotFound';
+import { DownloadHistory } from '../Pages/HowTo/DownloadHistory';
 
 const Routes = () => {
   return (
@@ -25,6 +27,7 @@ const Routes = () => {
         <Auth>
           <Route exact path="/introduction/:taskid" component={Introduction}></Route>
           <Route exact path="/attention" component={Attention}></Route>
+          <Route exact path="/how2exporthistory" component={DownloadHistory}></Route>
           <Route exact path="/pretask" component={PreTask}></Route>
           <Route exact path="/posttask" component={PostTask}></Route>
           <Route exact path="/task/:taskid" component={Task}></Route>

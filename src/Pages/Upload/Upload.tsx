@@ -1,7 +1,8 @@
 import { MDBBtn, MDBIcon, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
 import React, { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
+import { Header } from 'Components/Header';
 
 export const Upload: React.FC = () => {
   const history = useHistory();
@@ -33,8 +34,10 @@ export const Upload: React.FC = () => {
     const file = target.files.item(0);
     if (file) {
       // updateFile(this.props.dispatch, file);
-	} else {return}
-  }
+    } else {
+      return;
+    }
+  };
 
   // eslint-disable-next-line react/jsx-key
   const files = uploaded.map((file, idx) => {
@@ -59,36 +62,43 @@ export const Upload: React.FC = () => {
   });
 
   return (
-    <MDBContainer>
-      <p>User Home</p>
-      <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
-      <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
-	  <form method="post" action="/upload">
+    <>
+      <Header />
+      <MDBContainer className="my-5">
+        <p>履歴情報のエクスポート方法について</p>
+        <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
+        <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
 
-      <MDBRow className="border border-dark rounded-lg p-3">
-        {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
-        {/* <div className="input-group-prepend">
+        <p>
+          Google アカウントをお持ちの場合、閲覧履歴データをエクスポートすることが可能です。 詳細な手順については、
+          <Link to="/how2exporthistory">閲覧履歴データのエクスポート方法</Link> をご覧ください。
+        </p>
+
+        <form method="post" action="/upload">
+          <MDBRow className="border border-dark rounded-lg p-3">
+            {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
+            {/* <div className="input-group-prepend">
               <span className="input-group-text">ファイルを選択</span>
             </div> */}
-        <div {...getRootProps({ className: 'custom-file my-3' })}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p className="custom-file-label">ここにファイルをドラッグ&ドロップ。</p>
-          ) : (
-            <p className="custom-file-label">ファイルを選択するか、ドラッグ&ドロップしてください。</p>
-          )}
-        </div>
-      </MDBRow>
-      <MDBRow className="my-3">
-        <MDBBtn color="secondary" onClick={() => history.push('/user/rabhareit')}>
-          戻る
-        </MDBBtn>
-        <MDBBtn color="primary" type="submit" onClick={() => history.push('/upload/done')}>
-          アップロードする
-        </MDBBtn>
-      </MDBRow>
-
-	  </form>
-    </MDBContainer>
+            <div {...getRootProps({ className: 'custom-file my-3' })}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p className="custom-file-label">ここにファイルをドラッグ & ドロップ。</p>
+              ) : (
+                <p className="custom-file-label">ファイルを選択するか、ドラッグ & ドロップしてください。</p>
+              )}
+            </div>
+          </MDBRow>
+          <MDBRow className="my-3">
+            <MDBBtn color="secondary" onClick={() => history.goBack()}>
+              戻る
+            </MDBBtn>
+            <MDBBtn color="primary" type="submit" onClick={() => history.push('/upload/done')}>
+              アップロードする
+            </MDBBtn>
+          </MDBRow>
+        </form>
+      </MDBContainer>
+    </>
   );
 };
