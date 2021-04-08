@@ -47,11 +47,11 @@ export const Introduction: React.FC<Props> = ({ task }) => {
       <MDBRow className="my-5">
         <MDBCol>
           <p className="font-weight-bold">第三者に知られてしまう可能性のある情報がない場合</p>
-          <img src="./img/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
+          <img src="/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
         </MDBCol>
         <MDBCol>
           <p className="font-weight-bold">第三者に知られてしまう可能性のある情報がある場合</p>
-          <img src="./img/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
+          <img src="/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
         </MDBCol>
       </MDBRow>
       <h3 className="mt-5">検出方法</h3>

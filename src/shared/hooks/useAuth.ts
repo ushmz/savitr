@@ -7,6 +7,7 @@ type User = firebase.User;
 
 export const useProvideAuth = () => {
   const [user, setUser] = React.useState<User | null>(null);
+  const [didAuthentication, setAuthentication] = React.useState<boolean>(false);
 
   const signIn = (uid: string, password: string) => {
     return firebase
@@ -38,6 +39,7 @@ export const useProvideAuth = () => {
   React.useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       user ? setUser(user) : setUser(null);
+      setAuthentication(true);
     });
     // const token = localStorage.getItem('jwt');
     // if (token) {
@@ -76,5 +78,6 @@ export const useProvideAuth = () => {
     signUp,
     signOut,
     user,
+    didAuthentication,
   };
 };

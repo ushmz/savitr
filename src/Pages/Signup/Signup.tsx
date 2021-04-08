@@ -94,9 +94,6 @@ export const Signup: React.FC = () => {
           アカウントをお持ちの方は<Link to="/signin">ログイン</Link>
         </p>
       </MDBCard>
-      <Link to="/user/rabhareit">
-        <MDBBtn color="primary">User Home</MDBBtn>
-      </Link>
     </MDBContainer>
   );
 };
