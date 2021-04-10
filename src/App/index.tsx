@@ -8,11 +8,11 @@ import { ProvideAuth } from '../shared/provider/authProvider';
 const App = () => {
   return (
     <React.Fragment>
-	  <ProvideAuth>
-		  <NormalizeStyle />
-		  <Routes />
-		  <ToastContainer />
-	  </ProvideAuth>
+      <ProvideAuth>
+        <NormalizeStyle />
+        <Routes />
+        <ToastContainer />
+      </ProvideAuth>
     </React.Fragment>
   );
 };

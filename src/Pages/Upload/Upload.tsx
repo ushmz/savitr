@@ -3,14 +3,22 @@ import React, { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { Header } from 'Components/Header';
+import { uploadUserFile } from 'shared/apis/apis';
+import { useAuth } from 'shared/provider/authProvider';
+import { toast } from 'react-toastify';
 
 export const Upload: React.FC = () => {
   const history = useHistory();
+  const auth = useAuth();
   const [uploaded, setUploaded] = useState<File[]>([]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      return setUploaded([...uploaded, ...acceptedFiles]);
+      if (acceptedFiles.length != 1) {
+        toast.error('アップロードできるファイルは1つのみです。');
+        return setUploaded([...uploaded]);
+      }
+      return setUploaded([...acceptedFiles]);
     },
     [uploaded],
   );
@@ -33,18 +41,25 @@ export const Upload: React.FC = () => {
     if (target.files == null) return;
     const file = target.files.item(0);
     if (file) {
-      // updateFile(this.props.dispatch, file);
+      uploaded[0] = file;
     } else {
       return;
     }
   };
 
-  // eslint-disable-next-line react/jsx-key
+  const onSubmit = async (): Promise<boolean> => {
+    if (uploaded[0]) {
+      const username = auth.user?.email?.split('@')[0] || '';
+      const isOk = await uploadUserFile(username, uploaded[0]);
+      return isOk;
+    }
+    return false;
+  };
+
   const files = uploaded.map((file, idx) => {
     return (
       <div key={idx} className="border border-dark rounded-lg mx-3 my-1 px-3">
         <MDBRow>
-          {/* <MDBProgress value={0} className="my-2" /> */}
           <MDBCol md="10">
             <div className="d-flex flex-row">
               <input className="my-1" id={`fileInput${idx}`} defaultValue={file.name} />
@@ -74,30 +89,40 @@ export const Upload: React.FC = () => {
           <Link to="/how2exporthistory">閲覧履歴データのエクスポート方法</Link> をご覧ください。
         </p>
 
-        <form method="post" action="/upload">
-          <MDBRow className="border border-dark rounded-lg p-3">
-            {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
-            {/* <div className="input-group-prepend">
+        <MDBRow className="border border-dark rounded-lg p-3">
+          {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
+          {/* <div className="input-group-prepend">
               <span className="input-group-text">ファイルを選択</span>
             </div> */}
-            <div {...getRootProps({ className: 'custom-file my-3' })}>
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p className="custom-file-label">ここにファイルをドラッグ & ドロップ。</p>
-              ) : (
-                <p className="custom-file-label">ファイルを選択するか、ドラッグ & ドロップしてください。</p>
-              )}
-            </div>
-          </MDBRow>
-          <MDBRow className="my-3">
-            <MDBBtn color="secondary" onClick={() => history.goBack()}>
-              戻る
-            </MDBBtn>
-            <MDBBtn color="primary" type="submit" onClick={() => history.push('/upload/done')}>
-              アップロードする
-            </MDBBtn>
-          </MDBRow>
-        </form>
+          <div {...getRootProps({ className: 'custom-file my-3' })}>
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <p className="custom-file-label">ここにファイルをドラッグ & ドロップ。</p>
+            ) : (
+              <p className="custom-file-label">ファイルを選択するか、ドラッグ & ドロップしてください。</p>
+            )}
+          </div>
+        </MDBRow>
+        <MDBRow className="my-3">
+          <MDBBtn color="secondary" onClick={() => history.push('/user')}>
+            ホーム画面に戻る
+          </MDBBtn>
+          <MDBBtn
+            color="primary"
+            type="submit"
+            onClick={async () => {
+              const isOk = await onSubmit();
+              if (isOk) {
+                toast.success('アップロードが完了しました。');
+                history.push('/user');
+              } else {
+                toast.error('アップロードに失敗しました。');
+              }
+            }}
+          >
+            アップロードする
+          </MDBBtn>
+        </MDBRow>
       </MDBContainer>
     </>
   );

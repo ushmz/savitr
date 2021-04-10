@@ -1,4 +1,3 @@
-
 export const getLinesFromFile = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
   const fileContents = await response.text();
@@ -34,7 +33,7 @@ export function shuffle<T>(array: Array<T>): Array<T> {
   return array;
 }
 
-export const uid = () => {
+export const uid = (): string => {
   let uid = '',
     i,
     random;
@@ -87,4 +86,3 @@ export const encryptText = (text: string): string => {
   return joinedDataB64;
 };
 */
-

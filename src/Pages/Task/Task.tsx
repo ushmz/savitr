@@ -6,7 +6,7 @@ import { SearchHeader } from '../../Components/SearchBar';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
 import { ConfirmPopup } from '../../Components/ConfirmPopup';
 import { SizedText } from '../../Components/AdjustedComponents';
-import { Serp, TaskInfo } from '../../repository/koolhaas';
+import { Serp, TaskInfo } from '../../shared/apis/apis';
 
 type Props = {
   isLoading: boolean;

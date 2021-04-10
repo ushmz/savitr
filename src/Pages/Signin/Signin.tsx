@@ -12,19 +12,19 @@ type SigninParam = {
 };
 
 export const Signin: React.FC = () => {
-  const { register, handleSubmit, formState, errors } = useForm<SigninParam>();
+  const { register, handleSubmit, errors } = useForm<SigninParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId, passwd }) => {
     setLoading(true);
-    const email = externalId + '@gmail.com';
+    const email = externalId + '@savitr.dummy.com';
     auth
       .signIn(email, passwd)
       .then(() => {
         setLoading(false);
-        history.push(`/user/${externalId}`);
+        history.push('/user');
       })
       .catch((e) => {
         toast.error('ID または パスワードが正しくありません', e);
