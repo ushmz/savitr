@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import { apiClient } from '../utils/apiClient';
 import firebase from '../utils/firebase';
-import { createUser } from '../../repository/koolhaas';
+import { createUser } from '../../shared/apis/apis';
 
 type User = firebase.User;
 

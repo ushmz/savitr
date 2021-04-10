@@ -3,9 +3,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
-import { sendBehaviorLog } from '../../repository/logAPI';
-import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
-import { createTaskTimeLog, fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../repository/koolhaas';
+import { createTaskTimeLog, fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../shared/apis/apis';
 import { useAuth } from 'shared/provider/authProvider';
 
 // type SerpPage = {
