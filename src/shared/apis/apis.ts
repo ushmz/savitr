@@ -75,7 +75,7 @@ export const fetchSerp = async (taskId: number): Promise<Serp[]> => {
   }
 };
 
-export const uploadUserFile = async (userId: string, file: File): Promise<void> => {
+export const uploadUserFile = async (userId: string, file: File): Promise<boolean> => {
   const params = new FormData();
   params.append('fileName', file.name);
   params.append('uploadFile', file);
@@ -88,12 +88,11 @@ export const uploadUserFile = async (userId: string, file: File): Promise<void> 
   };
 
   const response = await axios.post(`${API_ENDPOINT}/v1/upload`, params, { headers: headers });
-  if (response.status === 200) {
-    return;
-  } else {
+  if (response.status !== 200) {
     console.log('[Error] Failed to upload file.');
-    return;
+    return false;
   }
+  return true;
 };
 
 export type TaskTimeLogParam = {
