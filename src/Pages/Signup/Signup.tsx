@@ -19,13 +19,13 @@ export const Signup: React.FC = () => {
 
   const onSubmit = handleSubmit(({ externalId, passwd }) => {
     setLoading(true);
-    const email = externalId + '@gmail.com';
+    const email = externalId + '@savitr.dummy.com';
     auth
       .signUp(externalId, email, passwd)
       .then(() => {
         toast.success('アカウント登録が完了しました');
         setLoading(false);
-        history.push(`/user/${externalId}`);
+        history.push('/user');
       })
       .catch((e) => {
         toast.error('アカウント登録に失敗しました', e);

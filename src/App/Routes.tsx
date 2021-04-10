@@ -31,8 +31,8 @@ const Routes = () => {
           <Route exact path="/pretask" component={PreTask}></Route>
           <Route exact path="/posttask" component={PostTask}></Route>
           <Route exact path="/task/:taskid" component={Task}></Route>
-          <Route exact path="/user/:username" component={User}></Route>
-          <Route exact path="/user/:username/upload" component={Upload}></Route>
+          <Route exact path="/user/" component={User}></Route>
+          <Route exact path="/user/upload" component={Upload}></Route>
           {/* <Route exact path="/user/:username/download/crx" component={Download}></Route> */}
         </Auth>
 

@@ -24,7 +24,7 @@ export const Signin: React.FC = () => {
       .signIn(email, passwd)
       .then(() => {
         setLoading(false);
-        history.push(`/user/${externalId}`);
+        history.push('/user');
       })
       .catch((e) => {
         toast.error('ID または パスワードが正しくありません', e);

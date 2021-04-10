@@ -29,7 +29,7 @@ export const Top: React.FC = () => {
       <p className="font-weight-bold">
         以上に同意していただける方のみ，下記ボタンをクリックしてユーザ登録を行い，タスクを開始してください．
       </p>
-      <MDBBtn color="primary" onClick={() => history.push(`/user/${username || ''}`)}>
+      <MDBBtn color="primary" onClick={() => history.push('/user')}>
         はじめる
       </MDBBtn>
       {/* <img src="./img/Task-rafiki.svg" className="mx-auto d-block" width="300px" /> */}
