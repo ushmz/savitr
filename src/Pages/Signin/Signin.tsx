@@ -12,14 +12,14 @@ type SigninParam = {
 };
 
 export const Signin: React.FC = () => {
-  const { register, handleSubmit, formState, errors } = useForm<SigninParam>();
+  const { register, handleSubmit, errors } = useForm<SigninParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId, passwd }) => {
     setLoading(true);
-    const email = externalId + '@gmail.com';
+    const email = externalId + '@savitr.dummy.com';
     auth
       .signIn(email, passwd)
       .then(() => {
