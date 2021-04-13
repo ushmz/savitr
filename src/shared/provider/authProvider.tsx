@@ -11,6 +11,7 @@ type ContextValue = {
   // confirmPasswordReset: (code: string, password: string) => Promise<void>;
   user: firebase.User | null;
   didAuthentication: boolean;
+  isTaskReady: boolean;
 };
 
 export const AuthContext = createContext({} as ContextValue);
