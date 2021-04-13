@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:8080';
+const API_ENDPOINT = process.env.BACKEND_ENDPOINT || 'http://localhost:8080';
 
 const getJWT = () => localStorage.getItem('jwt') || '';
 

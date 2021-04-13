@@ -8,6 +8,7 @@ type User = firebase.User;
 export const useProvideAuth = () => {
   const [user, setUser] = React.useState<User | null>(null);
   const [didAuthentication, setAuthentication] = React.useState<boolean>(false);
+  const [isTaskReady, setTaskReady] = React.useState<boolean>(false);
 
   const signIn = (uid: string, password: string) => {
     return firebase
@@ -79,5 +80,6 @@ export const useProvideAuth = () => {
     signOut,
     user,
     didAuthentication,
+    isTaskReady,
   };
 };
