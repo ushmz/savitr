@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 // AuthState
 type ContextValue = {
   signIn: (uid: string, password: string) => Promise<void | firebase.auth.UserCredential>;
-  signUp: (externalId: string, email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  signUp: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
   signOut: () => Promise<void>;
   // sendPasswordResetEmail: (email: string) => Promise<void>;
   // confirmPasswordReset: (code: string, password: string) => Promise<void>;

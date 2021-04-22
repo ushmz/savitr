@@ -22,7 +22,7 @@ export const useProvideAuth = () => {
       });
   };
 
-  const signUp = (externalId: string, email: string, password: string) => {
+  const signUp = (email: string, password: string) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -30,7 +30,6 @@ export const useProvideAuth = () => {
         if (res.user) {
           const token = await res.user.getIdToken(true);
           localStorage.setItem('jwt', token);
-          await createUser(externalId);
         }
       });
   };
