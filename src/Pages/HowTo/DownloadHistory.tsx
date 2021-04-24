@@ -22,26 +22,27 @@ export const DownloadHistory: React.FC = () => {
           </li>
           <li>Google アカウントでログインしていない場合はログインを行ってください。</li>
           <li>「選択をすべて解除」をクリックします。</li>
-          <img src="/public/img/how2/exporthistory/0001.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0001.png" width="100%" />
           <li>「Chrome のブックマーク、履歴などの設定」の欄にチェックを入れます。</li>
-          <img src="/public/img/how2/exporthistory/0002.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0002.png" width="100%" />
           <li>「Chrome のすべてのデータが含まれます」をクリックします。</li>
-          <img src="/public/img/how2/exporthistory/0003.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0003.png" width="100%" />
           <li>「選択をすべて解除」をクリックします。</li>
-          <img src="/public/img/how2/exporthistory/0004.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0004.png" width="100%" />
           <li>「BrowserHistory」のみを選択します。</li>
-          <img src="/public/img/how2/exporthistory/0005.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0005.png" width="100%" />
           <li>1 番下までスクロールし、「次のステップ」をクリックします。</li>
-          <img src="/public/img/how2/exporthistory/0006.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0006.png" width="100%" />
+
           <li>
             「1
             回エクスポート」が選択されていることを確認し、「エクスポートを作成」をクリックします。その他の項目はそのままで構いません。
           </li>
-          <img src="/public/img/how2/exporthistory/0007.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0007.png" width="100%" />
           <li>
             エクスポートが完了すると画面が切り替わります。「ダウンロード」をクリックして履歴情報をダウンロードしてください。
           </li>
-          <img src="/public/img/how2/exporthistory/0008.png" width="100%" />
+          <img src="/public/img/how2/downloadHistory/0008.png" width="100%" />
         </ol>
         <MDBBtn color="primary" onClick={() => history.goBack()}>
           戻る
