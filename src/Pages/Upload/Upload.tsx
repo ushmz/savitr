@@ -31,21 +31,21 @@ export const Upload: React.FC = () => {
     setUploaded(newFiles);
   };
 
-  const removeAll = () => {
-    setUploaded([]);
-  };
+  // const removeAll = () => {
+  //   setUploaded([]);
+  // };
 
-  const handleFileChange = (e: any) => {
-    const target = e.target as HTMLInputElement;
+  // const handleFileChange = (e: any) => {
+  //   const target = e.target as HTMLInputElement;
 
-    if (target.files == null) return;
-    const file = target.files.item(0);
-    if (file) {
-      uploaded[0] = file;
-    } else {
-      return;
-    }
-  };
+  //   if (target.files == null) return;
+  //   const file = target.files.item(0);
+  //   if (file) {
+  //     uploaded[0] = file;
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   const onSubmit = async (): Promise<boolean> => {
     if (uploaded[0]) {
@@ -84,21 +84,11 @@ export const Upload: React.FC = () => {
         <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
         <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
 
-        <h3>提供していただく履歴情報について</h3>
-        <p>
-          提供していただく履歴情報にはページのタイトルが含まれています。中には gmail
-          のように、ページタイトルに個人情報が含まれている場合があります。
-        </p>
-
-        <p>
-          Google アカウントをお持ちの場合、閲覧履歴データをエクスポートすることが可能です。 詳細な手順については、
-          <Link to="/how2exporthistory">閲覧履歴データのエクスポート方法</Link> をご覧ください。
-        </p>
-
         <p>
           chrome 拡張が使用できるブラウザでは、閲覧履歴データをエクスポートする拡張機能を使用できます。
+          <br />
           詳細な手順については、
-          <Link to="/how2exporthistoryextension">chrome 拡張を用いた閲覧履歴データのエクスポート方法</Link>
+          <Link to="/how2exporthistory/ext">chrome 拡張を用いた閲覧履歴データのエクスポート方法</Link>
           をご覧ください。
         </p>
 
@@ -117,17 +107,13 @@ export const Upload: React.FC = () => {
           </div>
         </MDBRow>
         <MDBRow className="my-3">
-          <MDBBtn color="secondary" onClick={() => history.push('/user')}>
-            ホーム画面に戻る
-          </MDBBtn>
           <MDBBtn
             color="primary"
             type="submit"
             onClick={async () => {
               const isOk = await onSubmit();
               if (isOk) {
-                toast.success('アップロードが完了しました。');
-                history.push('/user');
+                history.push('/upload/completion');
               } else {
                 toast.error('アップロードに失敗しました。');
               }
