@@ -22,12 +22,17 @@ export const Register: React.FC = () => {
     setLoading(true);
     createUser(externalId)
       .then((v) => {
+        if (v.externalId === '') {
+          toast.error('タスクができるのは 1 人 1 度までとなります');
+          setLoading(false);
+          return;
+        }
         const email = externalId + '@savitr.dummy.com';
         auth
           .signUp(email, v.secret)
           .then(() => {
             setLoading(false);
-            history.push('/user');
+            history.push('/upload');
           })
           .catch((res) => {
             toast.error(`登録に失敗しました : ${res}`);
@@ -35,7 +40,7 @@ export const Register: React.FC = () => {
           });
       })
       .catch((res) => {
-        toast.error(`登録に失敗しました : ${res}`);
+        toast.error(`予期せぬエラーが発生しました : ${res}`);
         setLoading(false);
       });
   });
