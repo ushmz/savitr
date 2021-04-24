@@ -4,15 +4,41 @@ const API_ENDPOINT = process.env.BACKEND_ENDPOINT || 'http://localhost:8080';
 
 const getJWT = () => localStorage.getItem('jwt') || '';
 
-export const createUser = async (uid: string): Promise<number> => {
-  const response = await axios.post(`${API_ENDPOINT}/users/signup`, {
-    uid: uid,
-    externalId: uid,
+type UserResponse = {
+  // This return value seems `InsertedId`
+  externalId: string;
+  secret: string;
+};
+
+export const createUser = async (uid: string): Promise<UserResponse> => {
+  const r = await axios
+    .post(`${API_ENDPOINT}/users/signup`, {
+      uid: uid,
+      externalId: uid,
+    })
+    .then((response) => {
+      return response.data as UserResponse;
+    })
+    .catch((err) => {
+      if (err.response.status === 403) {
+        return { externalId: '', secret: '' } as UserResponse;
+      } else {
+        throw new Error();
+      }
+    });
+  return r;
+};
+
+export const fetchCompletionCode = async (uid: string): Promise<number> => {
+  const response = await axios.get(`${API_ENDPOINT}/v1/users/${uid}/code`, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
   });
   if (response.status === 200) {
-    return response.data.userId;
+    return response.data.completionCode;
   } else {
-    return 0;
+    throw new Error('Failed to fetch completion code.');
   }
 };
 

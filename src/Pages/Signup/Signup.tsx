@@ -21,7 +21,7 @@ export const Signup: React.FC = () => {
     setLoading(true);
     const email = externalId + '@savitr.dummy.com';
     auth
-      .signUp(externalId, email, passwd)
+      .signUp(email, passwd)
       .then(() => {
         toast.success('アカウント登録が完了しました');
         setLoading(false);
