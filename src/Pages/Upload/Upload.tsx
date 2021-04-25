@@ -80,17 +80,67 @@ export const Upload: React.FC = () => {
     <>
       <Header />
       <MDBContainer className="my-5">
-        <h3>履歴情報のエクスポート方法について</h3>
-        <p>実験協力ありがとうございます。こちらから履歴情報のアップロードを行ってください。</p>
-        <p>いただいた履歴情報は研究目的以外の用途で使用することはありません。</p>
-
+        <h1>履歴情報のアップロード</h1>
+        <p>実験にご協力いただきありがとうございます。このページから履歴情報のアップロードを行ってください。</p>
         <p>
-          chrome 拡張が使用できるブラウザでは、閲覧履歴データをエクスポートする拡張機能を使用できます。
-          <br />
-          詳細な手順については、
-          <Link to="/how2exporthistory/ext">chrome 拡張を用いた閲覧履歴データのエクスポート方法</Link>
-          をご覧ください。
+          提供いただいた閲覧履歴は、静岡大学情報学部で行っている研究目的で使用いたします。研究目的にのみ使用し、その他の目的では一切使用いたしません。
         </p>
+
+        <h2 className="mt-5">タスクの流れについて</h2>
+        <p>タスクの流れを説明いたします。 手順に従ってアップロードを行ってください。</p>
+        <ol className="my-5">
+          <li className="my-3">
+            閲覧履歴をエクスポートできる拡張機能をダウンロードします。以下のリンク先にアクセスしてください。
+            <ul>
+              <li>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://chrome.google.com/webstore/detail/history-export/lpmoaclacdaofhlijejogfldmgkdlglj/related?hl=ja"
+                >
+                  History export by Quamilek
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li className="my-3">画像のようなページが表示されたら、「chromeに追加」をクリックします。</li>
+          <img src="/public/img/how2/exportHistory/01.png" width="100%" className="my-3 mx-3" />
+
+          <li className="my-3">ポップアップの内容を確認し、「拡張機能を追加」をクリックします。</li>
+          <div className="mx-auto">
+            <img src="/public/img/how2/exportHistory/02.png" width="50%" className="my-3 mx-3" />
+          </div>
+
+          <li className="my-3">
+            「拡張機能が追加されました」と書かれたポップアップが表示されたら、アイコンをクリックします。
+          </li>
+          <img src="/public/img/how2/exportHistory/03.png" width="50%" className="my-3 mx-3" />
+
+          <li className="my-3">「all history」をクリックします。</li>
+          <img src="/public/img/how2/exportHistory/04.png" width="50%" className="my-3 mx-3" />
+
+          <li className="my-3">
+            閲覧履歴情報が「history.json」というファイル名で保存されます。ファイル名は変更しないでください。
+          </li>
+          <img src="/public/img/how2/exportHistory/05.png" width="50%" className="my-3 mx-3" />
+
+          <li className="my-3">
+            ダウンロードが完了したら、先程保存した「history.json」というファイルを 以下のアップロード画面にドラッグ &
+            ドロップしてください。 「アップロードする」のボタンを押してアップロードを完了します。
+            <br />
+            ボタンを押したあとに、画像のように完了コードが表示されればタスクは完了です。
+            完了コードを記録したら、画面右上の「タスクを終了する」ボタンよりタスクを終了してください。
+            ボタンを押したあとは最初の画面に戻りますので、ページを閉じていただいて問題ありません。
+          </li>
+          <MDBRow>
+            <MDBCol>
+              <img src="/public/img/how2/exportHistory/06.png" width="100%" className="my-3 mx-3" />
+            </MDBCol>
+            <MDBCol>
+              <img src="/public/img/how2/exportHistory/08.png" width="100%" className="my-3 mx-3" />
+            </MDBCol>
+          </MDBRow>
+        </ol>
 
         <MDBRow className="border border-dark rounded-lg p-3">
           {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
