@@ -22,11 +22,6 @@ export const Register: React.FC = () => {
     setLoading(true);
     createUser(externalId)
       .then((v) => {
-        if (v.externalId === '') {
-          toast.error('タスクができるのは 1 人 1 度までとなります');
-          setLoading(false);
-          return;
-        }
         const email = externalId + '@savitr.dummy.com';
         auth
           .signUp(email, v.secret)
@@ -35,8 +30,16 @@ export const Register: React.FC = () => {
             history.push('/upload');
           })
           .catch((res) => {
-            toast.error(`登録に失敗しました : ${res}`);
-            setLoading(false);
+            auth
+              .signIn(email, v.secret)
+              .then(() => {
+                setLoading(false);
+                history.push('/upload');
+              })
+              .catch(() => {
+                toast.error(`予期せぬエラーが発生しました : ${res}`);
+                setLoading(false);
+              });
           });
       })
       .catch((res) => {
