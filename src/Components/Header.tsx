@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
               history.push('/');
             }}
           >
-            ログアウト
+            タスクを終了する
           </MDBBtn>
         </MDBNavItem>
       </MDBNavbarNav>
