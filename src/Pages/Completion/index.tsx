@@ -1,3 +1,4 @@
+import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 import { NotFound } from 'Pages/NotFound';
 import React, { useEffect, useState } from 'react';
 import { fetchCompletionCode } from 'shared/apis/apis';
@@ -11,5 +12,5 @@ export const Completion: React.FC = () => {
     const uid = auth.user?.email?.split('@')[0];
     fetchCompletionCode(uid || '').then((v) => setCompCode(v));
   });
-  return compCode !== null ? <Component compCode={compCode} /> : <NotFound />;
+  return compCode !== null ? <Component compCode={compCode} /> : <ComponentLoaderCenter />;
 };
