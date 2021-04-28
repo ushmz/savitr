@@ -1,35 +1,36 @@
-import { MDBBtn, MDBIcon, MDBCol, MDBContainer, MDBRow } from 'mdbreact';
+import { MDBBtn, MDBIcon, MDBCol, MDBContainer, MDBRow, MDBNavbar } from 'mdbreact';
 import React, { useState, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { useDropzone } from 'react-dropzone';
+import { useHistory } from 'react-router-dom';
 import { Header } from 'Components/Header';
-import { uploadUserFile } from 'shared/apis/apis';
-import { useAuth } from 'shared/provider/authProvider';
-import { toast } from 'react-toastify';
+// import { useDropzone } from 'react-dropzone';
+// import { uploadUserFile } from 'shared/apis/apis';
+// import { useAuth } from 'shared/provider/authProvider';
+// import { toast } from 'react-toastify';
 
 export const Upload: React.FC = () => {
   const history = useHistory();
-  const auth = useAuth();
-  const [uploaded, setUploaded] = useState<File[]>([]);
+  // const auth = useAuth();
+  // const [uploaded, setUploaded] = useState<File[]>([]);
+  const [isClicked, setClicked] = useState<boolean>(false);
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      if (acceptedFiles.length != 1) {
-        toast.error('アップロードできるファイルは1つのみです。');
-        return setUploaded([...uploaded]);
-      }
-      return setUploaded([...acceptedFiles]);
-    },
-    [uploaded],
-  );
+  // const onDrop = useCallback(
+  //   (acceptedFiles: File[]) => {
+  //     if (acceptedFiles.length != 1) {
+  //       toast.error('アップロードできるファイルは1つのみです。');
+  //       return setUploaded([...uploaded]);
+  //     }
+  //     return setUploaded([...acceptedFiles]);
+  //   },
+  //   [uploaded],
+  // );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: onDrop, multiple: false });
+  // const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: onDrop, multiple: false });
 
-  const removeFile = (file: File) => () => {
-    const newFiles = [...uploaded];
-    newFiles.splice(newFiles.indexOf(file), 1);
-    setUploaded(newFiles);
-  };
+  // const removeFile = (file: File) => () => {
+  //   const newFiles = [...uploaded];
+  //   newFiles.splice(newFiles.indexOf(file), 1);
+  //   setUploaded(newFiles);
+  // };
 
   // const removeAll = () => {
   //   setUploaded([]);
@@ -47,34 +48,34 @@ export const Upload: React.FC = () => {
   //   }
   // };
 
-  const onSubmit = async (): Promise<boolean> => {
-    if (uploaded[0]) {
-      const username = auth.user?.email?.split('@')[0] || '';
-      const isOk = await uploadUserFile(username, uploaded[0]);
-      return isOk;
-    }
-    return false;
-  };
+  // const onSubmit = async (): Promise<boolean> => {
+  //   if (uploaded[0]) {
+  //     const username = auth.user?.email?.split('@')[0] || '';
+  //     const isOk = await uploadUserFile(username, uploaded[0]);
+  //     return isOk;
+  //   }
+  //   return false;
+  // };
 
-  const files = uploaded.map((file, idx) => {
-    return (
-      <div key={idx} className="border border-dark rounded-lg mx-3 my-1 px-3">
-        <MDBRow>
-          <MDBCol md="10">
-            <div className="d-flex flex-row">
-              <input className="my-1" id={`fileInput${idx}`} defaultValue={file.name} />
-              <p className="my-1">{`(${file.size} bytes)`}</p>
-            </div>
-          </MDBCol>
-          <MDBCol md="2">
-            <span className="float-right">
-              <MDBIcon icon="times-circle" onClick={removeFile(file)} />
-            </span>
-          </MDBCol>
-        </MDBRow>
-      </div>
-    );
-  });
+  // const files = uploaded.map((file, idx) => {
+  //   return (
+  //     <div key={idx} className="border border-dark rounded-lg mx-3 my-1 px-3">
+  //       <MDBRow>
+  //         <MDBCol md="10">
+  //           <div className="d-flex flex-row">
+  //             <input className="my-1" id={`fileInput${idx}`} defaultValue={file.name} />
+  //             <p className="my-1">{`(${file.size} bytes)`}</p>
+  //           </div>
+  //         </MDBCol>
+  //         <MDBCol md="2">
+  //           <span className="float-right">
+  //             <MDBIcon icon="times-circle" onClick={removeFile(file)} />
+  //           </span>
+  //         </MDBCol>
+  //       </MDBRow>
+  //     </div>
+  //   );
+  // });
 
   return (
     <>
@@ -85,7 +86,6 @@ export const Upload: React.FC = () => {
         <p>
           提供いただいた閲覧履歴は、静岡大学情報学部で行っている研究目的で使用いたします。研究目的にのみ使用し、その他の目的では一切使用いたしません。
         </p>
-
         <h2 className="mt-5">タスクの流れについて</h2>
         <p>タスクの流れを説明いたします。 手順に従ってアップロードを行ってください。</p>
         <ol className="my-5">
@@ -125,53 +125,61 @@ export const Upload: React.FC = () => {
           <img src="/public/img/how2/exportHistory/05.png" width="50%" className="my-3 mx-3" />
 
           <li className="my-3">
-            ダウンロードが完了したら、先程保存した「history.json」というファイルを 以下のアップロード画面にドラッグ &
-            ドロップしてください。 「アップロードする」のボタンを押してアップロードを完了します。
+            ダウンロードが完了したら、先程保存した「history.json」というファイルをアップロードしてください。
+            アップロード先 URL は
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.dropbox.com/request/8Eaw6J2Yuwhi0MS9FQmr"
+              onClick={() => setClicked(true)}
+            >
+              https://www.dropbox.com/request/8Eaw6J2Yuwhi0MS9FQmr
+            </a>
+            です。
             <br />
-            ボタンを押したあとに、画像のように完了コードが表示されればタスクは完了です。
-            完了コードを記録したら、画面右上の「タスクを終了する」ボタンよりタスクを終了してください。
-            ボタンを押したあとは最初の画面に戻りますので、ページを閉じていただいて問題ありません。
+            リンク先は新規タブで開かれます。「Add
+            files（ファイルを追加）」をクリックしてファイルをアップロードしてください。
+            アップロードが完了したら開かれたタブを閉じ、以下にある「完了コードの発行」をクリックしてください。（リンクを開くとボタンがクリックできるようになります。）
           </li>
-          <MDBRow>
-            <MDBCol>
-              <img src="/public/img/how2/exportHistory/06.png" width="100%" className="my-3 mx-3" />
-            </MDBCol>
-            <MDBCol>
-              <img src="/public/img/how2/exportHistory/08.png" width="100%" className="my-3 mx-3" />
-            </MDBCol>
-          </MDBRow>
         </ol>
-
-        <MDBRow className="border border-dark rounded-lg p-3">
-          {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
-          {/* <div className="input-group-prepend">
-              <span className="input-group-text">ファイルを選択</span>
-            </div> */}
-          <div {...getRootProps({ className: 'custom-file my-3' })}>
-            <input {...getInputProps()} />
-            {isDragActive ? (
-              <p className="custom-file-label">ここにファイルをドラッグ & ドロップ。</p>
-            ) : (
-              <p className="custom-file-label">ファイルを選択するか、ドラッグ & ドロップしてください。</p>
-            )}
-          </div>
-        </MDBRow>
-        <MDBRow className="my-3">
-          <MDBBtn
-            color="primary"
-            type="submit"
-            onClick={async () => {
-              const isOk = await onSubmit();
-              if (isOk) {
-                history.push('/upload/completion');
-              } else {
-                toast.error('アップロードに失敗しました。');
-              }
-            }}
-          >
-            アップロードする
-          </MDBBtn>
-        </MDBRow>
+        {/*
+	  <MDBRow className="border border-dark rounded-lg p-3">
+		  {files.length !== 0 ? <div style={{ width: '100%' }}>{files}</div> : <></>}
+		  <div {...getRootProps({ className: 'custom-file my-3' })}>
+		  <input {...getInputProps()} />
+		  {isDragActive ? (
+			  <p className="custom-file-label">ファイルを選択してください。</p>
+		  ) : (
+			  <p className="custom-file-label">ファイルを選択してください。</p>
+		  )}
+		  </div>
+		  </MDBRow>
+		  <MDBRow className="my-3">
+		  <MDBBtn
+		  color="primary"
+		  type="submit"
+		  onClick={async () => {
+			  const isOk = await onSubmit();
+			  if (isOk) {
+				  history.push('/upload/completion');
+			  } else {
+				  toast.error('アップロードに失敗しました。');
+			  }
+		  }}
+		  >
+	アップロードする
+	</MDBBtn>
+	</MDBRow>
+	*/}
+        <MDBBtn
+          disabled={!isClicked}
+          color="primary"
+          onClick={() => {
+            history.push('/upload/completion');
+          }}
+        >
+          完了コードの発行
+        </MDBBtn>
       </MDBContainer>
     </>
   );

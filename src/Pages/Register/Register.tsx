@@ -29,15 +29,15 @@ export const Register: React.FC = () => {
             setLoading(false);
             history.push('/upload');
           })
-          .catch((res) => {
+          .catch(() => {
             auth
               .signIn(email, v.secret)
               .then(() => {
                 setLoading(false);
                 history.push('/upload');
               })
-              .catch(() => {
-                toast.error(`予期せぬエラーが発生しました : ${res}`);
+              .catch((resin) => {
+                toast.error(`予期せぬエラーが発生しました : ${resin}`);
                 setLoading(false);
               });
           });
