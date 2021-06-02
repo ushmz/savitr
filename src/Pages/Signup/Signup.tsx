@@ -6,13 +6,22 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from 'shared/provider/authProvider';
 import { toast } from 'react-toastify';
 
+type SignUpParamName = 'externalId' | 'passwd' | 'passwdConfirm';
+
 type SignUpParam = {
   externalId: string;
   passwd: string;
+  passwdConfirm: string;
 };
 
 export const Signup: React.FC = () => {
-  const { register, handleSubmit, formState, errors } = useForm<SignUpParam>();
+  const {
+    register,
+    handleSubmit,
+    formState,
+    setError,
+    formState: { errors },
+  } = useForm<SignUpParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const auth = useAuth();
@@ -42,43 +51,51 @@ export const Signup: React.FC = () => {
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
             </label>
-            <input
-              id="externalId"
-              name="externalId"
-              ref={register({ required: true })}
-              className="mb-3 mt-0 form-control"
-            />
-            <ErrorMessage errors={errors} name="externalId" as="p" message="必須項目です" style={{ color: 'red' }} />
-
+            <input id="externalId" className="mb-3 mt-0 form-control" {...register('externalId')} />
+            {errors.externalId && <p>{errors.externalId.message}</p>}
             <label htmlFor="passwd" className="grey-text font-weight-light">
               パスワード
             </label>
-            <input
-              id="passwd"
-              name="passwd"
-              ref={register({ required: true, min: 8 })}
-              className="mb-3 mt-0 form-control"
-              type="password"
-            />
-            <ErrorMessage
-              errors={errors}
-              name="passwd"
-              as="p"
-              message="パスワードは必須項目かつ8文字以上が必要です"
-              style={{ color: 'red' }}
-            />
+            <input id="passwd" className="mb-3 mt-0 form-control" type="password" {...register('passwd')} />
+            {errors.passwd && <p>{errors.passwd.message}</p>}
             <label htmlFor="passwdConfirm" className="grey-text font-weight-light">
               パスワード（確認）
             </label>
             <input
               id="passwdConfirm"
-              name="passwdConfirm"
-              ref={register({ required: true, min: 8 })}
               className="mb-3 mt-0 form-control"
               type="password"
+              {...register('passwdConfirm')}
             />
+            {errors.passwdConfirm && <p>{errors.passwdConfirm.message}</p>}
             <div className="text-center">
-              <MDBBtn type="submit" color="primary" invalid={(!formState.isValid).toString()}>
+              <MDBBtn
+                type="submit"
+                color="primary"
+                invalid={(!formState.isValid).toString()}
+                onClick={() => {
+                  [
+                    {
+                      type: 'manual',
+                      name: 'externalId',
+                      message: '必須項目です',
+                    },
+                    {
+                      type: 'manual',
+                      name: 'passwd',
+                      message: '必須項目です',
+                    },
+                    {
+                      type: 'manual',
+                      name: 'passwdConfirm',
+                      message: '一致しません',
+                    },
+                  ].forEach(({ type, name, message }) => {
+                    const param = name as SignUpParamName;
+                    setError(param, { type, message });
+                  });
+                }}
+              >
                 {isLoading ? (
                   <div className="spinner-border spinner-border-sm" role="status">
                     <span className="sr-only">Loading...</span>

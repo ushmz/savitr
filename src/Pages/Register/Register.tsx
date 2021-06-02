@@ -1,4 +1,3 @@
-import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
@@ -7,13 +6,20 @@ import { useAuth } from '../../shared/provider/authProvider';
 import { toast } from 'react-toastify';
 import { createUser } from '../../shared/apis/apis';
 
-type SigninParam = {
+type RegisterParamName = 'externalId';
+
+type RegisterParam = {
   externalId: string;
   passwd: string;
 };
 
 export const Register: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<SigninParam>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<RegisterParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const auth = useAuth();
@@ -57,16 +63,25 @@ export const Register: React.FC = () => {
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
             </label>
-            <input
-              id="externalId"
-              name="externalId"
-              ref={register({ required: true })}
-              className="mb-3 mt-0 form-control"
-            />
-            <ErrorMessage errors={errors} name="externalId" as="p" message="必須項目です" style={{ color: 'red' }} />
-
+            <input id="externalId" className="mb-3 mt-0 form-control" {...register('externalId')} />
+            {errors.externalId && <p>{errors.externalId.message}</p>}
             <div className="text-center">
-              <MDBBtn type="submit" color="primary">
+              <MDBBtn
+                type="submit"
+                color="primary"
+                onClick={() => {
+                  [
+                    {
+                      type: 'manual',
+                      name: 'externalId',
+                      message: '必須項目です',
+                    },
+                  ].forEach(({ type, name, message }) => {
+                    const param = name as RegisterParamName;
+                    setError(param, { type, message });
+                  });
+                }}
+              >
                 {isLoading ? (
                   <div className="spinner-border spinner-border-sm" role="status">
                     <span className="sr-only">Loading...</span>

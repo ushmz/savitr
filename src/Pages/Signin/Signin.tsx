@@ -1,4 +1,3 @@
-import { ErrorMessage } from '@hookform/error-message';
 import { useForm } from 'react-hook-form';
 import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
@@ -6,13 +5,20 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from 'shared/provider/authProvider';
 import { toast } from 'react-toastify';
 
+type SigninParamName = 'externalId' | 'passwd';
+
 type SigninParam = {
   externalId: string;
   passwd: string;
 };
 
 export const Signin: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<SigninParam>();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<SigninParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
   const history = useHistory();
   const auth = useAuth();
@@ -41,33 +47,35 @@ export const Signin: React.FC = () => {
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
             </label>
-            <input
-              id="externalId"
-              name="externalId"
-              ref={register({ required: true })}
-              className="mb-3 mt-0 form-control"
-            />
-            <ErrorMessage errors={errors} name="externalId" as="p" message="必須項目です" style={{ color: 'red' }} />
-
+            <input id="externalId" className="mb-3 mt-0 form-control" {...register('externalId')} />
+            {errors.externalId && <p>{errors.externalId.message}</p>}
             <label htmlFor="passwd" className="grey-text font-weight-light">
               パスワード
             </label>
-            <input
-              id="passwd"
-              name="passwd"
-              ref={register({ required: true, min: 8 })}
-              className="mb-3 mt-0 form-control"
-              type="password"
-            />
-            <ErrorMessage
-              errors={errors}
-              name="passwd"
-              as="p"
-              message="パスワードは必須項目かつ8文字以上が必要です"
-              style={{ color: 'red' }}
-            />
+            <input id="passwd" className="mb-3 mt-0 form-control" type="password" {...register('passwd')} />
+            {errors.passwd && <p>{errors.passwd.message}</p>}
             <div className="text-center">
-              <MDBBtn type="submit" color="primary">
+              <MDBBtn
+                type="submit"
+                color="primary"
+                onClick={() => {
+                  [
+                    {
+                      type: 'manual',
+                      name: 'externalId',
+                      message: '必須項目です',
+                    },
+                    {
+                      type: 'manual',
+                      name: 'passwd',
+                      message: '必須項目です',
+                    },
+                  ].forEach(({ type, name, message }) => {
+                    const param = name as SigninParamName;
+                    setError(param, { type, message });
+                  });
+                }}
+              >
                 {isLoading ? (
                   <div className="spinner-border spinner-border-sm" role="status">
                     <span className="sr-only">Loading...</span>
