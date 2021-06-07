@@ -6,15 +6,91 @@ import { sendDocumentClickLog, sendHistoryClickLog } from '../repository/logAPI'
 import { WARNING_MESSAGE } from '../shared/consts';
 import { LeakedPage } from '../shared/apis/apis';
 import TextTruncate from 'react-text-truncate';
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 
-type CollectedHistories = {
+type Props = {
+  title: string;
+  url: string;
+  snippet: string;
+  leakedPages: LeakedPage[];
+  getTimeOnPage: () => number;
+  taskName: string;
+};
+
+/**
+ * Return single search result component used in web search task.
+ */
+export const SearchResult: React.FC<Props> = ({ title, snippet, url, leakedPages, getTimeOnPage, taskName }) => {
+  return (
+    <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => {
+          sendDocumentClickLog({
+            uid: localStorage.getItem('uid') || '',
+            taskName: taskName,
+            timeOnPage: getTimeOnPage(),
+            pageUrl: url,
+            linkedPageNum: leakedPages.length,
+          });
+        }}
+      >
+        <URLText size="14px">{truncateText(url, 72)}</URLText>
+        <TitleText size="18px">{truncateText(title, 33)}</TitleText>
+      </a>
+      <SizedText size="14px">{truncateText(snippet || '', 125)}</SizedText>
+      {leakedPages.length === 0 ? (
+        <></>
+      ) : (
+        <>
+          <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
+          <div className="border border-dark m-3 rounded-lg">
+            {/* <CollectedPages histories={leakedPages} documentURL={url} getTimeOnPage={getTimeOnPage} taskName={taskName} /> */}
+            <CollectedTendencyIconList
+              histories={leakedPages}
+              documentURL={url}
+              getTimeOnPage={getTimeOnPage}
+              taskName={taskName}
+            ></CollectedTendencyIconList>
+          </div>
+        </>
+      )}
+    </SearchResultContainer>
+  );
+};
+
+type CollectedTendencyIconListProps = {
   histories: LeakedPage[];
   documentURL: string;
   getTimeOnPage: () => number;
   taskName: string;
 };
 
-const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, getTimeOnPage, taskName }) => {
+const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (props) => {
+  const arrowLeft = <MDBIcon icon="caret-left" className="mx-3"></MDBIcon>;
+  const arrowRight = <MDBIcon icon="caret-right" className="mx-3"></MDBIcon>;
+  const icons = props.histories.map((history) => {
+    const fav = history.url.endsWith('/') ? `${history.url}favicon.ico` : `${history.url}/favicon.ico`;
+    return (
+      <a key={history.id} href={history.url} className="mx-1 my-2">
+        <img src={fav} style={{ height: 60, objectFit: 'cover' }} />
+      </a>
+    );
+  });
+
+  return <ScrollMenu data={icons} arrowLeft={arrowLeft} arrowRight={arrowRight}></ScrollMenu>;
+};
+
+type CollectedPagesProp = {
+  histories: LeakedPage[];
+  documentURL: string;
+  getTimeOnPage: () => number;
+  taskName: string;
+};
+
+const CollectedPages: React.FC<CollectedPagesProp> = ({ histories, documentURL, getTimeOnPage, taskName }) => {
   if (histories.length === 0) {
     return <></>;
   } else if (histories.length < 3) {
@@ -108,52 +184,7 @@ const CollectedPages: React.FC<CollectedHistories> = ({ histories, documentURL, 
   }
 };
 
-type Props = {
-  title: string;
-  url: string;
-  snippet: string;
-  leakedPages: LeakedPage[];
-  getTimeOnPage: () => number;
-  taskName: string;
-};
-
-/**
- * Return single search result component used in web search task.
- * Title of pages that collected when follow the link(passed as `Props.url`) are displayed.
- */
-export const SearchResult: React.FC<Props> = ({ title, snippet, url, leakedPages, getTimeOnPage, taskName }) => {
-  return (
-    <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => {
-          sendDocumentClickLog({
-            uid: localStorage.getItem('uid') || '',
-            taskName: taskName,
-            timeOnPage: getTimeOnPage(),
-            pageUrl: url,
-            linkedPageNum: leakedPages.length,
-          });
-        }}
-      >
-        <URLText size="14px">{truncateText(url, 72)}</URLText>
-        <TitleText size="18px">{truncateText(title, 33)}</TitleText>
-      </a>
-      <SizedText size="14px">{truncateText(snippet || '', 125)}</SizedText>
-      {leakedPages.length === 0 ? (
-        <></>
-      ) : (
-        <div className="border border-dark m-3 rounded-lg">
-          <CollectedPages histories={leakedPages} documentURL={url} getTimeOnPage={getTimeOnPage} taskName={taskName} />
-        </div>
-      )}
-    </SearchResultContainer>
-  );
-};
-
-type CollapseProps = {
+type CollapseMenuProps = {
   items: LeakedPage[];
   documentURL: string;
   getTimeOnPage: () => number;
@@ -162,10 +193,9 @@ type CollapseProps = {
 
 /**
  * Return Collapse menu component.
- * This component is too optimized for this search result,
- * so I don't separate this as (shared) component.
+ * This is for the risk display area.
  */
-const CollapseMenu: React.FC<CollapseProps> = ({ items, documentURL, getTimeOnPage, taskName }) => {
+const CollapseMenu: React.FC<CollapseMenuProps> = ({ items, documentURL, getTimeOnPage, taskName }) => {
   const [collapsedID, setCollapsedID] = React.useState<string>('');
 
   const toggleCollapse = (collapseID: string) => () => {
