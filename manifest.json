@@ -1,35 +1,21 @@
 {
-    "name": "savitri",
-    "version": "0.0.1",
-    "manifest_version": 2,
-    "description": "",
-    "browser_action": {
-        "default_title": "text appear when hover the pointer",
-        "default_popup": "src/popup.html"
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*.google.com/search?*",
-                "*://*.google.co.jp/search?*"
-            ],
-            "js": [
-                "src/collect.js"
-            ]
-        }
-    ],
-    "background": {
-        "scripts": [
-            "src/background.js"
-        ]
-    },
-    "web_accessible_resources": [
-        "src/SQLRepository.js",
-        "db/sql/*.sql"
-    ],
-    "permissions": [
-        "*://*.google.com/search?*",
-        "downloads",
-        "storage"
-    ]
+  "name": "savitri",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "",
+  "browser_action": {
+    "default_title": "text appear when hover the pointer",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/search?*", "*://*.google.co.jp/search?*"],
+      "js": ["src/collect.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["src/background.js"]
+  },
+  "web_accessible_resources": ["src/SQLRepository.js", "db/sql/*.sql"],
+  "permissions": ["*://*.google.com/search?*", "downloads", "storage"]
 }

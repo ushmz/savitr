@@ -28,7 +28,7 @@ export const SearchHeader: React.FC<Props> = ({ title, placeholder }) => {
               <Inlinediv>
                 <MDBIcon icon="times" size="lg" className="mx-1" />
                 <div className="border-left border-dark">
-                  <MDBIcon icon="microphone" size="lg" className="mx-1" />
+                  <div />
                 </div>
                 <MDBIcon icon="search" className="indigo-text mx-1" size="lg" />
               </Inlinediv>
