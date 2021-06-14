@@ -14,9 +14,10 @@ import { useAuth } from 'shared/provider/authProvider';
 //   linkedPages: HistoryTable[];
 // };
 
-type Props = RouteComponentProps<{ taskid?: string }>;
+type TaskProps = RouteComponentProps<{ taskid?: string }>;
 
-export const Task: React.FC<Props> = (props) => {
+export const Task: React.FC<TaskProps> = (props: TaskProps) => {
+  const taskIdNum = parseInt(props.match.params.taskid!);
   const dummyTask: TaskInfo = {
     query: 'dummyQuery',
     title: 'dummyTitle',
@@ -42,17 +43,18 @@ export const Task: React.FC<Props> = (props) => {
         uid: auth.user?.uid || '',
         timeOnPage: minutes * 60 + seconds,
         url: document.URL,
-        // How do we fetch these?
-        taskId: 5,
-        conditionId: 5,
+        taskId: taskIdNum,
+        conditionId: taskIdNum,
       });
     }
   }, 1000);
 
   useEffect(() => {
     // getSerp();
-    fetchSerp(5).then((serp) => setSerpPages(serp));
-    fetchTaskInfo(5).then((taskInfo) => (taskInfo ? setTask(taskInfo) : setTask(dummyTask)));
+    fetchSerp(taskIdNum).then((serp) => setSerpPages(serp));
+    fetchTaskInfo(taskIdNum).then((taskInfo) => {
+      taskInfo ? setTask(taskInfo) : setTask(dummyTask);
+    });
   }, []);
 
   return <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={task} />;
