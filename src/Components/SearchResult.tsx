@@ -72,10 +72,9 @@ const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (pro
   const arrowLeft = <MDBIcon icon="caret-left" className="mx-3"></MDBIcon>;
   const arrowRight = <MDBIcon icon="caret-right" className="mx-3"></MDBIcon>;
   const icons = props.histories.map((history) => {
-    const fav = history.url.endsWith('/') ? `${history.url}favicon.ico` : `${history.url}/favicon.ico`;
     return (
       <a key={history.id} href={history.url} className="mx-1 my-2">
-        <img src={fav} style={{ height: 60, objectFit: 'cover' }} />
+        <img src={history.icon} style={{ height: 60, objectFit: 'cover' }} />
       </a>
     );
   });
@@ -83,106 +82,106 @@ const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (pro
   return <ScrollMenu data={icons} arrowLeft={arrowLeft} arrowRight={arrowRight}></ScrollMenu>;
 };
 
-type CollectedPagesProp = {
-  histories: LeakedPage[];
-  documentURL: string;
-  getTimeOnPage: () => number;
-  taskName: string;
-};
+// type CollectedPagesProp = {
+//   histories: LeakedPage[];
+//   documentURL: string;
+//   getTimeOnPage: () => number;
+//   taskName: string;
+// };
 
-const CollectedPages: React.FC<CollectedPagesProp> = ({ histories, documentURL, getTimeOnPage, taskName }) => {
-  if (histories.length === 0) {
-    return <></>;
-  } else if (histories.length < 3) {
-    return (
-      <div className="m-3">
-        <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
-        {histories.map((history, idx) => (
-          <div
-            key={idx}
-            onClick={() =>
-              sendHistoryClickLog({
-                uid: localStorage.getItem('uid') || '',
-                taskName: taskName,
-                timeOnPage: getTimeOnPage(),
-                linkedDocumentUrl: documentURL,
-                linkedPageNum: histories.length,
-                collapse: false,
-              })
-            }
-          >
-            <MDBPopper domElement placement="top">
-              <a href={history.url} target="_blank" rel="noopener noreferrer">
-                <TextTruncate line={1} element="p" truncateText="..." text={history.title} />
-              </a>
-              <span>
-                <img src={history.thumb} width="240px" />
-              </span>
-            </MDBPopper>
-          </div>
-        ))}
-      </div>
-    );
-  } else {
-    const primary = histories[0];
-    const secondly = histories[1];
-
-    return (
-      <div className="m-3">
-        <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
-        <div
-          onClick={() =>
-            sendHistoryClickLog({
-              uid: chrome.runtime.id,
-              taskName: taskName,
-              timeOnPage: getTimeOnPage(),
-              linkedDocumentUrl: documentURL,
-              linkedPageNum: histories.length,
-              collapse: false,
-            })
-          }
-        >
-          <MDBPopper domElement placement="top">
-            <a href={primary.url} target="_blank" rel="noopener noreferrer">
-              <TextTruncate line={1} element="p" truncateText="..." text={primary.title} />
-            </a>
-            <span>
-              <img src={primary.thumb} width="240px" />
-            </span>
-          </MDBPopper>
-        </div>
-
-        <div
-          onClick={() =>
-            sendHistoryClickLog({
-              uid: chrome.runtime.id,
-              taskName: taskName,
-              timeOnPage: getTimeOnPage(),
-              linkedDocumentUrl: documentURL,
-              linkedPageNum: histories.length,
-              collapse: false,
-            })
-          }
-        >
-          <MDBPopper domElement placement="top">
-            <a href={secondly.url} target="_blank" rel="noopener noreferrer">
-              <TextTruncate line={1} element="p" truncateText="..." text={secondly.title} />
-            </a>
-            <span>
-              <img src={secondly.thumb} width="240px" />
-            </span>
-          </MDBPopper>
-        </div>
-        <CollapseMenu
-          items={histories.slice(2)}
-          documentURL={documentURL}
-          getTimeOnPage={getTimeOnPage}
-          taskName={taskName}
-        />
-      </div>
-    );
-  }
-};
+// const CollectedPages: React.FC<CollectedPagesProp> = ({ histories, documentURL, getTimeOnPage, taskName }) => {
+//   if (histories.length === 0) {
+//     return <></>;
+//   } else if (histories.length < 3) {
+//     return (
+//       <div className="m-3">
+//         <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
+//         {histories.map((history, idx) => (
+//           <div
+//             key={idx}
+//             onClick={() =>
+//               sendHistoryClickLog({
+//                 uid: localStorage.getItem('uid') || '',
+//                 taskName: taskName,
+//                 timeOnPage: getTimeOnPage(),
+//                 linkedDocumentUrl: documentURL,
+//                 linkedPageNum: histories.length,
+//                 collapse: false,
+//               })
+//             }
+//           >
+//             <MDBPopper domElement placement="top">
+//               <a href={history.url} target="_blank" rel="noopener noreferrer">
+//                 <TextTruncate line={1} element="p" truncateText="..." text={history.title} />
+//               </a>
+//               <span>
+//                 <img src={history.thumb} width="240px" />
+//               </span>
+//             </MDBPopper>
+//           </div>
+//         ))}
+//       </div>
+//     );
+//   } else {
+//     const primary = histories[0];
+//     const secondly = histories[1];
+//
+//     return (
+//       <div className="m-3">
+//         <WarningText size="18px">{WARNING_MESSAGE}</WarningText>
+//         <div
+//           onClick={() =>
+//             sendHistoryClickLog({
+//               uid: chrome.runtime.id,
+//               taskName: taskName,
+//               timeOnPage: getTimeOnPage(),
+//               linkedDocumentUrl: documentURL,
+//               linkedPageNum: histories.length,
+//               collapse: false,
+//             })
+//           }
+//         >
+//           <MDBPopper domElement placement="top">
+//             <a href={primary.url} target="_blank" rel="noopener noreferrer">
+//               <TextTruncate line={1} element="p" truncateText="..." text={primary.title} />
+//             </a>
+//             <span>
+//               <img src={primary.thumb} width="240px" />
+//             </span>
+//           </MDBPopper>
+//         </div>
+//
+//         <div
+//           onClick={() =>
+//             sendHistoryClickLog({
+//               uid: chrome.runtime.id,
+//               taskName: taskName,
+//               timeOnPage: getTimeOnPage(),
+//               linkedDocumentUrl: documentURL,
+//               linkedPageNum: histories.length,
+//               collapse: false,
+//             })
+//           }
+//         >
+//           <MDBPopper domElement placement="top">
+//             <a href={secondly.url} target="_blank" rel="noopener noreferrer">
+//               <TextTruncate line={1} element="p" truncateText="..." text={secondly.title} />
+//             </a>
+//             <span>
+//               <img src={secondly.thumb} width="240px" />
+//             </span>
+//           </MDBPopper>
+//         </div>
+//         <CollapseMenu
+//           items={histories.slice(2)}
+//           documentURL={documentURL}
+//           getTimeOnPage={getTimeOnPage}
+//           taskName={taskName}
+//         />
+//       </div>
+//     );
+//   }
+// };
 
 type CollapseMenuProps = {
   items: LeakedPage[];
@@ -235,7 +234,7 @@ const CollapseMenu: React.FC<CollapseMenuProps> = ({ items, documentURL, getTime
                   <TextTruncate line={1} element="p" truncateText="..." text={page.title} />
                 </a>
                 <span>
-                  <img src={page.thumb} width="240px" />
+                  <img src={page.icon} width="240px" />
                 </span>
               </MDBPopper>
             </div>
