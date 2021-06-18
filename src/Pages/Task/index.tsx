@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useStopwatch } from 'react-timer-hook';
-import { useInterval } from 'use-interval';
+// import { useStopwatch } from 'react-timer-hook';
+// import { useInterval } from 'use-interval';
 import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
-import { createTaskTimeLog, fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../shared/apis/apis';
-import { useAuth } from 'shared/provider/authProvider';
+import { fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../shared/apis/apis';
+// import { useAuth } from 'shared/provider/authProvider';
 
 // type SerpPage = {
 //   title: string;
@@ -27,35 +27,47 @@ export const Task: React.FC<TaskProps> = (props: TaskProps) => {
     type: '',
   };
 
-  const auth = useAuth();
+  // const auth = useAuth();
   const [task, setTask] = useState<TaskInfo>(dummyTask);
   const [serpPages, setSerpPages] = useState<Serp[]>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const { seconds, minutes } = useStopwatch({ autoStart: true });
+  const [offset, setOffset] = useState<number>(0);
 
-  const getTimeOnPage = () => minutes * 60 + seconds;
+  // const { seconds, minutes } = useStopwatch({ autoStart: true });
 
-  useInterval(async () => {
-    if (!window.document.hidden) {
-      await createTaskTimeLog({
-        id: auth.user?.email || '',
-        uid: auth.user?.uid || '',
-        timeOnPage: minutes * 60 + seconds,
-        url: document.URL,
-        taskId: taskIdNum,
-        conditionId: taskIdNum,
-      });
-    }
-  }, 1000);
+  // const getTimeOnPage = () => minutes * 60 + seconds;
+
+  // useInterval(async () => {
+  //   if (!window.document.hidden) {
+  //     await createTaskTimeLog({
+  //       id: auth.user?.email || '',
+  //       uid: auth.user?.uid || '',
+  //       timeOnPage: minutes * 60 + seconds,
+  //       url: document.URL,
+  //       taskId: taskIdNum,
+  //       conditionId: taskIdNum,
+  //     });
+  //   }
+  // }, 1000);
 
   useEffect(() => {
     // getSerp();
-    fetchSerp(taskIdNum).then((serp) => setSerpPages(serp));
+    fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
     fetchTaskInfo(taskIdNum).then((taskInfo) => {
       taskInfo ? setTask(taskInfo) : setTask(dummyTask);
     });
-  }, []);
+    window.scrollTo(0, 0);
+  }, [offset]);
 
-  return <Component isLoading={isLoading} serpPages={serpPages} getTimeOnPage={getTimeOnPage} task={task} />;
+  return (
+    <Component
+      isLoading={isLoading}
+      serpPages={serpPages}
+      offset={offset}
+      setOffset={setOffset}
+      getTimeOnPage={() => 1}
+      task={task}
+    />
+  );
 };
