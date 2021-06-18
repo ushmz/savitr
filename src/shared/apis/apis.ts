@@ -52,7 +52,7 @@ export type TaskInfo = {
 };
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/tasks/${taskId}`, {
+  const response = await axios.get(`${API_ENDPOINT}/v1/tasks/${taskId}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -70,7 +70,7 @@ export type LeakedPage = {
   id: string;
   title: string;
   url: string;
-  thumb: string;
+  icon: string;
   cookies: {
     String: string;
     Valid: boolean;
@@ -84,10 +84,11 @@ export type Serp = {
   snippet: string;
   cookies: string[];
   leaks: { [key: string]: LeakedPage };
+  leak_num?: number;
 };
 
-export const fetchSerp = async (taskId: number): Promise<Serp[]> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/savitr/serps/${taskId}`, {
+export const fetchSerp = async (taskId: number, offset: number): Promise<Serp[]> => {
+  const response = await axios.get(`${API_ENDPOINT}/v1/serps/${taskId}?offset=${offset}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
