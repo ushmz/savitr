@@ -1,6 +1,6 @@
 import { MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type Props = {
   answer: string;
@@ -13,7 +13,6 @@ type Props = {
 export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }) => {
   const [name, setName] = useState<string>('');
   const [reason, setReason] = useState<string>('');
-  const history = useHistory();
 
   return (
     <MDBContainer>
@@ -67,7 +66,7 @@ export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }
                 e.preventDefault();
                 e.currentTarget.className += ' was-validated';
                 toggle(!isOpen);
-                history.push(linkTo);
+                // history.push(linkTo);
               }}
             >
               検索タスクを終了する

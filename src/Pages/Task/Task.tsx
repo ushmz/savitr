@@ -1,5 +1,17 @@
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBRow, MDBTypography } from 'mdbreact';
-import React, { useState } from 'react';
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBPagination,
+  MDBIcon,
+  MDBRow,
+  MDBTypography,
+  MDBPageItem,
+  MDBPageNav,
+} from 'mdbreact';
+import React, { Dispatch, useState, SetStateAction } from 'react';
+// import ReactPaginate from 'react-paginate';
 // import { SERPElement } from '../../shared/types';
 import { SearchResult } from '../../Components/SearchResult';
 import { SearchHeader } from '../../Components/SearchBar';
@@ -11,18 +23,26 @@ import { Serp, TaskInfo } from '../../shared/apis/apis';
 type Props = {
   isLoading: boolean;
   serpPages: Serp[];
+  offset: number;
+  setOffset: Dispatch<SetStateAction<number>>;
   getTimeOnPage: () => number;
   task: TaskInfo;
 };
 
-export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, task }) => {
+export const Task: React.FC<Props> = ({ isLoading, serpPages, offset, setOffset, getTimeOnPage, task }) => {
   const [isOpen, toggle] = useState<boolean>(false);
+
+  const totalRecords = serpPages.length;
+  const pageLimits = 10;
+  const pageNeighbours = 1;
+  const totalPages = Math.ceil(totalRecords / pageLimits);
 
   return (
     <>
       <MDBRow>
         <SearchHeader title="Custom Search" placeholder={task.query}></SearchHeader>
       </MDBRow>
+
       <MDBRow className="pt-5">
         {isLoading ? (
           <ComponentLoaderCenter />
@@ -39,6 +59,7 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
                     leakedPages={Object.entries(page.leaks).map(([_, v]) => v)}
                     getTimeOnPage={getTimeOnPage}
                     taskName={task.title}
+                    visible={idx % 2 != 0}
                   />
                 );
               })}
@@ -64,7 +85,13 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
                       <SizedText size="13px">制限時間はありませんので、納得のいくまで検索を行ってください。</SizedText>
                     </li>
                   </MDBTypography>
-                  <MDBBtn onClick={() => toggle(!isOpen)}>回答する</MDBBtn>
+                  <MDBBtn
+                    onClick={() => {
+                      /*toggle(!isOpen)*/
+                    }}
+                  >
+                    回答する
+                  </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
               <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} linkTo={'/'} />
@@ -72,6 +99,48 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, getTimeOnPage, tas
           </>
         )}
       </MDBRow>
+
+      <div className="px-5 py-5">
+        <MDBPagination>
+          <MDBPageItem disabled={offset <= 1}>
+            <MDBPageNav onClick={() => setOffset(offset - 1)}>
+              <MDBIcon icon="angle-double-left" />
+            </MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(1)}>1</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(2)}>2</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(3)}>3</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(4)}>4</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(5)}>5</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(6)}>6</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(7)}>7</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(8)}>8</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem>
+            <MDBPageNav onClick={() => setOffset(9)}>9</MDBPageNav>
+          </MDBPageItem>
+          <MDBPageItem disabled={offset > 10} onClick={() => setOffset(offset + 1)}>
+            <MDBPageNav>
+              <MDBIcon icon="angle-double-right" />
+            </MDBPageNav>
+          </MDBPageItem>
+        </MDBPagination>
+      </div>
     </>
   );
 };
