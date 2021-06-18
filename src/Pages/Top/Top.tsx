@@ -1,10 +1,10 @@
-import { MDBBtn } from 'mdbreact';
+// import { MDBBtn } from 'mdbreact';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { Toppage } from 'Components/AdjustedComponents';
 
 export const Top: React.FC = () => {
-  const history = useHistory();
+  // const history = useHistory();
   return (
     <Toppage className="mx-auto my-5">
       <h1 className="my-4">履歴情報の提供にあたって</h1>
@@ -31,9 +31,11 @@ export const Top: React.FC = () => {
       <p className="font-weight-bold">
         以上に同意していただける方は、下記ボタンをクリックして「ランサーズID」を入力し、タスクを開始してください．
       </p>
+      {/*
       <MDBBtn color="primary" onClick={() => history.push('/register')}>
         はじめる
       </MDBBtn>
+      */}
       {/* <img src="./img/Task-rafiki.svg" className="mx-auto d-block" width="300px" /> */}
     </Toppage>
   );
