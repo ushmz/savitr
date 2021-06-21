@@ -99,6 +99,44 @@ a.aciXEb {
   position: relative;
   z-index: 99;
 }
+.J1hqV {
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  height: 127px;
+  width: 100%;
+  min-width: 1261px;
+  pointer-events: none;
+  opacity: 1;
+}
+.CU3Cw {
+  height: 127px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.cG5GOd {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 220px;
+  height: 90px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%);
+}
+g-img {
+  display: block;
+}
+.rISBZc {
+  display: block;
+  border: 0;
+}
+g-img {
+  height: 100%;
+}
+.BA0A6c {
+  overflow: hidden;
+}
 .A8SBwf {
   position: relative;
   margin: 0 auto;
@@ -180,13 +218,8 @@ a.aciXEb {
   padding-right: 6px;
   margin-top: -7px;
 }
-#logo {
-  display: block;
-  overflow: hidden;
-  position: relative;
-}
-#logo img {
-  border: 0;
+.doodle {
+  margin-top: -2px;
 }
 .CcAdNb {
   margin: auto;
