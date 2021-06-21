@@ -19,6 +19,8 @@ type TaskProps = RouteComponentProps<{ taskid?: string }>;
 export const Task: React.FC<TaskProps> = (props: TaskProps) => {
   const taskIdNum = parseInt(props.match.params.taskid!);
   const dummyTask: TaskInfo = {
+    id: 0,
+    conditionId: 0,
     query: 'dummyQuery',
     title: 'dummyTitle',
     description: 'dummyDescription',

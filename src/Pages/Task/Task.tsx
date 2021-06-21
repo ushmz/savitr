@@ -53,12 +53,11 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, offset, setOffset,
                 return (
                   <SearchResult
                     key={idx}
-                    title={page.title}
-                    snippet={page.snippet}
-                    url={page.url}
-                    leakedPages={Object.entries(page.leaks).map(([_, v]) => v)}
+                    rank={idx + 1}
+                    pageOnSerp={offset + 1}
+                    task={task}
+                    page={page}
                     getTimeOnPage={getTimeOnPage}
-                    taskName={task.title}
                     visible={idx % 2 != 0}
                   />
                 );
