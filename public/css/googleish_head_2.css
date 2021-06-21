@@ -672,17 +672,17 @@ li.fp-c {
   display: block;
   position: relative;
   padding-bottom: 15px;
-  margin-left: 892px;
+  margin-left: 800px;
   padding-right: 8px;
 }
 @media (min-width: 1459px) and (max-width: 1539px) {
   #rhs {
-    margin-left: calc(50vw + 163px);
+    margin-left: calc(50vw + 50px);
   }
 }
 @media (min-width: 1539px) {
   #rhs {
-    margin-left: 932px;
+    margin-left: 800px;
   }
 }
 #rhs .scrt.VjDLd,
@@ -694,17 +694,17 @@ li.fp-c {
   padding-left: 17px;
   padding-right: 16px;
   position: relative;
-  width: 369px;
+  width: 400px;
   box-sizing: border-box;
 }
 #rhs.hSOk2e .VjDLd {
-  width: 369px;
+  width: 400px;
 }
 #center_col .rhsl5 {
   display: none;
 }
 #rhs.rhstc4 .VjDLd {
-  width: 369px;
+  width: 400px;
 }
 #rhs.rhstc5 .VjDLd {
   width: 457px;
