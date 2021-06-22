@@ -93,7 +93,7 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, offset, setOffset,
                   </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
-              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} linkTo={'/'} />
+              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={() => toggle(!isOpen)} linkTo={'/'} />
             </div>
           </>
         )}
