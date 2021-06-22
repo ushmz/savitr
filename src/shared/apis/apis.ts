@@ -150,7 +150,6 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
     conditionId: param.conditionId,
   };
 
-  console.log(timeLog);
   const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/time`, timeLog, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
