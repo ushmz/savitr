@@ -1,62 +1,48 @@
 import React from 'react';
 import { URLText, TitleText, SearchResultContainer, SizedText } from './AdjustedComponents';
 import { truncateText } from '../shared/util';
-import { sendDocumentClickLog } from '../repository/logAPI';
-import { LeakedPage } from '../shared/apis/apis';
+import { SimilarwebPage, createClickLog, Serp, TaskInfo } from '../shared/apis/apis';
 
-type Props = {
-  title: string;
-  url: string;
-  snippet: string;
-  leakedPages: LeakedPage[];
+export type SearchResultProps = {
+  rank: number;
+  pageOnSerp: number;
+  task: TaskInfo;
+  page: Serp;
   getTimeOnPage: () => number;
-  taskName: string;
   visible: boolean;
 };
 
 /**
  * Return single search result component used in web search task.
  */
-export const SearchResult: React.FC<Props> = ({
-  title,
-  snippet,
-  url,
-  leakedPages,
-  getTimeOnPage,
-  taskName,
-  visible,
-}) => {
+export const SearchResult: React.FC<SearchResultProps> = ({ rank, pageOnSerp, task, page, getTimeOnPage, visible }) => {
   return (
     <SearchResultContainer className="pl-3 py-3" style={{ width: '720px' }}>
       <a
-        href={url}
+        href={page.url}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => {
-          sendDocumentClickLog({
+          createClickLog({
             uid: localStorage.getItem('uid') || '',
-            taskName: taskName,
-            timeOnPage: getTimeOnPage(),
-            pageUrl: url,
-            linkedPageNum: leakedPages.length,
+            taskId: task.id,
+            conditionId: task.conditionId,
+            time: getTimeOnPage(),
+            rank: rank,
+            page: pageOnSerp,
           });
         }}
       >
-        <URLText size="14px">{truncateText(url, 72)}</URLText>
-        <TitleText size="18px">{truncateText(title, 33)}</TitleText>
+        <URLText size="14px">{truncateText(page.url, 72)}</URLText>
+        <TitleText size="18px">{truncateText(page.title, 33)}</TitleText>
       </a>
-      <SizedText size="14px">{truncateText(snippet || '', 200)}</SizedText>
-      {leakedPages.length === 0 ? (
+      <SizedText size="14px">{truncateText(page.snippet || '', 200)}</SizedText>
+      {page.leaks.length === 0 ? (
         <></>
       ) : (
         visible && (
           <div className="m-3">
-            <CollectedTendencyIconList
-              histories={leakedPages}
-              documentURL={url}
-              getTimeOnPage={getTimeOnPage}
-              taskName={taskName}
-            ></CollectedTendencyIconList>
+            <CollectedTendencyIconList leaks={page.leaks} documentURL={page.url}></CollectedTendencyIconList>
           </div>
         )
       )}
@@ -65,14 +51,12 @@ export const SearchResult: React.FC<Props> = ({
 };
 
 type CollectedTendencyIconListProps = {
-  histories: LeakedPage[];
+  leaks: SimilarwebPage[];
   documentURL: string;
-  getTimeOnPage: () => number;
-  taskName: string;
 };
 
 const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (props) => {
-  const icons = props.histories.map((history) => {
+  const icons = props.leaks.map((history) => {
     return (
       <img
         key={history.id}
@@ -84,5 +68,5 @@ const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (pro
     );
   });
 
-  return <>{icons.slice(0, 5)}</>;
+  return <>{icons.slice(0, 7)}</>;
 };

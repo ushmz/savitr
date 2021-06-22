@@ -43,6 +43,8 @@ export const fetchCompletionCode = async (uid: string): Promise<number> => {
 };
 
 export type TaskInfo = {
+  id: number;
+  conditionId: number;
   query: string;
   title: string;
   description: string;
@@ -66,15 +68,11 @@ export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefine
   }
 };
 
-export type LeakedPage = {
+export type SimilarwebPage = {
   id: string;
   title: string;
   url: string;
   icon: string;
-  cookies: {
-    String: string;
-    Valid: boolean;
-  };
 };
 
 export type Serp = {
@@ -83,7 +81,7 @@ export type Serp = {
   url: string;
   snippet: string;
   cookies: string[];
-  leaks: { [key: string]: LeakedPage };
+  leaks: SimilarwebPage[];
   leak_num?: number;
 };
 
@@ -102,25 +100,25 @@ export const fetchSerp = async (taskId: number, offset: number): Promise<Serp[]>
   }
 };
 
-export const uploadUserFile = async (userId: string, file: File): Promise<boolean> => {
-  const params = new FormData();
-  params.append('fileName', file.name);
-  params.append('uploadFile', file);
-  params.append('userId', userId);
-
-  const headers = {
-    accept: 'application/json',
-    Authorization: `Bearer ${getJWT()}`,
-    'Content-Type': 'multipart/form-data',
-  };
-
-  const response = await axios.post(`${API_ENDPOINT}/v1/upload`, params, { headers: headers });
-  if (response.status !== 200) {
-    console.log('[Error] Failed to upload file.');
-    return false;
-  }
-  return true;
-};
+// export const uploadUserFile = async (userId: string, file: File): Promise<boolean> => {
+//   const params = new FormData();
+//   params.append('fileName', file.name);
+//   params.append('uploadFile', file);
+//   params.append('userId', userId);
+//
+//   const headers = {
+//     accept: 'application/json',
+//     Authorization: `Bearer ${getJWT()}`,
+//     'Content-Type': 'multipart/form-data',
+//   };
+//
+//   const response = await axios.post(`${API_ENDPOINT}/v1/upload`, params, { headers: headers });
+//   if (response.status !== 200) {
+//     console.log('[Error] Failed to upload file.');
+//     return false;
+//   }
+//   return true;
+// };
 
 export type TaskTimeLogParam = {
   id: string;
@@ -152,12 +150,12 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
     conditionId: param.conditionId,
   };
 
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.id}/logs`, timeLog, {
+  const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/time`, timeLog, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
   });
-  if (response.status === 200) {
+  if (response.status === 201) {
     return;
   } else {
     console.log('[Error] Failed to create log.');
@@ -165,44 +163,67 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
   }
 };
 
-export type ThumbnailWatchLogParam = {
-  userId: string;
-  timeOnPage: number;
-  url: string;
-  taskId: number;
-  conditionId: number;
-};
-
-export type ThumbnailWatchLog = {
-  id: string;
-  autherId: number;
+export type ClickLogParam = {
   uid: string;
-  timeOnPage: number;
-  url: string;
   taskId: number;
   conditionId: number;
+  time: number;
+  page: number;
+  rank: number;
 };
 
-export const createThumbnailWatchLog = async (param: ThumbnailWatchLogParam): Promise<void> => {
-  const timeLog = {
-    id: param.userId,
-    autherId: 2,
-    uid: param.userId,
-    timeOnPage: param.timeOnPage,
-    url: '',
-    taskId: param.taskId,
-    conditionId: param.conditionId,
-  };
-
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog, {
+export const createClickLog = async (param: ClickLogParam): Promise<void> => {
+  const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/click`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
   });
-  if (response.status === 200) {
+  if (response.status === 201) {
     return;
   } else {
     console.log('[Error] Failed to create log.');
     return;
   }
 };
+
+// export type ThumbnailWatchLogParam = {
+//   userId: string;
+//   timeOnPage: number;
+//   url: string;
+//   taskId: number;
+//   conditionId: number;
+// };
+//
+// export type ThumbnailWatchLog = {
+//   id: string;
+//   autherId: number;
+//   uid: string;
+//   timeOnPage: number;
+//   url: string;
+//   taskId: number;
+//   conditionId: number;
+// };
+//
+// export const createThumbnailWatchLog = async (param: ThumbnailWatchLogParam): Promise<void> => {
+//   const timeLog = {
+//     id: param.userId,
+//     autherId: 2,
+//     uid: param.userId,
+//     timeOnPage: param.timeOnPage,
+//     url: '',
+//     taskId: param.taskId,
+//     conditionId: param.conditionId,
+//   };
+//
+//   const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog, {
+//     headers: {
+//       Authorization: `Bearer ${getJWT()}`,
+//     },
+//   });
+//   if (response.status === 200) {
+//     return;
+//   } else {
+//     console.log('[Error] Failed to create log.');
+//     return;
+//   }
+// };
