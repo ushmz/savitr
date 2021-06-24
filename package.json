@@ -77,9 +77,6 @@
     "webpack-node-externals": "^3.0.0"
   },
   "resolutions": {
-    "**/**/chart.js": "^3.3.2",
-    "**/**/react-chartjs-2": "^3.0.3",
-    "**/**/node-fetch": "^2.6.1",
     "**/**/fsevents": "^2.3.2",
     "react-popper": "^2.2.5",
     "**/**/@popperjs/core": "^2.9.2",
