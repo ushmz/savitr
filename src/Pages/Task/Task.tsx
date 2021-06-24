@@ -32,11 +32,6 @@ type Props = {
 export const Task: React.FC<Props> = ({ isLoading, serpPages, offset, setOffset, getTimeOnPage, task }) => {
   const [isOpen, toggle] = useState<boolean>(false);
 
-  const totalRecords = serpPages.length;
-  const pageLimits = 10;
-  const pageNeighbours = 1;
-  const totalPages = Math.ceil(totalRecords / pageLimits);
-
   return (
     <>
       <MDBRow>
@@ -93,48 +88,48 @@ export const Task: React.FC<Props> = ({ isLoading, serpPages, offset, setOffset,
                   </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
-              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={toggle} linkTo={'/'} />
+              <ConfirmPopup answer="商品名" isOpen={isOpen} toggle={() => toggle(!isOpen)} linkTo={'/'} />
             </div>
           </>
         )}
       </MDBRow>
 
       <div className="px-5 py-5">
-        <MDBPagination>
-          <MDBPageItem disabled={offset <= 1}>
+        <MDBPagination color="dark-grey">
+          <MDBPageItem disabled={offset <= 0}>
             <MDBPageNav onClick={() => setOffset(offset - 1)}>
               <MDBIcon icon="angle-double-left" />
             </MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(1)}>1</MDBPageNav>
+          <MDBPageItem active={offset === 0}>
+            <MDBPageNav onClick={() => setOffset(0)}></MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(2)}>2</MDBPageNav>
+          <MDBPageItem active={offset === 1}>
+            <MDBPageNav onClick={() => setOffset(1)}>2</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(3)}>3</MDBPageNav>
+          <MDBPageItem active={offset == 2}>
+            <MDBPageNav onClick={() => setOffset(2)}>3</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(4)}>4</MDBPageNav>
+          <MDBPageItem active={offset == 3}>
+            <MDBPageNav onClick={() => setOffset(3)}>4</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(5)}>5</MDBPageNav>
+          <MDBPageItem active={offset == 4}>
+            <MDBPageNav onClick={() => setOffset(4)}>5</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(6)}>6</MDBPageNav>
+          <MDBPageItem active={offset == 5}>
+            <MDBPageNav onClick={() => setOffset(5)}>6</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(7)}>7</MDBPageNav>
+          <MDBPageItem active={offset == 6}>
+            <MDBPageNav onClick={() => setOffset(6)}>7</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(8)}>8</MDBPageNav>
+          <MDBPageItem active={offset == 7}>
+            <MDBPageNav onClick={() => setOffset(7)}>8</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem>
-            <MDBPageNav onClick={() => setOffset(9)}>9</MDBPageNav>
+          <MDBPageItem active={offset == 8}>
+            <MDBPageNav onClick={() => setOffset(8)}>9</MDBPageNav>
           </MDBPageItem>
-          <MDBPageItem disabled={offset > 10} onClick={() => setOffset(offset + 1)}>
-            <MDBPageNav>
+          <MDBPageItem disabled={offset >= 8}>
+            <MDBPageNav onClick={() => setOffset(offset + 1)}>
               <MDBIcon icon="angle-double-right" />
             </MDBPageNav>
           </MDBPageItem>

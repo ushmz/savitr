@@ -5,6 +5,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { SearchResultPage as Component } from './Search';
 import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
 import { useAuth } from 'shared/provider/authProvider';
+import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
@@ -25,6 +26,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   const taskIdNum = parseInt(props.match.params.taskid);
   const [serpPages, setSerpPages] = useState<Serp[]>([]);
   const [offset, setOffset] = useState<number>(0);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [task, setTask] = useState<TaskInfo>(dummyTask);
   const { minutes, seconds } = useStopwatch({ autoStart: true });
   const getTimeOnPage = () => minutes * 60 + seconds;
@@ -46,10 +48,12 @@ export const Search: React.FC<SearchProp> = (props) => {
     fetchTaskInfo(taskIdNum).then((taskInfo) => {
       taskInfo ? setTask(taskInfo) : setTask(dummyTask);
     });
-    fetchSerp(taskIdNum, 0).then((serp) => setSerpPages(serp));
+    fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
     window.scrollTo(0, 0);
   }, [offset]);
-  return (
+  return isLoading ? (
+    <ComponentLoaderCenter />
+  ) : (
     <Component offset={offset} setOffset={setOffset} pageList={serpPages} task={task} getTimeOnPage={getTimeOnPage} />
   );
 };

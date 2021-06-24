@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 type Props = {
   answer: string;
   isOpen: boolean;
-  toggle: React.Dispatch<React.SetStateAction<boolean>>;
+  toggle: () => void;
   linkTo: string;
 };
 
@@ -18,14 +18,14 @@ export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }
     <MDBContainer>
       <MDBModal
         isOpen={isOpen}
-        toggle={() => toggle(!isOpen)}
+        toggle={toggle}
         size="md"
         // Following three props are not neccesary, but w/o these, cause error.
         inline={false}
         noClickableBodyWithoutBackdrop={false}
         overflowScroll={true}
       >
-        <MDBModalHeader toggle={() => toggle(!isOpen)}></MDBModalHeader>
+        <MDBModalHeader toggle={toggle}></MDBModalHeader>
         <MDBModalBody>
           <form>
             <div className="form-outline mb-4">
@@ -55,7 +55,7 @@ export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }
           </form>
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn color="secondary" className="float-left" onClick={() => toggle(!isOpen)}>
+          <MDBBtn color="secondary" className="float-left" onClick={toggle}>
             キャンセル
           </MDBBtn>
           <Link to={linkTo}>
@@ -65,7 +65,7 @@ export const ConfirmPopup: React.FC<Props> = ({ answer, isOpen, toggle, linkTo }
               onClick={(e) => {
                 e.preventDefault();
                 e.currentTarget.className += ' was-validated';
-                toggle(!isOpen);
+                toggle();
                 // history.push(linkTo);
               }}
             >

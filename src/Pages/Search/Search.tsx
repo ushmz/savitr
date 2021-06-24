@@ -1,5 +1,6 @@
-import { MDBCol, MDBRow, MDBIcon, MDBPagination, MDBPageItem, MDBPageNav, MDBBtn } from 'mdbreact';
-import React, { Dispatch, SetStateAction } from 'react';
+import { MDBCol, MDBRow, MDBIcon, MDBPagination, MDBPageItem, MDBPageNav, MDBBtn, MDBContainer } from 'mdbreact';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { createClickLog, Serp, TaskInfo } from '../../shared/apis/apis';
 import { truncateText } from '../../shared/util';
 
@@ -37,6 +38,7 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
 };
 
 export const SearchList: React.FC<SearchTaskProps> = ({ offset, setOffset, pageList, task, getTimeOnPage }) => {
+  const [popuped, togglePopup] = useState<boolean>(false);
   return (
     <div className="main" id="main">
       <div className="cnt">
@@ -108,7 +110,8 @@ export const SearchList: React.FC<SearchTaskProps> = ({ offset, setOffset, pageL
             </div>
             <div style={{ clear: 'both' }}></div>
           </div>
-          <CunningPanel {...task} />
+          <CunningPanel task={task} togglePopup={() => togglePopup(!popuped)} />
+          <ConfirmPopup answer={task.title} isOpen={popuped} toggle={() => togglePopup(!popuped)} linkTo="/search/6" />
         </div>
       </div>
     </div>
@@ -195,7 +198,7 @@ type SearchResultProps = {
  * Last of this component must be wrapped by <div> tag with `hlcw0c` className
  */
 export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, offset, getTimeOnPage }) => {
-  const isShown = parseInt(page.id) % 2 == 0 || Object.keys(page.leaks).length == 0;
+  const isShown = rank % 2 == 0 || Object.keys(page.leaks).length == 0;
   return (
     <div className="g">
       <div>
@@ -221,7 +224,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
               <h3 className="LC20lb DKV0Md">{truncateText(page.title, 30)}</h3>
               <div className="TbwUpd NJjxre">
                 <cite className="iUh30 Zu0yb qLRx3b tjvcx">
-                  {decodeURI(page.url)}
+                  {truncateText(decodeURI(page.url), 72)}
                   <span className="dyjrff qzEoUe">{/* If there is some category or URL params */}</span>
                 </cite>
               </div>
@@ -242,10 +245,10 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
                 </div>
                 <div>
                   <div className="d8lLoc">
-                    <h4 className="eJ7tvc">{'このようなページが知られます'}</h4>
+                    <h4 className="eJ7tvc">{'第3者に過去に訪問したことが知られてしまう可能性があるページ'}</h4>
                     <span
                       className="XCKyNd"
-                      aria-label="このようなページが知られます"
+                      aria-label="第3者に過去に訪問したことが知られてしまう可能性があるページ"
                       role="button"
                       tabIndex={0}
                     ></span>
@@ -255,8 +258,12 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
                           <img
                             key={v.id}
                             src={v.icon}
-                            // @ts-ignore
-                            onError={(e) => (e.target.style.display = 'none')}
+                            onError={(e) => {
+                              // @ts-ignore
+                              e.target.style.display = 'none';
+                              const leaksArea = document.getElementById('eob_21');
+                              leaksArea!.style.display = 'none';
+                            }}
                             style={{ height: 30, objectFit: 'cover' }}
                           />
                         ))}
@@ -281,40 +288,40 @@ type PaginationProps = {
 export const SerpPagination: React.FC<PaginationProps> = ({ offset, setOffset }) => {
   return (
     <div className="pt-3 pb-5">
-      <MDBPagination>
-        <MDBPageItem disabled={offset <= 1}>
+      <MDBPagination color="blue">
+        <MDBPageItem disabled={offset <= 0}>
           <MDBPageNav onClick={() => setOffset(offset - 1)}>
             <MDBIcon icon="angle-double-left" />
           </MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(1)}>1</MDBPageNav>
+        <MDBPageItem active={offset === 0}>
+          <MDBPageNav onClick={() => setOffset(0)}>1</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(2)}>2</MDBPageNav>
+        <MDBPageItem active={offset === 1}>
+          <MDBPageNav onClick={() => setOffset(1)}>2</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(3)}>3</MDBPageNav>
+        <MDBPageItem active={offset === 2}>
+          <MDBPageNav onClick={() => setOffset(2)}>3</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(4)}>4</MDBPageNav>
+        <MDBPageItem active={offset === 3}>
+          <MDBPageNav onClick={() => setOffset(3)}>4</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(5)}>5</MDBPageNav>
+        <MDBPageItem active={offset === 4}>
+          <MDBPageNav onClick={() => setOffset(4)}>5</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(6)}>6</MDBPageNav>
+        <MDBPageItem active={offset === 5}>
+          <MDBPageNav onClick={() => setOffset(5)}>6</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(7)}>7</MDBPageNav>
+        <MDBPageItem active={offset === 6}>
+          <MDBPageNav onClick={() => setOffset(6)}>7</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(8)}>8</MDBPageNav>
+        <MDBPageItem active={offset === 7}>
+          <MDBPageNav onClick={() => setOffset(7)}>8</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem>
-          <MDBPageNav onClick={() => setOffset(9)}>9</MDBPageNav>
+        <MDBPageItem active={offset === 8}>
+          <MDBPageNav onClick={() => setOffset(8)}>9</MDBPageNav>
         </MDBPageItem>
-        <MDBPageItem disabled={offset > 10} onClick={() => setOffset(offset + 1)}>
+        <MDBPageItem disabled={offset >= 8} onClick={() => setOffset(offset + 1)}>
           <MDBPageNav>
             <MDBIcon icon="angle-double-right" />
           </MDBPageNav>
@@ -324,7 +331,12 @@ export const SerpPagination: React.FC<PaginationProps> = ({ offset, setOffset })
   );
 };
 
-export const CunningPanel: React.FC<TaskInfo> = ({ title, description }) => {
+type CunningPanelProps = {
+  togglePopup: () => void;
+  task: TaskInfo;
+};
+
+export const CunningPanel: React.FC<CunningPanelProps> = ({ task, togglePopup }) => {
   return (
     <div className="TQc1id rhstc4" id="rhs" style={{ position: 'fixed' }}>
       <div className="liYKde g VjDLd">
@@ -336,13 +348,13 @@ export const CunningPanel: React.FC<TaskInfo> = ({ title, description }) => {
                   <div className="Ftghae iirjIb DaSCDf">
                     <div className="SPZz6b">
                       <h2 className="qrShPb kno-ecr-pt PZPZlf mfMhoc">
-                        <span>{title}</span>
+                        <span>{task.title}</span>
                       </h2>
                     </div>
                   </div>
                   <div className="wDYxhc" style={{ clear: 'none', paddingTop: 12 }}>
                     <div className="zloOqf kpS1Ac vk_gy">
-                      <span className="YhemCb">{description}</span>
+                      <span className="YhemCb">{task.description}</span>
                     </div>
                   </div>
                 </div>
@@ -390,10 +402,12 @@ export const CunningPanel: React.FC<TaskInfo> = ({ title, description }) => {
                           <div className="UDZeY OTFaAf">
                             <div className="wDYxhc ml-3">
                               <div className="XQvBOc ml-5">
-                                <div className="ml-5">
+                                <div className="ml-4">
                                   <span>
                                     <span>
-                                      <MDBBtn type="button">{'提出'}</MDBBtn>
+                                      <MDBBtn type="button" color="blue" onClick={togglePopup}>
+                                        {'タスク回答を提出'}
+                                      </MDBBtn>
                                     </span>
                                   </span>
                                   <div className="xlrjNe"></div>
@@ -505,5 +519,86 @@ export const GoogleIshFooter: React.FC = () => {
         </div>
       </div>
     </>
+  );
+};
+
+type ConfirmPopupProps = {
+  answer: string;
+  isOpen: boolean;
+  toggle: () => void;
+  linkTo: string;
+};
+
+import Modal from 'react-modal';
+
+// TODO: Send answers to log server
+export const ConfirmPopup: React.FC<ConfirmPopupProps> = ({ answer, isOpen, toggle, linkTo }) => {
+  const [name, setName] = useState<string>('');
+  const [reason, setReason] = useState<string>('');
+
+  Modal.setAppElement('#main');
+  const modalStyle = {
+    overlay: {
+      top: 0,
+      left: 0,
+      backgroundColor: 'rgba(0,0,0,0.15)',
+    },
+    content: {
+      width: '480px',
+      height: '400px',
+      margin: 'auto',
+      borderRadius: '1rem',
+      padding: '1.5rem',
+    },
+  };
+
+  return (
+    <MDBContainer>
+      <Modal isOpen={isOpen} style={modalStyle} onRequestClose={() => toggle()}>
+        <form>
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="productName">
+              {answer}
+            </label>
+            <input
+              type="text"
+              id="productName"
+              value={name}
+              className="form-control"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="reason">
+              理由
+            </label>
+            <textarea
+              className="form-control"
+              id="reason"
+              value={reason}
+              rows={4}
+              onChange={(e) => setReason(e.target.value)}
+            ></textarea>
+          </div>
+        </form>
+        <MDBBtn color="secondary" className="float-left" onClick={toggle}>
+          キャンセル
+        </MDBBtn>
+        <Link to={linkTo}>
+          <MDBBtn
+            disabled={name === '' || reason === ''}
+            color="primary"
+            onClick={(e) => {
+              e.preventDefault();
+              e.currentTarget.className += ' was-validated';
+
+              toggle();
+            }}
+          >
+            検索タスクを終了する
+          </MDBBtn>
+        </Link>
+      </Modal>
+    </MDBContainer>
   );
 };
