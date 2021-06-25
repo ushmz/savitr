@@ -1,4 +1,7 @@
 {
+  "awesomeTypescriptLoaderOptions": {
+    "useTranspileModule": true
+  },
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "react",
@@ -7,7 +10,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "sourceMap": true,
-    "noEmit": true,
     "isolatedModules": true,
     "strict": true,
     "moduleResolution": "node",
@@ -19,6 +21,6 @@
     "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "scripts", "functions"]
 }

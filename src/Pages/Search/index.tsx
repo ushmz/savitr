@@ -26,6 +26,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   const taskIdNum = parseInt(props.match.params.taskid);
   const [serpPages, setSerpPages] = useState<Serp[]>([]);
   const [offset, setOffset] = useState<number>(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setLoading] = useState<boolean>(false);
   const [task, setTask] = useState<TaskInfo>(dummyTask);
   const { minutes, seconds } = useStopwatch({ autoStart: true });
@@ -46,11 +47,16 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     fetchTaskInfo(taskIdNum).then((taskInfo) => {
-      taskInfo ? setTask(taskInfo) : setTask(dummyTask);
+      if (taskInfo) setTask(taskInfo);
     });
+  }, [taskIdNum]);
+
+  useEffect(() => {
     fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
+
   return isLoading ? (
     <ComponentLoaderCenter />
   ) : (

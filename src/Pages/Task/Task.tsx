@@ -11,8 +11,6 @@ import {
   MDBPageNav,
 } from 'mdbreact';
 import React, { Dispatch, useState, SetStateAction } from 'react';
-// import ReactPaginate from 'react-paginate';
-// import { SERPElement } from '../../shared/types';
 import { SearchResult } from '../../Components/SearchResult';
 import { SearchHeader } from '../../Components/SearchBar';
 import { ComponentLoaderCenter } from '../../Components/ComponentLoader';

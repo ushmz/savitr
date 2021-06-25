@@ -1,16 +1,14 @@
 import * as React from 'react';
-// import { apiClient } from '../utils/apiClient';
+import { ContextValue } from '../types';
 import firebase from '../utils/firebase';
-import { createUser } from '../../shared/apis/apis';
 
 type User = firebase.User;
 
-export const useProvideAuth = () => {
+export const useProvideAuth = (): ContextValue => {
   const [user, setUser] = React.useState<User | null>(null);
   const [didAuthentication, setAuthentication] = React.useState<boolean>(false);
-  const [isTaskReady, setTaskReady] = React.useState<boolean>(false);
 
-  const signIn = (uid: string, password: string) => {
+  const signIn = async (uid: string, password: string) => {
     return firebase
       .auth()
       .signInWithEmailAndPassword(uid, password)
@@ -22,7 +20,7 @@ export const useProvideAuth = () => {
       });
   };
 
-  const signUp = (email: string, password: string) => {
+  const signUp = async (email: string, password: string) => {
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -79,6 +77,5 @@ export const useProvideAuth = () => {
     signOut,
     user,
     didAuthentication,
-    isTaskReady,
   };
 };

@@ -254,15 +254,17 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
                     ></span>
                     <div className="hYkSRb">
                       <div className="exp-c">
-                        {Object.entries(page.leaks).map(([_, v]) => (
+                        {Object.entries(page.leaks).map(([k, v]) => (
                           <img
-                            key={v.id}
+                            key={k}
                             src={v.icon}
                             onError={(e) => {
-                              // @ts-ignore
-                              e.target.style.display = 'none';
+                              const target = e.target as HTMLElement;
+                              target.style.display = 'none';
                               const leaksArea = document.getElementById('eob_21');
-                              leaksArea!.style.display = 'none';
+                              if (leaksArea != null) {
+                                leaksArea.style.display = 'none';
+                              }
                             }}
                             style={{ height: 30, objectFit: 'cover' }}
                           />
