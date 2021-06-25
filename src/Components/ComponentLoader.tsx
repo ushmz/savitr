@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-export const ComponentLoaderCenter = () => (
+export const ComponentLoaderCenter = (): ReactElement => (
   <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
     <div className="spinner-border text-primary" role="status">
       <span className="sr-only">Loading...</span>
@@ -8,7 +8,7 @@ export const ComponentLoaderCenter = () => (
   </div>
 );
 
-export const ComponentLoader = () => (
+export const ComponentLoader = (): ReactElement => (
   <div className="spinner-border" role="status">
     <span className="sr-only">Loading...</span>
   </div>

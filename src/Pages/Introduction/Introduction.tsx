@@ -4,13 +4,6 @@ import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 import { SizedText } from '../../Components/AdjustedComponents';
 import { TaskInfo } from 'shared/apis/apis';
 
-type Props = {
-  task: {
-    id: number;
-    task: string;
-  };
-};
-
 export const Introduction: React.FC<TaskInfo> = (props) => {
   return (
     <MDBContainer className="my-5">

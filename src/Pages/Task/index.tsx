@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { useStopwatch } from 'react-timer-hook';
-// import { useInterval } from 'use-interval';
 import { RouteComponentProps } from 'react-router-dom';
 import { Task as Component } from './Task';
 import { fetchSerp, fetchTaskInfo, Serp, TaskInfo } from '../../shared/apis/apis';
-// import { useAuth } from 'shared/provider/authProvider';
 
-// type SerpPage = {
-//   title: string;
-//   snippet: string;
-//   url: string;
-//   cookies: string[];
-//   linkedPages: HistoryTable[];
-// };
-
-type TaskProps = RouteComponentProps<{ taskid?: string }>;
+type TaskProps = RouteComponentProps<{ taskid: string }>;
 
 export const Task: React.FC<TaskProps> = (props: TaskProps) => {
-  const taskIdNum = parseInt(props.match.params.taskid!);
+  const taskIdNum = parseInt(props.match.params.taskid);
   const dummyTask: TaskInfo = {
     id: 0,
     conditionId: 0,
@@ -54,11 +43,15 @@ export const Task: React.FC<TaskProps> = (props: TaskProps) => {
   // }, 1000);
 
   useEffect(() => {
-    // getSerp();
     fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
     fetchTaskInfo(taskIdNum).then((taskInfo) => {
-      taskInfo ? setTask(taskInfo) : setTask(dummyTask);
+      if (taskInfo) setTask(taskInfo);
     });
+    window.scrollTo(0, 0);
+  }, [taskIdNum]);
+
+  useEffect(() => {
+    fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
     window.scrollTo(0, 0);
   }, [offset]);
 

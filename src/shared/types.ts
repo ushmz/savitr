@@ -1,4 +1,16 @@
+import firebase from 'firebase/app';
+
 export type Pages = 'Attention' | 'Introduction1' | 'Introduction2' | 'PreTask' | 'Task1' | 'Task2' | 'PostTask';
+
+export type ContextValue = {
+  signIn: (uid: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  signUp: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  signOut: () => Promise<void>;
+  // sendPasswordResetEmail: (email: string) => Promise<void>;
+  // confirmPasswordReset: (code: string, password: string) => Promise<void>;
+  user: firebase.User | null;
+  didAuthentication: boolean;
+};
 
 export interface RuntimeRequest<T> {
   method: string;

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import NormalizeStyle from './NormalizeStyle';
 import Routes from './Routes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProvideAuth } from '../shared/provider/authProvider';
 
-const App = () => {
+const App = (): ReactElement => {
   return (
     <React.Fragment>
       <ProvideAuth>

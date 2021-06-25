@@ -61,8 +61,10 @@ const CollectedTendencyIconList: React.FC<CollectedTendencyIconListProps> = (pro
       <img
         key={history.id}
         src={history.icon}
-        // @ts-ignore
-        onError={(e) => (e.target.style.display = 'none')}
+        onError={(e) => {
+          const target = e.target as HTMLElement;
+          target.style.display = 'none';
+        }}
         style={{ height: 30, objectFit: 'cover' }}
       />
     );
