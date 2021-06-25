@@ -88,7 +88,8 @@
     "**/**/source-map-resolve": "^0.6.0",
     "**/**/core-js": "^3.12.0",
     "**/**/chokidar": "^3.0.0",
-    "**/**/react-is": "^16.8.0"
+    "**/**/react-is": "^16.8.0",
+    "**/**/chart.js": "^3.3.2"
   },
   "repository": {
     "type": "git",
