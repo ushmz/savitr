@@ -8,11 +8,12 @@ type UserResponse = {
   // This return value seems `InsertedId`
   externalId: string;
   secret: string;
+  tasks: number[];
 };
 
 export const createUser = async (uid: string): Promise<UserResponse> => {
   const r = await axios
-    .post(`${API_ENDPOINT}/users/signup`, {
+    .post(`${API_ENDPOINT}/users`, {
       uid: uid,
       externalId: uid,
     })
@@ -54,7 +55,7 @@ export type TaskInfo = {
 };
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/tasks/${taskId}`, {
+  const response = await axios.get(`${API_ENDPOINT}/v1/task/${taskId}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -86,7 +87,7 @@ export type Serp = {
 };
 
 export const fetchSerp = async (taskId: number, offset: number): Promise<Serp[]> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/serps/${taskId}?offset=${offset}`, {
+  const response = await axios.get(`${API_ENDPOINT}/v1/serp/${taskId}?offset=${offset}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -99,26 +100,6 @@ export const fetchSerp = async (taskId: number, offset: number): Promise<Serp[]>
     return [];
   }
 };
-
-// export const uploadUserFile = async (userId: string, file: File): Promise<boolean> => {
-//   const params = new FormData();
-//   params.append('fileName', file.name);
-//   params.append('uploadFile', file);
-//   params.append('userId', userId);
-//
-//   const headers = {
-//     accept: 'application/json',
-//     Authorization: `Bearer ${getJWT()}`,
-//     'Content-Type': 'multipart/form-data',
-//   };
-//
-//   const response = await axios.post(`${API_ENDPOINT}/v1/upload`, params, { headers: headers });
-//   if (response.status !== 200) {
-//     console.log('[Error] Failed to upload file.');
-//     return false;
-//   }
-//   return true;
-// };
 
 export type TaskTimeLogParam = {
   id: string;
@@ -185,45 +166,3 @@ export const createClickLog = async (param: ClickLogParam): Promise<void> => {
     return;
   }
 };
-
-// export type ThumbnailWatchLogParam = {
-//   userId: string;
-//   timeOnPage: number;
-//   url: string;
-//   taskId: number;
-//   conditionId: number;
-// };
-//
-// export type ThumbnailWatchLog = {
-//   id: string;
-//   autherId: number;
-//   uid: string;
-//   timeOnPage: number;
-//   url: string;
-//   taskId: number;
-//   conditionId: number;
-// };
-//
-// export const createThumbnailWatchLog = async (param: ThumbnailWatchLogParam): Promise<void> => {
-//   const timeLog = {
-//     id: param.userId,
-//     autherId: 2,
-//     uid: param.userId,
-//     timeOnPage: param.timeOnPage,
-//     url: '',
-//     taskId: param.taskId,
-//     conditionId: param.conditionId,
-//   };
-//
-//   const response = await axios.post(`${API_ENDPOINT}/v1/users/${param.userId}/logs`, timeLog, {
-//     headers: {
-//       Authorization: `Bearer ${getJWT()}`,
-//     },
-//   });
-//   if (response.status === 200) {
-//     return;
-//   } else {
-//     console.log('[Error] Failed to create log.');
-//     return;
-//   }
-// };
