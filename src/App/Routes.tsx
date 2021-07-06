@@ -8,9 +8,6 @@ import { PreTask } from '../Pages/PreTask';
 import { Task } from '../Pages/Task';
 import { Search } from '../Pages/Search';
 import { Top } from '../Pages/Top';
-import { Signup } from '../Pages/Signup';
-import { Signin } from '../Pages/Signin';
-import { Register } from '../Pages/Register';
 import { User } from '../Pages/User';
 import { NotFound } from '../Pages/NotFound';
 import history from '../shared/browserHistory';
@@ -20,9 +17,6 @@ const Routes: React.FC = () => {
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Top}></Route>
-        <Route exact path="/signin" component={Signin}></Route>
-        <Route exact path="/signup" component={Signup}></Route>
-        <Route exact path="/register" component={Register}></Route>
 
         <Auth>
           <Route exact path="/introduction/:taskid" component={Introduction}></Route>
