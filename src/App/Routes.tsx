@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import { Attention } from '../Pages/Attention';
 import { Auth } from '../Pages/Auth/Auth';
 import { Introduction } from '../Pages/Introduction';
 import { PostTask } from '../Pages/PostTask';
@@ -20,7 +19,6 @@ const Routes: React.FC = () => {
 
         <Auth>
           <Route exact path="/introduction/:taskid" component={Introduction}></Route>
-          <Route exact path="/attention" component={Attention}></Route>
           <Route exact path="/pretask" component={PreTask}></Route>
           <Route exact path="/posttask" component={PostTask}></Route>
           <Route exact path="/task/:taskid" component={Task}></Route>
