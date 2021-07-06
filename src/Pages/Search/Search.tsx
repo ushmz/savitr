@@ -18,12 +18,15 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   return (
     <>
       <link type="text/css" rel="stylesheet" href="css/googleish_footer.css" />
+      {/* id=eob_21 以下? */}
       <link type="text/css" rel="stylesheet" href="css/googleish_head_1.css" />
+      {/* Title and Url ? */}
       <link type="text/css" rel="stylesheet" href="css/googleish_head_2.css" />
       <link type="text/css" rel="stylesheet" href="css/googleish_head_3.css" />
+      {/* Search query input */}
       <link type="text/css" rel="stylesheet" href="css/googleish_body_1.css" />
       <link type="text/css" rel="stylesheet" href="css/googleish_kp_extra.css" />
-      <MDBRow className="mb-5">
+      <MDBRow className="mt-5">
         <SearchHeader query={props.task.query} />
       </MDBRow>
       <br />
@@ -38,81 +41,56 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
 };
 
 export const SearchList: React.FC<SearchTaskProps> = ({ offset, setOffset, pageList, task, getTimeOnPage }) => {
-  const [popuped, togglePopup] = useState<boolean>(false);
   return (
     <div className="main" id="main">
-      <div className="cnt">
-        <div className="GyAeWb" id="rcnt">
-          <div className="D6j0vc">
-            <div className="center_col">
-              <div className="eqAnXb" id="res" role="main">
-                <div className="search">
-                  <div>
-                    <div id="rso">
-                      {pageList.map((page, idx) => (
-                        <SearchResult
-                          key={idx}
-                          page={page}
-                          task={task}
-                          rank={idx + 1}
-                          offset={offset + 1}
-                          getTimeOnPage={getTimeOnPage}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                {/* 「他のキーワード」欄 */}
-                <div className="buttonmads"></div>
-                <div className="botstuff">
-                  <div>
-                    <div id="bres">
-                      <div className="ULSxyf">
-                        <div className="w3bYAd">
-                          <div className="oIk2Cb">
-                            <h3 className="O3JH7">
-                              <span className="mfMhoc">{/*他のキーワード*/}</span>
-                            </h3>
-                            <div className="y6Uyqe">
-                              <div className="EIaa9b">
-                                {/* `AJLUJb` is column */}
-                                <div className="AJLUJb">
-                                  {/* <QueryCand> A query candidate component*/}
-                                  <div>
-                                    <a className="k8XOCe" href="#">
-                                      <div className="aXBZVd"></div>
-                                      <div className="s75CSd OhScic AB4Wff">
-                                        <b>{/* Other query candidate */}</b>
-                                      </div>
-                                    </a>
-                                  </div>
-                                  {/* </QueryCand> */}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+      <div className="cnt GyAeWb" id="rcnt">
+        <div className="D6j0vc center_col">
+          <div className="eqAnXb" id="res" role="main">
+            <div className="search rso">
+              {pageList.map((page, idx) => (
+                <SearchResult
+                  key={idx}
+                  page={page}
+                  task={task}
+                  rank={idx}
+                  offset={offset + 1}
+                  getTimeOnPage={getTimeOnPage}
+                />
+              ))}
+            </div>
+            <div id="bres" className="botstuff">
+              <div className="w3bYAd oIk2Cb ULSxyf">
+                <h3 className="O3JH7">
+                  <span className="mfMhoc">{/*他のキーワード*/}</span>
+                </h3>
+                <div className="y6Uyqe EIaa9b">
+                  {/* `AJLUJb` is column */}
+                  <div className="AJLUJb">
+                    {/* <QueryCand> A query candidate component*/}
+                    <div>
+                      <a className="k8XOCe" href="#">
+                        <div className="s75CSd OhScic AB4Wff">
+                          <b>{/* Other query candidate */}</b>
                         </div>
-                      </div>
+                      </a>
                     </div>
-                    <div style={{ display: 'none' }}></div>
+                    {/* </QueryCand> */}
                   </div>
-                </div>
-                <div style={{ display: 'none' }}></div>
-                <div role="navigation">
-                  <span id="xjs">
-                    <h1 className="Uo8X3b OhScic zsYMMe">{/*ページの操作*/}</h1>
-                    <SerpPagination offset={offset} setOffset={setOffset} />
-                  </span>
-                  <div id="gfn"></div>
-                  <span id="fvf"></span>
                 </div>
               </div>
             </div>
-            <div style={{ clear: 'both' }}></div>
+            <div role="navigation">
+              <span id="xjs">
+                <h1 className="Uo8X3b OhScic zsYMMe">{/*ページの操作*/}</h1>
+                <SerpPagination offset={offset} setOffset={setOffset} />
+              </span>
+            </div>
           </div>
+        </div>
+        {/*
           <CunningPanel task={task} togglePopup={() => togglePopup(!popuped)} />
           <ConfirmPopup answer={task.title} isOpen={popuped} toggle={() => togglePopup(!popuped)} linkTo="/search/6" />
-        </div>
+          */}
       </div>
     </div>
   );
@@ -134,19 +112,6 @@ export const SearchHeader: React.FC<SearchHeaderProps> = ({ query }) => {
             <div className="SDkEP">
               <div className="a4bIc">
                 <div className="pR49Ae gsfi"></div>
-                <div className="gLFyf uKLqed gsfi">
-                  <div style={{ display: 'none' }} data-dismiss="" id="ow18">
-                    <div className="CIKhFd v0rrvd">
-                      <div className="EA3l1b">
-                        <div className="Xb004">
-                          <span className="awHmMb xy0YY ohEFXb">
-                            <span className="gLWQQ">/</span> を押すと検索ボックスに移動できます
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <input
                   disabled
                   className="gLFyf gsfi"
@@ -198,10 +163,10 @@ type SearchResultProps = {
  * Last of this component must be wrapped by <div> tag with `hlcw0c` className
  */
 export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, offset, getTimeOnPage }) => {
-  const isShown = rank % 2 == 0 || Object.keys(page.leaks).length == 0;
+  const isLeaksVisible = (rank + 1) % 2 !== 0 && Object.keys(page.leaks).length !== 0;
   return (
     <div className="g">
-      <div>
+      <div className={`pr${offset}-${rank} linfo-${isLeaksVisible} lp-${Object.keys(page.leaks).length}`}>
         <div className="tF2Cxc">
           {/* URL and page title component */}
           <div className="yuRUbf">
@@ -237,7 +202,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
             </div>
           </div>
           {/* 「他の人はこちらも検索」のやつ*/}
-          {isShown && (
+          {isLeaksVisible && (
             <div id="eob_21">
               <div className="AUiS2" style={{ display: 'block', opacity: 1 }}>
                 <div style={{ display: 'none' }}>
@@ -254,21 +219,26 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
                     ></span>
                     <div className="hYkSRb">
                       <div className="exp-c">
-                        {Object.entries(page.leaks).map(([k, v]) => (
-                          <img
-                            key={k}
-                            src={v.icon}
-                            onError={(e) => {
-                              const target = e.target as HTMLElement;
-                              target.style.display = 'none';
-                              const leaksArea = document.getElementById('eob_21');
-                              if (leaksArea != null) {
-                                leaksArea.style.display = 'none';
-                              }
-                            }}
-                            style={{ height: 30, objectFit: 'cover' }}
-                          />
-                        ))}
+                        {Object.entries(page.leaks).map(([k, v]) => {
+                          return (
+                            // <a key={k} href={v.url}>
+                            <img
+                              key={k}
+                              src={v.icon}
+                              onError={(e) => {
+                                const target = e.target as HTMLElement;
+                                // console.log(`error on rank : ${rank}\n`, target);
+                                target.style.display = 'none';
+                                // const leaksArea = document.getElementById('eob_21');
+                                // if (leaksArea != null) {
+                                //   leaksArea.style.display = 'none';
+                                // }
+                              }}
+                              style={{ height: 30, objectFit: 'cover' }}
+                            />
+                            // </a>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

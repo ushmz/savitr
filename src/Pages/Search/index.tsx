@@ -22,11 +22,11 @@ export const Search: React.FC<SearchProp> = (props) => {
   };
 
   const auth = useAuth();
+  const ext = auth.user?.email?.split('@')[0] || '';
 
   const taskIdNum = parseInt(props.match.params.taskid);
   const [serpPages, setSerpPages] = useState<Serp[]>([]);
   const [offset, setOffset] = useState<number>(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setLoading] = useState<boolean>(false);
   const [task, setTask] = useState<TaskInfo>(dummyTask);
   const { minutes, seconds } = useStopwatch({ autoStart: true });
@@ -35,8 +35,8 @@ export const Search: React.FC<SearchProp> = (props) => {
   useInterval(async () => {
     if (!window.document.hidden) {
       await createTaskTimeLog({
-        id: auth.user?.email || 'void',
-        uid: auth.user?.uid || 'void',
+        id: ext + '-' + taskIdNum,
+        uid: ext,
         timeOnPage: minutes * 60 + seconds,
         url: document.URL,
         taskId: taskIdNum,
@@ -52,7 +52,14 @@ export const Search: React.FC<SearchProp> = (props) => {
   }, [taskIdNum]);
 
   useEffect(() => {
-    fetchSerp(taskIdNum, offset).then((serp) => setSerpPages(serp));
+    fetchSerp(taskIdNum, offset).then((serp) => {
+      serp.sort((a, b) => {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
+      });
+      setSerpPages(serp);
+    });
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
