@@ -36,22 +36,14 @@ export const Top: React.FC = () => {
         auth
           .signUp(email, v.secret)
           .then(() => {
-            localStorage.setItem('task1', '' + v.tasks[0]);
-            localStorage.setItem('task2', '' + v.tasks[1]);
+            localStorage.setItem('notyet', '' + v.tasks[1]);
+            localStorage.setItem('condition', '' + v.conditionId);
             setLoading(false);
             history.push(`/introduction/${v.tasks[0]}`);
           })
-          .catch(() => {
-            auth
-              .signIn(email, v.secret)
-              .then(() => {
-                setLoading(false);
-                history.push('/upload');
-              })
-              .catch((resin) => {
-                toast.error(`予期せぬエラーが発生しました : ${resin}`);
-                setLoading(false);
-              });
+          .catch((res) => {
+            toast.error(`予期せぬエラーが発生しました : ${res}`);
+            setLoading(false);
           });
       })
       .catch((res) => {

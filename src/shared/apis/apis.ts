@@ -9,6 +9,7 @@ type UserResponse = {
   externalId: string;
   secret: string;
   tasks: number[];
+  conditionId: number;
 };
 
 export const createUser = async (uid: string): Promise<UserResponse> => {
