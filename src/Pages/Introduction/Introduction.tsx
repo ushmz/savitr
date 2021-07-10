@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
-
 import { SizedText } from '../../Components/AdjustedComponents';
-import { TaskInfo } from 'shared/apis/apis';
+import history from '../../shared/browserHistory';
+import { TaskInfo } from '../../shared/apis/apis';
+import { CONDITION_EXP } from '../../shared/consts';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [name, setName] = useState<string>('');
   const [reason, setReason] = useState<string>('');
   const condition = localStorage.getItem('condition') || '';
-  const isUIDetailVisible = condition === '5';
+  const isUIDetailVisible = condition === CONDITION_EXP;
   return (
     <>
       <link type="text/css" rel="stylesheet" href="css/link_nocolor.css" />
@@ -31,10 +32,8 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
 
         <h2 className="mt-5">留意事項</h2>
         <p>・タスク中はブラウザーの「戻る」ボタンは使用しないでください。</p>
-        <p>
-          ・タスク中、ページ閲覧ログを収集させていただきます。収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
-        </p>
-
+        <p>・タスク中、ページ閲覧ログを収集させていただきます。</p>
+        <p>・収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。</p>
         {isUIDetailVisible && (
           <MDBRow className="my-5">
             <h2 className="mt-5">検索結果リストについて</h2>
@@ -88,10 +87,20 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
           </div>
         </form>
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-          <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
-            <a target="_blank" rel="noopener noreferrer" href={`/search/${props.id}`} style={{ fontSize: 16 }}>
-              回答を提出する
-            </a>
+          <MDBBtn
+            color="primary"
+            style={{ width: '240px' }}
+            onClick={() => {
+              const taskId = localStorage.getItem('notyet');
+              if (taskId) {
+                localStorage.removeItem('notyet');
+                history.push(`/introduction/${taskId}`);
+              } else {
+                history.push('/posttask');
+              }
+            }}
+          >
+            回答を提出する
           </MDBBtn>
         </div>
       </MDBContainer>

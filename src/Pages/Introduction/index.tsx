@@ -24,9 +24,11 @@ export const Introduction: React.FC<Props> = (props) => {
   const taskIdNum = parseInt(props.match.params.taskid || '0');
 
   useEffect(() => {
+    // If error occor, it should better to redirect to error page?
     fetchTaskInfo(taskIdNum).then((task) => {
       if (task) setTask(task);
     });
+    window.scrollTo(0, 0);
   }, [taskIdNum]);
 
   return <Component {...task} />;
