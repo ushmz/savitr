@@ -36,10 +36,12 @@ export const Top: React.FC = () => {
         auth
           .signUp(email, v.secret)
           .then(() => {
+            localStorage.setItem('standby', '' + v.tasks[0]);
             localStorage.setItem('notyet', '' + v.tasks[1]);
-            localStorage.setItem('condition', '' + v.conditionId);
+            localStorage.setItem('condition', '' + v.condition);
+            localStorage.setItem('group', '' + v.group);
             setLoading(false);
-            history.push(`/introduction/${v.tasks[0]}`);
+            history.push('/pretask');
           })
           .catch((res) => {
             toast.error(`予期せぬエラーが発生しました : ${res}`);
