@@ -1,42 +1,103 @@
-// import { MDBBtn } from 'mdbreact';
-import React from 'react';
-// import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { Toppage } from 'Components/AdjustedComponents';
+import { MDBBtn } from 'mdbreact';
+import { toast } from 'react-toastify';
+import { useAuth } from 'shared/provider/authProvider';
+import { createUser } from '../../shared/apis/apis';
+
+type RegisterParam = {
+  externalId: string;
+  passwd: string;
+};
 
 export const Top: React.FC = () => {
-  // const history = useHistory();
+  const auth = useAuth();
+  const history = useHistory();
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<RegisterParam>();
+
+  const onSubmit = handleSubmit(({ externalId }) => {
+    const ext = externalId.trim();
+    if (ext === '') {
+      toast.error('ランサーズID（ユーザー名）が入力されていません');
+      return;
+    }
+    setLoading(true);
+    createUser(ext)
+      .then((v) => {
+        const email = ext + '@savitr.dummy.com';
+        auth
+          .signUp(email, v.secret)
+          .then(() => {
+            localStorage.setItem('standby', '' + v.tasks[0]);
+            localStorage.setItem('notyet', '' + v.tasks[1]);
+            localStorage.setItem('condition', '' + v.condition);
+            localStorage.setItem('group', '' + v.group);
+            setLoading(false);
+            history.push('/pretask');
+          })
+          .catch((res) => {
+            toast.error(`予期せぬエラーが発生しました : ${res}`);
+            setLoading(false);
+          });
+      })
+      .catch((res) => {
+        toast.error(`予期せぬエラーが発生しました : ${res}`);
+        setLoading(false);
+      });
+  });
+
   return (
     <Toppage className="mx-auto my-5">
-      <h1 className="my-4">履歴情報の提供にあたって</h1>
-      <p>本ウェブサイトは、ランサーズにて掲載している履歴情報を提供していただくためのサイトです。</p>
-      <p>本タスクで提供していただく情報は以下の通りです。</p>
-      <ul>
-        <li>・ランサーズID（タスク管理用）</li>
-        <li>・過去に閲覧したウェブページのURL</li>
-      </ul>
+      <h1 className="my-4">検索タスク開始にあたって</h1>
+      <p>本ウェブサイトは、ランサーズにて掲載している検索タスクを行っていただくためのサイトです。</p>
+
       <p>
-        Gmailなど、ウェブページよってはページのタイトルやURLに個人情報が含まれている
-        場合がございますが、本タスクではURLのみを収集対象とし、個人が特定できてしまうような情報は
-        保存いたしません。また、タスク依頼者からどのランサーがどのURLを閲覧していたかが
-        分からないよう、提出していただいた情報を匿名化します。 ​
-        提供いただいた閲覧履歴は、静岡大学情報学部で行っている研究目的で使用いたします。
-        研究目的にのみ使用し、その他の目的では一切使用いたしません。 ​
+        本タスクでははじめにアンケートに回答していただきます。続いて検索タスクを行っていただきます。
+        最後にもう一度アンケートに回答していただきます。タスク全体の想定時間は 30 分程度を想定しております。
       </p>
-      {/* <p>
-		  なお本タスクでは，タスク中のウェブ情報検索・閲覧行動を記録させていただきます．
-		  <br />
-		  記録したログ情報は匿名化されており，学術研究活動以外の目的で使用することはありません．
-		  </p>
-	  */}
+
+      <p>
+        タスク中、ページ閲覧ログを収集させていただきます。
+        収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
+      </p>
+
       <p className="font-weight-bold">
-        以上に同意していただける方は、下記ボタンをクリックして「ランサーズID」を入力し、タスクを開始してください．
+        以上に同意していただける方は、以下の入力欄に「ランサーズID」を入力し、
+        「タスクを開始する」ボタンをクリックしてタスクを開始してください。
       </p>
-      {/*
-      <MDBBtn color="primary" onClick={() => history.push('/register')}>
-        はじめる
-      </MDBBtn>
-      */}
-      {/* <img src="./img/Task-rafiki.svg" className="mx-auto d-block" width="300px" /> */}
+
+      <form className="my-5" onSubmit={onSubmit}>
+        <label htmlFor="externalId" className="font-weight-light">
+          ランサーズID（ユーザー名）
+        </label>
+        <input id="externalId" className="mb-3 form-control" style={{ width: '360px' }} {...register('externalId')} />
+        {errors.externalId && <p>{errors.externalId.message}</p>}
+        <div>
+          <MDBBtn
+            type="submit"
+            color="primary"
+            onClick={() => {
+              setError('externalId', { type: 'manual', message: '必須項目です' });
+            }}
+          >
+            {isLoading ? (
+              <div className="spinner-border spinner-border-sm" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            ) : (
+              'タスクを開始する'
+            )}
+          </MDBBtn>
+        </div>
+      </form>
     </Toppage>
   );
 };

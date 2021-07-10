@@ -1,54 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
-
 import { SizedText } from '../../Components/AdjustedComponents';
-import { TaskInfo } from 'shared/apis/apis';
+import history from '../../shared/browserHistory';
+import { TaskInfo } from '../../shared/apis/apis';
+import { CONDITION_EXP } from '../../shared/consts';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
+  const [name, setName] = useState<string>('');
+  const [reason, setReason] = useState<string>('');
+  const condition = localStorage.getItem('condition') || '';
+  const isUIDetailVisible = condition === CONDITION_EXP;
   return (
-    <MDBContainer className="my-5">
-      <h1 className="mt-5">タスク内容</h1>
-      <SizedText size="18px" className="font-weight-bold lead">
-        {props.description}
-      </SizedText>
-      <h2 className="mt-5">注意事項</h2>
-      <ul>
-        <li>・検索キーワードは変更できません。</li>
-        <li>
-          ・表示された検索結果リスト及び、そのリンク先のページのみ閲覧してください。検索結果は新規タブで開かれます。
-        </li>
-        <li>・検索タスクの終了時には質問の回答と、その理由をお尋ねしますので、ご準備をお願いします。</li>
-        <li>・制限時間はありませんので、納得のいくまで検索を行ってください。</li>
-        <li>
-          表示されるリストとそこからリンクされたページの情報のみを用いてタスクを行ってください。Google検索やYahoo検索を使わずにタスクを行ってください。
-        </li>
-        <li>タスクの回答は画面右側の「提出」ボタンから提出してください。</li>
-      </ul>
-      {/* TODO: 表示する条件をどこで判断するか，そもそも表示するか． */}
-      <h2 className="mt-5">検索結果リストについて</h2>
-      <p>
-        次に表示される画面では、Google検索やYahoo検索のような検索エンジンの結果ページを模したページが表示されます。
-        各検索結果には、そのページを閲覧することで第三者に知られてしまう可能性のあるウェブページが表示されることがあります。
-      </p>
-      <h2 className="mt-5">留意事項</h2>
-      <p>
-        タスク中、ページ閲覧ログを収集させていただきます。収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
-      </p>
-      <MDBRow className="my-5">
-        <MDBCol>
-          <p className="font-weight-bold">第三者に知られてしまう可能性のある情報がない場合</p>
-          <img src="/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
-        </MDBCol>
-        <MDBCol>
-          <p className="font-weight-bold">第三者に知られてしまう可能性のある情報がある場合</p>
-          <img src="/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
-        </MDBCol>
-      </MDBRow>
-      <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-        <MDBBtn color="primary" className="float-right">
-          タスクを開始する
-        </MDBBtn>
-      </div>
-    </MDBContainer>
+    <>
+      <link type="text/css" rel="stylesheet" href="css/link_nocolor.css" />
+      <MDBContainer className="my-5">
+        <h1 className="mt-5">タスク内容</h1>
+        <SizedText size="18px" className="lead">
+          {props.description}
+        </SizedText>
+        <h2 className="mt-5">注意事項</h2>
+        <ul>
+          <li>・「検索結果リストを表示する」ボタンをクリックすると、新しいタブで検索結果リストが表示されます。</li>
+          <li>・表示された検索結果リスト及び、そのリンク先のページのみ閲覧してください。</li>
+          <li>・検索キーワードは変更できません。</li>
+          <li>・制限時間はありませんので、納得のいくまで検索を行ってください。</li>
+          <li>・Google検索やYahoo検索を使わずにタスクを行ってください。</li>
+          <li>
+            ・検索が終わったら、タスクの回答と理由をこの画面の下側の入力欄に入力し、「回答を提出する」ボタンを押して提出してください。
+          </li>
+        </ul>
+
+        <h2 className="mt-5">留意事項</h2>
+        <p>・タスク中はブラウザーの「戻る」ボタンは使用しないでください。</p>
+        <p>・タスク中、ページ閲覧ログを収集させていただきます。</p>
+        <p>・収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。</p>
+        {isUIDetailVisible && (
+          <MDBRow className="my-5">
+            <h2 className="mt-5">検索結果リストについて</h2>
+            <p>
+              次に表示される画面では、Google検索やYahoo検索のような検索エンジンの結果ページを模したページが表示されます。
+              各検索結果には、そのページを閲覧することで第三者に知られてしまう可能性のあるウェブページが表示されることがあります。
+            </p>
+            <MDBCol>
+              <p>第三者に知られてしまう可能性のある情報がない場合</p>
+              <img src="/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
+            </MDBCol>
+            <MDBCol>
+              <p>第三者に知られてしまう可能性のある情報がある場合</p>
+              <img src="/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
+            </MDBCol>
+          </MDBRow>
+        )}
+
+        <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
+          <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
+            <a target="_blank" rel="noopener noreferrer" href={`/search/${props.id}`}>
+              検索結果リストを表示する
+            </a>
+          </MDBBtn>
+        </div>
+        <h2 className="mt-5">回答</h2>
+        <form className="mx-5 my-5">
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="productName">
+              回答
+            </label>
+            <input
+              type="text"
+              id="answer"
+              value={name}
+              className="form-control"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-outline mb-4">
+            <label className="form-label" htmlFor="reason">
+              理由
+            </label>
+            <textarea
+              className="form-control"
+              id="reason"
+              value={reason}
+              rows={4}
+              onChange={(e) => setReason(e.target.value)}
+            ></textarea>
+          </div>
+        </form>
+        <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
+          <MDBBtn
+            color="primary"
+            style={{ width: '240px' }}
+            onClick={() => {
+              const taskId = localStorage.getItem('notyet');
+              if (taskId) {
+                localStorage.removeItem('notyet');
+                history.push(`/introduction/${taskId}`);
+              } else {
+                history.push('/posttask');
+              }
+            }}
+          >
+            回答を提出する
+          </MDBBtn>
+        </div>
+      </MDBContainer>
+    </>
   );
 };

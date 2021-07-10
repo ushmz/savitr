@@ -1,3 +1,35 @@
+import { preTaskUrl, postTaskUrl } from './config';
+
+export const getPreTaskEnqueteByGroupId = (group: string): string => {
+  switch (group) {
+    case '1':
+      return preTaskUrl.experienced.shopping;
+    case '2':
+      return preTaskUrl.experienced.desease;
+    case '3':
+      return preTaskUrl.controled.shopping;
+    case '4':
+      return preTaskUrl.controled.desease;
+    default:
+      return '/404';
+  }
+};
+
+export const getPostTaskEnqueteByGroupId = (group: string): string => {
+  switch (group) {
+    case '1':
+      return postTaskUrl.experienced.shopping;
+    case '2':
+      return postTaskUrl.experienced.desease;
+    case '3':
+      return postTaskUrl.controled.shopping;
+    case '4':
+      return postTaskUrl.controled.desease;
+    default:
+      return '/404';
+  }
+};
+
 export const getLinesFromFile = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
   const fileContents = await response.text();
