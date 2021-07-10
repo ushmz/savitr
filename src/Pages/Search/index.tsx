@@ -52,6 +52,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   }, [taskIdNum]);
 
   useEffect(() => {
+    setLoading(true);
     fetchSerp(taskIdNum, offset).then((serp) => {
       serp.sort((a, b) => {
         if (a.id < b.id) return -1;
@@ -60,6 +61,7 @@ export const Search: React.FC<SearchProp> = (props) => {
       });
       setSerpPages(serp);
     });
+    setLoading(false);
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);

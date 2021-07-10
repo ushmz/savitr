@@ -72,12 +72,6 @@ const StyledRootContainer = styled.div`
   height: 44px;
   border-radius: 24px;
   z-index: 3;
-
-  *,
-  ::after,
-  ::before {
-    box-sizing: border-box;
-  }
 `;
 
 const StyledInput = styled.input`
