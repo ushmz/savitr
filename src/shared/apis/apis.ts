@@ -9,7 +9,8 @@ type UserResponse = {
   externalId: string;
   secret: string;
   tasks: number[];
-  conditionId: number;
+  condition: number;
+  group: number;
 };
 
 export const createUser = async (uid: string): Promise<UserResponse> => {
@@ -164,6 +165,27 @@ export const createClickLog = async (param: ClickLogParam): Promise<void> => {
     return;
   } else {
     console.log('[Error] Failed to create log.');
+    return;
+  }
+};
+
+export type AnswerParam = {
+  taskId: number;
+  conditionId: number;
+  answer: string;
+  reason: string;
+};
+
+export const createTaskAnswer = async (param: AnswerParam): Promise<void> => {
+  const response = await axios.post(`${API_ENDPOINT}/v1/task/answer`, param, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
+  if (response.status === 201) {
+    return;
+  } else {
+    console.log('[Error] Failed to create answer');
     return;
   }
 };
