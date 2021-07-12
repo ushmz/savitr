@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { useAuth } from '../../shared/provider/authProvider';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 import { Redirect } from 'react-router';
 
 export const Auth: React.FC = ({ children }) => {
@@ -9,9 +8,9 @@ export const Auth: React.FC = ({ children }) => {
     auth.user !== null ? (
       <>{children}</>
     ) : (
-      <Redirect to="/signin" />
+      <Redirect to="/error/400" />
     )
   ) : (
-    <ComponentLoaderCenter />
+    <Redirect to="/error/403" />
   );
 };

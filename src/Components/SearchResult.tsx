@@ -24,12 +24,13 @@ export const SearchResult: React.FC<SearchResultProps> = ({ rank, pageOnSerp, ta
         rel="noopener noreferrer"
         onClick={() => {
           createClickLog({
-            uid: localStorage.getItem('uid') || '',
+            user: 0,
             taskId: task.id,
             conditionId: task.conditionId,
             time: getTimeOnPage(),
             rank: rank,
             page: pageOnSerp,
+            visible: false,
           });
         }}
       >

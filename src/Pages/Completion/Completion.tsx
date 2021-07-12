@@ -8,6 +8,8 @@ type Props = {
 export const Completion: React.FC<Props> = ({ compCode }) => {
   localStorage.removeItem('jwt');
   localStorage.removeItem('condition');
+  localStorage.removeItem('group');
+  localStorage.removeItem('user');
   return (
     <>
       <MDBContainer className="my-5">

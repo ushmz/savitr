@@ -78,7 +78,7 @@ export const SearchList: React.FC<SearchTaskProps> = ({ offset, setOffset, pageL
             <div role="navigation">
               <span id="xjs">
                 <h1 className="Uo8X3b OhScic zsYMMe">{/*ページの操作*/}</h1>
-                <SerpPagination offset={offset} setOffset={setOffset} />
+                <SerpPagination task={task} offset={offset} setOffset={setOffset} getTimeOnPage={getTimeOnPage} />
               </span>
             </div>
           </div>
