@@ -6,7 +6,7 @@ const getJWT = () => localStorage.getItem('jwt') || '';
 
 type UserResponse = {
   // This return value seems `InsertedId`
-  externalId: string;
+  user: number;
   secret: string;
   tasks: number[];
   condition: number;
@@ -17,23 +17,18 @@ export const createUser = async (uid: string): Promise<UserResponse> => {
   const r = await axios
     .post(`${API_ENDPOINT}/users`, {
       uid: uid,
-      externalId: uid,
     })
     .then((response) => {
       return response.data as UserResponse;
     })
     .catch((err) => {
-      if (err.response.status === 403) {
-        return { externalId: '', secret: '' } as UserResponse;
-      } else {
-        throw new Error();
-      }
+      throw new Error(err);
     });
   return r;
 };
 
-export const fetchCompletionCode = async (uid: string): Promise<number> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/users/${uid}/code`, {
+export const fetchCompletionCode = async (id: string): Promise<number> => {
+  const response = await axios.get(`${API_ENDPOINT}/v1/users/code/${id}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -147,12 +142,13 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
 };
 
 export type ClickLogParam = {
-  uid: string;
+  user: number;
   taskId: number;
   conditionId: number;
   time: number;
   page: number;
   rank: number;
+  visible: boolean;
 };
 
 export const createClickLog = async (param: ClickLogParam): Promise<void> => {
@@ -170,6 +166,8 @@ export const createClickLog = async (param: ClickLogParam): Promise<void> => {
 };
 
 export type AnswerParam = {
+  user: number;
+  uid: string;
   taskId: number;
   conditionId: number;
   answer: string;

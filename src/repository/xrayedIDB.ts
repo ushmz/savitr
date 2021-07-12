@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { JunctionIDBTable, CookieIDBTable } from '../shared/types';
 import { getLinesFromFile, formatString2Array } from '../shared/util';
 
