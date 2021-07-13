@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBBtn } from 'mdbreact';
-import { getPostTaskEnqueteByGroupId } from '../../shared/util';
+import { getPostTaskEnqueteByGroupId, getUserId } from '../../shared/util';
 
 export const PostTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
   const group = localStorage.getItem('group') || '';
   const enquete = getPostTaskEnqueteByGroupId(group);
+  const user = getUserId();
 
   return (
     <MDBContainer className="my-5">
@@ -19,7 +20,7 @@ export const PostTask: React.FC = () => {
       <p>
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
       </p>
-      <a className="white-text" href={enquete} target="_blank" rel="noopener noreferrer">
+      <a className="white-text" href={enquete + user} target="_blank" rel="noopener noreferrer">
         <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
           アンケートページへ
         </MDBBtn>
