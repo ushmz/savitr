@@ -4,7 +4,6 @@ import { useInterval } from 'use-interval';
 import { useStopwatch } from 'react-timer-hook';
 import { SearchResultPage as Component } from './Search';
 import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
-import { useAuth } from 'shared/provider/authProvider';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
@@ -13,16 +12,15 @@ export const Search: React.FC<SearchProp> = (props) => {
   const dummyTask: TaskInfo = {
     id: 0,
     conditionId: 0,
-    query: 'dummyQuery',
-    title: 'dummyTitle',
-    description: 'dummyDescription',
-    authorId: 'dummyAuthorId',
-    searchUrl: 'dummySearchUrl',
+    query: '',
+    title: '',
+    description: '',
+    authorId: '',
+    searchUrl: '',
     type: '',
   };
 
-  const auth = useAuth();
-  const ext = auth.user?.email?.split('@')[0] || '';
+  const user = localStorage.getItem('user') || '';
 
   const taskIdNum = parseInt(props.match.params.taskid);
   const [serpPages, setSerpPages] = useState<Serp[]>([]);
@@ -35,8 +33,8 @@ export const Search: React.FC<SearchProp> = (props) => {
   useInterval(async () => {
     if (!window.document.hidden) {
       await createTaskTimeLog({
-        id: ext + '-' + taskIdNum,
-        uid: ext,
+        id: user + '-' + taskIdNum,
+        uid: user,
         timeOnPage: minutes * 60 + seconds,
         url: document.URL,
         taskId: taskIdNum,

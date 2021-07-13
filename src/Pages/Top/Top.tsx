@@ -36,6 +36,8 @@ export const Top: React.FC = () => {
         auth
           .signUp(email, v.secret)
           .then(() => {
+            localStorage.setItem('uid', ext);
+            localStorage.setItem('user', '' + v.user);
             localStorage.setItem('standby', '' + v.tasks[0]);
             localStorage.setItem('notyet', '' + v.tasks[1]);
             localStorage.setItem('condition', '' + v.condition);

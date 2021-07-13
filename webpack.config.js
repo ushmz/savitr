@@ -16,6 +16,7 @@ module.exports = () => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'build'),
+      filename: '[name].bundle.js',
     },
     module: {
       rules: [
@@ -57,11 +58,6 @@ module.exports = () => {
             from: 'public/**/*',
             to: path.resolve(__dirname, 'build'),
           },
-          //          {
-          //            context: './public/img',
-          //            from: '*.svg',
-          //            to: path.resolve(__dirname, 'build', 'img'),
-          //          },
         ],
       }),
       new HtmlWebpackPlugin({
@@ -70,6 +66,7 @@ module.exports = () => {
       new Dotenv({ path: envFile }),
       new CleanWebpackPlugin(),
     ],
+    devtool: 'inline-source-map',
     devServer: {
       inline: true,
       contentBase: path.join(__dirname, 'public'),

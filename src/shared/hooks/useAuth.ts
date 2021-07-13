@@ -11,7 +11,8 @@ export const useProvideAuth = (): ContextValue => {
   const signIn = async (uid: string, password: string) => {
     return firebase
       .auth()
-      .signInWithEmailAndPassword(uid, password)
+      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(() => firebase.auth().signInWithEmailAndPassword(uid, password))
       .then(async (res) => {
         if (res.user) {
           const token = await res.user.getIdToken(true);
@@ -23,7 +24,8 @@ export const useProvideAuth = (): ContextValue => {
   const signUp = async (email: string, password: string) => {
     return firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(() => firebase.auth().createUserWithEmailAndPassword(email, password))
       .then(async (res) => {
         if (res.user) {
           const token = await res.user.getIdToken(true);

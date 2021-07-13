@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 import { SizedText } from '../../Components/AdjustedComponents';
 import history from '../../shared/browserHistory';
-import { TaskInfo } from '../../shared/apis/apis';
+import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_EXP } from '../../shared/consts';
+import { useAuth } from 'shared/provider/authProvider';
+import { getUserId } from 'shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
-  const [name, setName] = useState<string>('');
+  const [answer, setAnswer] = useState<string>('');
   const [reason, setReason] = useState<string>('');
   const condition = localStorage.getItem('condition') || '';
   const isUIDetailVisible = condition === CONDITION_EXP;
+
+  const userId = getUserId();
+  const auth = useAuth();
+  const uid = auth.user?.email?.split('@')[0] || '';
+
   return (
     <>
       <link type="text/css" rel="stylesheet" href="css/link_nocolor.css" />
@@ -53,11 +60,11 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         )}
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-          <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
-            <a target="_blank" rel="noopener noreferrer" href={`/search/${props.id}`}>
+          <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
+            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
               検索結果リストを表示する
-            </a>
-          </MDBBtn>
+            </MDBBtn>
+          </a>
         </div>
         <h2 className="mt-5">回答</h2>
         <form className="mx-5 my-5">
@@ -68,9 +75,9 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
             <input
               type="text"
               id="answer"
-              value={name}
+              value={answer}
               className="form-control"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setAnswer(e.target.value)}
             />
           </div>
           <div className="form-outline mb-4">
@@ -94,8 +101,28 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               const taskId = localStorage.getItem('notyet');
               if (taskId) {
                 localStorage.removeItem('notyet');
+                createTaskAnswer({
+                  user: userId,
+                  uid: uid,
+                  taskId: props.id,
+                  conditionId: props.conditionId,
+                  answer: answer,
+                  reason: reason,
+                });
+                setAnswer('');
+                setReason('');
                 history.push(`/introduction/${taskId}`);
               } else {
+                createTaskAnswer({
+                  user: userId,
+                  uid: uid,
+                  taskId: props.id,
+                  conditionId: props.conditionId,
+                  answer: answer,
+                  reason: reason,
+                });
+                setAnswer('');
+                setReason('');
                 history.push('/posttask');
               }
             }}

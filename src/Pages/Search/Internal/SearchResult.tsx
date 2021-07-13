@@ -1,6 +1,6 @@
 import React from 'react';
 import { createClickLog, Serp, TaskInfo } from '../../../shared/apis/apis';
-import { truncateText } from '../../../shared/util';
+import { getUserId, truncateText } from '../../../shared/util';
 
 type SearchResultProps = {
   page: Serp;
@@ -14,6 +14,7 @@ type SearchResultProps = {
  * Last of this component must be wrapped by <div> tag with `hlcw0c` className
  */
 export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, offset, getTimeOnPage }) => {
+  const user = getUserId();
   const isLeaksVisible = (rank + 1) % 2 !== 0 && Object.keys(page.leaks).length !== 0;
   return (
     <div className="g">
@@ -27,12 +28,13 @@ export const SearchResult: React.FC<SearchResultProps> = ({ page, task, rank, of
               rel="noreferrer"
               onClick={() => {
                 createClickLog({
-                  uid: localStorage.getItem('uid') || '',
+                  user: user,
                   taskId: task.id,
                   conditionId: task.conditionId,
                   time: getTimeOnPage(),
                   rank: rank,
                   page: offset,
+                  visible: isLeaksVisible,
                 });
               }}
             >

@@ -1,5 +1,14 @@
 import { preTaskUrl, postTaskUrl } from './config';
 
+export const getUserId = (): number => {
+  const usersrt = localStorage.getItem('user') || '0';
+  return parseInt(usersrt);
+};
+
+export const getUID = (): string => {
+  return localStorage.getItem('uid') || '';
+};
+
 export const getPreTaskEnqueteByGroupId = (group: string): string => {
   switch (group) {
     case '1':
@@ -11,7 +20,7 @@ export const getPreTaskEnqueteByGroupId = (group: string): string => {
     case '4':
       return preTaskUrl.controled.desease;
     default:
-      return '/404';
+      return '/error/404';
   }
 };
 
@@ -26,7 +35,7 @@ export const getPostTaskEnqueteByGroupId = (group: string): string => {
     case '4':
       return postTaskUrl.controled.desease;
     default:
-      return '/404';
+      return '/error/404';
   }
 };
 
