@@ -1,9 +1,10 @@
-import { MDBCol, MDBRow } from 'mdbreact';
+import { MDBRow } from 'mdbreact';
 import React, { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import { Serp, TaskInfo } from '../../shared/apis/apis';
-import { SearchHeader } from './Internal/SearchHeader';
-import { SearchResult } from './Internal/SearchResult';
+import { SearchResultUnit } from './Internal/SearchResult';
 import { SerpPagination } from './Internal/Pagination';
+import { SearchBar } from './Internal/SearchBar';
 
 type SearchTaskProps = {
   offset: number;
@@ -16,74 +17,64 @@ type SearchTaskProps = {
 export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   return (
     <>
-      <link type="text/css" rel="stylesheet" href="css/googleish_footer.css" />
-      <link type="text/css" rel="stylesheet" href="css/query_suggestion_area.css" />
-      <link type="text/css" rel="stylesheet" href="css/search_result.css" />
-      <link type="text/css" rel="stylesheet" href="css/googleish_head_3.css" />
-      <link type="text/css" rel="stylesheet" href="css/search_bar.css" />
-      <link type="text/css" rel="stylesheet" href="css/knowledge_panel.css" />
-      <MDBRow className="mt-5">
-        <SearchHeader query={props.task.query} />
+      <MDBRow>
+        <StyledSearchBarParent>
+          <SearchBar query={props.task.query} />
+        </StyledSearchBarParent>
       </MDBRow>
       <br />
-      <MDBRow className="mt-5">
-        <MDBCol md="1"></MDBCol>
-        <MDBCol md="11">
-          <SearchList {...props} />
-        </MDBCol>
+      <MDBRow>
+        <StyledDivider />
+        <StyledRootContainer>
+          {props.pageList.map((page, idx) => (
+            <SearchResultUnit
+              key={idx}
+              page={page}
+              task={props.task}
+              rank={idx}
+              offset={props.offset + 1}
+              getTimeOnPage={props.getTimeOnPage}
+            />
+          ))}
+          <div role="navigation">
+            <span id="xjs">
+              <SerpPagination
+                task={props.task}
+                offset={props.offset}
+                setOffset={props.setOffset}
+                getTimeOnPage={props.getTimeOnPage}
+              />
+            </span>
+          </div>
+        </StyledRootContainer>
       </MDBRow>
     </>
   );
 };
 
-export const SearchList: React.FC<SearchTaskProps> = ({ offset, setOffset, pageList, task, getTimeOnPage }) => {
-  return (
-    <div className="main" id="main">
-      <div className="cnt GyAeWb" id="rcnt">
-        <div className="D6j0vc center_col">
-          <div className="eqAnXb" id="res" role="main">
-            <div className="search rso">
-              {pageList.map((page, idx) => (
-                <SearchResult
-                  key={idx}
-                  page={page}
-                  task={task}
-                  rank={idx}
-                  offset={offset + 1}
-                  getTimeOnPage={getTimeOnPage}
-                />
-              ))}
-            </div>
-            <div id="bres" className="botstuff">
-              <div className="w3bYAd oIk2Cb ULSxyf">
-                <h3 className="O3JH7">
-                  <span className="mfMhoc">{/*他のキーワード*/}</span>
-                </h3>
-                <div className="y6Uyqe EIaa9b">
-                  {/* `AJLUJb` is column */}
-                  <div className="AJLUJb">
-                    {/* <QueryCand> A query candidate component*/}
-                    <div>
-                      <a className="k8XOCe" href="#">
-                        <div className="s75CSd OhScic AB4Wff">
-                          <b>{/* Other query candidate */}</b>
-                        </div>
-                      </a>
-                    </div>
-                    {/* </QueryCand> */}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div role="navigation">
-              <span id="xjs">
-                <h1 className="Uo8X3b OhScic zsYMMe">{/*ページの操作*/}</h1>
-                <SerpPagination task={task} offset={offset} setOffset={setOffset} getTimeOnPage={getTimeOnPage} />
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const StyledSearchBarParent = styled.div`
+  position: absolute;
+  top: 20px;
+  margin-top: 6px;
+  position: relative;
+  margin: 0 auto;
+  margin-left: 133px;
+`;
+
+const StyledDivider = styled.div`
+  border-bottom: 1px solid #dfe1e5;
+  position: relative;
+  z-index: 126;
+
+  background: #fff;
+  height: 44px;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  white-space: nowrap;
+`;
+
+const StyledRootContainer = styled.div`
+  margin-left: 180px;
+  padding-top: 20px;
+`;
