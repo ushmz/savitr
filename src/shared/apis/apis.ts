@@ -111,10 +111,10 @@ export type TaskTimeLog = {
   id: string;
   authorId: number;
   uid: string;
-  timeOnPage: number;
+  time: number;
   url: string;
-  taskId: number;
-  conditionId: number;
+  task: number;
+  condition: number;
 };
 
 export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> => {
@@ -122,10 +122,10 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
     id: param.id,
     authorId: 2,
     uid: param.uid,
-    timeOnPage: param.timeOnPage,
+    time: param.timeOnPage,
     url: param.url,
-    taskId: param.taskId,
-    conditionId: param.conditionId,
+    task: param.taskId,
+    condition: param.conditionId,
   };
 
   const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/time`, timeLog, {
