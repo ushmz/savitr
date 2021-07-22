@@ -41,10 +41,14 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       title={props.page.title}
       url={props.page.url}
       snippet={props.page.snippet}
-      suggestion={{
-        title: '第3者に過去に訪問したことが知られてしまう可能性があるページ',
-        child: leakableArea,
-      }}
+      suggestion={
+        isLeaksVisible
+          ? {
+              title: '第3者に過去に訪問したことが知られてしまう可能性があるページ',
+              child: leakableArea,
+            }
+          : undefined
+      }
       onResultClick={() => {
         createClickLog({
           user: user,
@@ -65,7 +69,7 @@ type SearchResultSingleProps = {
   title: string;
   url: string;
   snippet: string;
-  suggestion: {
+  suggestion?: {
     title: string;
     child: JSX.Element;
     onClick?: () => void;
@@ -87,11 +91,15 @@ export const SearchResultSingle: React.FC<SearchResultSingleProps> = (props) => 
           </div>
         </StyledAnchor>
       </StyledPageInfoArea>
-      <StyledPageSnippetArea>{props.snippet}</StyledPageSnippetArea>
-      <StyledSuggestionArea>
-        <h4 style={styles.suggestionTitle}>{props.suggestion.title}</h4>
-        <div style={styles.suggestionComponent}>{props.suggestion.child}</div>
-      </StyledSuggestionArea>
+      <StyledPageSnippetArea>{props.snippet.slice(0, 80) + '...'}</StyledPageSnippetArea>
+      {props.suggestion && (
+        <StyledSuggestionArea>
+          <h4 style={styles.suggestionTitle}>{props.suggestion.title}</h4>
+          <div style={styles.suggestionComponent} onClick={props.suggestion.onClick}>
+            {props.suggestion.child}
+          </div>
+        </StyledSuggestionArea>
+      )}
     </StyledRootContainer>
   );
 };

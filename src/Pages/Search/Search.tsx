@@ -37,14 +37,12 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
             />
           ))}
           <div role="navigation">
-            <span id="xjs">
-              <SerpPagination
-                task={props.task}
-                offset={props.offset}
-                setOffset={props.setOffset}
-                getTimeOnPage={props.getTimeOnPage}
-              />
-            </span>
+            <SerpPagination
+              task={props.task}
+              offset={props.offset}
+              setOffset={props.setOffset}
+              getTimeOnPage={props.getTimeOnPage}
+            />
           </div>
         </StyledRootContainer>
       </MDBRow>
