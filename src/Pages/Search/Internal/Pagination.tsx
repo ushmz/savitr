@@ -18,16 +18,18 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
         <MDBPageItem disabled={offset <= 0}>
           <MDBPageNav
             onClick={() => {
-              setOffset(offset - 1);
-              createClickLog({
-                taskId: task.id,
-                conditionId: task.conditionId,
-                time: getTimeOnPage(),
-                rank: 999,
-                page: offset,
-                user: user,
-                visible: false,
-              });
+              if (!(offset <= 0)) {
+                setOffset(offset - 1);
+                createClickLog({
+                  taskId: task.id,
+                  conditionId: task.conditionId,
+                  time: getTimeOnPage(),
+                  rank: 999,
+                  page: offset,
+                  user: user,
+                  visible: false,
+                });
+              }
             }}
           >
             <MDBIcon icon="angle-double-left" />
@@ -58,16 +60,18 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
         <MDBPageItem
           disabled={offset >= 8}
           onClick={() => {
-            setOffset(offset + 1);
-            createClickLog({
-              taskId: task.id,
-              conditionId: task.conditionId,
-              time: getTimeOnPage(),
-              rank: 999,
-              page: offset,
-              user: user,
-              visible: false,
-            });
+            if (!(offset >= 8)) {
+              setOffset(offset + 1);
+              createClickLog({
+                taskId: task.id,
+                conditionId: task.conditionId,
+                time: getTimeOnPage(),
+                rank: 999,
+                page: offset,
+                user: user,
+                visible: false,
+              });
+            }
           }}
         >
           <MDBPageNav>
