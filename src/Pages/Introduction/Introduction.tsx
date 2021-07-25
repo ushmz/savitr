@@ -6,6 +6,7 @@ import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_EXP } from '../../shared/consts';
 import { useAuth } from 'shared/provider/authProvider';
 import { getUserId } from 'shared/util';
+import { toast } from 'react-toastify';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [answer, setAnswer] = useState<string>('');
@@ -108,7 +109,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   conditionId: props.conditionId,
                   answer: answer,
                   reason: reason,
-                });
+                }).then(() => toast.success('回答を記録しました'));
                 setAnswer('');
                 setReason('');
                 history.push(`/introduction/${taskId}`);
@@ -120,7 +121,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   conditionId: props.conditionId,
                   answer: answer,
                   reason: reason,
-                });
+                }).then(() => toast.success('回答を記録しました'));
                 setAnswer('');
                 setReason('');
                 history.push('/posttask');
