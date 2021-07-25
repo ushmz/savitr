@@ -5,6 +5,7 @@ import { Completion } from '../Pages/Completion';
 import { Introduction } from '../Pages/Introduction';
 import { PostTask } from '../Pages/PostTask';
 import { PreTask } from '../Pages/PreTask';
+import { Sample } from 'Pages/Sample';
 import { Search } from '../Pages/Search';
 import { Top } from '../Pages/Top';
 import { NotFound } from '../Pages/NotFound';
@@ -16,6 +17,7 @@ const Routes: React.FC = () => {
       <Switch>
         <Route exact path="/" component={Top} />
         <Route exact path="/error/:err" component={NotFound} />
+        <Route exact path="/search/sample" component={Sample} />
         {/* <Auth> */}
         <Route exact path="/introduction/:taskid" component={Introduction} />
         <Route exact path="/pretask" component={PreTask} />
