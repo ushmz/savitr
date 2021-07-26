@@ -23,7 +23,7 @@ export const PreTask: React.FC = () => {
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面からタスクを再開してください。
       </p>
       <a className="white-text" href={enquete + user} target="_blank" rel="noopener noreferrer">
-        <MDBBtn color="primary" className="mb-5" onClick={() => isClicked(true)}>
+        <MDBBtn color="primary" className={`${!clicked ? '' : 'disabled'} mb-5`} onClick={() => isClicked(true)}>
           アンケートページへ
         </MDBBtn>
       </a>

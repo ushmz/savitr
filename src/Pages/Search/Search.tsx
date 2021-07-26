@@ -32,7 +32,7 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
               key={idx}
               page={page}
               task={props.task}
-              rank={idx}
+              rank={idx + 1}
               offset={props.offset + 1}
               getTimeOnPage={props.getTimeOnPage}
             />

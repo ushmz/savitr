@@ -6,7 +6,7 @@ import history from '../../shared/browserHistory';
 import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_EXP } from '../../shared/consts';
 import { useAuth } from '../../shared/provider/authProvider';
-import { getUserId } from '../../shared/util';
+import { getConditionId, getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [answer, setAnswer] = useState<string>('');
@@ -15,6 +15,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
   const isUIDetailVisible = condition === CONDITION_EXP;
 
   const userId = getUserId();
+  const conditionId = getConditionId();
   const auth = useAuth();
   const uid = auth.user?.email?.split('@')[0] || '';
 
@@ -118,8 +119,8 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                 createTaskAnswer({
                   user: userId,
                   uid: uid,
-                  taskId: props.id,
-                  conditionId: props.conditionId,
+                  task: props.id,
+                  condition: conditionId,
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
@@ -130,8 +131,8 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                 createTaskAnswer({
                   user: userId,
                   uid: uid,
-                  taskId: props.id,
-                  conditionId: props.conditionId,
+                  task: props.id,
+                  condition: conditionId,
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
