@@ -16,6 +16,7 @@ module.exports = () => {
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'build'),
+      publicPath: '/',
       filename: '[name].bundle.js',
     },
     module: {
@@ -40,7 +41,7 @@ module.exports = () => {
             {
               loader: 'file-loader',
               options: {
-                name: 'public/[name].[ext]',
+                name: '[name].[ext]',
               },
             },
           ],
@@ -55,7 +56,11 @@ module.exports = () => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: 'public/**/*',
+            from: 'public/css/**/*',
+            to: path.resolve(__dirname, 'build'),
+          },
+          {
+            from: 'public/img/**/*',
             to: path.resolve(__dirname, 'build'),
           },
         ],
@@ -69,7 +74,6 @@ module.exports = () => {
     devtool: 'inline-source-map',
     devServer: {
       inline: true,
-      contentBase: path.join(__dirname, 'public'),
       watchContentBase: true,
       historyApiFallback: true,
     },

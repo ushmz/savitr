@@ -9,6 +9,7 @@ import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
 export const Search: React.FC<SearchProp> = (props) => {
+  document.title = '検索結果リスト';
   const dummyTask: TaskInfo = {
     id: 0,
     conditionId: 0,

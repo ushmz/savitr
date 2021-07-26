@@ -18,14 +18,15 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   return (
     <>
       <MDBRow>
-        <StyledSearchBarParent>
+        <StyledSearchBarContainer>
           <SearchBar query={props.task.query} />
-        </StyledSearchBarParent>
+        </StyledSearchBarContainer>
       </MDBRow>
       <br />
+      <StyledDivider />
+      <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
       <MDBRow>
-        <StyledDivider />
-        <StyledRootContainer>
+        <StyledSearchResultContainer>
           {props.pageList.map((page, idx) => (
             <SearchResultUnit
               key={idx}
@@ -44,13 +45,13 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
               getTimeOnPage={props.getTimeOnPage}
             />
           </div>
-        </StyledRootContainer>
+        </StyledSearchResultContainer>
       </MDBRow>
     </>
   );
 };
 
-const StyledSearchBarParent = styled.div`
+const StyledSearchBarContainer = styled.div`
   position: absolute;
   top: 20px;
   margin-top: 6px;
@@ -72,7 +73,17 @@ const StyledDivider = styled.div`
   white-space: nowrap;
 `;
 
-const StyledRootContainer = styled.div`
+const StyledAppBarContainer = styled.div`
+  position: relative;
+  height: 43px;
+  margin-left: 160px;
+  font-size: 14px;
+  color: #70757a;
+  min-width: 652px;
+  line-height: 43px;
+`;
+
+const StyledSearchResultContainer = styled.div`
   margin-left: 180px;
   padding-top: 20px;
 `;
