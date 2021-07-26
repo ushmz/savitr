@@ -168,8 +168,8 @@ export const createClickLog = async (param: ClickLogParam): Promise<void> => {
 export type AnswerParam = {
   user: number;
   uid: string;
-  taskId: number;
-  conditionId: number;
+  task: number;
+  condition: number;
   answer: string;
   reason: string;
 };
