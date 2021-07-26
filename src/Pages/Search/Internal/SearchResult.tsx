@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { createClickLog, Serp, TaskInfo } from '../../../shared/apis/apis';
-import { getUserId, isExperimentalGroup } from '../../../shared/util';
+import { getConditionId, getUserId, isExperimentalGroup } from '../../../shared/util';
 
 type SearchResultProps = {
   page: Serp;
@@ -13,7 +13,7 @@ type SearchResultProps = {
 
 export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
-  const isLeaksVisible = (props.rank + 1) % 2 !== 0 && Object.keys(props.page.leaks).length !== 0;
+  const isLeaksVisible = props.rank % 2 !== 0 && Object.keys(props.page.leaks).length !== 0;
   const isExpGroup = isExperimentalGroup();
 
   const leakableArea = (
@@ -53,7 +53,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
         createClickLog({
           user: user,
           taskId: props.task.id,
-          conditionId: props.task.conditionId,
+          conditionId: getConditionId(),
           time: props.getTimeOnPage(),
           rank: props.rank,
           page: props.offset,

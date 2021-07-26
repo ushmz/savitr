@@ -1,12 +1,17 @@
 import { preTaskUrl, postTaskUrl } from './config';
 
 export const getUserId = (): number => {
-  const usersrt = localStorage.getItem('user') || '0';
-  return parseInt(usersrt);
+  const userstr = localStorage.getItem('user') || '0';
+  return parseInt(userstr);
 };
 
 export const getUID = (): string => {
   return localStorage.getItem('uid') || '';
+};
+
+export const getConditionId = (): number => {
+  const condstr = localStorage.getItem('condition') || '0';
+  return parseInt(condstr);
 };
 
 export const isExperimentalGroup = (): boolean => {
