@@ -9,6 +9,11 @@ export const getUID = (): string => {
   return localStorage.getItem('uid') || '';
 };
 
+export const isExperimentalGroup = (): boolean => {
+  const conditionId = localStorage.getItem('condition') || '';
+  return conditionId === '5';
+};
+
 export const getPreTaskEnqueteByGroupId = (group: string): string => {
   switch (group) {
     case '1':
