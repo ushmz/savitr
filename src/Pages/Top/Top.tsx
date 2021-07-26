@@ -33,22 +33,42 @@ export const Top: React.FC = () => {
     createUser(ext)
       .then((v) => {
         const email = ext + '@savitr.dummy.com';
-        auth
-          .signUp(email, v.secret)
-          .then(() => {
-            localStorage.setItem('uid', ext);
-            localStorage.setItem('user', '' + v.user);
-            localStorage.setItem('standby', '' + v.tasks[0]);
-            localStorage.setItem('notyet', '' + v.tasks[1]);
-            localStorage.setItem('condition', '' + v.condition);
-            localStorage.setItem('group', '' + v.group);
-            setLoading(false);
-            history.push('/pretask');
-          })
-          .catch((res) => {
-            toast.error(`予期せぬエラーが発生しました : ${res}`);
-            setLoading(false);
-          });
+        if (v.exist) {
+          auth
+            .signIn(email, v.secret)
+            .then(() => {
+              localStorage.setItem('uid', ext);
+              localStorage.setItem('user', '' + v.user);
+              localStorage.setItem('standby', '' + v.tasks[0]);
+              localStorage.setItem('notyet', '' + v.tasks[1]);
+              localStorage.setItem('condition', '' + v.condition);
+              localStorage.setItem('group', '' + v.group);
+              setLoading(false);
+              history.push('/pretask');
+            })
+
+            .catch((res) => {
+              toast.error(`予期せぬエラーが発生しました : ${res}`);
+              setLoading(false);
+            });
+        } else {
+          auth
+            .signUp(email, v.secret)
+            .then(() => {
+              localStorage.setItem('uid', ext);
+              localStorage.setItem('user', '' + v.user);
+              localStorage.setItem('standby', '' + v.tasks[0]);
+              localStorage.setItem('notyet', '' + v.tasks[1]);
+              localStorage.setItem('condition', '' + v.condition);
+              localStorage.setItem('group', '' + v.group);
+              setLoading(false);
+              history.push('/pretask');
+            })
+            .catch((res) => {
+              toast.error(`予期せぬエラーが発生しました : ${res}`);
+              setLoading(false);
+            });
+        }
       })
       .catch((res) => {
         toast.error(`予期せぬエラーが発生しました : ${res}`);

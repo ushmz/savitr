@@ -6,6 +6,7 @@ const getJWT = () => localStorage.getItem('jwt') || '';
 
 type UserResponse = {
   // This return value seems `InsertedId`
+  exist: boolean;
   user: number;
   secret: string;
   tasks: number[];
