@@ -18,13 +18,13 @@ const Routes: React.FC = () => {
         <Route exact path="/" component={Top} />
         <Route exact path="/error/:err" component={NotFound} />
         <Route exact path="/search/sample" component={Sample} />
-        {/* <Auth> */}
-        <Route exact path="/introduction/:taskid" component={Introduction} />
-        <Route exact path="/pretask" component={PreTask} />
-        <Route exact path="/posttask" component={PostTask} />
-        <Route exact path="/search/:taskid" component={Search} />
-        <Route exact path="/compcode" component={Completion} />
-        {/* </Auth> */}
+        <Auth>
+          <Route exact path="/introduction/:taskid" component={Introduction} />
+          <Route exact path="/pretask" component={PreTask} />
+          <Route exact path="/posttask" component={PostTask} />
+          <Route exact path="/search/:taskid" component={Search} />
+          <Route exact path="/compcode" component={Completion} />
+        </Auth>
         <Route exact path="*" component={NotFound} />
       </Switch>
     </Router>
