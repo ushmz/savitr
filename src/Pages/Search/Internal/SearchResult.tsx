@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { createClickLog, Serp, TaskInfo } from '../../../shared/apis/apis';
-import { getUserId } from '../../../shared/util';
+import { getUserId, isExperimentalGroup } from '../../../shared/util';
 
 type SearchResultProps = {
   page: Serp;
@@ -14,6 +14,7 @@ type SearchResultProps = {
 export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
   const isLeaksVisible = (props.rank + 1) % 2 !== 0 && Object.keys(props.page.leaks).length !== 0;
+  const isExpGroup = isExperimentalGroup();
 
   const leakableArea = (
     <>
@@ -23,7 +24,6 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
           src={v.icon}
           onError={(e) => {
             const target = e.target as HTMLElement;
-            // console.log(`error on rank : ${rank}\n`, target);
             target.style.display = 'none';
             // const leaksArea = document.getElementById('eob_21');
             // if (leaksArea != null) {
@@ -42,7 +42,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       url={props.page.url}
       snippet={props.page.snippet}
       suggestion={
-        isLeaksVisible
+        isLeaksVisible && isExpGroup
           ? {
               title: '第3者に過去に訪問したことが知られてしまう可能性があるページ',
               child: leakableArea,
