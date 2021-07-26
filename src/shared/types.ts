@@ -9,7 +9,7 @@ export type ContextValue = {
   // sendPasswordResetEmail: (email: string) => Promise<void>;
   // confirmPasswordReset: (code: string, password: string) => Promise<void>;
   user: firebase.User | null;
-  didAuthentication: boolean;
+  // didAuthentication: boolean;
 };
 
 export interface RuntimeRequest<T> {

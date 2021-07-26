@@ -78,6 +78,6 @@ export const useProvideAuth = (): ContextValue => {
     signUp,
     signOut,
     user,
-    didAuthentication,
+    // didAuthentication,
   };
 };
