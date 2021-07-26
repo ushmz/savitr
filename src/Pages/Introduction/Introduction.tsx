@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
+import { toast } from 'react-toastify';
 import { SizedText } from '../../Components/AdjustedComponents';
 import history from '../../shared/browserHistory';
 import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_EXP } from '../../shared/consts';
-import { useAuth } from 'shared/provider/authProvider';
-import { getUserId } from 'shared/util';
-import { toast } from 'react-toastify';
+import { useAuth } from '../../shared/provider/authProvider';
+import { getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [answer, setAnswer] = useState<string>('');
@@ -47,21 +47,30 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
           </li>
         </ul>
         {isUIDetailVisible && (
-          <MDBRow className="my-5">
-            <h2 className="mt-5">検索結果リストについて</h2>
-            <p>
-              次に表示される画面では、Google検索やYahoo検索のような検索エンジンの結果ページを模したページが表示されます。
-              各検索結果には、そのページを閲覧することで第三者に知られてしまう可能性のあるウェブページが表示されることがあります。
-            </p>
-            <MDBCol>
-              <p>第三者に知られてしまう可能性のある情報がない場合</p>
-              <img src="public/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
-            </MDBCol>
-            <MDBCol>
-              <p>第三者に知られてしまう可能性のある情報がある場合</p>
-              <img src="public/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
-            </MDBCol>
-          </MDBRow>
+          <>
+            <MDBRow className="my-5">
+              <h2 className="mt-5">検索結果リストについて</h2>
+              <p>
+                次に表示される画面では、Google検索やYahoo検索のような検索エンジンの結果ページを模したページが表示されます。
+                各検索結果には、そのページを閲覧することで第三者に知られてしまう可能性のあるウェブページが表示されることがあります。
+              </p>
+              <MDBCol>
+                <p>第三者に知られてしまう可能性のある情報がない場合</p>
+                <img src="public/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
+              </MDBCol>
+              <MDBCol>
+                <p>第三者に知られてしまう可能性のある情報がある場合</p>
+                <img src="public/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <p>
+                上記の例では「《2021年》おすすめヘッドホン15選！高音質が魅力の注目」というウェブページにアクセスをすることで
+                「第3者に過去に訪問したことが知られてしまう可能性があるページ 」の欄に表示されている 9
+                つのウェブサイトにアクセスしていたことが第三者に知られてしまうことを意味しています．
+              </p>
+            </MDBRow>
+          </>
         )}
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
