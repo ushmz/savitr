@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { MDBIcon, MDBPagination, MDBPageItem, MDBPageNav } from 'mdbreact';
 import { createClickLog, TaskInfo } from '../../../shared/apis/apis';
-import { getUserId } from '../../../shared/util';
+import { getConditionId, getUserId } from '../../../shared/util';
 
 type PaginationProps = {
   task: TaskInfo;
@@ -12,6 +12,7 @@ type PaginationProps = {
 
 export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOffset, getTimeOnPage }) => {
   const user = getUserId();
+  const condition = getConditionId();
   return (
     <div className="pt-3 pb-5">
       <MDBPagination color="blue">
@@ -22,10 +23,10 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
                 setOffset(offset - 1);
                 createClickLog({
                   taskId: task.id,
-                  conditionId: task.conditionId,
+                  conditionId: condition,
                   time: getTimeOnPage(),
                   rank: 999,
-                  page: offset,
+                  page: offset + 1,
                   user: user,
                   visible: false,
                 });
@@ -43,10 +44,10 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
                   setOffset(v);
                   createClickLog({
                     taskId: task.id,
-                    conditionId: task.conditionId,
+                    conditionId: condition,
                     time: getTimeOnPage(),
                     rank: 999,
-                    page: offset,
+                    page: offset + 1,
                     user: user,
                     visible: false,
                   });
@@ -57,24 +58,23 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
             </MDBPageItem>
           );
         })}
-        <MDBPageItem
-          disabled={offset >= 8}
-          onClick={() => {
-            if (!(offset >= 8)) {
-              setOffset(offset + 1);
-              createClickLog({
-                taskId: task.id,
-                conditionId: task.conditionId,
-                time: getTimeOnPage(),
-                rank: 999,
-                page: offset,
-                user: user,
-                visible: false,
-              });
-            }
-          }}
-        >
-          <MDBPageNav>
+        <MDBPageItem disabled={offset >= 9}>
+          <MDBPageNav
+            onClick={() => {
+              if (!(offset >= 9)) {
+                setOffset(offset + 1);
+                createClickLog({
+                  taskId: task.id,
+                  conditionId: condition,
+                  time: getTimeOnPage(),
+                  rank: 999,
+                  page: offset + 1,
+                  user: user,
+                  visible: false,
+                });
+              }
+            }}
+          >
             <MDBIcon icon="angle-double-right" />
           </MDBPageNav>
         </MDBPageItem>
