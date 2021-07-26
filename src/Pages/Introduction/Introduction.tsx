@@ -114,6 +114,14 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
             color="primary"
             style={{ width: '240px' }}
             onClick={() => {
+              if (answer === '') {
+                toast.error('回答が入力されていません');
+                return;
+              }
+              if (reason === '') {
+                toast.error('回答の理由が入力されていません');
+                return;
+              }
               const taskId = localStorage.getItem('notyet');
               if (taskId) {
                 localStorage.removeItem('notyet');
