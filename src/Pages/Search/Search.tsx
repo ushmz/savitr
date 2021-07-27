@@ -5,6 +5,7 @@ import { Serp, TaskInfo } from '../../shared/apis/apis';
 import { SearchResultUnit } from './Internal/SearchResult';
 import { SerpPagination } from './Internal/Pagination';
 import { SearchBar } from './Internal/SearchBar';
+import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 
 type SearchTaskProps = {
   offset: number;
@@ -12,6 +13,7 @@ type SearchTaskProps = {
   pageList: Serp[];
   task: TaskInfo;
   getTimeOnPage: () => number;
+  isLoading: boolean;
 };
 
 export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
@@ -24,29 +26,35 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
       </MDBRow>
       <br />
       <StyledDivider />
-      <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
-      <MDBRow>
-        <StyledSearchResultContainer>
-          {props.pageList.map((page, idx) => (
-            <SearchResultUnit
-              key={idx}
-              page={page}
-              task={props.task}
-              rank={idx + 1}
-              offset={props.offset + 1}
-              getTimeOnPage={props.getTimeOnPage}
-            />
-          ))}
-          <div role="navigation">
-            <SerpPagination
-              task={props.task}
-              offset={props.offset}
-              setOffset={props.setOffset}
-              getTimeOnPage={props.getTimeOnPage}
-            />
-          </div>
-        </StyledSearchResultContainer>
-      </MDBRow>
+      {props.isLoading ? (
+        <ComponentLoaderCenter />
+      ) : (
+        <>
+          <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
+          <MDBRow>
+            <StyledSearchResultContainer>
+              {props.pageList.map((page, idx) => (
+                <SearchResultUnit
+                  key={idx}
+                  page={page}
+                  task={props.task}
+                  rank={idx + 1}
+                  offset={props.offset + 1}
+                  getTimeOnPage={props.getTimeOnPage}
+                />
+              ))}
+              <div role="navigation">
+                <SerpPagination
+                  task={props.task}
+                  offset={props.offset}
+                  setOffset={props.setOffset}
+                  getTimeOnPage={props.getTimeOnPage}
+                />
+              </div>
+            </StyledSearchResultContainer>
+          </MDBRow>
+        </>
+      )}
     </>
   );
 };

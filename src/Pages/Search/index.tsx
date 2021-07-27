@@ -59,15 +59,20 @@ export const Search: React.FC<SearchProp> = (props) => {
         return 0;
       });
       setSerpPages(serp);
+      setLoading(false);
+      window.scrollTo(0, 0);
     });
-    setLoading(false);
-    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
-  return isLoading ? (
-    <ComponentLoaderCenter />
-  ) : (
-    <Component offset={offset} setOffset={setOffset} pageList={serpPages} task={task} getTimeOnPage={getTimeOnPage} />
+  return (
+    <Component
+      offset={offset}
+      setOffset={setOffset}
+      pageList={serpPages}
+      task={task}
+      getTimeOnPage={getTimeOnPage}
+      isLoading={isLoading}
+    />
   );
 };
