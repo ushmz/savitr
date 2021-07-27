@@ -9,6 +9,7 @@ import { useAuth } from '../../shared/provider/authProvider';
 import { getConditionId, getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
+  const [clicked, isClicked] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>('');
   const [reason, setReason] = useState<string>('');
   const condition = localStorage.getItem('condition') || '';
@@ -77,7 +78,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
-            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
+            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }} onClick={() => isClicked(true)}>
               検索結果リストを表示する
             </MDBBtn>
           </a>
@@ -111,6 +112,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         </form>
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <MDBBtn
+            className={clicked ? '' : 'disabled'}
             color="primary"
             style={{ width: '240px' }}
             onClick={() => {
