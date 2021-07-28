@@ -4,7 +4,6 @@ import { useInterval } from 'use-interval';
 import { useStopwatch } from 'react-timer-hook';
 import { SearchResultPage as Component } from './Search';
 import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
