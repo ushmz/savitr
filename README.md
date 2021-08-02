@@ -14,4 +14,8 @@ So, most users do not have enough chance to think about thier privacy protection
 
 Before user visits a webpage, show web page titles they had been visited in the past that have possibility to be collected.
 
-![proposal overview](./public/img/samples/sample_result_linked.png)
+- Icon UI
+![proposal overview icon UI](./public/img/samples/sample_search_icon.png)
+
+- Distribution UI
+![proposal overview distribution UI](./public/img/samples/sample_search_distribution.png)
