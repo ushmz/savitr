@@ -4,7 +4,6 @@ import { useInterval } from 'use-interval';
 import { useStopwatch } from 'react-timer-hook';
 import { SearchResultPage as Component } from './Search';
 import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
@@ -24,7 +23,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   const user = localStorage.getItem('user') || '';
 
   const taskIdNum = parseInt(props.match.params.taskid);
-  const [serpPages, setSerpPages] = useState<Serp[]>([]);
+  const [resultPages, setResultPages] = useState<Serp[]>([]);
   const [offset, setOffset] = useState<number>(0);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [task, setTask] = useState<TaskInfo>(dummyTask);
@@ -52,22 +51,27 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    fetchSerp(taskIdNum, offset).then((serp) => {
+    fetchSerp(taskIdNum, offset, 'pct').then((serp) => {
       serp.sort((a, b) => {
         if (a.id < b.id) return -1;
         if (a.id > b.id) return 1;
         return 0;
       });
-      setSerpPages(serp);
+      setResultPages(serp);
+      setLoading(false);
+      window.scrollTo(0, 0);
     });
-    setLoading(false);
-    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
-  return isLoading ? (
-    <ComponentLoaderCenter />
-  ) : (
-    <Component offset={offset} setOffset={setOffset} pageList={serpPages} task={task} getTimeOnPage={getTimeOnPage} />
+  return (
+    <Component
+      offset={offset}
+      setOffset={setOffset}
+      pageList={resultPages}
+      task={task}
+      getTimeOnPage={getTimeOnPage}
+      isLoading={isLoading}
+    />
   );
 };

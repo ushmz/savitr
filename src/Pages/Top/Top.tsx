@@ -24,7 +24,7 @@ export const Top: React.FC = () => {
   } = useForm<RegisterParam>();
 
   const onSubmit = handleSubmit(({ externalId }) => {
-    const ext = externalId.trim();
+    const ext = externalId.replace(' ', '');
     if (ext === '') {
       toast.error('ランサーズID（ユーザー名）が入力されていません');
       return;

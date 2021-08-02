@@ -9,6 +9,7 @@ import { useAuth } from '../../shared/provider/authProvider';
 import { getConditionId, getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
+  const [clicked, isClicked] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>('');
   const [reason, setReason] = useState<string>('');
   const condition = localStorage.getItem('condition') || '';
@@ -32,12 +33,11 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         <ul style={{ marginLeft: '20px', listStyleType: 'disc' }}>
           <li>「検索結果リストを表示する」ボタンをクリックすると、新しいタブで検索結果リストが表示されます。</li>
           <li>
-            検索キーワードは変更できません。表示された検索結果リスト及び、そのリンク先のページのみ閲覧してください。
+            今回のタスクでは検索キーワードは変更できません。表示された検索結果リストおよび、そのリンク先ページのみ閲覧してください。
           </li>
           <li>制限時間はありませんので、納得のいくまで検索を行ってください。</li>
-          <li>Google検索やYahoo検索を使わずにタスクを行ってください。</li>
           <li>
-            検索が終わったら、タスクの回答と理由をこの画面の下側の入力欄に入力し、「回答を提出する」ボタンを押して提出してください。
+            Google検索やYahoo検索など他のウェブ検索エンジンを使わずにタスクを行ってください。あくまで表示された検索結果リストとそのリンク先ページの情報のみをもとに，タスクを行ってください．
           </li>
         </ul>
 
@@ -48,36 +48,37 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
             タスク中、ページ閲覧ログを収集させていただきます。収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
           </li>
         </ul>
+        <h2 className="mt-5">検索結果リストについて</h2>
+        <p>
+          「検索結果リストを表示する」ボタンをクリックした後に表示される画面では、Google検索やYahoo検索のようなウェブ検索エンジンの結果ページを模したページが表示されます。
+        </p>
+
         {isUIDetailVisible && (
-          <>
-            <MDBRow className="my-5">
-              <h2 className="mt-5">検索結果リストについて</h2>
-              <p>
-                次に表示される画面では、Google検索やYahoo検索のような検索エンジンの結果ページを模したページが表示されます。
-                各検索結果には、そのページを閲覧することで第三者に知られてしまう可能性のあるウェブページが表示されることがあります。
-              </p>
-              <MDBCol>
-                <p>第三者に知られてしまう可能性のある情報がない場合</p>
-                <img src="public/img/samples/sample_result_unlinked.png" className="img-fluid z-depth-1" alt="" />
-              </MDBCol>
-              <MDBCol>
-                <p>第三者に知られてしまう可能性のある情報がある場合</p>
-                <img src="public/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
-              </MDBCol>
-            </MDBRow>
+          <MDBCol>
             <MDBRow>
               <p>
-                上記の例では「《2021年》おすすめヘッドホン15選！高音質が魅力の注目」というウェブページにアクセスをすることで
-                「第3者に過去に訪問したことが知られてしまう可能性があるページ 」の欄に表示されている 9
-                つのウェブサイトにアクセスしていたことが第三者に知られてしまうことを意味しています．
+                加えて、各検索結果には「いくつかのウェブサイトのアイコン」が表示されることがあります。
+                ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。
+                検索結果にウェブサイトのアイコンが表示されている場合、その検索結果を閲覧すると
+                アイコンが示すウェブサイトのトラッカー（広告会社）に検索結果を閲覧したことが知られてしまう可能性があることを意味します。
               </p>
             </MDBRow>
-          </>
+            <MDBRow className="d-flex justify-content-center">
+              <img src="public/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
+            </MDBRow>
+            <MDBRow className="my-3">
+              <p>
+                例えば上記の例では、「《2021年》おすすめヘッドホン15選！高音質が魅力の注目」というウェブページに対して、
+                TSUTAYAを含む9つのアイコンが表示されています。このことは、「おすすめヘッドホン15選」のウェブサイトを閲覧すると、
+                TSUTAYAにウェブ広告を配信している企業に「おすすめヘッドホン15選」を閲覧したことが知られてしまう可能性があることを意味します。
+              </p>
+            </MDBRow>
+          </MDBCol>
         )}
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
-            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }}>
+            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }} onClick={() => isClicked(true)}>
               検索結果リストを表示する
             </MDBBtn>
           </a>
@@ -111,6 +112,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         </form>
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <MDBBtn
+            className={clicked ? '' : 'disabled'}
             color="primary"
             style={{ width: '240px' }}
             onClick={() => {

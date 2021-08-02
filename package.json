@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack serve --mode development --inline --port 8081"
+    "start": "webpack serve --mode development --inline --port 8081",
+    "deploy": "firebase deploy --only hosting:savitr"
   },
   "dependencies": {
     "axios": "^0.21.1",
