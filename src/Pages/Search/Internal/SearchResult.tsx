@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { createClickLog, Serp, TaskInfo } from '../../../shared/apis/apis';
+import { MDBCol, MDBRow } from 'mdbreact';
+import { createClickLog, Serp, SerpWithDistribution, SerpWithIcon, TaskInfo } from '../../../shared/apis/apis';
 import { getConditionId, getUserId, isExperimentalGroup } from '../../../shared/util';
 
 type SearchResultProps = {
@@ -13,28 +14,34 @@ type SearchResultProps = {
 
 export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
-  const isLeaksVisible = props.rank % 2 !== 0 && Object.keys(props.page.leaks).length !== 0;
   const isExpGroup = isExperimentalGroup();
 
-  const leakableArea = (
-    <>
-      {Object.entries(props.page.leaks).map(([k, v]) => (
-        <img
-          key={k}
-          src={v.icon}
-          onError={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.display = 'none';
-            // const leaksArea = document.getElementById('eob_21');
-            // if (leaksArea != null) {
-            //   leaksArea.style.display = 'none';
-            // }
-          }}
-          style={{ height: 30, objectFit: 'cover' }}
+  let suggestionArea: ReactElement | null = null;
+  if (props.page.leaks) {
+    suggestionArea =
+      props.rank % 2 !== 0 && props.page.leaks.length > 0 ? (
+        <IconSuggestionArea
+          id={props.page.id}
+          title={props.page.title}
+          url={props.page.url}
+          snippet={props.page.snippet}
+          leaks={props.page.leaks}
+          rank={props.rank}
         />
-      ))}
-    </>
-  );
+      ) : null;
+  } else if (props.page.total && props.page.distribution) {
+    suggestionArea =
+      props.rank % 2 !== 0 && props.page.distribution.length > 0 ? (
+        <DistributionSuggestionArea
+          id={props.page.id}
+          title={props.page.title}
+          url={props.page.url}
+          snippet={props.page.snippet}
+          total={props.page.total}
+          distribution={props.page.distribution}
+        />
+      ) : null;
+  }
 
   return (
     <SearchResultSingle
@@ -42,10 +49,12 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       url={props.page.url}
       snippet={props.page.snippet}
       suggestion={
-        isLeaksVisible && isExpGroup
+        suggestionArea !== null && isExpGroup
           ? {
-              title: '第3者に過去に訪問したことが知られてしまう可能性があるページ',
-              child: leakableArea,
+              title: `第3者に過去に訪問したことが知られてしまう可能性があるページ${
+                props.page.total ? '（' + props.page.total + '件）' : ''
+              }`,
+              child: suggestionArea,
             }
           : undefined
       }
@@ -57,10 +66,48 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
           time: props.getTimeOnPage(),
           rank: props.rank,
           page: props.offset,
-          visible: isLeaksVisible,
+          visible: suggestionArea !== null && isExpGroup,
         });
       }}
     />
+  );
+};
+
+const IconSuggestionArea: React.FC<SerpWithIcon & { rank: number }> = (props) => {
+  return (
+    <MDBRow style={{ marginLeft: '5px' }}>
+      {Object.entries(props.leaks).map(([k, v]) => (
+        <>
+          <img
+            key={k}
+            src={v.icon}
+            onError={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.display = 'none';
+              // const leaksArea = document.getElementById('eob_21');
+              // if (leaksArea != null) {
+              //   leaksArea.style.display = 'none';
+              // }
+            }}
+            style={{ height: 30, objectFit: 'cover' }}
+          />
+        </>
+      ))}
+    </MDBRow>
+  );
+};
+
+const DistributionSuggestionArea: React.FC<SerpWithDistribution> = (props) => {
+  return (
+    <MDBRow>
+      {props.distribution.map((v, idx) => (
+        <MDBCol key={idx} style={styles.distributionSuggestionText}>
+          {/* Set className="d-flex justify-content-center" to centerize */}
+          <div style={{ fontWeight: 'bold' }}>{v.category}</div>
+          <div>{`${Math.ceil(v.pct * 100)}%（${v.count} 件）`}</div>
+        </MDBCol>
+      ))}
+    </MDBRow>
   );
 };
 
@@ -140,7 +187,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '4px',
     marginLeft: 0,
     marginTop: '14px',
-    color: 'rgba(0, 0, 0, 0.57)',
+    // color: 'rgba(0, 0, 0, 0.57)',
+    color: 'rgba(0, 0, 0, 0.6)',
     margin: '12px 0px',
     fontSize: '14px',
     fontWeight: 300,
@@ -157,6 +205,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: 'calc(100% - 24px)',
     display: 'inline-block',
     overflowY: 'hidden',
+  },
+  distributionSuggestionText: {
+    marginLeft: 0,
+    color: 'rgba(0, 0, 0, 0.57)',
+    fontSize: '14px',
+    lineHeight: 1.2,
   },
 };
 

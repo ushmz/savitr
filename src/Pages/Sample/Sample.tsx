@@ -11,7 +11,6 @@ export const Sample: React.FC = () => {
           url: 'https://kakakumag.com/av-kaden/?id=10041',
           snippet:
             'ぜひ、ヘッドホン選びの参考にしてみてください。 目次. ヘッドホン選びのポイント; 1. 騒音を気にせず音楽に集中できる！ おすすめノイズキャンセリングヘッドホン',
-          cookies: [],
           leaks: [
             {
               id: '6653',
@@ -86,7 +85,7 @@ export const Sample: React.FC = () => {
           type: '',
         }}
         getTimeOnPage={() => 0}
-        rank={0}
+        rank={1}
         offset={0}
       />
       <SearchResultUnit
@@ -96,7 +95,6 @@ export const Sample: React.FC = () => {
           url: 'https://kakakumag.com/av-kaden/?id=10041',
           snippet:
             'ぜひ、ヘッドホン選びの参考にしてみてください。 目次. ヘッドホン選びのポイント; 1. 騒音を気にせず音楽に集中できる！ おすすめノイズキャンセリングヘッドホン',
-          cookies: [],
           leaks: [],
         }}
         task={{
@@ -110,7 +108,7 @@ export const Sample: React.FC = () => {
           type: '',
         }}
         getTimeOnPage={() => 0}
-        rank={0}
+        rank={2}
         offset={0}
       />
       <SearchResultUnit
@@ -120,7 +118,6 @@ export const Sample: React.FC = () => {
           url: 'https://e-earphone.blog/?p=1341135',
           snippet:
             'ゲーミング＆ヘッドホン担当のレオです！ 今回は様々なヘッドホンの中からワイヤレスヘッドホンのおすすめや、近年話題のノイズキャンセリング搭載の',
-          cookies: [],
           leaks: [
             {
               id: '7859',
@@ -195,7 +192,7 @@ export const Sample: React.FC = () => {
           type: '',
         }}
         getTimeOnPage={() => 0}
-        rank={2}
+        rank={3}
         offset={0}
       />
 
@@ -206,7 +203,6 @@ export const Sample: React.FC = () => {
           url: 'https://e-earphone.blog/?p=1341135',
           snippet:
             'ゲーミング＆ヘッドホン担当のレオです！ 今回は様々なヘッドホンの中からワイヤレスヘッドホンのおすすめや、近年話題のノイズキャンセリング搭載の',
-          cookies: [],
           leaks: [{ id: 'similarweb0', title: '', url: '', icon: '' }],
         }}
         task={{
@@ -220,7 +216,7 @@ export const Sample: React.FC = () => {
           type: '',
         }}
         getTimeOnPage={() => 0}
-        rank={3}
+        rank={4}
         offset={0}
       />
     </div>

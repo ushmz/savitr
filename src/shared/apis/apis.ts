@@ -67,25 +67,88 @@ export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefine
   }
 };
 
+export type SerpType = 'icon' | 'pct';
+
 export type SimilarwebPage = {
   id: string;
   title: string;
   url: string;
   icon: string;
+  category?: number;
 };
 
-export type Serp = {
+export type SerpSimple = {
   id: string;
   title: string;
   url: string;
   snippet: string;
-  cookies: string[];
-  leaks: SimilarwebPage[];
-  leak_num?: number;
 };
 
-export const fetchSerp = async (taskId: number, offset: number): Promise<Serp[]> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/serp/${taskId}?offset=${offset}`, {
+export type Serp = SerpSimple & {
+  leaks?: SimilarwebPage[];
+  total?: number;
+  distribution?: {
+    category: string;
+    count: number;
+    pct: number;
+  }[];
+};
+
+export type SerpWithIcon = SerpSimple & {
+  leaks: SimilarwebPage[];
+};
+
+export type SerpWithDistribution = SerpSimple & {
+  total: number;
+  distribution: {
+    category: string;
+    count: number;
+    pct: number;
+  }[];
+};
+
+export const fetchSerpWithIcon = async (taskId: number, offset: number, top?: number): Promise<SerpWithIcon[]> => {
+  const response = await axios.get(
+    `${API_ENDPOINT}/v1/serp/${taskId}/icon?offset=${offset}${top ? '&top=' + top : ''}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getJWT()}`,
+      },
+    },
+  );
+
+  if (response.status === 200) {
+    return response.data as SerpWithIcon[];
+  } else {
+    console.log('Error fetch error.');
+    return [];
+  }
+};
+
+export const fetchSerpWithDistribution = async (
+  taskId: number,
+  offset: number,
+  top?: number,
+): Promise<SerpWithDistribution[]> => {
+  const response = await axios.get(
+    `${API_ENDPOINT}/v1/serp/${taskId}/pct?offset=${offset}${top ? '&top=' + top : ''}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getJWT()}`,
+      },
+    },
+  );
+
+  if (response.status === 200) {
+    return response.data as SerpWithDistribution[];
+  } else {
+    console.log('Error fetch error.');
+    return [];
+  }
+};
+
+export const fetchSerp = async (taskId: number, offset: number, style: SerpType): Promise<Serp[]> => {
+  const response = await axios.get(`${API_ENDPOINT}/v1/serp/${taskId}/${style}?offset=${offset}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
