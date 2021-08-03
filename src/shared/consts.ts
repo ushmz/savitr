@@ -1,7 +1,8 @@
 export const SERP_MIN_PAGE = 1;
 export const SERP_MAX_PAGE = 10;
-export const CONDITION_EXP = '5';
-export const CONDITION_CTRL = '6';
+export const CONDITION_ICON = 5;
+export const CONDITION_CTRL = 6;
+export const CONDITION_DIST = 7;
 export const WARNING_MESSAGE = '第3者に過去に訪問したことが知られてしまう可能性があるページ';
 
 export const CROSS_SVG_PATH = `
