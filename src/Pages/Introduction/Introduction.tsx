@@ -4,26 +4,22 @@ import { toast } from 'react-toastify';
 import { SizedText } from '../../Components/AdjustedComponents';
 import history from '../../shared/browserHistory';
 import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
-import { CONDITION_EXP } from '../../shared/consts';
-import { useAuth } from '../../shared/provider/authProvider';
-import { getConditionId, getUserId } from '../../shared/util';
+import { CONDITION_ICON, CONDITION_DIST } from '../../shared/consts';
+import { getConditionId, getUID, getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>('');
   const [reason, setReason] = useState<string>('');
-  const condition = localStorage.getItem('condition') || '';
-  const isUIDetailVisible = condition === CONDITION_EXP;
 
+  const condition = getConditionId();
+  const isUIDetailVisible = condition === CONDITION_ICON || condition === CONDITION_DIST;
   const progresNumString = props.id <= 6 ? '1' : '2';
   const userId = getUserId();
-  const conditionId = getConditionId();
-  const auth = useAuth();
-  const uid = auth.user?.email?.split('@')[0] || '';
+  const uid = getUID();
 
   return (
     <>
-      <link type="text/css" rel="stylesheet" href="css/link_nocolor.css" />
       <MDBContainer className="my-5">
         <h1 className="mt-5">タスク内容{`（${progresNumString} / 2）`}</h1>
         <SizedText size="18px" className="lead">
@@ -56,22 +52,61 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         {isUIDetailVisible && (
           <MDBCol>
             <MDBRow>
-              <p>
-                加えて、各検索結果には「いくつかのウェブサイトのアイコン」が表示されることがあります。
-                ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。
-                検索結果にウェブサイトのアイコンが表示されている場合、その検索結果を閲覧すると
-                アイコンが示すウェブサイトのトラッカー（広告会社）に検索結果を閲覧したことが知られてしまう可能性があることを意味します。
-              </p>
+              {condition === 5 ? (
+                <p>
+                  　加えて、各検索結果には「いくつかのウェブサイトのアイコン」が表示されることがあります。
+                  ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。検索結果にウェブサイトのアイコンが表示されている場合、
+                  その検索結果を閲覧するとアイコンが示すウェブサイトのトラッカー（広告会社）に
+                  検索結果を閲覧したことが知られてしまう可能性があることを意味します。
+                </p>
+              ) : (
+                <p>
+                  　加えて、各検索結果には「そのページに訪問したことがどんなカテゴリのウェブサイトにどの程度知られてしまうかの情報」が表示されることがあります。
+                  ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。
+                  検索結果に「そのページに訪問したことがどんなカテゴリのウェブサイトにどの程度知られてしまうかの割合」が表示されている場合、その検索結果を閲覧すると割合が表示されたカテゴリのウェブサイトのトラッカー（広告会社）に検索結果を閲覧したことが知られてしまう可能性があることを意味します。
+                </p>
+              )}
             </MDBRow>
             <MDBRow className="d-flex justify-content-center">
-              <img src="public/img/samples/sample_result_linked.png" className="img-fluid z-depth-1" alt="" />
+              <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
             </MDBRow>
             <MDBRow className="my-3">
-              <p>
-                例えば上記の例では、「《2021年》おすすめヘッドホン15選！高音質が魅力の注目」というウェブページに対して、
-                TSUTAYAを含む9つのアイコンが表示されています。このことは、「おすすめヘッドホン15選」のウェブサイトを閲覧すると、
-                TSUTAYAにウェブ広告を配信している企業に「おすすめヘッドホン15選」を閲覧したことが知られてしまう可能性があることを意味します。
-              </p>
+              {condition === 5 ? (
+                <p>
+                  例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+                  ブリジストンや日本野球機構を含む10のアイコンが表示されています。
+                  このことは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
+                  <ul style={{ margin: '20px', listStyleType: 'disc' }}>
+                    <li>
+                      ブリジストンや日本野球機構などにウェブ広告を配信している企業に
+                      「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
+                    </li>
+                    <li>
+                      次回ブリジストンや日本野球機構などのウェブサイトを訪問した際に、
+                      「Webカメラのおすすめ11選！」を閲覧したという記録を使ってウェブ広告が表示される
+                    </li>
+                  </ul>
+                  可能性があることを意味します。
+                </p>
+              ) : (
+                <p>
+                  例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+                  そのページに訪問したことが知られてしまう3つのカテゴリのウェブサイトの 数と割合が表示されています。
+                  上記の図からは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
+                  <ul style={{ margin: '20px', listStyleType: 'disc' }}>
+                    <li>
+                      「乗り物」や「ホームとガーデニング」といったカテゴリのウェブサイトに
+                      広告を配信している企業に「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
+                    </li>
+                    <li>
+                      次回「乗り物」や「ホームとガーデニング」のようなカテゴリの
+                      ウェブサイトを訪問した際に、「Webカメラのおすすめ11選！」を閲覧したという
+                      記録を使ってウェブ広告が表示される
+                    </li>
+                  </ul>
+                  可能性があることが分かります。
+                </p>
+              )}
             </MDBRow>
           </MDBCol>
         )}
@@ -131,24 +166,26 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   user: userId,
                   uid: uid,
                   task: props.id,
-                  condition: conditionId,
+                  condition: condition,
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
                 setAnswer('');
                 setReason('');
+                isClicked(false);
                 history.push(`/introduction/${taskId}`);
               } else {
                 createTaskAnswer({
                   user: userId,
                   uid: uid,
                   task: props.id,
-                  condition: conditionId,
+                  condition: condition,
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
                 setAnswer('');
                 setReason('');
+                isClicked(false);
                 history.push('/posttask');
               }
             }}

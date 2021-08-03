@@ -1,40 +1,46 @@
 export const preTaskUrl: EnqueteURL = {
-  controled: {
-    shopping:
-      'https://docs.google.com/forms/d/e/1FAIpQLSe8fcClPc1yIawtpnnaC5G5bf2sIn4OUNx9A-71Nvypu4ts1w/viewform?usp=pp_url&entry.783194538=',
-    desease:
-      'https://docs.google.com/forms/d/e/1FAIpQLSdNveC6ZdI9yiLeFvQVdCkVan3_iLVuvjKyt0sCOiFtmns_2w/viewform?usp=pp_url&entry.836057442=',
+  shopping: {
+    controled:
+      'https://docs.google.com/forms/d/e/1FAIpQLSemQ2tFN2VJ1oTAr1ogVUlVEwNmAO5JDX2rC0w7DeeAUHjUrg/viewform?usp=pp_url&entry.783194538=',
+    distribution:
+      'https://docs.google.com/forms/d/e/1FAIpQLSemQ2tFN2VJ1oTAr1ogVUlVEwNmAO5JDX2rC0w7DeeAUHjUrg/viewform?usp=pp_url&entry.783194538=',
+    icon: 'https://docs.google.com/forms/d/e/1FAIpQLSemQ2tFN2VJ1oTAr1ogVUlVEwNmAO5JDX2rC0w7DeeAUHjUrg/viewform?usp=pp_url&entry.783194538=',
   },
-  experienced: {
-    shopping:
-      'https://docs.google.com/forms/d/e/1FAIpQLSe8fcClPc1yIawtpnnaC5G5bf2sIn4OUNx9A-71Nvypu4ts1w/viewform?usp=pp_url&entry.783194538=',
-    desease:
-      'https://docs.google.com/forms/d/e/1FAIpQLSdNveC6ZdI9yiLeFvQVdCkVan3_iLVuvjKyt0sCOiFtmns_2w/viewform?usp=pp_url&entry.836057442=',
+  desease: {
+    controled:
+      'https://docs.google.com/forms/d/e/1FAIpQLSev9j19FgH1EvEtPBj4O86tDw8zaCEJ3IqBMzlgJ2JbPDay_Q/viewform?usp=pp_url&entry.836057442=',
+    distribution:
+      'https://docs.google.com/forms/d/e/1FAIpQLSev9j19FgH1EvEtPBj4O86tDw8zaCEJ3IqBMzlgJ2JbPDay_Q/viewform?usp=pp_url&entry.836057442=',
+    icon: 'https://docs.google.com/forms/d/e/1FAIpQLSev9j19FgH1EvEtPBj4O86tDw8zaCEJ3IqBMzlgJ2JbPDay_Q/viewform?usp=pp_url&entry.836057442=',
   },
 };
 
 export const postTaskUrl: EnqueteURL = {
-  controled: {
-    shopping:
-      'https://docs.google.com/forms/d/e/1FAIpQLSfdSj1TZPhFT8MjPfmn5RGh6iJU_Juhb0h66nJ0zQq8Q2iwfQ/viewform?usp=pp_url&entry.1852859412=',
-    desease:
-      'https://docs.google.com/forms/d/e/1FAIpQLScz0tXoh8y6kkMaKz7F7phnDz5dJORzSfN2PTxrlcY-IsUSgw/viewform?usp=pp_url&entry.1968107174=',
+  shopping: {
+    controled:
+      'https://docs.google.com/forms/d/e/1FAIpQLSfhxKkP_lC-4cEezCX0nsV18WvAxlmImT_6Aq3w6VrVBF8gLg/viewform?usp=pp_url&entry.845870063=',
+    distribution:
+      'https://docs.google.com/forms/d/e/1FAIpQLSeaeNMvLB_b3_PW029jYbj6L9PYfBMGbOyYVz91a75czvj8EA/viewform?usp=pp_url&entry.845870063=',
+    icon: 'https://docs.google.com/forms/d/e/1FAIpQLScD9NQR729ejkr6x8XwMpEL8_9qJEhXDwwWG2VFZKyzf0FUDg/viewform?usp=pp_url&entry.845870063=',
   },
-  experienced: {
-    shopping:
-      'https://docs.google.com/forms/d/e/1FAIpQLSegaT7fQkQYuXFGls5tmnsSRVgG-71iwVz0_eJeOZ7zht9kzQ/viewform?usp=pp_url&entry.845870063=',
-    desease:
-      'https://docs.google.com/forms/d/e/1FAIpQLSfF-fp--vhA-cI5xsP6msqjINmetwR3giN0YKourq_NJrBfRQ/viewform?usp=pp_url&entry.1399492081=',
+  desease: {
+    controled:
+      'https://docs.google.com/forms/d/e/1FAIpQLSduYSRPTfI_dlSSsiQORFseJkvdxCkocsDftQ4u8FzvByKE5w/viewform?usp=pp_url&entry.845870063=',
+    distribution:
+      'https://docs.google.com/forms/d/e/1FAIpQLSfh3HfQb65TCxBaCZ0yGY3mkHyjm8UIHhLBi17y5Qp2XyBW-w/viewform?usp=pp_url&entry.845870063=',
+    icon: 'https://docs.google.com/forms/d/e/1FAIpQLSde6dFqJQbasBGUPz473S5N_mVXY9BWG7c94HorWyaJUjV74g/viewform?usp=pp_url&entry.845870063=',
   },
 };
 
 type EnqueteURL = {
-  controled: {
-    shopping: string;
-    desease: string;
+  shopping: {
+    controled: string;
+    distribution: string;
+    icon: string;
   };
-  experienced: {
-    shopping: string;
-    desease: string;
+  desease: {
+    controled: string;
+    distribution: string;
+    icon: string;
   };
 };

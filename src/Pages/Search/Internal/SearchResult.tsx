@@ -16,6 +16,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
   const isExpGroup = isExperimentalGroup();
 
+  // ???
   let suggestionArea: ReactElement | null = null;
   if (props.page.leaks) {
     suggestionArea =
@@ -51,9 +52,9 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       suggestion={
         suggestionArea !== null && isExpGroup
           ? {
-              title: `第3者に過去に訪問したことが知られてしまう可能性があるページ${
-                props.page.total ? '（' + props.page.total + '件）' : ''
-              }`,
+              title: `上のページに訪問したことがどんな${
+                props.page.distribution ? 'カテゴリの' : ''
+              }ウェブサイトに知られてしまうか${props.page.total ? '（' + props.page.total + '件）' : ''}`,
               child: suggestionArea,
             }
           : undefined
@@ -101,10 +102,10 @@ const DistributionSuggestionArea: React.FC<SerpWithDistribution> = (props) => {
   return (
     <MDBRow>
       {props.distribution.map((v, idx) => (
-        <MDBCol key={idx} style={styles.distributionSuggestionText}>
+        <MDBCol key={idx}>
           {/* Set className="d-flex justify-content-center" to centerize */}
-          <div style={{ fontWeight: 'bold' }}>{v.category}</div>
-          <div>{`${Math.ceil(v.pct * 100)}%（${v.count} 件）`}</div>
+          <div style={styles.distributionSuggestionTitle}>{v.category}</div>
+          <div style={styles.distributionSuggestionText}>{`${Math.ceil(v.pct * 1000) / 10}%（${v.count} 件）`}</div>
         </MDBCol>
       ))}
     </MDBRow>
@@ -205,6 +206,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: 'calc(100% - 24px)',
     display: 'inline-block',
     overflowY: 'hidden',
+  },
+  distributionSuggestionTitle: {
+    marginLeft: 0,
+    color: 'rgba(90, 165, 90, 1.0)',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    lineHeight: 1.2,
   },
   distributionSuggestionText: {
     marginLeft: 0,

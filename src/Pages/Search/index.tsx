@@ -21,6 +21,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   };
 
   const user = localStorage.getItem('user') || '';
+  const condition = localStorage.getItem('condition') || '';
 
   const taskIdNum = parseInt(props.match.params.taskid);
   const [resultPages, setResultPages] = useState<Serp[]>([]);
@@ -51,16 +52,30 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    fetchSerp(taskIdNum, offset, 'pct').then((serp) => {
-      serp.sort((a, b) => {
-        if (a.id < b.id) return -1;
-        if (a.id > b.id) return 1;
-        return 0;
+    if (condition === '5') {
+      fetchSerp(taskIdNum, offset, 'icon').then((serp) => {
+        serp.sort((a, b) => {
+          if (a.id < b.id) return -1;
+          if (a.id > b.id) return 1;
+          return 0;
+        });
+        setResultPages(serp);
+        setLoading(false);
+        window.scrollTo(0, 0);
       });
-      setResultPages(serp);
-      setLoading(false);
-      window.scrollTo(0, 0);
-    });
+    } else {
+      fetchSerp(taskIdNum, offset, 'pct').then((serp) => {
+        serp.sort((a, b) => {
+          if (a.id < b.id) return -1;
+          if (a.id > b.id) return 1;
+          return 0;
+        });
+        setResultPages(serp);
+        setLoading(false);
+        window.scrollTo(0, 0);
+      });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 

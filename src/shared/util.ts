@@ -22,13 +22,17 @@ export const isExperimentalGroup = (): boolean => {
 export const getPreTaskEnqueteByGroupId = (group: string): string => {
   switch (group) {
     case '1':
-      return preTaskUrl.experienced.shopping;
+      return preTaskUrl.shopping.icon;
     case '2':
-      return preTaskUrl.experienced.desease;
+      return preTaskUrl.desease.icon;
     case '3':
-      return preTaskUrl.controled.shopping;
+      return preTaskUrl.shopping.controled;
     case '4':
-      return preTaskUrl.controled.desease;
+      return preTaskUrl.desease.controled;
+    case '5':
+      return preTaskUrl.shopping.distribution;
+    case '6':
+      return preTaskUrl.desease.distribution;
     default:
       return '/error/404';
   }
@@ -37,13 +41,17 @@ export const getPreTaskEnqueteByGroupId = (group: string): string => {
 export const getPostTaskEnqueteByGroupId = (group: string): string => {
   switch (group) {
     case '1':
-      return postTaskUrl.experienced.shopping;
+      return postTaskUrl.shopping.icon;
     case '2':
-      return postTaskUrl.experienced.desease;
+      return postTaskUrl.desease.icon;
     case '3':
-      return postTaskUrl.controled.shopping;
+      return postTaskUrl.shopping.controled;
     case '4':
-      return postTaskUrl.controled.desease;
+      return postTaskUrl.desease.controled;
+    case '5':
+      return postTaskUrl.shopping.distribution;
+    case '6':
+      return postTaskUrl.desease.distribution;
     default:
       return '/error/404';
   }
