@@ -3,7 +3,7 @@ import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 import { toast } from 'react-toastify';
 import { SizedText } from '../../Components/AdjustedComponents';
 import history from '../../shared/browserHistory';
-import { createTaskAnswer, TaskInfo } from '../../shared/apis/apis';
+import { createTaskAnswer, makeSearchSesion, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_ICON, CONDITION_DIST } from '../../shared/consts';
 import { getConditionId, getUID, getUserId } from '../../shared/util';
 
@@ -113,7 +113,15 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
-            <MDBBtn color="primary" className="float-right" style={{ width: '240px' }} onClick={() => isClicked(true)}>
+            <MDBBtn
+              color="primary"
+              className="float-right"
+              style={{ width: '240px' }}
+              onClick={() => {
+                isClicked(true);
+                makeSearchSesion(userId, props.id, props.conditionId);
+              }}
+            >
               検索結果リストを表示する
             </MDBBtn>
           </a>
@@ -170,6 +178,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
+                makeSearchSesion(userId, props.id, props.conditionId);
                 setAnswer('');
                 setReason('');
                 isClicked(false);
@@ -183,6 +192,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
+                makeSearchSesion(userId, props.id, props.conditionId);
                 setAnswer('');
                 setReason('');
                 isClicked(false);

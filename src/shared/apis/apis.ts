@@ -67,6 +67,25 @@ export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefine
   }
 };
 
+export const makeSearchSesion = async (user: number, taskId: number, conditionId: number): Promise<void> => {
+  const response = await axios.post(
+    `${API_ENDPOINT}/v1/task/session`,
+    { user: user, task: taskId, condition: conditionId },
+    {
+      headers: {
+        Authorization: `Bearer ${getJWT()}`,
+      },
+    },
+  );
+
+  if (response.status === 200) {
+    return;
+  } else {
+    console.log('Error fetch error.');
+    return;
+  }
+};
+
 export type SerpType = 'icon' | 'pct';
 
 export type SimilarwebPage = {
