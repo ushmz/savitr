@@ -76,7 +76,6 @@ export const Sample: React.FC = () => {
         }}
         task={{
           id: 0,
-          conditionId: 0,
           query: '',
           title: '',
           description: '',
@@ -99,7 +98,6 @@ export const Sample: React.FC = () => {
         }}
         task={{
           id: 0,
-          conditionId: 0,
           query: '',
           title: '',
           description: '',
@@ -183,7 +181,6 @@ export const Sample: React.FC = () => {
         }}
         task={{
           id: 1,
-          conditionId: 0,
           query: '',
           title: '',
           description: '',
@@ -207,7 +204,6 @@ export const Sample: React.FC = () => {
         }}
         task={{
           id: 1,
-          conditionId: 0,
           query: '',
           title: '',
           description: '',

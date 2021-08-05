@@ -119,7 +119,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               style={{ width: '240px' }}
               onClick={() => {
                 isClicked(true);
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
               }}
             >
               検索結果リストを表示する
@@ -178,7 +178,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
                 setAnswer('');
                 setReason('');
                 isClicked(false);
@@ -192,7 +192,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
                 setAnswer('');
                 setReason('');
                 isClicked(false);
