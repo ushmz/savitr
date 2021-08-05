@@ -16,7 +16,7 @@ export const getConditionId = (): number => {
 
 export const isExperimentalGroup = (): boolean => {
   const conditionId = localStorage.getItem('condition') || '';
-  return conditionId === '5';
+  return conditionId !== '6';
 };
 
 export const getPreTaskEnqueteByGroupId = (group: string): string => {

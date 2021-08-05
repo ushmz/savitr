@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MDBCol, MDBRow } from 'mdbreact';
 import { createClickLog, Serp, SerpWithDistribution, SerpWithIcon, TaskInfo } from '../../../shared/apis/apis';
 import { getConditionId, getUserId, isExperimentalGroup } from '../../../shared/util';
+import { API_ENDPOINT } from '../../../shared/config';
 
 type SearchResultProps = {
   page: Serp;
@@ -12,13 +13,26 @@ type SearchResultProps = {
   offset: number;
 };
 
+const getIconCache = (origin: string): string => {
+  const prsr = new URL(origin);
+  return `${API_ENDPOINT}/statics/${prsr.searchParams.get('h')}.png`;
+};
+
 export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
   const isExpGroup = isExperimentalGroup();
+  const condition = getConditionId();
 
-  // ???
-  let suggestionArea: ReactElement | null = null;
-  if (props.page.leaks) {
+  const suggestionTitle = isExpGroup
+    ? `上記ページに訪問したことがどんな${props.page.distribution ? 'カテゴリの' : ''}ウェブサイトに知られてしまうか${
+        props.page.total ? '（' + props.page.total + '件）' : ''
+      }`
+    : '';
+  let suggestionArea: ReactElement | undefined = undefined;
+  if (!isExpGroup) {
+    suggestionArea =
+      props.rank % 2 !== 0 ? <p style={{ color: 'green' }}>上記ページではトラッキングが行われています</p> : undefined;
+  } else if (props.page.leaks && condition === 5) {
     suggestionArea =
       props.rank % 2 !== 0 && props.page.leaks.length > 0 ? (
         <IconSuggestionArea
@@ -29,7 +43,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
           leaks={props.page.leaks}
           rank={props.rank}
         />
-      ) : null;
+      ) : undefined;
   } else if (props.page.total && props.page.distribution) {
     suggestionArea =
       props.rank % 2 !== 0 && props.page.distribution.length > 0 ? (
@@ -41,7 +55,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
           total={props.page.total}
           distribution={props.page.distribution}
         />
-      ) : null;
+      ) : undefined;
   }
 
   return (
@@ -50,11 +64,9 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       url={props.page.url}
       snippet={props.page.snippet}
       suggestion={
-        suggestionArea !== null && isExpGroup
+        suggestionArea
           ? {
-              title: `上のページに訪問したことがどんな${
-                props.page.distribution ? 'カテゴリの' : ''
-              }ウェブサイトに知られてしまうか${props.page.total ? '（' + props.page.total + '件）' : ''}`,
+              title: suggestionTitle,
               child: suggestionArea,
             }
           : undefined
@@ -78,21 +90,22 @@ const IconSuggestionArea: React.FC<SerpWithIcon & { rank: number }> = (props) =>
   return (
     <MDBRow style={{ marginLeft: '5px' }}>
       {Object.entries(props.leaks).map(([k, v]) => (
-        <>
-          <img
-            key={k}
-            src={v.icon}
-            onError={(e) => {
-              const target = e.target as HTMLElement;
-              target.style.display = 'none';
-              // const leaksArea = document.getElementById('eob_21');
-              // if (leaksArea != null) {
-              //   leaksArea.style.display = 'none';
-              // }
-            }}
-            style={{ height: 30, objectFit: 'cover' }}
-          />
-        </>
+        <div key={k}>
+          <a href={v.url} target="_blank" rel="noreferrer">
+            <img
+              src={getIconCache(v.icon)}
+              onError={(e) => {
+                const target = e.target as HTMLElement;
+                target.style.display = 'none';
+                // const leaksArea = document.getElementById('eob_21');
+                // if (leaksArea != null) {
+                //   leaksArea.style.display = 'none';
+                // }
+              }}
+              style={{ height: 30, objectFit: 'cover' }}
+            />
+          </a>
+        </div>
       ))}
     </MDBRow>
   );
@@ -119,7 +132,7 @@ type SearchResultSingleProps = {
   snippet: string;
   suggestion?: {
     title: string;
-    child: JSX.Element;
+    child?: JSX.Element;
     onClick?: () => void;
   };
 };

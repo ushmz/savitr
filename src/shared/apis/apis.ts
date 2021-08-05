@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_ENDPOINT = process.env.BACKEND_ENDPOINT || 'http://localhost:8080';
+import { API_ENDPOINT } from '../config';
 
 const getJWT = () => localStorage.getItem('jwt') || '';
 
@@ -43,7 +42,6 @@ export const fetchCompletionCode = async (id: string): Promise<number> => {
 
 export type TaskInfo = {
   id: number;
-  conditionId: number;
   query: string;
   title: string;
   description: string;
@@ -182,33 +180,25 @@ export const fetchSerp = async (taskId: number, offset: number, style: SerpType)
 };
 
 export type TaskTimeLogParam = {
-  id: string;
-  uid: string;
-  timeOnPage: number;
-  url: string;
-  taskId: number;
-  conditionId: number;
+  user: string;
+  task: number;
+  time: number;
+  condition: number;
 };
 
 export type TaskTimeLog = {
-  id: string;
-  authorId: number;
-  uid: string;
-  time: number;
-  url: string;
+  user: string;
   task: number;
+  time: number;
   condition: number;
 };
 
 export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> => {
   const timeLog: TaskTimeLog = {
-    id: param.id,
-    authorId: 2,
-    uid: param.uid,
-    time: param.timeOnPage,
-    url: param.url,
-    task: param.taskId,
-    condition: param.conditionId,
+    user: param.user,
+    time: param.time,
+    task: param.task,
+    condition: param.condition,
   };
 
   const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/time`, timeLog, {

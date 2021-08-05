@@ -11,7 +11,6 @@ export const Introduction: React.FC<Props> = (props) => {
   const history = useHistory();
   const dummyTask: TaskInfo = {
     id: 0,
-    conditionId: 0,
     query: '',
     title: '',
     description: '',

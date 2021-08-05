@@ -11,7 +11,6 @@ export const Search: React.FC<SearchProp> = (props) => {
   document.title = '検索結果リスト';
   const dummyTask: TaskInfo = {
     id: 0,
-    conditionId: 0,
     query: '',
     title: '',
     description: '',
@@ -34,12 +33,10 @@ export const Search: React.FC<SearchProp> = (props) => {
   useInterval(async () => {
     if (!window.document.hidden) {
       await createTaskTimeLog({
-        id: user + '-' + taskIdNum,
-        uid: user,
-        timeOnPage: minutes * 60 + seconds,
-        url: document.URL,
-        taskId: taskIdNum,
-        conditionId: taskIdNum,
+        user: user,
+        time: minutes * 60 + seconds,
+        task: taskIdNum,
+        condition: taskIdNum,
       });
     }
   }, 1000);

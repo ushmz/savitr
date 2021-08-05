@@ -6,6 +6,7 @@ import history from '../../shared/browserHistory';
 import { createTaskAnswer, makeSearchSesion, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_ICON, CONDITION_DIST } from '../../shared/consts';
 import { getConditionId, getUID, getUserId } from '../../shared/util';
+import { RuleSetUse } from 'webpack';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
@@ -49,7 +50,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
           「検索結果リストを表示する」ボタンをクリックした後に表示される画面では、Google検索やYahoo検索のようなウェブ検索エンジンの結果ページを模したページが表示されます。
         </p>
 
-        {isUIDetailVisible && (
+        {isUIDetailVisible ? (
           <MDBCol>
             <MDBRow>
               {condition === 5 ? (
@@ -109,6 +110,39 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               )}
             </MDBRow>
           </MDBCol>
+        ) : (
+          <MDBCol>
+            <MDBRow>
+              <p>
+                加えて、各検索結果には「上記ページではトラッキングが行われている」と 表示されることがあります。ｊ
+                ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が
+                埋め込まれている場合があります。検索結果に「上記ページではトラッキングが行われている」と
+                表示されている場合、その検索結果を閲覧するとウェブ広告会社に検索結果を閲覧したことが
+                知られてしまう可能性があることを意味します。
+              </p>
+            </MDBRow>
+
+            <MDBRow className="d-flex justify-content-center">
+              <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+            </MDBRow>
+            <MDBRow className="my-3">
+              <p>
+                例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+                「上記ページではトラッキングが行われています」と表示されています。
+                このことは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
+                <ul style={{ margin: '20px', listStyleType: 'disc' }}>
+                  <li>
+                    そのサイトにウェブ広告を配信している企業に「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
+                  </li>
+                  <li>
+                    ウェブ広告会社が広告を提供している他のウェブサイトを訪問した際に、
+                    「Webカメラのおすすめ11選！」を閲覧したという記録を使ってウェブ広告が表示される
+                  </li>
+                </ul>
+                可能性があることを意味します。
+              </p>
+            </MDBRow>
+          </MDBCol>
         )}
 
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
@@ -119,7 +153,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               style={{ width: '240px' }}
               onClick={() => {
                 isClicked(true);
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
               }}
             >
               検索結果リストを表示する
@@ -178,7 +212,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
                 setAnswer('');
                 setReason('');
                 isClicked(false);
@@ -192,7 +226,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
                   answer: answer,
                   reason: reason,
                 }).then(() => toast.success('回答を記録しました'));
-                makeSearchSesion(userId, props.id, props.conditionId);
+                makeSearchSesion(userId, props.id, condition);
                 setAnswer('');
                 setReason('');
                 isClicked(false);

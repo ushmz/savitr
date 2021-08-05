@@ -10,9 +10,21 @@ import { Search } from '../Pages/Search';
 import { Top } from '../Pages/Top';
 import { NotFound } from '../Pages/NotFound';
 import history from '../shared/browserHistory';
+import { isMobile } from 'react-device-detect';
+import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdbreact';
 
 const Routes: React.FC = () => {
-  return (
+  return isMobile ? (
+    <>
+      <MDBCard className="m-5">
+        <MDBCardTitle className="m-3">このページはパソコン専用です。</MDBCardTitle>
+        <MDBCardBody className="mx=3">
+          <p>本ウェブサイトは、クラウドワークスにて掲載している検索タスクを行っていただくためのサイトです。</p>
+          <p>このページはパソコン専用です。このタスク行うにはパソコンからアクセスしてください。</p>
+        </MDBCardBody>
+      </MDBCard>
+    </>
+  ) : (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={Top} />

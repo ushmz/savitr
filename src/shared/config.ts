@@ -1,3 +1,5 @@
+export const API_ENDPOINT = process.env.BACKEND_ENDPOINT || 'http://localhost:8080';
+
 export const preTaskUrl: EnqueteURL = {
   shopping: {
     controled:

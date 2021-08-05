@@ -26,7 +26,7 @@ export const Top: React.FC = () => {
   const onSubmit = handleSubmit(({ externalId }) => {
     const ext = externalId.replace(' ', '');
     if (ext === '') {
-      toast.error('ランサーズID（ユーザー名）が入力されていません');
+      toast.error('クラウドワークスIDが入力されていません');
       return;
     }
     setLoading(true);
@@ -79,11 +79,11 @@ export const Top: React.FC = () => {
   return (
     <Toppage className="mx-auto my-5">
       <h1 className="my-4">検索タスク開始にあたって</h1>
-      <p>本ウェブサイトは、ランサーズにて掲載している検索タスクを行っていただくためのサイトです。</p>
+      <p>本ウェブサイトは、クラウドワークスにて掲載している検索タスクを行っていただくためのサイトです。</p>
 
       <p>
         本タスクでははじめにアンケートに回答していただきます。続いて検索タスクを行っていただきます。
-        最後にもう一度アンケートに回答していただきます。タスク全体の想定時間は 30 分程度を想定しております。
+        最後にもう一度アンケートに回答していただきます。タスク全体の想定時間は 20 分程度を想定しております。
       </p>
 
       <p>
@@ -92,13 +92,13 @@ export const Top: React.FC = () => {
       </p>
 
       <p className="font-weight-bold">
-        以上に同意していただける方は、以下の入力欄に「ランサーズID」を入力し、
+        以上に同意していただける方は、以下の入力欄に「クラウドワークスID」を入力し、
         「タスクを開始する」ボタンをクリックしてタスクを開始してください。
       </p>
 
       <form className="my-5" onSubmit={onSubmit}>
         <label htmlFor="externalId" className="font-weight-light">
-          ランサーズID（ユーザー名）
+          クラウドワークスID
         </label>
         <input id="externalId" className="mb-3 form-control" style={{ width: '360px' }} {...register('externalId')} />
         {errors.externalId && <p>{errors.externalId.message}</p>}
