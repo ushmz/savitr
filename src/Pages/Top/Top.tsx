@@ -6,6 +6,7 @@ import { MDBBtn } from 'mdbreact';
 import { toast } from 'react-toastify';
 import { useAuth } from 'shared/provider/authProvider';
 import { createUser } from '../../shared/apis/apis';
+import { CROWDSOURCING_SITE } from '../../shared/config';
 
 type RegisterParam = {
   externalId: string;
@@ -26,7 +27,7 @@ export const Top: React.FC = () => {
   const onSubmit = handleSubmit(({ externalId }) => {
     const ext = externalId.replace(' ', '');
     if (ext === '') {
-      toast.error('クラウドワークスIDが入力されていません');
+      toast.error(`${CROWDSOURCING_SITE}IDが入力されていません`);
       return;
     }
     setLoading(true);
@@ -46,9 +47,8 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-
-            .catch((res) => {
-              toast.error(`予期せぬエラーが発生しました : ${res}`);
+            .catch((_) => {
+              toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
         } else {
@@ -64,8 +64,8 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-            .catch((res) => {
-              toast.error(`予期せぬエラーが発生しました : ${res}`);
+            .catch((_) => {
+              toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
         }
@@ -79,7 +79,7 @@ export const Top: React.FC = () => {
   return (
     <Toppage className="mx-auto my-5">
       <h1 className="my-4">検索タスク開始にあたって</h1>
-      <p>本ウェブサイトは、クラウドワークスにて掲載している検索タスクを行っていただくためのサイトです。</p>
+      <p>本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。</p>
 
       <p>
         本タスクでははじめにアンケートに回答していただきます。続いて検索タスクを行っていただきます。
@@ -92,16 +92,22 @@ export const Top: React.FC = () => {
       </p>
 
       <p className="font-weight-bold">
-        以上に同意していただける方は、以下の入力欄に「クラウドワークスID」を入力し、
+        以上に同意していただける方は、以下の入力欄に「{CROWDSOURCING_SITE}ID」を入力し、
         「タスクを開始する」ボタンをクリックしてタスクを開始してください。
       </p>
 
       <form className="my-5" onSubmit={onSubmit}>
         <label htmlFor="externalId" className="font-weight-light">
-          クラウドワークスID
+          {CROWDSOURCING_SITE}ID（IDは半角英数字と記号を用いて入力してください）
         </label>
-        <input id="externalId" className="mb-3 form-control" style={{ width: '360px' }} {...register('externalId')} />
-        {errors.externalId && <p>{errors.externalId.message}</p>}
+        <input
+          id="externalId"
+          className="mb-3 form-control"
+          pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
+          style={{ width: '360px' }}
+          {...register('externalId')}
+        />
+        {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
         <div>
           <MDBBtn
             type="submit"
