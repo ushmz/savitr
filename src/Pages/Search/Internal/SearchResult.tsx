@@ -79,7 +79,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
           time: props.getTimeOnPage(),
           rank: props.rank,
           page: props.offset,
-          visible: suggestionArea !== null && isExpGroup,
+          visible: props.rank % 2 === 1,
         });
       }}
     />
