@@ -4,6 +4,7 @@ import { useInterval } from 'use-interval';
 import { useStopwatch } from 'react-timer-hook';
 import { SearchResultPage as Component } from './Search';
 import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
+import { getConditionId, getUserId } from 'shared/util';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
@@ -19,8 +20,8 @@ export const Search: React.FC<SearchProp> = (props) => {
     type: '',
   };
 
-  const user = localStorage.getItem('user') || '';
-  const condition = localStorage.getItem('condition') || '';
+  const userId = getUserId();
+  const condition = getConditionId();
 
   const taskIdNum = parseInt(props.match.params.taskid);
   const [resultPages, setResultPages] = useState<Serp[]>([]);
@@ -33,7 +34,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   useInterval(async () => {
     if (!window.document.hidden) {
       await createTaskTimeLog({
-        user: user,
+        user: userId,
         time: minutes * 60 + seconds,
         task: taskIdNum,
         condition: taskIdNum,
@@ -49,7 +50,7 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    if (condition === '5') {
+    if (condition === 5) {
       fetchSerp(taskIdNum, offset, 'icon').then((serp) => {
         serp.sort((a, b) => {
           if (a.id < b.id) return -1;

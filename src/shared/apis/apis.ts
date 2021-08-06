@@ -180,14 +180,14 @@ export const fetchSerp = async (taskId: number, offset: number, style: SerpType)
 };
 
 export type TaskTimeLogParam = {
-  user: string;
+  user: number;
   task: number;
   time: number;
   condition: number;
 };
 
 export type TaskTimeLog = {
-  user: string;
+  user: number;
   task: number;
   time: number;
   condition: number;
