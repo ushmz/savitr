@@ -6,7 +6,6 @@ import history from '../../shared/browserHistory';
 import { createTaskAnswer, makeSearchSesion, TaskInfo } from '../../shared/apis/apis';
 import { CONDITION_ICON, CONDITION_DIST } from '../../shared/consts';
 import { getConditionId, getUID, getUserId } from '../../shared/util';
-import { RuleSetUse } from 'webpack';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
