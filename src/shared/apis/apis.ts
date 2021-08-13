@@ -34,7 +34,7 @@ export const fetchCompletionCode = async (id: string): Promise<number> => {
     },
   });
   if (response.status === 200) {
-    return response.data.completionCode;
+    return response.data as number;
   } else {
     throw new Error('Failed to fetch completion code.');
   }
@@ -45,9 +45,7 @@ export type TaskInfo = {
   query: string;
   title: string;
   description: string;
-  authorId: string;
   searchUrl: string;
-  type: string;
 };
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
@@ -58,7 +56,7 @@ export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefine
   });
 
   if (response.status === 200) {
-    return response.data[0] as TaskInfo;
+    return response.data as TaskInfo;
   } else {
     console.log('Error fetch error.');
     return;
@@ -76,7 +74,7 @@ export const makeSearchSesion = async (user: number, taskId: number, conditionId
     },
   );
 
-  if (response.status === 200) {
+  if (response.status === 201) {
     return;
   } else {
     console.log('Error fetch error.');

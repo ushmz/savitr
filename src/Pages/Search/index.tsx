@@ -15,9 +15,7 @@ export const Search: React.FC<SearchProp> = (props) => {
     query: '',
     title: '',
     description: '',
-    authorId: '',
     searchUrl: '',
-    type: '',
   };
 
   const userId = getUserId();

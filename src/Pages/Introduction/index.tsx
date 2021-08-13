@@ -14,9 +14,7 @@ export const Introduction: React.FC<Props> = (props) => {
     query: '',
     title: '',
     description: '',
-    authorId: '',
     searchUrl: '',
-    type: '',
   };
 
   const [task, setTask] = useState<TaskInfo>(dummyTask);
