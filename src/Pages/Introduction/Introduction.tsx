@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import { SizedText } from '../../Components/AdjustedComponents';
 import history from '../../shared/browserHistory';
 import { createTaskAnswer, makeSearchSesion, TaskInfo } from '../../shared/apis/apis';
-import { CONDITION_ICON, CONDITION_DIST } from '../../shared/consts';
 import { getConditionId, getUID, getUserId } from '../../shared/util';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
@@ -13,7 +12,6 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
   const [reason, setReason] = useState<string>('');
 
   const condition = getConditionId();
-  const isUIDetailVisible = condition === CONDITION_ICON || condition === CONDITION_DIST;
   const progresNumString = props.id <= 6 ? '1' : '2';
   const userId = getUserId();
   const uid = getUID();
@@ -48,102 +46,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         <p>
           「検索結果リストを表示する」ボタンをクリックした後に表示される画面では、Google検索やYahoo検索のようなウェブ検索エンジンの結果ページを模したページが表示されます。
         </p>
-
-        {isUIDetailVisible ? (
-          <MDBCol>
-            <MDBRow>
-              {condition === 5 ? (
-                <p>
-                  　加えて、各検索結果には「いくつかのウェブサイトのアイコン」が表示されることがあります。
-                  ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。検索結果にウェブサイトのアイコンが表示されている場合、
-                  その検索結果を閲覧するとアイコンが示すウェブサイトのトラッカー（広告会社）に
-                  検索結果を閲覧したことが知られてしまう可能性があることを意味します。
-                </p>
-              ) : (
-                <p>
-                  　加えて、各検索結果には「そのページに訪問したことがどんなカテゴリのウェブサイトにどの程度知られてしまうかの情報」が表示されることがあります。
-                  ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が埋め込まれている場合があります。
-                  検索結果に「そのページに訪問したことがどんなカテゴリのウェブサイトにどの程度知られてしまうかの割合」が表示されている場合、その検索結果を閲覧すると割合が表示されたカテゴリのウェブサイトのトラッカー（広告会社）に検索結果を閲覧したことが知られてしまう可能性があることを意味します。
-                </p>
-              )}
-            </MDBRow>
-            <MDBRow className="d-flex justify-content-center">
-              <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
-            </MDBRow>
-            <MDBRow className="my-3">
-              {condition === 5 ? (
-                <p>
-                  例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
-                  ブリジストンや日本野球機構を含む10のアイコンが表示されています。
-                  このことは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
-                  <ul style={{ margin: '20px', listStyleType: 'disc' }}>
-                    <li>
-                      ブリジストンや日本野球機構などにウェブ広告を配信している企業に
-                      「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
-                    </li>
-                    <li>
-                      次回ブリジストンや日本野球機構などのウェブサイトを訪問した際に、
-                      「Webカメラのおすすめ11選！」を閲覧したという記録を使ってウェブ広告が表示される
-                    </li>
-                  </ul>
-                  可能性があることを意味します。
-                </p>
-              ) : (
-                <p>
-                  例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
-                  そのページに訪問したことが知られてしまう3つのカテゴリのウェブサイトの 数と割合が表示されています。
-                  上記の図からは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
-                  <ul style={{ margin: '20px', listStyleType: 'disc' }}>
-                    <li>
-                      「乗り物」や「ホームとガーデニング」といったカテゴリのウェブサイトに
-                      広告を配信している企業に「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
-                    </li>
-                    <li>
-                      次回「乗り物」や「ホームとガーデニング」のようなカテゴリの
-                      ウェブサイトを訪問した際に、「Webカメラのおすすめ11選！」を閲覧したという
-                      記録を使ってウェブ広告が表示される
-                    </li>
-                  </ul>
-                  可能性があることが分かります。
-                </p>
-              )}
-            </MDBRow>
-          </MDBCol>
-        ) : (
-          <MDBCol>
-            <MDBRow>
-              <p>
-                加えて、各検索結果には「上記ページではトラッキングが行われている」と 表示されることがあります。ｊ
-                ウェブサイトの中にはユーザの閲覧行動をウェブ広告会社に送信するトラッカー機能が
-                埋め込まれている場合があります。検索結果に「上記ページではトラッキングが行われている」と
-                表示されている場合、その検索結果を閲覧するとウェブ広告会社に検索結果を閲覧したことが
-                知られてしまう可能性があることを意味します。
-              </p>
-            </MDBRow>
-
-            <MDBRow className="d-flex justify-content-center">
-              <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
-            </MDBRow>
-            <MDBRow className="my-3">
-              <p>
-                例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
-                「上記ページではトラッキングが行われています」と表示されています。
-                このことは、「Webカメラのおすすめ11選！」のウェブサイトを閲覧すると、
-                <ul style={{ margin: '20px', listStyleType: 'disc' }}>
-                  <li>
-                    そのサイトにウェブ広告を配信している企業に「Webカメラのおすすめ11選！」を閲覧したことが知られてしまい、
-                  </li>
-                  <li>
-                    ウェブ広告会社が広告を提供している他のウェブサイトを訪問した際に、
-                    「Webカメラのおすすめ11選！」を閲覧したという記録を使ってウェブ広告が表示される
-                  </li>
-                </ul>
-                可能性があることを意味します。
-              </p>
-            </MDBRow>
-          </MDBCol>
-        )}
-
+        {taskDetail(condition)}
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
             <MDBBtn
@@ -239,4 +142,93 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
       </MDBContainer>
     </>
   );
+};
+
+const taskDetail = (condition: number) => {
+  switch (condition) {
+    case 5:
+      return (
+        <MDBCol>
+          <MDBRow>
+            <p>
+              加えて、各検索結果には下図のように、
+              「上のページを閲覧すると、以下のウェブサイトでも上記ページの閲覧履歴を記録・分析される可能性があります」
+              というメッセージと共に「いくつかのウェブサイトのアイコン」が表示されることがあります。
+              検索結果にウェブサイトのアイコンが表示されている場合、その検索結果からリンクされたページを閲覧すると、
+              アイコンが示すウェブサイトでも検索結果のページを閲覧したことが記録・分析されてしまう
+              可能性があることを意味します。
+            </p>
+          </MDBRow>
+          <MDBRow className="d-flex justify-content-center">
+            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+          </MDBRow>
+          <MDBRow className="my-3">
+            <p>
+              例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+              ブリジストンや日本野球機構を含む10のアイコンが表示されています。
+              このことは、「Webカメラのおすすめ11選！」のウェブページを閲覧すると、
+              「Webカメラのおすすめ11選！」のページだけでなく、
+              「ブリジストン」や「日本野球機構」といったウェブサイトなどにウェブ広告を配信している企業などにも
+              「Webカメラのおすすめ11選！」を閲覧したことが記録・分析されてしまう可能性があることが分かります。
+            </p>
+          </MDBRow>
+        </MDBCol>
+      );
+    case 6:
+      return (
+        <MDBCol>
+          <MDBRow>
+            <p>
+              加えて、各検索結果には下図のように、
+              「上のページを閲覧すると、ページの閲覧履歴を記録・分析される可能性があります」と
+              表示されることがあります。
+              検索結果にこのメッセージが表示されている場合、その検索結果からリンクされたページを閲覧すると、
+              第三者にそのページの閲覧履歴が記録・分析されてしまう可能性があることを意味します。
+            </p>
+          </MDBRow>
+
+          <MDBRow className="d-flex justify-content-center">
+            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+          </MDBRow>
+          <MDBRow className="my-3">
+            <p>
+              例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+              「上のページを閲覧すると、ページの閲覧履歴を記録・分析される可能性があります」と表示されています。
+              このことは、「Webカメラのおすすめ11選！」のウェブページを閲覧すると、
+              そのページにウェブ広告を配信している企業などに「Webカメラのおすすめ11選！」を
+              閲覧したことが記録・分析されてしまう可能性があることが分かります。
+            </p>
+          </MDBRow>
+        </MDBCol>
+      );
+    case 7:
+      return (
+        <MDBCol>
+          <MDBRow>
+            <p>
+              加えて、各検索結果には下図のように、 「検索結果からリンクされたページを閲覧したことが、
+              どんなカテゴリのウェブサイトにどの程度知られてしまうかの割合情報」 が表示されることがあります。
+              検索結果に割合情報が表示されている場合、その検索結果からリンクされたページを閲覧すると、
+              割合が表示されたカテゴリのウェブサイトでも
+              検索結果のページを閲覧したことが記録・分析されてしまう可能性があることを意味します。
+            </p>
+          </MDBRow>
+          <MDBRow className="d-flex justify-content-center">
+            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+          </MDBRow>
+          <MDBRow className="my-3">
+            <p>
+              例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
+              そのページを閲覧したことが知られてしまう3つのカテゴリのウェブサイトの数と割合が表示されています。
+              上図からは、「Webカメラのおすすめ11選！」のウェブページを閲覧すると、
+              「Webカメラのおすすめ11選！」のページだけでなく、
+              「乗り物」や「ホームとガーデニング」のようなカテゴリのウェブサイトにウェブ広告を配信している企業などにも
+              「Webカメラのおすすめ11選！」を閲覧したことが記録・分析されてしまう可能性があることを意味します。
+            </p>
+          </MDBRow>
+        </MDBCol>
+      );
+    default:
+      return;
+  }
 };
