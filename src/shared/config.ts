@@ -1,6 +1,6 @@
 export const API_ENDPOINT = process.env.BACKEND_ENDPOINT || 'http://localhost:8080';
 
-export const CROWDSOURCING_SITE = 'ランサーズ';
+export const CROWDSOURCING_SITE = 'クラウドワークス';
 
 export const preTaskUrl: EnqueteURL = {
   shopping: {

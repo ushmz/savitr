@@ -23,15 +23,20 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const isExpGroup = isExperimentalGroup();
   const condition = getConditionId();
 
-  const suggestionTitle = isExpGroup
-    ? `上記ページに訪問したことがどんな${props.page.distribution ? 'カテゴリの' : ''}ウェブサイトに知られてしまうか${
-        props.page.total ? '（' + props.page.total + '件）' : ''
-      }`
+  const suggestionTitleFirst = isExpGroup
+    ? `上のページを閲覧すると，以下の${condition == 7 ? 'カテゴリの' : ''}ウェブサイトでも`
     : '';
+
+  const suggestionTitleLater = `上記ページの閲覧履歴を記録・分析される可能性があります${
+    condition == 7 ? '（' + props.page.total + '件）' : ''
+  }`;
+
   let suggestionArea: ReactElement | undefined = undefined;
   if (!isExpGroup) {
     suggestionArea =
-      props.rank % 2 !== 0 ? <p style={{ color: 'green' }}>上記ページではトラッキングが行われています</p> : undefined;
+      props.rank % 2 !== 0 ? (
+        <p style={{ color: 'green' }}>上のページを閲覧すると，ページの閲覧履歴を記録・分析される可能性があります</p>
+      ) : undefined;
   } else if (props.page.leaks && condition === 5) {
     suggestionArea =
       props.rank % 2 !== 0 && props.page.leaks.length > 0 ? (
@@ -66,7 +71,8 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
       suggestion={
         suggestionArea
           ? {
-              title: suggestionTitle,
+              title: suggestionTitleFirst,
+              secondaryTitle: suggestionTitleLater,
               child: suggestionArea,
             }
           : undefined
@@ -132,12 +138,26 @@ type SearchResultSingleProps = {
   snippet: string;
   suggestion?: {
     title: string;
+    secondaryTitle?: string;
     child?: JSX.Element;
     onClick?: () => void;
   };
 };
 
 export const SearchResultSingle: React.FC<SearchResultSingleProps> = (props) => {
+  const buildTitle = () => {
+    if (props.suggestion == null) return <></>;
+    return props.suggestion.secondaryTitle ? (
+      <>
+        {props.suggestion.title}
+        <br />
+        {props.suggestion.secondaryTitle}
+      </>
+    ) : (
+      <>{props.suggestion.title}</>
+    );
+  };
+
   return (
     <StyledRootContainer className="g">
       <StyledPageInfoArea>
@@ -155,7 +175,7 @@ export const SearchResultSingle: React.FC<SearchResultSingleProps> = (props) => 
       <StyledPageSnippetArea>{props.snippet.slice(0, 80) + '...'}</StyledPageSnippetArea>
       {props.suggestion && (
         <StyledSuggestionArea>
-          <h4 style={styles.suggestionTitle}>{props.suggestion.title}</h4>
+          <h4 style={styles.suggestionTitle}>{buildTitle()}</h4>
           <div style={styles.suggestionComponent} onClick={props.suggestion.onClick}>
             {props.suggestion.child}
           </div>
