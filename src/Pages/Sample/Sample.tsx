@@ -79,9 +79,7 @@ export const Sample: React.FC = () => {
           query: '',
           title: '',
           description: '',
-          authorId: '',
           searchUrl: '',
-          type: '',
         }}
         getTimeOnPage={() => 0}
         rank={1}
@@ -101,9 +99,7 @@ export const Sample: React.FC = () => {
           query: '',
           title: '',
           description: '',
-          authorId: '',
           searchUrl: '',
-          type: '',
         }}
         getTimeOnPage={() => 0}
         rank={2}
@@ -184,9 +180,7 @@ export const Sample: React.FC = () => {
           query: '',
           title: '',
           description: '',
-          authorId: '',
           searchUrl: '',
-          type: '',
         }}
         getTimeOnPage={() => 0}
         rank={3}
@@ -207,9 +201,7 @@ export const Sample: React.FC = () => {
           query: '',
           title: '',
           description: '',
-          authorId: '',
           searchUrl: '',
-          type: '',
         }}
         getTimeOnPage={() => 0}
         rank={4}
