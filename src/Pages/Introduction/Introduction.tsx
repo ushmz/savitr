@@ -160,7 +160,7 @@ const taskDetail = (condition: number) => {
             </p>
           </MDBRow>
           <MDBRow className="d-flex justify-content-center">
-            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+            <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
           </MDBRow>
           <MDBRow className="my-3">
             <p>
@@ -188,7 +188,7 @@ const taskDetail = (condition: number) => {
           </MDBRow>
 
           <MDBRow className="d-flex justify-content-center">
-            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+            <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
           </MDBRow>
           <MDBRow className="my-3">
             <p>
@@ -214,7 +214,7 @@ const taskDetail = (condition: number) => {
             </p>
           </MDBRow>
           <MDBRow className="d-flex justify-content-center">
-            <img src={`public/img/samples/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
+            <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
           </MDBRow>
           <MDBRow className="my-3">
             <p>

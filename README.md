@@ -16,8 +16,8 @@ Before user visits a webpage, show web page titles they had been visited in the 
 
 - Icon UI
 
-![proposal overview icon UI](./public/img/samples/5.png)
+![proposal overview icon UI](./public/img/samples/en/5.png)
 
 - Distribution UI
 
-![proposal overview distribution UI](./public/img/samples/7.png)
+![proposal overview distribution UI](./public/img/samples/en/7.png)
