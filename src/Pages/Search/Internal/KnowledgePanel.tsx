@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBBtn } from 'mdbreact';
-import { TaskInfo } from '../../../shared/apis/apis';
+import { TaskInfo } from 'shared/types';
 
 type CunningPanelProps = {
   togglePopup: () => void;

@@ -1,6 +1,16 @@
 import React, { createContext } from 'react';
-import { useProvideAuth } from '../hooks/useAuth';
-import { ContextValue } from '../types';
+import { useProvideAuth } from 'shared/hooks/useAuth';
+import firebase from 'firebase/app';
+
+export type ContextValue = {
+  signIn: (uid: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  signUp: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  signOut: () => Promise<void>;
+  // sendPasswordResetEmail: (email: string) => Promise<void>;
+  // confirmPasswordReset: (code: string, password: string) => Promise<void>;
+  user: firebase.User | null;
+  // didAuthentication: boolean;
+};
 
 export const AuthContext = createContext({} as ContextValue);
 

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
 import { toast } from 'react-toastify';
-import { SizedText } from '../../Components/AdjustedComponents';
-import history from '../../shared/browserHistory';
-import { createTaskAnswer, makeSearchSesion, TaskInfo } from '../../shared/apis/apis';
-import { getConditionId, getUID, getUserId } from '../../shared/util';
+import { SizedText } from 'Components/AdjustedComponents';
+import history from 'shared/utils/browserHistory';
+import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
+import { TaskInfo } from 'shared/types';
+import { getConditionId, getUID, getUserId } from 'shared/utils';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);

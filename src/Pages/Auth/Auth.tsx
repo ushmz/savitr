@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../shared/provider/authProvider';
 import { Redirect } from 'react-router';
-import firebase from '../../shared/utils/firebase';
-import { ComponentLoaderCenter } from '../../Components/ComponentLoader';
+import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { useAuth } from 'shared/provider/authProvider';
+import firebase from 'shared/utils/firebase';
 
 export const Auth: React.FC = ({ children }) => {
   const auth = useAuth();

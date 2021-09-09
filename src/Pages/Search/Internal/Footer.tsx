@@ -1,5 +1,5 @@
-import { MDBBtn, MDBContainer } from 'mdbreact';
 import React, { useState } from 'react';
+import { MDBBtn, MDBContainer } from 'mdbreact';
 
 export const GoogleIshFooter: React.FC = () => {
   return (

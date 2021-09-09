@@ -1,5 +1,5 @@
-import { MDBContainer } from 'mdbreact';
 import React from 'react';
+import { MDBContainer } from 'mdbreact';
 
 export const NotFound: React.FC<{ err?: string; message?: string }> = (props) => {
   return (

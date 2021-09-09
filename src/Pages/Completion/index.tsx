@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchCompletionCode } from 'shared/apis/apis';
-import { Completion as Component } from './Completion';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { Completion as Component } from 'Pages/Completion/Completion';
+import { fetchCompletionCode } from 'shared/apis';
 
 export const Completion: React.FC = () => {
   const [compCode, setCompCode] = useState<number>(99999);

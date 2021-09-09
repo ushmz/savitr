@@ -1,17 +1,17 @@
 import { MDBRow } from 'mdbreact';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { Serp, TaskInfo } from '../../shared/apis/apis';
-import { SearchResultUnit } from './Internal/SearchResult';
-import { SerpPagination } from './Internal/Pagination';
-import { SearchBar } from './Internal/SearchBar';
+import { Serp, TaskInfo } from 'shared/types';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { SearchResultUnit } from 'Pages/Search/Internal/SearchResult';
+import { SerpPagination } from 'Pages/Search/Internal/Pagination';
+import { SearchBar } from 'Pages/Search/Internal/SearchBar';
 
 type SearchTaskProps = {
+  task: TaskInfo;
+  pageList: Serp[];
   offset: number;
   setOffset: Dispatch<SetStateAction<number>>;
-  pageList: Serp[];
-  task: TaskInfo;
   getTimeOnPage: () => number;
   isLoading: boolean;
 };
@@ -29,7 +29,7 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
       {props.isLoading ? (
         <ComponentLoaderCenter />
       ) : (
-        <>
+        <div>
           <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
           <MDBRow>
             <StyledSearchResultContainer>
@@ -43,17 +43,15 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
                   getTimeOnPage={props.getTimeOnPage}
                 />
               ))}
-              <div role="navigation">
-                <SerpPagination
-                  task={props.task}
-                  offset={props.offset}
-                  setOffset={props.setOffset}
-                  getTimeOnPage={props.getTimeOnPage}
-                />
-              </div>
+              <SerpPagination
+                task={props.task}
+                offset={props.offset}
+                setOffset={props.setOffset}
+                getTimeOnPage={props.getTimeOnPage}
+              />
             </StyledSearchResultContainer>
           </MDBRow>
-        </>
+        </div>
       )}
     </>
   );

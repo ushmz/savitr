@@ -5,8 +5,8 @@ import { Toppage } from 'Components/AdjustedComponents';
 import { MDBBtn } from 'mdbreact';
 import { toast } from 'react-toastify';
 import { useAuth } from 'shared/provider/authProvider';
-import { createUser } from '../../shared/apis/apis';
-import { CROWDSOURCING_SITE } from '../../shared/config';
+import { createUser } from 'shared/apis';
+import { CROWDSOURCING_SITE } from 'shared/config';
 
 type RegisterParam = {
   externalId: string;

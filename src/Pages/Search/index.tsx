@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useInterval } from 'use-interval';
 import { useStopwatch } from 'react-timer-hook';
-import { SearchResultPage as Component } from './Search';
-import { Serp, TaskInfo, fetchSerp, fetchTaskInfo, createTaskTimeLog } from '../../shared/apis/apis';
-import { getConditionId, getUserId } from 'shared/util';
+import { useInterval } from 'use-interval';
+import { SearchResultPage as Component } from 'Pages/Search/Search';
+import { fetchSerp, fetchTaskInfo, createTaskTimeLog } from 'shared/apis';
+import { Serp, TaskInfo } from 'shared/types';
+import { getConditionId, getUserId } from 'shared/utils';
 
 type SearchProp = RouteComponentProps<{ taskid: string }>;
 
@@ -33,9 +34,8 @@ export const Search: React.FC<SearchProp> = (props) => {
     if (!window.document.hidden) {
       await createTaskTimeLog({
         user: userId,
-        time: minutes * 60 + seconds,
         task: taskIdNum,
-        condition: taskIdNum,
+        condition: condition,
       });
     }
   }, 1000);
@@ -48,30 +48,17 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    if (condition === 5) {
-      fetchSerp(taskIdNum, offset, 'icon').then((serp) => {
-        serp.sort((a, b) => {
-          if (a.id < b.id) return -1;
-          if (a.id > b.id) return 1;
-          return 0;
-        });
-        setResultPages(serp);
-        setLoading(false);
-        window.scrollTo(0, 0);
+    const cond = condition === 5 ? 'icon' : 'pct';
+    fetchSerp(taskIdNum, offset, cond).then((serp) => {
+      serp.sort((a, b) => {
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
       });
-    } else {
-      fetchSerp(taskIdNum, offset, 'pct').then((serp) => {
-        serp.sort((a, b) => {
-          if (a.id < b.id) return -1;
-          if (a.id > b.id) return 1;
-          return 0;
-        });
-        setResultPages(serp);
-        setLoading(false);
-        window.scrollTo(0, 0);
-      });
-    }
-
+      setResultPages(serp);
+      setLoading(false);
+      window.scrollTo(0, 0);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 

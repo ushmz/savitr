@@ -1,17 +1,16 @@
 import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
-import { Auth } from '../Pages/Auth/Auth';
-import { Completion } from '../Pages/Completion';
-import { Introduction } from '../Pages/Introduction';
-import { PostTask } from '../Pages/PostTask';
-import { PreTask } from '../Pages/PreTask';
-import { Sample } from 'Pages/Sample';
-import { Search } from '../Pages/Search';
-import { Top } from '../Pages/Top';
-import { NotFound } from '../Pages/NotFound';
-import history from '../shared/browserHistory';
 import { isMobile } from 'react-device-detect';
+import { Route, Router, Switch } from 'react-router-dom';
 import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdbreact';
+import { Auth } from 'Pages/Auth/Auth';
+import { Completion } from 'Pages/Completion';
+import { Introduction } from 'Pages/Introduction';
+import { PostTask } from 'Pages/PostTask';
+import { PreTask } from 'Pages/PreTask';
+import { Search } from 'Pages/Search';
+import { Top } from 'Pages/Top';
+import { NotFound } from 'Pages/NotFound';
+import history from 'shared/utils/browserHistory';
 
 const Routes: React.FC = () => {
   return isMobile ? (
@@ -29,7 +28,6 @@ const Routes: React.FC = () => {
       <Switch>
         <Route exact path="/" component={Top} />
         <Route exact path="/error/:err" component={NotFound} />
-        <Route exact path="/search/sample" component={Sample} />
         <Auth>
           <Route exact path="/introduction/:taskid" component={Introduction} />
           <Route exact path="/pretask" component={PreTask} />

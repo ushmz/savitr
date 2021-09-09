@@ -1,7 +1,7 @@
 import { MDBBtn, MDBContainer } from 'mdbreact';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header } from '../../Components/Header';
+import { Header } from 'Components/Header';
 
 export const ExportHistory: React.FC = () => {
   const history = useHistory();
