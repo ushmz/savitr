@@ -60,7 +60,7 @@ module.exports = () => {
             to: path.resolve(__dirname, 'build'),
           },
           {
-            from: 'public/img/samples/*.png',
+            from: 'public/img/samples/**/*.png',
             to: path.resolve(__dirname, 'build'),
           },
         ],
@@ -73,9 +73,14 @@ module.exports = () => {
     ],
     devtool: 'inline-source-map',
     devServer: {
-      inline: true,
-      watchContentBase: true,
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
       historyApiFallback: true,
+      port: '8081',
+    },
+    watchOptions: {
+      ignored: '**/node_modules',
     },
   };
 };
