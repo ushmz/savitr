@@ -1,122 +1,45 @@
-import firebase from 'firebase/app';
-
-export type Pages = 'Attention' | 'Introduction1' | 'Introduction2' | 'PreTask' | 'Task1' | 'Task2' | 'PostTask';
-
-export type ContextValue = {
-  signIn: (uid: string, password: string) => Promise<void | firebase.auth.UserCredential>;
-  signUp: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
-  signOut: () => Promise<void>;
-  // sendPasswordResetEmail: (email: string) => Promise<void>;
-  // confirmPasswordReset: (code: string, password: string) => Promise<void>;
-  user: firebase.User | null;
-  // didAuthentication: boolean;
+export type TaskInfo = {
+  id: number;
+  query: string;
+  title: string;
+  description: string;
+  searchUrl: string;
 };
 
-export interface RuntimeRequest<T> {
-  method: string;
-  query: T;
-}
+export type SerpType = 'icon' | 'pct';
 
-export interface HistoryQuery {
-  max: number;
-}
-
-export interface ChromeHistoryResponse {
+export type SimilarwebPage = {
   id: string;
-  lastVisitTime: number;
   title: string;
-  typedCount: number;
   url: string;
-  visitCount: number;
-}
+  icon: string;
+  category?: number;
+};
 
-export type PageIDBTable = {
+export type SimilarwebDistribution = {
+  category: string;
+  count: number;
+  pct: number;
+};
+
+export type SerpSimple = {
   id: string;
-  title: string;
-  start_uri: string;
-  final_uri: string;
-  snippet: string;
-};
-
-export type CookieIDBTable = {
-  domain: string;
-  httponly: string;
-  secure: string;
-};
-
-export type JunctionIDBTable = {
-  page_id: string;
-  cookie_id: string;
-};
-
-// TODO: Better name
-export interface CookieInformationStatus {
-  status: boolean;
-  cookies: string[];
-  error: string;
-  message: string;
-}
-
-export interface RuntimeMessageResponse<T> {
-  data: Array<T>;
-  status: boolean;
-  message?: string;
-}
-
-export type HistoryAPIParams = {
-  text: string;
-  maxResults?: number;
-  startTime?: number;
-  endTime?: number;
-};
-
-export type SerpPageTable = {
-  id: string;
-  title: string;
-  start_uri: string;
-  final_uri: string;
-  snippet: string;
-};
-
-export type SERPElement = {
   title: string;
   url: string;
   snippet: string;
-  cookies: string[];
-  linkedPages: { title: string; url: string }[];
 };
 
-export type SetPageProp = {
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
+export type Serp = SerpSimple & {
+  leaks?: SimilarwebPage[];
+  total?: number;
+  distribution?: SimilarwebDistribution[];
 };
 
-export type HistoryTable = {
-  title: string;
-  url: string;
-  cookies: CookieIDBTable[] | string[];
+export type SerpWithIcon = SerpSimple & {
+  leaks: SimilarwebPage[];
 };
 
-export type BehaviorLog = {
-  uid: string;
-  taskName: string;
-  timeOnPage: number;
-  currentPage: number;
-  positionOnPage: number;
-};
-
-export type DocumentClickLog = {
-  uid: string;
-  taskName: string;
-  timeOnPage: number;
-  pageUrl: string;
-  linkedPageNum: number;
-};
-
-export type HistoryClickLog = {
-  uid: string;
-  taskName: string;
-  timeOnPage: number;
-  linkedDocumentUrl: string;
-  linkedPageNum: number;
-  collapse: boolean;
+export type SerpWithDistribution = SerpSimple & {
+  total: number;
+  distribution: SimilarwebDistribution[];
 };

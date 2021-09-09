@@ -87,7 +87,7 @@ const StyledInput = styled.input`
   word-wrap: break-word;
   display: flex;
   flex: 100%;
-  -webkit-tap-highlight-color: transparent;
+  --webkit-tap-highlight-color: transparent;
   font-size: 16px;
   font: 16px arial, sans-serif;
 `;
@@ -103,7 +103,6 @@ const StyledButton = styled.button`
   flex: 0 0 auto;
   padding-right: 13px;
   height: 44px;
-  /* width: 44px; */
   background: transparent;
   border: none;
   cursor: pointer;
