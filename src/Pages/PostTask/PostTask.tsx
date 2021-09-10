@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBBtn } from 'mdbreact';
-import { getPostTaskEnqueteByGroupId, getUserId } from '../../shared/util';
+import { getPostTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PostTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);

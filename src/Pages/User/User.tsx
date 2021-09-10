@@ -1,7 +1,7 @@
 import { MDBBtn, MDBContainer } from 'mdbreact';
 import React from 'react';
-import { Header } from '../../Components/Header';
 import { useHistory } from 'react-router-dom';
+import { Header } from 'Components/Header';
 import { useAuth } from 'shared/provider/authProvider';
 
 export const User: React.FC = () => {

@@ -1,11 +1,11 @@
-import { MDBBtn, MDBIcon, MDBCol, MDBContainer, MDBRow, MDBNavbar } from 'mdbreact';
-import React, { useState, useCallback } from 'react';
+import { MDBBtn, MDBContainer } from 'mdbreact';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Header } from 'Components/Header';
 // import { useDropzone } from 'react-dropzone';
+// import { toast } from 'react-toastify';
 // import { uploadUserFile } from 'shared/apis/apis';
 // import { useAuth } from 'shared/provider/authProvider';
-// import { toast } from 'react-toastify';
 
 export const Upload: React.FC = () => {
   const history = useHistory();

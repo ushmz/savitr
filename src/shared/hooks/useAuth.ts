@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ContextValue } from '../types';
-import firebase from '../utils/firebase';
+import { ContextValue } from 'shared/provider/authProvider';
+import firebase from 'shared/utils/firebase';
 
 type User = firebase.User;
 

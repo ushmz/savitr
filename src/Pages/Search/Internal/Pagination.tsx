@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { MDBIcon, MDBPagination, MDBPageItem, MDBPageNav } from 'mdbreact';
-import { createClickLog, TaskInfo } from '../../../shared/apis/apis';
-import { getConditionId, getUserId } from '../../../shared/util';
+import { createClickLog } from 'shared/apis';
+import { TaskInfo } from 'shared/types';
+import { getConditionId, getUserId } from 'shared/utils';
 
 type PaginationProps = {
   task: TaskInfo;

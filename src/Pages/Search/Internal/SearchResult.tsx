@@ -1,9 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { MDBCol, MDBRow } from 'mdbreact';
-import { createClickLog, Serp, SerpWithDistribution, SerpWithIcon, TaskInfo } from '../../../shared/apis/apis';
-import { getConditionId, getUserId, isExperimentalGroup } from '../../../shared/util';
-import { API_ENDPOINT } from '../../../shared/config';
+import { createClickLog } from 'shared/apis';
+import { Serp, SimilarwebPage, SimilarwebDistribution, TaskInfo } from 'shared/types';
+import { getConditionId, getUserId, isExperimentalGroup } from 'shared/utils';
+import { API_ENDPOINT } from 'shared/config';
 
 type SearchResultProps = {
   page: Serp;
@@ -20,63 +21,45 @@ const getIconCache = (origin: string): string => {
 
 export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   const user = getUserId();
-  const isExpGroup = isExperimentalGroup();
   const condition = getConditionId();
 
-  const suggestionTitleFirst = isExpGroup
-    ? `上のページを閲覧すると，以下の${condition == 7 ? 'カテゴリの' : ''}ウェブサイトでも`
-    : '';
+  const SuggestionArea = (condition: number, rank: number) => {
+    const isExpGroup = isExperimentalGroup();
+    if (rank % 2 === 0) {
+      return;
+    }
 
-  const suggestionTitleLater = `上記ページの閲覧履歴を記録・分析される可能性があります${
-    condition == 7 ? '（' + props.page.total + '件）' : ''
-  }`;
-
-  let suggestionArea: ReactElement | undefined = undefined;
-  if (!isExpGroup) {
-    suggestionArea =
-      props.rank % 2 !== 0 ? (
-        <p style={{ color: 'green' }}>上のページを閲覧すると，ページの閲覧履歴を記録・分析される可能性があります</p>
-      ) : undefined;
-  } else if (props.page.leaks && condition === 5) {
-    suggestionArea =
-      props.rank % 2 !== 0 && props.page.leaks.length > 0 ? (
-        <IconSuggestionArea
-          id={props.page.id}
-          title={props.page.title}
-          url={props.page.url}
-          snippet={props.page.snippet}
-          leaks={props.page.leaks}
-          rank={props.rank}
-        />
-      ) : undefined;
-  } else if (props.page.total && props.page.distribution) {
-    suggestionArea =
-      props.rank % 2 !== 0 && props.page.distribution.length > 0 ? (
-        <DistributionSuggestionArea
-          id={props.page.id}
-          title={props.page.title}
-          url={props.page.url}
-          snippet={props.page.snippet}
-          total={props.page.total}
-          distribution={props.page.distribution}
-        />
-      ) : undefined;
-  }
+    if (!isExpGroup) {
+      return {
+        title: '',
+        secondaryTitle: '',
+        child: (
+          <p style={{ color: 'green' }}>上のページを閲覧すると，ページの閲覧履歴を記録・分析される可能性があります</p>
+        ),
+      };
+    } else if (condition === 5) {
+      if (!props.page.leaks) return;
+      return {
+        title: '上のページを閲覧すると，以下のウェブサイトでも',
+        secondaryTitle: '上記ページの閲覧履歴を記録・分析される可能性があります',
+        child: <IconSuggestionArea rank={rank} leaks={props.page.leaks} />,
+      };
+    } else if (condition === 7) {
+      if (!props.page.distribution) return;
+      return {
+        title: '上のページを閲覧すると，以下のカテゴリのウェブサイトでも',
+        secondaryTitle: `上記ページの閲覧履歴を記録・分析される可能性があります（${props.page.total}件）`,
+        child: <DistributionSuggestionArea {...props.page.distribution} />,
+      };
+    }
+  };
 
   return (
     <SearchResultSingle
       title={props.page.title}
       url={props.page.url}
       snippet={props.page.snippet}
-      suggestion={
-        suggestionArea
-          ? {
-              title: suggestionTitleFirst,
-              secondaryTitle: suggestionTitleLater,
-              child: suggestionArea,
-            }
-          : undefined
-      }
+      suggestion={SuggestionArea(condition, props.rank)}
       onResultClick={() => {
         createClickLog({
           user: user,
@@ -92,7 +75,7 @@ export const SearchResultUnit: React.FC<SearchResultProps> = (props) => {
   );
 };
 
-const IconSuggestionArea: React.FC<SerpWithIcon & { rank: number }> = (props) => {
+export const IconSuggestionArea: React.FC<{ rank: number; leaks: SimilarwebPage[] }> = (props) => {
   return (
     <MDBRow style={{ marginLeft: '5px' }}>
       {Object.entries(props.leaks).map(([k, v]) => (
@@ -117,10 +100,10 @@ const IconSuggestionArea: React.FC<SerpWithIcon & { rank: number }> = (props) =>
   );
 };
 
-const DistributionSuggestionArea: React.FC<SerpWithDistribution> = (props) => {
+export const DistributionSuggestionArea: React.FC<SimilarwebDistribution[]> = (props) => {
   return (
     <MDBRow>
-      {props.distribution.map((v, idx) => (
+      {props.map((v, idx) => (
         <MDBCol key={idx}>
           {/* Set className="d-flex justify-content-center" to centerize */}
           <div style={styles.distributionSuggestionTitle}>{v.category}</div>
@@ -146,7 +129,7 @@ type SearchResultSingleProps = {
 
 export const SearchResultSingle: React.FC<SearchResultSingleProps> = (props) => {
   const buildTitle = () => {
-    if (props.suggestion == null) return <></>;
+    if (!props.suggestion) return <></>;
     return props.suggestion.secondaryTitle ? (
       <>
         {props.suggestion.title}

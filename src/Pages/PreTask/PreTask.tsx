@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MDBContainer, MDBBtn } from 'mdbreact';
-import { getPreTaskEnqueteByGroupId, getUserId } from '../../shared/util';
+import { getPreTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);

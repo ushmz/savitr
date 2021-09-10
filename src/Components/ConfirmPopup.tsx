@@ -1,6 +1,6 @@
-import { MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalFooter, MDBModalHeader } from 'mdbreact';
 
 type Props = {
   answer: string;

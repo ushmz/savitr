@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form';
-import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../shared/provider/authProvider';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { createUser } from '../../shared/apis/apis';
+import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
+import { useAuth } from 'shared/provider/authProvider';
+import { createUser } from 'shared/apis';
 
 type RegisterParamName = 'externalId';
 

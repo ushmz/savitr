@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router-dom';
-import { Introduction as Component } from './Introduction';
-import { fetchTaskInfo, TaskInfo } from 'shared/apis/apis';
+import { Introduction as Component } from 'Pages/Introduction/Introduction';
+import { fetchTaskInfo } from 'shared/apis';
+import { TaskInfo } from 'shared/types';
 
 type Props = RouteComponentProps<{
   taskid?: string;
