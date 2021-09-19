@@ -1,43 +1,37 @@
 import * as React from 'react';
 import { ContextValue } from 'shared/provider/authProvider';
 import firebase from 'shared/utils/firebase';
-
-type User = firebase.User;
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { User } from 'firebase/auth';
 
 export const useProvideAuth = (): ContextValue => {
   const [user, setUser] = React.useState<User | null>(null);
   const [didAuthentication, setAuthentication] = React.useState<boolean>(false);
+  const auth = getAuth(firebase);
 
   const signIn = async (uid: string, password: string) => {
-    return firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(() => firebase.auth().signInWithEmailAndPassword(uid, password))
-      .then(async (res) => {
-        if (res.user) {
-          const token = await res.user.getIdToken(true);
-          localStorage.setItem('jwt', token);
-        }
-      });
+    //.setPersistence(Persistence.LOCAL)
+    return signInWithEmailAndPassword(auth, uid, password).then(async (res) => {
+      if (res.user) {
+        const token = await res.user.getIdToken(true);
+        localStorage.setItem('jwt', token);
+      }
+    });
   };
 
   const signUp = async (email: string, password: string) => {
-    return firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(() => firebase.auth().createUserWithEmailAndPassword(email, password))
-      .then(async (res) => {
-        if (res.user) {
-          const token = await res.user.getIdToken(true);
-          localStorage.setItem('jwt', token);
-        }
-      });
+    return createUserWithEmailAndPassword(auth, email, password).then(async (res) => {
+      if (res.user) {
+        const token = await res.user.getIdToken(true);
+        localStorage.setItem('jwt', token);
+      }
+    });
   };
 
-  const signOut = () => firebase.auth().signOut();
+  const signOut = () => auth.signOut();
 
   React.useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       user ? setUser(user) : setUser(null);
       setAuthentication(true);
     });
@@ -78,6 +72,6 @@ export const useProvideAuth = (): ContextValue => {
     signUp,
     signOut,
     user,
-    // didAuthentication,
+    didAuthentication,
   };
 };
