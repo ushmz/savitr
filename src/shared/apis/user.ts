@@ -12,10 +12,15 @@ type UserResponse = {
 };
 
 export const createUser = async (uid: string): Promise<UserResponse> => {
-  const r = await axios
-    .post(`${API_ENDPOINT}/users`, {
+  const instance = axios.create({
+    baseURL: API_ENDPOINT,
+    method: 'post',
+    data: {
       uid: uid,
-    })
+    },
+  });
+  const r = await instance
+    .post('/users')
     .then((response) => {
       return response.data as UserResponse;
     })
