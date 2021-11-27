@@ -1,6 +1,5 @@
-import { MDBRow } from 'mdbreact';
 import React, { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
+import { MDBRow } from 'mdbreact';
 import { Serp, TaskInfo } from 'shared/types';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 import { SearchResultUnit } from 'Pages/Search/Internal/SearchResult';
@@ -24,9 +23,9 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
         <ComponentLoaderCenter />
       ) : (
         <div>
-          <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
+          <div style={styles.pageIndicator}>{`${props.offset + 1}ページ / 10ページ`}</div>
           <MDBRow>
-            <StyledSearchResultContainer>
+            <div style={styles.searchResults}>
               {props.pageList.map((page, idx) => (
                 <SearchResultUnit
                   key={idx}
@@ -43,7 +42,7 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
                 setOffset={props.setOffset}
                 getTimeOnPage={props.getTimeOnPage}
               />
-            </StyledSearchResultContainer>
+            </div>
           </MDBRow>
         </div>
       )}
@@ -51,17 +50,18 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   );
 };
 
-const StyledAppBarContainer = styled.div`
-  position: relative;
-  height: 43px;
-  margin-left: 160px;
-  font-size: 14px;
-  color: #70757a;
-  min-width: 652px;
-  line-height: 43px;
-`;
-
-const StyledSearchResultContainer = styled.div`
-  margin-left: 180px;
-  padding-top: 20px;
-`;
+const styles: { [key: string]: React.CSSProperties } = {
+  pageIndicator: {
+    position: 'relative',
+    height: '43px',
+    marginLeft: '160px',
+    fontSize: '14px',
+    color: '#70757a',
+    minWidth: '652px',
+    lineHeight: '43px',
+  },
+  searchResults: {
+    marginLeft: '180px',
+    paddingTop: '20px',
+  },
+};
