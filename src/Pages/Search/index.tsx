@@ -20,7 +20,7 @@ export const Search: React.FC<SearchProp> = (props) => {
   };
 
   const userId = getUserId();
-  const condition = getConditionId();
+  const conditionId = getConditionId();
 
   const taskIdNum = parseInt(props.match.params.taskid);
   const [resultPages, setResultPages] = useState<Serp[]>([]);
@@ -35,7 +35,7 @@ export const Search: React.FC<SearchProp> = (props) => {
       await createTaskTimeLog({
         user: userId,
         task: taskIdNum,
-        condition: condition,
+        condition: conditionId,
       });
     }
   }, 1000);
@@ -48,7 +48,7 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    const cond = condition === 5 ? 'icon' : 'pct';
+    const cond = conditionId === 5 ? 'icon' : 'pct';
     fetchSerp(taskIdNum, offset, cond).then((serp) => {
       serp.sort((a, b) => {
         if (a.id < b.id) return -1;
@@ -64,6 +64,7 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   return (
     <Component
+      condition={conditionId}
       offset={offset}
       setOffset={setOffset}
       pageList={resultPages}

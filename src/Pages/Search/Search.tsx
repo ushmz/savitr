@@ -1,13 +1,17 @@
-import { MDBRow } from 'mdbreact';
 import React, { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
-import { Serp, TaskInfo } from 'shared/types';
+import { MDBRow } from 'mdbreact';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
-import { SearchResultUnit } from 'Pages/Search/Internal/SearchResult';
+import { ControlledUI } from 'Pages/Search/Internal/ControlledUI';
+import { IconUI } from 'Pages/Search/Internal/IconUI';
+import { RatioUI } from 'Pages/Search/Internal/RatioUI';
 import { SerpPagination } from 'Pages/Search/Internal/Pagination';
-import { SearchBar } from 'Pages/Search/Internal/SearchBar';
+import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
+import { createClickLog } from 'shared/apis';
+import { Serp, TaskInfo } from 'shared/types';
+import { getConditionId, getUserId } from 'shared/utils';
 
-type SearchTaskProps = {
+type SearchResultPageProps = {
+  condition: number;
   task: TaskInfo;
   pageList: Serp[];
   offset: number;
@@ -16,40 +20,75 @@ type SearchTaskProps = {
   isLoading: boolean;
 };
 
-export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
+export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
+  const user = getUserId();
+  const condition = getConditionId();
+
   return (
     <>
-      <MDBRow>
-        <StyledSearchBarContainer>
-          <SearchBar query={props.task.query} />
-        </StyledSearchBarContainer>
-      </MDBRow>
-      <br />
-      <StyledDivider />
+      <SearchHeader query={props.task.query} />
       {props.isLoading ? (
         <ComponentLoaderCenter />
       ) : (
         <div>
-          <StyledAppBarContainer>{`${props.offset + 1}ページ / 10ページ`}</StyledAppBarContainer>
+          <div style={styles.pageIndicator}>{`${props.offset + 1}ページ / 10ページ`}</div>
           <MDBRow>
-            <StyledSearchResultContainer>
-              {props.pageList.map((page, idx) => (
-                <SearchResultUnit
-                  key={idx}
-                  page={page}
-                  task={props.task}
-                  rank={idx + 1}
-                  offset={props.offset + 1}
-                  getTimeOnPage={props.getTimeOnPage}
-                />
-              ))}
+            <div style={styles.searchResults}>
+              {props.pageList.map((page, idx) => {
+                const sendClickLog = () => {
+                  createClickLog({
+                    user: user,
+                    taskId: props.task.id,
+                    conditionId: condition,
+                    time: props.getTimeOnPage(),
+                    rank: idx + 1,
+                    page: props.offset + 1,
+                    visible: true,
+                  });
+                };
+                if (props.condition === 5) {
+                  return (
+                    <div key={`icon-${props.offset}-${idx}`} style={styles.searchResult}>
+                      <IconUI
+                        title={page.title}
+                        url={page.url}
+                        snippet={page.snippet}
+                        tracked={page.leaks || []}
+                        sendClickLog={sendClickLog}
+                      />
+                    </div>
+                  );
+                } else if (props.condition === 6) {
+                  return (
+                    <div key={`ratio-${props.offset}-${idx}`} style={styles.searchResult}>
+                      <RatioUI
+                        title={page.title}
+                        url={page.url}
+                        snippet={page.snippet}
+                        tracked={{ total: page.total || 0, distribution: page.distribution || [] }}
+                        sendClickLog={sendClickLog}
+                      />
+                    </div>
+                  );
+                }
+                return (
+                  <div key={`controlled-${props.offset}-${idx}`} style={styles.searchResult}>
+                    <ControlledUI
+                      title={page.title}
+                      url={page.url}
+                      snippet={page.snippet}
+                      sendClickLog={sendClickLog}
+                    />
+                  </div>
+                );
+              })}
               <SerpPagination
                 task={props.task}
                 offset={props.offset}
                 setOffset={props.setOffset}
                 getTimeOnPage={props.getTimeOnPage}
               />
-            </StyledSearchResultContainer>
+            </div>
           </MDBRow>
         </div>
       )}
@@ -57,39 +96,21 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   );
 };
 
-const StyledSearchBarContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  margin-top: 6px;
-  position: relative;
-  margin: 0 auto;
-  margin-left: 133px;
-`;
-
-const StyledDivider = styled.div`
-  border-bottom: 1px solid #dfe1e5;
-  position: relative;
-  z-index: 126;
-
-  background: #fff;
-  height: 44px;
-  width: 100%;
-  padding: 0;
-  position: relative;
-  white-space: nowrap;
-`;
-
-const StyledAppBarContainer = styled.div`
-  position: relative;
-  height: 43px;
-  margin-left: 160px;
-  font-size: 14px;
-  color: #70757a;
-  min-width: 652px;
-  line-height: 43px;
-`;
-
-const StyledSearchResultContainer = styled.div`
-  margin-left: 180px;
-  padding-top: 20px;
-`;
+const styles: { [key: string]: React.CSSProperties } = {
+  pageIndicator: {
+    position: 'relative',
+    height: '43px',
+    marginLeft: '160px',
+    fontSize: '14px',
+    color: '#70757a',
+    minWidth: '652px',
+    lineHeight: '43px',
+  },
+  searchResult: {
+    marginBottom: '15px',
+  },
+  searchResults: {
+    marginLeft: '180px',
+    paddingTop: '20px',
+  },
+};
