@@ -5,7 +5,7 @@ import { Serp, TaskInfo } from 'shared/types';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 import { SearchResultUnit } from 'Pages/Search/Internal/SearchResult';
 import { SerpPagination } from 'Pages/Search/Internal/Pagination';
-import { SearchBar } from 'Pages/Search/Internal/SearchBar';
+import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
 
 type SearchTaskProps = {
   task: TaskInfo;
@@ -19,13 +19,7 @@ type SearchTaskProps = {
 export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
   return (
     <>
-      <MDBRow>
-        <StyledSearchBarContainer>
-          <SearchBar query={props.task.query} />
-        </StyledSearchBarContainer>
-      </MDBRow>
-      <br />
-      <StyledDivider />
+      <SearchHeader query={props.task.query} />
       {props.isLoading ? (
         <ComponentLoaderCenter />
       ) : (
@@ -56,28 +50,6 @@ export const SearchResultPage: React.FC<SearchTaskProps> = (props) => {
     </>
   );
 };
-
-const StyledSearchBarContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  margin-top: 6px;
-  position: relative;
-  margin: 0 auto;
-  margin-left: 133px;
-`;
-
-const StyledDivider = styled.div`
-  border-bottom: 1px solid #dfe1e5;
-  position: relative;
-  z-index: 126;
-
-  background: #fff;
-  height: 44px;
-  width: 100%;
-  padding: 0;
-  position: relative;
-  white-space: nowrap;
-`;
 
 const StyledAppBarContainer = styled.div`
   position: relative;
