@@ -4,14 +4,14 @@ import { getJWT } from 'shared/utils';
 import { TaskInfo } from 'shared/types';
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
-  const response = await axios.get(`${API_ENDPOINT}/v1/task/${taskId}`, {
+  const response = await axios.get<TaskInfo>(`${API_ENDPOINT}/api/v1/task/${taskId}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
   });
 
   if (response.status === 200) {
-    return response.data as TaskInfo;
+    return response.data;
   } else {
     console.log('Error fetch error.');
     return;
@@ -28,7 +28,7 @@ export type AnswerParam = {
 };
 
 export const createTaskAnswer = async (param: AnswerParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/v1/task/answer`, param, {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/task/answer`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
