@@ -9,7 +9,7 @@ export type TaskTimeLogParam = {
 };
 
 export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/time`, param, {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/time`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -33,7 +33,7 @@ export type ClickLogParam = {
 };
 
 export const createClickLog = async (param: ClickLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/v1/users/logs/click`, param, {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/click`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
