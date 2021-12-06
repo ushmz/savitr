@@ -68,6 +68,10 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: './public/index.html',
       }),
+      new HtmlWebpackPlugin({
+        filename: 'wip.html',
+        template: './public/wip.html',
+      }),
       new Dotenv({ path: envFile }),
       new CleanWebpackPlugin(),
     ],
