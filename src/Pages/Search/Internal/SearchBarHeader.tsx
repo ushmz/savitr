@@ -21,42 +21,42 @@ export const SearchHeader: React.FC<SearchHeaderProps> = ({ query }) => {
   return (
     <div>
       <div style={styles.searchBar}>
-        <form action="/" method="GET">
-          <div style={{ display: 'flex' }}>
-            <div style={styles.textInputContentPosition}>
-              <input disabled style={styles.searchBarInput} name="q" type="text" value={query} />
-              <div style={styles.iconWithDividerPosition}>
-                <div style={styles.inputIconPosition}>
-                  <span style={styles.svgIconAppearance}>
-                    <svg
-                      style={{ ...styles.searchBarIcon, color: '#70757a' }}
-                      focusable="false"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d={CROSS_SVG_PATH}></path>
-                    </svg>
-                  </span>
-                  <span style={styles.searchBarDivider} />
-                </div>
-              </div>
-            </div>
-            <button disabled style={styles.searchBarSearchButton} aria-label="検索">
-              <div style={styles.submitIconPosition}>
+        {/* <form action="/" method="GET"> */}
+        <div style={{ display: 'flex' }}>
+          <div style={styles.textInputContentPosition}>
+            <input disabled style={styles.searchBarInput} name="q" type="text" value={query} />
+            <div style={styles.iconWithDividerPosition}>
+              <div style={styles.inputIconPosition}>
                 <span style={styles.svgIconAppearance}>
                   <svg
-                    style={{ ...styles.searchBarIcon, color: '#4285f4' }}
+                    style={{ ...styles.searchBarIcon, color: '#70757a' }}
                     focusable="false"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
-                    <path d={SEARCH_SVG_PATH}></path>
+                    <path d={CROSS_SVG_PATH}></path>
                   </svg>
                 </span>
+                <span style={styles.searchBarDivider} />
               </div>
-            </button>
+            </div>
           </div>
-        </form>
+          <button disabled style={styles.searchBarSearchButton} aria-label="検索">
+            <div style={styles.submitIconPosition}>
+              <span style={styles.svgIconAppearance}>
+                <svg
+                  style={{ ...styles.searchBarIcon, color: '#4285f4' }}
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <path d={SEARCH_SVG_PATH}></path>
+                </svg>
+              </span>
+            </div>
+          </button>
+        </div>
+        {/* </form> */}
       </div>
       <br />
       <div style={styles.headerDivider} />

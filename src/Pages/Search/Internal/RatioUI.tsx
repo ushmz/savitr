@@ -1,4 +1,3 @@
-import { MDBCol, MDBRow } from 'mdbreact';
 import React from 'react';
 import { SimilarwebDistribution } from 'shared/types';
 import { SearchResult } from './SearchResult';
@@ -25,15 +24,15 @@ export const RatioUI: React.FC<RatioUIProps> = (props) => {
           上記ページの閲覧履歴を記録・分析される可能性があります（{props.tracked.total}件）
         </h4>
 
-        <MDBRow>
+        <div style={styles.ratioContainer}>
           {props.tracked.distribution.map((v, idx) => (
-            <MDBCol key={idx}>
+            <div key={idx} style={styles.ratioColumn}>
               {/* Set className="d-flex justify-content-center" to centerize */}
               <div style={styles.ratioCategory}>{v.category}</div>
               <div style={styles.ratio}>{`${Math.ceil(v.pct * 1000) / 10}%（${v.count} 件）`}</div>
-            </MDBCol>
+            </div>
           ))}
-        </MDBRow>
+        </div>
       </div>
     </>
   );
@@ -55,6 +54,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '14px',
     fontWeight: 300,
     lineHeight: 1.2,
+  },
+  ratioContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  ratioColumn: {
+    flexBasis: 0,
+    flexGrow: 1,
+    maxWidth: '100%',
   },
   ratioCategory: {
     marginLeft: 0,

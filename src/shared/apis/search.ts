@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from 'shared/config';
 import { getJWT } from 'shared/utils';
-import { SerpType, Serp, SerpWithIcon, SerpWithDistribution } from 'shared/types';
+import { SerpType, Serp, SerpWithIcon, SerpWithDistribution, SerpSimple } from 'shared/types';
 
 export const makeSearchSesion = async (user: number, taskId: number, conditionId: number): Promise<void> => {
   const response = await axios.post(
@@ -46,7 +46,7 @@ export const fetchSerpWithDistribution = async (
   top?: number,
 ): Promise<SerpWithDistribution[]> => {
   const response = await axios.get<SerpWithDistribution[]>(
-    `${API_ENDPOINT}/api/v1/serp/${taskId}/pct?offset=${offset}${top ? '&top=' + top : ''}`,
+    `${API_ENDPOINT}/api/v1/serp/${taskId}/ratio?offset=${offset}${top ? '&top=' + top : ''}`,
     {
       headers: {
         Authorization: `Bearer ${getJWT()}`,
@@ -62,7 +62,22 @@ export const fetchSerpWithDistribution = async (
   }
 };
 
-export const fetchSerp = async (taskId: number, offset: number, style: SerpType): Promise<Serp[]> => {
+export const fatchSerp = async (taskId: number, offset: number): Promise<SerpSimple[]> => {
+  const response = await axios.get<SerpSimple[]>(`${API_ENDPOINT}/api/v1/serp/${taskId}?offset=${offset}`, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    console.log('Error fetch error.');
+    return [];
+  }
+};
+
+export const fetchSearchResults = async (taskId: number, offset: number, style: SerpType): Promise<Serp[]> => {
   const response = await axios.get<Serp[]>(`${API_ENDPOINT}/api/v1/serp/${taskId}/${style}?offset=${offset}`, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
