@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 import { SearchResultPage as Component } from 'Pages/Search/Search';
-import { fetchSerp, fetchTaskInfo, createTaskTimeLog } from 'shared/apis';
+import { fetchSearchResults, fetchTaskInfo, createTaskTimeLog } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
 
@@ -48,8 +48,8 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    const cond = conditionId === 5 ? 'icon' : 'pct';
-    fetchSerp(taskIdNum, offset, cond).then((serp) => {
+    const cond = conditionId === 5 ? 'icon' : 'ratio';
+    fetchSearchResults(taskIdNum, offset, cond).then((serp) => {
       serp.sort((a, b) => {
         if (a.id < b.id) return -1;
         if (a.id > b.id) return 1;
