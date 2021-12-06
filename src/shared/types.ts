@@ -6,7 +6,7 @@ export type TaskInfo = {
   searchUrl: string;
 };
 
-export type SerpType = 'icon' | 'pct';
+export type SerpType = 'icon' | 'ratio';
 
 export type SimilarwebPage = {
   id: string;
