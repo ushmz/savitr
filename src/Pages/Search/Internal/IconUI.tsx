@@ -1,5 +1,4 @@
 import React from 'react';
-import { MDBRow } from 'mdbreact';
 import { SearchResult } from './SearchResult';
 import { API_ENDPOINT } from 'shared/config';
 import { SimilarwebPage } from 'shared/types';
@@ -10,7 +9,6 @@ type IconUIProps = {
   snippet: string;
   tracked: SimilarwebPage[];
   sendClickLog: () => void;
-  onResultClick?: () => void;
 };
 
 const getIconCache = (origin: string): string => {
@@ -28,7 +26,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
           <br />
           上記ページの閲覧履歴を記録・分析される可能性があります
         </h4>
-        <MDBRow style={{ marginLeft: '5px' }}>
+        <div style={styles.icons}>
           {Object.entries(props.tracked).map(([k, v]) => (
             <div key={k}>
               <a href={v.url} target="_blank" rel="noreferrer">
@@ -47,7 +45,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
               </a>
             </div>
           ))}
-        </MDBRow>
+        </div>
       </div>
     </>
   );
@@ -64,12 +62,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     transformOrigin: 'top',
   },
   suggestionTitle: {
-    marginBottom: '4px',
     marginLeft: 0,
     color: 'rgba(0, 0, 0, 0.6)',
-    margin: '12px 0px',
     fontSize: '14px',
     fontWeight: 300,
     lineHeight: 1.2,
+  },
+  icons: {
+    marginLeft: '5px',
+    display: 'flex',
   },
 };

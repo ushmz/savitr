@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { MDBRow } from 'mdbreact';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { BaseUI } from 'Pages/Search/Internal/BaseUI';
 import { ControlledUI } from 'Pages/Search/Internal/ControlledUI';
 import { IconUI } from 'Pages/Search/Internal/IconUI';
 import { RatioUI } from 'Pages/Search/Internal/RatioUI';
@@ -32,7 +32,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
       ) : (
         <div>
           <div style={styles.pageIndicator}>{`${props.offset + 1}ページ / 10ページ`}</div>
-          <MDBRow>
+          <div style={styles.row}>
             <div style={styles.searchResults}>
               {props.pageList.map((page, idx) => {
                 const sendClickLog = () => {
@@ -58,7 +58,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                       />
                     </div>
                   );
-                } else if (props.condition === 6) {
+                } else if (props.condition === 7) {
                   return (
                     <div key={`ratio-${props.offset}-${idx}`} style={styles.searchResult}>
                       <RatioUI
@@ -73,12 +73,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                 }
                 return (
                   <div key={`controlled-${props.offset}-${idx}`} style={styles.searchResult}>
-                    <ControlledUI
-                      title={page.title}
-                      url={page.url}
-                      snippet={page.snippet}
-                      sendClickLog={sendClickLog}
-                    />
+                    <BaseUI title={page.title} url={page.url} snippet={page.snippet} sendClickLog={sendClickLog} />
                   </div>
                 );
               })}
@@ -89,7 +84,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                 getTimeOnPage={props.getTimeOnPage}
               />
             </div>
-          </MDBRow>
+          </div>
         </div>
       )}
     </>
@@ -97,6 +92,12 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
+  row: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginRight: '-15px',
+    marginLeft: '-15px',
+  },
   pageIndicator: {
     position: 'relative',
     height: '43px',
@@ -107,7 +108,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     lineHeight: '43px',
   },
   searchResult: {
-    marginBottom: '15px',
+    marginBottom: '30px',
   },
   searchResults: {
     marginLeft: '180px',
