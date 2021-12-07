@@ -72,7 +72,7 @@ module.exports = () => {
         filename: 'wip.html',
         template: './public/wip.html',
       }),
-      new Dotenv({ path: envFile }),
+      new Dotenv({ path: envFile, systemvars: true }),
       new CleanWebpackPlugin(),
     ],
     devtool: 'inline-source-map',
