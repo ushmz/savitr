@@ -11,6 +11,7 @@ import { Search } from 'Pages/Search';
 import { Top } from 'Pages/Top';
 import { NotFound } from 'Pages/NotFound';
 import history from 'shared/utils/browserHistory';
+import { ResultDocument } from 'Pages/Result';
 
 const Routes: React.FC = () => {
   return isMobile ? (
@@ -33,6 +34,7 @@ const Routes: React.FC = () => {
           <Route exact path="/pretask" component={PreTask} />
           <Route exact path="/posttask" component={PostTask} />
           <Route exact path="/search/:taskid" component={Search} />
+          <Route exact path="/rslt" component={ResultDocument} />
           <Route exact path="/compcode" component={Completion} />
         </Auth>
         <Route exact path="*" component={NotFound} />
