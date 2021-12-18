@@ -6,16 +6,17 @@ type RatioUIProps = {
   title: string;
   url: string;
   snippet: string;
-  sendClickLog: () => void;
   tracked: {
     total: number;
     distribution: SimilarwebDistribution[];
   };
+  sendClickLog: () => void;
+  sendHoverLog?: () => void;
 };
 
 export const RatioUI: React.FC<RatioUIProps> = (props) => {
   return (
-    <>
+    <div onMouseEnter={props.sendHoverLog}>
       <SearchResult title={props.title} url={props.url} snippet={props.snippet} sendClickLog={props.sendClickLog} />
       <div style={styles.nudge}>
         <h4 style={styles.suggestionTitle}>
@@ -34,7 +35,7 @@ export const RatioUI: React.FC<RatioUIProps> = (props) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

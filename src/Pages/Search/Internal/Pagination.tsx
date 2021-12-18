@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { MDBIcon, MDBPagination, MDBPageItem, MDBPageNav } from 'mdbreact';
-import { createClickLog } from 'shared/apis';
+import { createEventLog } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
 
@@ -22,14 +22,15 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
             onClick={() => {
               if (!(offset <= 0)) {
                 setOffset(offset - 1);
-                createClickLog({
+                createEventLog({
                   taskId: task.id,
                   conditionId: condition,
                   time: getTimeOnPage(),
-                  rank: 999,
+                  rank: 0,
                   page: offset + 1,
                   user: user,
-                  visible: false,
+                  visible: true,
+                  event: 'paginate',
                 });
               }
             }}
@@ -43,14 +44,15 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
               <MDBPageNav
                 onClick={() => {
                   setOffset(v);
-                  createClickLog({
+                  createEventLog({
                     taskId: task.id,
                     conditionId: condition,
                     time: getTimeOnPage(),
-                    rank: 999,
+                    rank: 0,
                     page: offset + 1,
                     user: user,
-                    visible: false,
+                    visible: true,
+                    event: 'paginate',
                   });
                 }}
               >
@@ -64,14 +66,15 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
             onClick={() => {
               if (!(offset >= 9)) {
                 setOffset(offset + 1);
-                createClickLog({
+                createEventLog({
                   taskId: task.id,
                   conditionId: condition,
                   time: getTimeOnPage(),
-                  rank: 999,
+                  rank: 0,
                   page: offset + 1,
                   user: user,
-                  visible: false,
+                  visible: true,
+                  event: 'paginate',
                 });
               }
             }}
