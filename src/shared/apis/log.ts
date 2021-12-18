@@ -2,14 +2,14 @@ import axios from 'axios';
 import { API_ENDPOINT } from 'shared/config';
 import { getJWT } from 'shared/utils';
 
-export type TaskTimeLogParam = {
+export type SerpViewingLogParam = {
   user: number;
   task: number;
   condition: number;
 };
 
-export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/time`, param, {
+export const createSerpViewingLog = async (param: SerpViewingLogParam): Promise<void> => {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/serp`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },
@@ -22,7 +22,30 @@ export const createTaskTimeLog = async (param: TaskTimeLogParam): Promise<void> 
   }
 };
 
-export type ClickLogParam = {
+export type PageViewingLogParam = {
+  user: number;
+  task: number;
+  condition: number;
+  page: number;
+};
+
+export const createPageViewingLog = async (param: PageViewingLogParam): Promise<void> => {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/pageview`, param, {
+    headers: {
+      Authorization: `Bearer ${getJWT()}`,
+    },
+  });
+  if (response.status === 201) {
+    return;
+  } else {
+    console.log('[Error] Failed to create log.');
+    return;
+  }
+};
+
+export type LoggingEventType = 'click' | 'hover' | 'paginate';
+
+export type EventLogParam = {
   user: number;
   taskId: number;
   conditionId: number;
@@ -30,10 +53,11 @@ export type ClickLogParam = {
   page: number;
   rank: number;
   visible: boolean;
+  event: LoggingEventType;
 };
 
-export const createClickLog = async (param: ClickLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/click`, param, {
+export const createEventLog = async (param: EventLogParam): Promise<void> => {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/events`, param, {
     headers: {
       Authorization: `Bearer ${getJWT()}`,
     },

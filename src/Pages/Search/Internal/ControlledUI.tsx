@@ -6,8 +6,9 @@ type ControlledUIProps = {
   url: string;
   snippet: string;
   sendClickLog: () => void;
+  sendHoverLog?: () => void;
 };
 
 export const ControlledUI: React.FC<ControlledUIProps> = (props) => {
-  return <SearchResult title={props.title} url={props.url} snippet={props.snippet} sendClickLog={props.sendClickLog} />;
+  return <SearchResult {...props} />;
 };
