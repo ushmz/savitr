@@ -9,6 +9,7 @@ type IconUIProps = {
   snippet: string;
   tracked: SimilarwebPage[];
   sendClickLog: () => void;
+  sendHoverLog?: () => void;
 };
 
 const getIconCache = (origin: string): string => {
@@ -18,7 +19,7 @@ const getIconCache = (origin: string): string => {
 
 export const IconUI: React.FC<IconUIProps> = (props) => {
   return (
-    <>
+    <div onMouseEnter={props.sendHoverLog}>
       <SearchResult title={props.title} url={props.url} snippet={props.snippet} sendClickLog={props.sendClickLog} />
       <div style={styles.nudge}>
         <h4 style={styles.suggestionTitle}>
@@ -47,7 +48,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 import { SearchResultPage as Component } from 'Pages/Search/Search';
-import { fetchSearchResults, fetchTaskInfo, createTaskTimeLog } from 'shared/apis';
+import { fetchSearchResults, fetchTaskInfo, createSerpViewingLog } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
 
@@ -32,7 +32,7 @@ export const Search: React.FC<SearchProp> = (props) => {
 
   useInterval(async () => {
     if (!window.document.hidden) {
-      await createTaskTimeLog({
+      await createSerpViewingLog({
         user: userId,
         task: taskIdNum,
         condition: conditionId,

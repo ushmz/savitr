@@ -6,7 +6,7 @@ import { IconUI } from 'Pages/Search/Internal/IconUI';
 import { RatioUI } from 'Pages/Search/Internal/RatioUI';
 import { SerpPagination } from 'Pages/Search/Internal/Pagination';
 import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
-import { createClickLog } from 'shared/apis';
+import { createEventLog, LoggingEventType } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
 
@@ -24,6 +24,20 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
   const user = getUserId();
   const condition = getConditionId();
 
+  const createEventHandler = (index: number, event: LoggingEventType) => {
+    return () =>
+      createEventLog({
+        user: user,
+        taskId: props.task.id,
+        conditionId: condition,
+        time: props.getTimeOnPage(),
+        rank: index + 1,
+        page: props.offset + 1,
+        visible: true,
+        event: event,
+      });
+  };
+
   return (
     <>
       <SearchHeader query={props.task.query} />
@@ -35,17 +49,8 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
           <div style={styles.row}>
             <div style={styles.searchResults}>
               {props.pageList.map((page, idx) => {
-                const sendClickLog = () => {
-                  createClickLog({
-                    user: user,
-                    taskId: props.task.id,
-                    conditionId: condition,
-                    time: props.getTimeOnPage(),
-                    rank: idx + 1,
-                    page: props.offset + 1,
-                    visible: true,
-                  });
-                };
+                const sendClickLog = createEventHandler(idx, 'click');
+                const sendHoverLog = createEventHandler(idx, 'hover');
                 if (props.condition === 5) {
                   return (
                     <div key={`icon-${props.offset}-${idx}`} style={styles.searchResult}>
@@ -55,6 +60,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                         snippet={page.snippet}
                         tracked={page.leaks || []}
                         sendClickLog={sendClickLog}
+                        sendHoverLog={sendHoverLog}
                       />
                     </div>
                   );
@@ -67,13 +73,19 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                         snippet={page.snippet}
                         tracked={{ total: page.total || 0, distribution: page.distribution || [] }}
                         sendClickLog={sendClickLog}
+                        sendHoverLog={sendHoverLog}
                       />
                     </div>
                   );
                 }
                 return (
                   <div key={`controlled-${props.offset}-${idx}`} style={styles.searchResult}>
-                    <BaseUI title={page.title} url={page.url} snippet={page.snippet} sendClickLog={sendClickLog} />
+                    <BaseUI
+                      title={page.title}
+                      snippet={page.snippet}
+                      sendClickLog={sendClickLog}
+                      sendHoverLog={sendHoverLog}
+                    />
                   </div>
                 );
               })}

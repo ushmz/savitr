@@ -5,11 +5,12 @@ type SearchResultProps = {
   url: string;
   snippet: string;
   sendClickLog: () => void;
+  sendHoverLog?: () => void;
 };
 
 export const SearchResult: React.FC<SearchResultProps> = (props) => {
   return (
-    <div className="g" style={styles.searchResultContainer}>
+    <div className="g" style={styles.searchResultContainer} onMouseEnter={props.sendHoverLog}>
       <div style={styles.pageInfo}>
         <a href={props.url} target="_blank" rel="noreferrer" style={styles.linkTitle} onClick={props.sendClickLog}>
           <br />

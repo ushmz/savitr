@@ -6,11 +6,12 @@ type BaseUIProps = {
   url: string;
   snippet: string;
   sendClickLog: () => void;
+  sendHoverLog?: () => void;
 };
 
 export const BaseUI: React.FC<BaseUIProps> = (props) => {
   return (
-    <>
+    <div onMouseEnter={props.sendHoverLog}>
       <SearchResult title={props.title} url={props.url} snippet={props.snippet} sendClickLog={props.sendClickLog} />
       <div style={styles.nudge}>
         {/*<h4 style={styles.suggestionTitle}></h4>*/}
@@ -20,7 +21,7 @@ export const BaseUI: React.FC<BaseUIProps> = (props) => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
