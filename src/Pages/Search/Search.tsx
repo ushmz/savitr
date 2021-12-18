@@ -56,7 +56,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                     <div key={`icon-${props.offset}-${idx}`} style={styles.searchResult}>
                       <IconUI
                         title={page.title}
-                        url={page.url}
+                        url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
                         tracked={page.leaks || []}
                         sendClickLog={sendClickLog}
@@ -69,7 +69,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                     <div key={`ratio-${props.offset}-${idx}`} style={styles.searchResult}>
                       <RatioUI
                         title={page.title}
-                        url={page.url}
+                        url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
                         tracked={{ total: page.total || 0, distribution: page.distribution || [] }}
                         sendClickLog={sendClickLog}
@@ -82,6 +82,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                   <div key={`controlled-${props.offset}-${idx}`} style={styles.searchResult}>
                     <BaseUI
                       title={page.title}
+                      url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                       snippet={page.snippet}
                       sendClickLog={sendClickLog}
                       sendHoverLog={sendHoverLog}
