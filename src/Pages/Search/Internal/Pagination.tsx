@@ -23,8 +23,8 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
               if (!(offset <= 0)) {
                 setOffset(offset - 1);
                 createEventLog({
-                  taskId: task.id,
-                  conditionId: condition,
+                  task: task.id,
+                  condition: condition,
                   time: getTimeOnPage(),
                   rank: 0,
                   page: offset + 1,
@@ -45,8 +45,8 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
                 onClick={() => {
                   setOffset(v);
                   createEventLog({
-                    taskId: task.id,
-                    conditionId: condition,
+                    task: task.id,
+                    condition: condition,
                     time: getTimeOnPage(),
                     rank: 0,
                     page: offset + 1,
@@ -67,8 +67,8 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
               if (!(offset >= 9)) {
                 setOffset(offset + 1);
                 createEventLog({
-                  taskId: task.id,
-                  conditionId: condition,
+                  task: task.id,
+                  condition: condition,
                   time: getTimeOnPage(),
                   rank: 0,
                   page: offset + 1,

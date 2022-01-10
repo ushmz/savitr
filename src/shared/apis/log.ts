@@ -47,8 +47,8 @@ export type LoggingEventType = 'click' | 'hover' | 'paginate';
 
 export type EventLogParam = {
   user: number;
-  taskId: number;
-  conditionId: number;
+  task: number;
+  condition: number;
   time: number;
   page: number;
   rank: number;

@@ -28,8 +28,8 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
     return () =>
       createEventLog({
         user: user,
-        taskId: props.task.id,
-        conditionId: condition,
+        task: props.task.id,
+        condition: condition,
         time: props.getTimeOnPage(),
         rank: index + 1,
         page: props.offset + 1,
