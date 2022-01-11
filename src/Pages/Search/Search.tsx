@@ -33,7 +33,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
         time: props.getTimeOnPage(),
         rank: index + 1,
         page: props.offset + 1,
-        visible: true,
+        visible: index % 2 === 0,
         event: event,
       });
   };
@@ -51,12 +51,25 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
               {props.pageList.map((page, idx) => {
                 const sendClickLog = createEventHandler(idx, 'click');
                 const sendHoverLog = createEventHandler(idx, 'hover');
-                if (props.condition === 5) {
+
+                if (idx % 2 !== 0) {
                   return (
-                    <div key={`icon-${props.offset}-${idx}`} style={styles.searchResult}>
+                    <div key={`${props.condition}-${props.offset}-${idx}`} style={styles.searchResult}>
+                      <ControlledUI
+                        title={page.title}
+                        url={page.url}
+                        snippet={page.snippet}
+                        sendClickLog={sendClickLog}
+                      />
+                    </div>
+                  );
+                } else if (props.condition === 5) {
+                  return (
+                    <div key={`${props.condition}-${props.offset}-${idx}`} style={styles.searchResult}>
                       <IconUI
                         title={page.title}
-                        url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
+                        url={page.url}
+                        // url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
                         tracked={page.leaks || []}
                         sendClickLog={sendClickLog}
@@ -66,10 +79,11 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                   );
                 } else if (props.condition === 7) {
                   return (
-                    <div key={`ratio-${props.offset}-${idx}`} style={styles.searchResult}>
+                    <div key={`${props.condition}-${props.offset}-${idx}`} style={styles.searchResult}>
                       <RatioUI
                         title={page.title}
-                        url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
+                        url={page.url}
+                        // url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
                         tracked={{ total: page.total || 0, distribution: page.distribution || [] }}
                         sendClickLog={sendClickLog}
@@ -78,11 +92,14 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                     </div>
                   );
                 }
+
+                // Else, return BaselineUI
                 return (
                   <div key={`controlled-${props.offset}-${idx}`} style={styles.searchResult}>
                     <BaseUI
                       title={page.title}
-                      url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
+                      url={page.url}
+                      // url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                       snippet={page.snippet}
                       sendClickLog={sendClickLog}
                       sendHoverLog={sendHoverLog}
