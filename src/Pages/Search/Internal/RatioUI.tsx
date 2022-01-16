@@ -1,14 +1,14 @@
 import React from 'react';
-import { SimilarwebDistribution } from 'shared/types';
+import { LinkedPageDistribution } from 'shared/types';
 import { SearchResult } from './SearchResult';
 
 type RatioUIProps = {
   title: string;
   url: string;
   snippet: string;
-  tracked: {
+  linked: {
     total: number;
-    distribution: SimilarwebDistribution[];
+    distribution: LinkedPageDistribution[];
   };
   sendClickLog: () => void;
   sendHoverLog?: () => void;
@@ -22,15 +22,17 @@ export const RatioUI: React.FC<RatioUIProps> = (props) => {
         <h4 style={styles.suggestionTitle}>
           上のページを閲覧すると，以下のウェブサイトでも
           <br />
-          上記ページの閲覧履歴を記録・分析される可能性があります（{props.tracked.total}件）
+          上記ページの閲覧履歴を記録・分析される可能性があります（{props.linked.total}件）
         </h4>
 
         <div style={styles.ratioContainer}>
-          {props.tracked.distribution.map((v, idx) => (
+          {props.linked.distribution.map((v, idx) => (
             <div key={idx} style={styles.ratioColumn}>
               {/* Set className="d-flex justify-content-center" to centerize */}
               <div style={styles.ratioCategory}>{v.category}</div>
-              <div style={styles.ratio}>{`${Math.ceil(v.pct * 1000) / 10}%（${v.count} 件）`}</div>
+              <div style={styles.ratio}>{`${Math.ceil((v.count / props.linked.total) * 1000) / 10}%（${
+                v.count
+              } 件）`}</div>
             </div>
           ))}
         </div>

@@ -58,7 +58,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                         title={page.title}
                         url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
-                        tracked={page.leaks || []}
+                        linked={page.linked || []}
                         sendClickLog={sendClickLog}
                         sendHoverLog={sendHoverLog}
                       />
@@ -71,7 +71,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
                         title={page.title}
                         url={`/rslt?tsk=${props.task.id}&pgi=${page.id}&u=${page.url}`}
                         snippet={page.snippet}
-                        tracked={{ total: page.total || 0, distribution: page.distribution || [] }}
+                        linked={{ total: page.total || 0, distribution: page.distribution || [] }}
                         sendClickLog={sendClickLog}
                         sendHoverLog={sendHoverLog}
                       />
