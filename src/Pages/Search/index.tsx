@@ -50,11 +50,11 @@ export const Search: React.FC<SearchProp> = (props) => {
     setLoading(true);
     const cond = conditionId === 5 ? 'icon' : 'ratio';
     fetchSearchResults(taskIdNum, offset, cond).then((serp) => {
-      serp.sort((a, b) => {
-        if (a.id < b.id) return -1;
-        if (a.id > b.id) return 1;
-        return 0;
-      });
+      // serp.sort((a, b) => {
+      //   if (a.id < b.id) return -1;
+      //   if (a.id > b.id) return 1;
+      //   return 0;
+      // });
       setResultPages(serp);
       setLoading(false);
       window.scrollTo(0, 0);

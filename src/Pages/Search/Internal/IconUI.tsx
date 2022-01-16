@@ -1,13 +1,13 @@
 import React from 'react';
 import { SearchResult } from './SearchResult';
 import { API_ENDPOINT } from 'shared/config';
-import { SimilarwebPage } from 'shared/types';
+import { LinkedPage } from 'shared/types';
 
 type IconUIProps = {
   title: string;
   url: string;
   snippet: string;
-  tracked: SimilarwebPage[];
+  linked: LinkedPage[];
   sendClickLog: () => void;
   sendHoverLog?: () => void;
 };
@@ -28,7 +28,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
           上記ページの閲覧履歴を記録・分析される可能性があります
         </h4>
         <div style={styles.icons}>
-          {Object.entries(props.tracked).map(([k, v]) => (
+          {Object.entries(props.linked).map(([k, v]) => (
             <div key={k}>
               <a href={v.url} target="_blank" rel="noreferrer">
                 <img

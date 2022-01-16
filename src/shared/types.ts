@@ -8,7 +8,7 @@ export type TaskInfo = {
 
 export type SerpType = 'icon' | 'ratio';
 
-export type SimilarwebPage = {
+export type LinkedPage = {
   id: string;
   title: string;
   url: string;
@@ -16,10 +16,10 @@ export type SimilarwebPage = {
   category?: number;
 };
 
-export type SimilarwebDistribution = {
+export type LinkedPageDistribution = {
   category: string;
   count: number;
-  pct: number;
+  // ratio: number;
 };
 
 export type SerpSimple = {
@@ -30,16 +30,16 @@ export type SerpSimple = {
 };
 
 export type Serp = SerpSimple & {
-  leaks?: SimilarwebPage[];
+  linked?: LinkedPage[];
   total?: number;
-  distribution?: SimilarwebDistribution[];
+  distribution?: LinkedPageDistribution[];
 };
 
 export type SerpWithIcon = SerpSimple & {
-  leaks: SimilarwebPage[];
+  links: LinkedPage[];
 };
 
 export type SerpWithDistribution = SerpSimple & {
   total: number;
-  distribution: SimilarwebDistribution[];
+  distribution: LinkedPageDistribution[];
 };
