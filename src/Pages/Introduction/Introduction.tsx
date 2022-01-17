@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
+import Container from '@mui/material/Container';
 import { toast } from 'react-toastify';
 import { SizedText } from 'Components/AdjustedComponents';
 import history from 'shared/utils/browserHistory';
 import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 import { getConditionId, getUID, getUserId } from 'shared/utils';
+import { Button } from '@mui/material';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
@@ -19,7 +20,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
 
   return (
     <>
-      <MDBContainer className="my-5">
+      <Container className="my-5">
         <h1 className="mt-5">タスク内容{`（${progresNumString} / 2）`}</h1>
         <SizedText size="18px" className="lead">
           {props.description}
@@ -50,7 +51,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
         {taskDetail(condition)}
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
           <a target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} href={`/search/${props.id}`}>
-            <MDBBtn
+            <Button
               color="primary"
               className="float-right"
               style={{ width: '240px' }}
@@ -60,7 +61,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               }}
             >
               検索結果リストを表示する
-            </MDBBtn>
+            </Button>
           </a>
         </div>
         <h2 className="mt-5">検索タスクの解答欄</h2>
@@ -91,7 +92,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
           </div>
         </form>
         <div className="d-flex justify-content-center m-5" style={{ margin: 'auto' }}>
-          <MDBBtn
+          <Button
             className={clicked ? '' : 'disabled'}
             color="primary"
             style={{ width: '240px' }}
@@ -138,9 +139,9 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
             }}
           >
             回答を提出する
-          </MDBBtn>
+          </Button>
         </div>
-      </MDBContainer>
+      </Container>
     </>
   );
 };
@@ -149,8 +150,8 @@ const taskDetail = (condition: number) => {
   switch (condition) {
     case 5:
       return (
-        <MDBCol>
-          <MDBRow>
+        <div>
+          <div>
             <p>
               加えて、各検索結果には下図のように、
               「上のページを閲覧すると、以下のウェブサイトでも上記ページの閲覧履歴を記録・分析される可能性があります」
@@ -159,11 +160,11 @@ const taskDetail = (condition: number) => {
               アイコンが示すウェブサイトでも検索結果のページを閲覧したことが記録・分析されてしまう
               可能性があることを意味します。
             </p>
-          </MDBRow>
-          <MDBRow className="d-flex justify-content-center">
+          </div>
+          <div className="d-flex justify-content-center">
             <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
-          </MDBRow>
-          <MDBRow className="my-3">
+          </div>
+          <div className="my-3">
             <p>
               例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
               ブリジストンや日本野球機構を含む10のアイコンが表示されています。
@@ -172,13 +173,13 @@ const taskDetail = (condition: number) => {
               「ブリジストン」や「日本野球機構」といったウェブサイトなどにウェブ広告を配信している企業などにも
               「Webカメラのおすすめ11選！」を閲覧したことが記録・分析されてしまう可能性があることが分かります。
             </p>
-          </MDBRow>
-        </MDBCol>
+          </div>
+        </div>
       );
     case 6:
       return (
-        <MDBCol>
-          <MDBRow>
+        <div>
+          <div>
             <p>
               加えて、各検索結果には下図のように、
               「上のページを閲覧すると、ページの閲覧履歴を記録・分析される可能性があります」と
@@ -186,12 +187,12 @@ const taskDetail = (condition: number) => {
               検索結果にこのメッセージが表示されている場合、その検索結果からリンクされたページを閲覧すると、
               第三者にそのページの閲覧履歴が記録・分析されてしまう可能性があることを意味します。
             </p>
-          </MDBRow>
+          </div>
 
-          <MDBRow className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
-          </MDBRow>
-          <MDBRow className="my-3">
+          </div>
+          <div className="my-3">
             <p>
               例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
               「上のページを閲覧すると、ページの閲覧履歴を記録・分析される可能性があります」と表示されています。
@@ -199,13 +200,13 @@ const taskDetail = (condition: number) => {
               そのページにウェブ広告を配信している企業などに「Webカメラのおすすめ11選！」を
               閲覧したことが記録・分析されてしまう可能性があることが分かります。
             </p>
-          </MDBRow>
-        </MDBCol>
+          </div>
+        </div>
       );
     case 7:
       return (
-        <MDBCol>
-          <MDBRow>
+        <div>
+          <div>
             <p>
               加えて、各検索結果には下図のように、 「検索結果からリンクされたページを閲覧したことが、
               どんなカテゴリのウェブサイトにどの程度知られてしまうかの割合情報」 が表示されることがあります。
@@ -213,11 +214,11 @@ const taskDetail = (condition: number) => {
               割合が表示されたカテゴリのウェブサイトでも
               検索結果のページを閲覧したことが記録・分析されてしまう可能性があることを意味します。
             </p>
-          </MDBRow>
-          <MDBRow className="d-flex justify-content-center">
+          </div>
+          <div className="d-flex justify-content-center">
             <img src={`public/img/samples/ja/${condition}.png`} className="img-fluid z-depth-1" alt="" width="560px" />
-          </MDBRow>
-          <MDBRow className="my-3">
+          </div>
+          <div className="my-3">
             <p>
               例えば上記の例では、「Webカメラのおすすめ11選！」というウェブページに対して、
               そのページを閲覧したことが知られてしまう3つのカテゴリのウェブサイトの数と割合が表示されています。
@@ -226,8 +227,8 @@ const taskDetail = (condition: number) => {
               「乗り物」や「ホームとガーデニング」のようなカテゴリのウェブサイトにウェブ広告を配信している企業などにも
               「Webカメラのおすすめ11選！」を閲覧したことが記録・分析されてしまう可能性があることを意味します。
             </p>
-          </MDBRow>
-        </MDBCol>
+          </div>
+        </div>
       );
     default:
       return;

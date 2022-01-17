@@ -1,15 +1,14 @@
-import { MDBBtn, MDBContainer } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header } from 'Components/Header';
 
 export const ExportHistory: React.FC = () => {
   const history = useHistory();
 
   return (
     <>
-      <Header />
-      <MDBContainer className="mt-5">
+      <Container className="mt-5">
         <h1>chrome 拡張機能を使用した履歴情報のエクスポート方法について</h1>
         <p>このページでは、chrome 拡張機能を用いた閲覧履歴のエクスポート方法について解説します。</p>
         <ol className="my-5">
@@ -62,10 +61,10 @@ export const ExportHistory: React.FC = () => {
 
           <li className="my-3">完了コードを記録したら、「ログアウト」ボタンよりタスクを終了してください。</li>
         </ol>
-        <MDBBtn color="primary" onClick={() => history.goBack()}>
+        <Button color="primary" onClick={() => history.goBack()}>
           戻る
-        </MDBBtn>
-      </MDBContainer>
+        </Button>
+      </Container>
     </>
   );
 };

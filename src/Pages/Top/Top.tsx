@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Toppage } from 'Components/AdjustedComponents';
-import { MDBBtn } from 'mdbreact';
+import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import { useAuth } from 'shared/provider/authProvider';
 import { createUser } from 'shared/apis';
@@ -109,7 +109,7 @@ export const Top: React.FC = () => {
         />
         {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
         <div>
-          <MDBBtn
+          <Button
             type="submit"
             color="primary"
             onClick={() => {
@@ -123,7 +123,7 @@ export const Top: React.FC = () => {
             ) : (
               'タスクを開始する'
             )}
-          </MDBBtn>
+          </Button>
         </div>
       </form>
     </Toppage>

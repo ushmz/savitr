@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Container from '@mui/material/Container';
 import { useAuth } from 'shared/provider/authProvider';
 import { createUser } from 'shared/apis';
 
@@ -55,10 +59,10 @@ export const Register: React.FC = () => {
   });
 
   return (
-    <MDBContainer>
-      <MDBCard className="mx-auto mt-5" style={{ width: '500px' }}>
-        <MDBCardTitle className="mx-auto mt-3">アカウント登録</MDBCardTitle>
-        <MDBCardBody>
+    <Container>
+      <Card className="mx-auto mt-5" style={{ width: '500px' }}>
+        <CardHeader className="mx-auto mt-3">アカウント登録</CardHeader>
+        <CardContent>
           <form onSubmit={onSubmit}>
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
@@ -66,7 +70,7 @@ export const Register: React.FC = () => {
             <input id="externalId" className="mb-3 mt-0 form-control" {...register('externalId')} />
             {errors.externalId && <p>{errors.externalId.message}</p>}
             <div className="text-center">
-              <MDBBtn
+              <Button
                 type="submit"
                 color="primary"
                 onClick={() => {
@@ -89,11 +93,11 @@ export const Register: React.FC = () => {
                 ) : (
                   '登録'
                 )}
-              </MDBBtn>
+              </Button>
             </div>
           </form>
-        </MDBCardBody>
-      </MDBCard>
-    </MDBContainer>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };

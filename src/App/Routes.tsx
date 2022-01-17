@@ -1,8 +1,10 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Route, Router, Switch } from 'react-router-dom';
-import { MDBCard, MDBCardBody, MDBCardTitle } from 'mdbreact';
 import { Auth } from 'Pages/Auth/Auth';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import { Completion } from 'Pages/Completion';
 import { Introduction } from 'Pages/Introduction';
 import { PostTask } from 'Pages/PostTask';
@@ -16,13 +18,13 @@ import { ResultDocument } from 'Pages/Result';
 const Routes: React.FC = () => {
   return isMobile ? (
     <>
-      <MDBCard className="m-5">
-        <MDBCardTitle className="m-3">このページはパソコン専用です。</MDBCardTitle>
-        <MDBCardBody className="mx=3">
+      <Card className="m-5">
+        <CardHeader className="m-3">このページはパソコン専用です。</CardHeader>
+        <CardContent className="mx=3">
           <p>本ウェブサイトは、クラウドワークスにて掲載している検索タスクを行っていただくためのサイトです。</p>
           <p>このページはパソコン専用です。このタスク行うにはパソコンからアクセスしてください。</p>
-        </MDBCardBody>
-      </MDBCard>
+        </CardContent>
+      </Card>
     </>
   ) : (
     <Router history={history}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MDBContainer, MDBBtn } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import { getPreTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
@@ -11,7 +12,7 @@ export const PreTask: React.FC = () => {
   const user = getUserId();
 
   return (
-    <MDBContainer className="my-5">
+    <Container className="my-5">
       <h1>事前アンケート</h1>
       <p>タスクを行う前に事前のアンケートにお答えください。質問は全部で2問あり、想定所要時間は約1分です。</p>
       <h2 className="mt-5">注意事項</h2>
@@ -23,12 +24,12 @@ export const PreTask: React.FC = () => {
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面からタスクを再開してください。
       </p>
       <a className="white-text" href={enquete + user} target="_blank" rel="noopener noreferrer">
-        <MDBBtn color="primary" className={`${!clicked ? '' : 'disabled'} mb-5`} onClick={() => isClicked(true)}>
+        <Button color="primary" className={`${!clicked ? '' : 'disabled'} mb-5`} onClick={() => isClicked(true)}>
           アンケートページへ
-        </MDBBtn>
+        </Button>
       </a>
       <p>アンケートへの回答が終了しましたら、以下のボタンから「タスク説明」ページへ進んでください。</p>
-      <MDBBtn
+      <Button
         color="primary"
         className={`${clicked ? '' : 'disabled'}`}
         onClick={() => {
@@ -42,7 +43,7 @@ export const PreTask: React.FC = () => {
         }}
       >
         タスク説明へ
-      </MDBBtn>
-    </MDBContainer>
+      </Button>
+    </Container>
   );
 };

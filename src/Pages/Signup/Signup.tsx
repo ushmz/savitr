@@ -1,4 +1,8 @@
-import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -42,10 +46,10 @@ export const Signup: React.FC = () => {
   });
 
   return (
-    <MDBContainer>
-      <MDBCard className="mx-auto mt-5" style={{ width: '500px' }}>
-        <MDBCardTitle className="mx-auto mt-3">アカウント登録</MDBCardTitle>
-        <MDBCardBody>
+    <Container>
+      <Card className="mx-auto mt-5" style={{ width: '500px' }}>
+        <CardHeader className="mx-auto mt-3">アカウント登録</CardHeader>
+        <CardContent>
           <form onSubmit={onSubmit}>
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
@@ -68,10 +72,10 @@ export const Signup: React.FC = () => {
             />
             {errors.passwdConfirm && <p>{errors.passwdConfirm.message}</p>}
             <div className="text-center">
-              <MDBBtn
-                type="submit"
-                color="primary"
-                invalid={(!formState.isValid).toString()}
+              <Button
+                // type="submit"
+                // color="primary"
+                disabled={!formState.isValid}
                 onClick={() => {
                   [
                     {
@@ -102,14 +106,14 @@ export const Signup: React.FC = () => {
                 ) : (
                   '作成'
                 )}
-              </MDBBtn>
+              </Button>
             </div>
           </form>
-        </MDBCardBody>
+        </CardContent>
         <p className="mx-auto my-3" style={{ fontSize: '85%' }}>
           アカウントをお持ちの方は<Link to="/signin">ログイン</Link>
         </p>
-      </MDBCard>
-    </MDBContainer>
+      </Card>
+    </Container>
   );
 };
