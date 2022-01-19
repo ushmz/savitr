@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Toppage } from 'Components/AdjustedComponents';
-import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import { useAuth } from 'shared/provider/authProvider';
 import { createUser } from 'shared/apis';
 import { CROWDSOURCING_SITE } from 'shared/config';
+import Button from 'Components/SimpleButton';
 
 type RegisterParam = {
   externalId: string;
@@ -77,7 +76,7 @@ export const Top: React.FC = () => {
   });
 
   return (
-    <Toppage className="mx-auto my-5">
+    <div style={styles.root}>
       <h1 className="my-4">検索タスク開始にあたって</h1>
       <p>本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。</p>
 
@@ -102,7 +101,6 @@ export const Top: React.FC = () => {
         </label>
         <input
           id="externalId"
-          className="mb-3 form-control"
           pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
           style={{ width: '360px' }}
           {...register('externalId')}
@@ -111,7 +109,6 @@ export const Top: React.FC = () => {
         <div>
           <Button
             type="submit"
-            color="primary"
             onClick={() => {
               setError('externalId', { type: 'manual', message: '必須項目です' });
             }}
@@ -126,6 +123,16 @@ export const Top: React.FC = () => {
           </Button>
         </div>
       </form>
-    </Toppage>
+    </div>
   );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+  root: {
+    maxWidth: '960px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: '10px',
+  },
 };
