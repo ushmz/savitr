@@ -6,6 +6,10 @@ import { useAuth } from 'shared/provider/authProvider';
 import { createUser } from 'shared/apis';
 import { CROWDSOURCING_SITE } from 'shared/config';
 import Button from 'Components/SimpleButton';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
 
 type RegisterParam = {
   externalId: string;
@@ -46,7 +50,7 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-            .catch((_) => {
+            .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
@@ -63,7 +67,7 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-            .catch((_) => {
+            .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
@@ -76,7 +80,15 @@ export const Top: React.FC = () => {
   });
 
   return (
-    <div style={styles.root}>
+    <Box
+      sx={{
+        maxWidth: '960px',
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        padding: '10px',
+      }}
+    >
       <h1 className="my-4">検索タスク開始にあたって</h1>
       <p>本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。</p>
 
@@ -96,43 +108,47 @@ export const Top: React.FC = () => {
       </p>
 
       <form className="my-5" onSubmit={onSubmit}>
-        <label htmlFor="externalId" className="font-weight-light">
-          {CROWDSOURCING_SITE}ID（IDは半角英数字と記号を用いて入力してください）
-        </label>
-        <input
-          id="externalId"
-          pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
-          style={{ width: '360px' }}
-          {...register('externalId')}
-        />
-        {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
-        <div>
-          <Button
-            type="submit"
-            onClick={() => {
-              setError('externalId', { type: 'manual', message: '必須項目です' });
-            }}
-          >
-            {isLoading ? (
-              <div className="spinner-border spinner-border-sm" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            ) : (
-              'タスクを開始する'
-            )}
-          </Button>
-        </div>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            '& .MuiTextField-root': { width: '25ch' },
+          }}
+        >
+          <InputLabel htmlFor="externalId">{CROWDSOURCING_SITE}IDは半角英数字と記号を用いて入力してください</InputLabel>
+          <TextField
+            id="externalId"
+            label={`${CROWDSOURCING_SITE}IDを入力`}
+            margin="dense"
+            pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
+            {...register('externalId')}
+          />
+          {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
+          <Box style={{ marginTop: '10px' }}>
+            <Button
+              style={{ height: '48px', width: '170px' }}
+              type="submit"
+              onClick={() => {
+                setError('externalId', { type: 'manual', message: '必須項目です' });
+              }}
+            >
+              {isLoading ? (
+                <CircularProgress
+                  size={48}
+                  sx={{
+                    color: 'snow',
+                    top: '50%',
+                    left: '50%',
+                  }}
+                  color="info"
+                />
+              ) : (
+                'タスクを開始する'
+              )}
+            </Button>
+          </Box>
+        </Box>
       </form>
-    </div>
+    </Box>
   );
-};
-
-const styles: { [key: string]: React.CSSProperties } = {
-  root: {
-    maxWidth: '960px',
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    padding: '10px',
-  },
 };
