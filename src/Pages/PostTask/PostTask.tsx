@@ -1,7 +1,9 @@
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 
+import Button from 'Components/Button';
+import Container from 'Components/Container';
+import Paragraph from 'Components/Paragraph';
 import { getPostTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PostTask: React.FC = () => {
@@ -11,28 +13,37 @@ export const PostTask: React.FC = () => {
   const user = getUserId();
 
   return (
-    <Container className="my-5">
+    <Container>
+      {/* 事後アンケートの説明段落 */}
       <h1>事後アンケート</h1>
-      <p>事後アンケートにお答えください。質問は全部で15問あり、想定所要時間は約5分です。</p>
+      <Paragraph>事後アンケートにお答えください。質問は全部で15問あり、想定所要時間は約5分です。</Paragraph>
+
+      {/* 注意事項の段落 */}
       <h2 className="mt-5">注意事項</h2>
-      <p>
+      <Paragraph>
         アンケートページは別タブで開かれますが、アンケートページが開いてもこのページは
-        <strong className="font-weight-bold">開いたままに</strong>してください。
-      </p>
-      <p>
+        <strong>開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面から実験を再開してください。
-      </p>
-      <a className="white-text" href={enquete + user} target="_blank" rel="noopener noreferrer">
-        <Button color="primary" className={`${!clicked ? '' : 'disabled'} mb-5`} onClick={() => isClicked(true)}>
-          アンケートページへ
-        </Button>
-      </a>
-      <p>実験は以上で終了となります。以下のボタンをクリックして完了コードを発行してください。</p>
-      <a href="/compCode" className="white-text">
-        <Button color="primary" className={`${clicked ? '' : 'disabled'} mb-5`}>
-          完了コード発行
-        </Button>
-      </a>
+      </Paragraph>
+
+      {/* アンケートページへの遷移ボタン */}
+      <Box sx={{ my: '24px', display: 'flex', justifyContent: 'center' }}>
+        <a href={enquete + user} target="_blank" rel="noopener noreferrer">
+          <Button disabled={clicked} onClick={() => isClicked(true)}>
+            アンケートページへ
+          </Button>
+        </a>
+      </Box>
+
+      {/* アンケート後の指示 */}
+      <Paragraph>実験は以上で終了となります。以下のボタンをクリックして完了コードを発行してください。</Paragraph>
+
+      {/* 完了コード発行ページへの遷移ボタン */}
+      <Box sx={{ my: '24px', display: 'flex', justifyContent: 'center' }}>
+        <a href="/compCode">
+          <Button disabled={!clicked}>完了コード発行</Button>
+        </a>
+      </Box>
     </Container>
   );
 };
