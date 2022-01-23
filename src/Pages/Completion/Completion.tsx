@@ -1,7 +1,10 @@
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
+import Container from 'Components/Container';
+import Paragraph from 'Components/Paragraph';
 import { CROWDSOURCING_SITE } from 'shared/config';
 
 type Props = {
@@ -10,18 +13,23 @@ type Props = {
 
 export const Completion: React.FC<Props> = ({ compCode }) => {
   return (
-    <>
-      <Container className="my-5">
-        <p>タスクへのご協力ありがとうございます。あなたの完了コードは以下になります。</p>
-        <Card className="mx-auto my-5" style={{ width: '22rem' }}>
-          <p className="m-auto" style={{ fontSize: '3rem' }}>
+    <Container>
+      <Paragraph>タスクへのご協力ありがとうございます。あなたの完了コードは以下になります。</Paragraph>
+      <Box sx={{ my: '24px', display: 'flex', justifyContent: 'center' }}>
+        <Card style={{ width: '22rem' }}>
+          <Typography variant="h2" align="center">
             {compCode}
-          </p>
+          </Typography>
         </Card>
-        <p>この完了コードを{CROWDSOURCING_SITE}の作業画面の「タスク完了コード」の欄に入力してください。</p>
-        <p>一度この画面を離れると、この画面は表示されませんので、忘れないようにメモなどをお願いいたします。</p>
-        <p>完了コードを記録したら、この画面を閉じていただいて問題ありません。</p>
-      </Container>
-    </>
+      </Box>
+      <Paragraph>
+        この完了コードを{CROWDSOURCING_SITE}の作業画面の「タスク完了コード」の欄に入力してください。
+        完了コードを記録したら、この画面を閉じていただいて問題ありません。
+      </Paragraph>
+      <Paragraph>
+        一度この画面を離れると、この画面は<strong>表示されません</strong>
+        ので、忘れないようにメモなどをお願いいたします。
+      </Paragraph>
+    </Container>
   );
 };
