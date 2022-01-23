@@ -44,7 +44,7 @@
         "pathGroupsExcludedImportTypes": ["builtin"],
         "pathGroups": [
           { "pattern": "App/**/*", "group": "internal" },
-          { "pattern": "Component/**/*", "group": "internal" },
+          { "pattern": "Components/**/*", "group": "internal" },
           { "pattern": "Pages/**/*", "group": "internal" },
           { "pattern": "shared/**/*", "group": "internal" }
         ]
