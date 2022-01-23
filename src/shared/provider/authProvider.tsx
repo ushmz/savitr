@@ -1,6 +1,7 @@
-import React, { createContext } from 'react';
-import { useProvideAuth } from 'shared/hooks/useAuth';
 import { User, UserCredential } from 'firebase/auth';
+import React, { createContext } from 'react';
+
+import { useProvideAuth } from 'shared/hooks/useAuth';
 
 export type ContextValue = {
   signIn: (uid: string, password: string) => Promise<void | UserCredential>;

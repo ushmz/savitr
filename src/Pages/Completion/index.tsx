@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+
+import { PageLoadingCenter } from 'Components/Loader';
 import { Completion as Component } from 'Pages/Completion/Completion';
 import { fetchCompletionCode } from 'shared/apis';
 
@@ -11,5 +12,5 @@ export const Completion: React.FC = () => {
       .then((v) => setCompCode(v))
       .then(() => localStorage.clear());
   }, []);
-  return compCode !== null ? <Component compCode={compCode} /> : <ComponentLoaderCenter />;
+  return compCode !== null ? <Component compCode={compCode} /> : <PageLoadingCenter />;
 };

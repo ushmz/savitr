@@ -1,12 +1,18 @@
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Toppage } from 'Components/AdjustedComponents';
-import { MDBBtn } from 'mdbreact';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAuth } from 'shared/provider/authProvider';
+
+import Button from 'Components/Button';
+import Container from 'Components/Container';
+import { ComponentLoadingCenter } from 'Components/Loader';
 import { createUser } from 'shared/apis';
 import { CROWDSOURCING_SITE } from 'shared/config';
+import { useAuth } from 'shared/provider/authProvider';
 
 type RegisterParam = {
   externalId: string;
@@ -47,7 +53,7 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-            .catch((_) => {
+            .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
@@ -64,7 +70,7 @@ export const Top: React.FC = () => {
               setLoading(false);
               history.push('/pretask');
             })
-            .catch((_) => {
+            .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);
               setLoading(false);
             });
@@ -77,55 +83,53 @@ export const Top: React.FC = () => {
   });
 
   return (
-    <Toppage className="mx-auto my-5">
-      <h1 className="my-4">検索タスク開始にあたって</h1>
-      <p>本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。</p>
+    <Container>
+      <h1>検索タスク開始にあたって</h1>
+      <Typography paragraph>
+        本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。
+      </Typography>
 
-      <p>
+      <Typography paragraph>
         本タスクでははじめにアンケートに回答していただきます。続いて検索タスクを行っていただきます。
         最後にもう一度アンケートに回答していただきます。タスク全体の想定時間は 20 分程度を想定しております。
-      </p>
+      </Typography>
 
-      <p>
+      <Typography paragraph>
         タスク中、ページ閲覧ログを収集させていただきます。
         収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
-      </p>
+      </Typography>
 
-      <p className="font-weight-bold">
+      <Typography paragraph>
         以上に同意していただける方は、以下の入力欄に「{CROWDSOURCING_SITE}ID」を入力し、
         「タスクを開始する」ボタンをクリックしてタスクを開始してください。
-      </p>
+      </Typography>
 
-      <form className="my-5" onSubmit={onSubmit}>
-        <label htmlFor="externalId" className="font-weight-light">
-          {CROWDSOURCING_SITE}ID（IDは半角英数字と記号を用いて入力してください）
-        </label>
-        <input
+      <form onSubmit={onSubmit}>
+        <InputLabel htmlFor="externalId">
+          {CROWDSOURCING_SITE}を入力（IDは半角英数字と記号を用いて入力してください）
+        </InputLabel>
+        <TextField
           id="externalId"
-          className="mb-3 form-control"
+          size="small"
           pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
-          style={{ width: '360px' }}
           {...register('externalId')}
+          sx={{ width: '360px' }}
         />
         {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
-        <div>
-          <MDBBtn
+        <Box sx={{ mt: '20px' }}>
+          <Button
             type="submit"
-            color="primary"
+            // To avoid changing button size by inner elements(text or progress),
+            // fix button size here.
+            style={{ height: '48px', width: '160px' }}
             onClick={() => {
               setError('externalId', { type: 'manual', message: '必須項目です' });
             }}
           >
-            {isLoading ? (
-              <div className="spinner-border spinner-border-sm" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-            ) : (
-              'タスクを開始する'
-            )}
-          </MDBBtn>
-        </div>
+            {isLoading ? <ComponentLoadingCenter /> : 'タスクを開始する'}
+          </Button>
+        </Box>
       </form>
-    </Toppage>
+    </Container>
   );
 };

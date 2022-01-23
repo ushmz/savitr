@@ -13,7 +13,16 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "jest", "prettier", "prefer-arrow", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jest",
+    "prettier",
+    "prefer-arrow",
+    "react",
+    "react-hooks",
+    "unused-imports"
+  ],
   "root": true,
   "settings": {
     "import/resolver": {
@@ -23,18 +32,35 @@
     }
   },
   "rules": {
-    "react/prop-types": "off",
-    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroups": [
+          { "pattern": "App/**/*", "group": "internal" },
+          { "pattern": "Components/**/*", "group": "internal" },
+          { "pattern": "Pages/**/*", "group": "internal" },
+          { "pattern": "shared/**/*", "group": "internal" }
+        ]
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": "error"
+    "unused-imports/no-unused-imports": "warn"
   },
   "globals": {
     "__DEV__": true,
     "alert": false,
-    "document": false,
-    "console": false
+    "console": false,
+    "document": false
   }
 }

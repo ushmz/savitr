@@ -1,15 +1,14 @@
-import { MDBBtn, MDBContainer } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header } from 'Components/Header';
 
 export const DownloadHistory: React.FC = () => {
   const history = useHistory();
 
   return (
     <>
-      <Header />
-      <MDBContainer className="mt-5">
+      <Container className="mt-5">
         <h1>履歴情報のエクスポート方法について</h1>
         <p>
           このページでは、ご自身の google アカウントから、閲覧履歴の情報をエクスポートする方法について解説します。
@@ -44,10 +43,10 @@ export const DownloadHistory: React.FC = () => {
           </li>
           <img src="/public/img/how2/downloadHistory/0008.png" width="100%" />
         </ol>
-        <MDBBtn color="primary" onClick={() => history.goBack()}>
+        <Button color="primary" onClick={() => history.goBack()}>
           戻る
-        </MDBBtn>
-      </MDBContainer>
+        </Button>
+      </Container>
     </>
   );
 };

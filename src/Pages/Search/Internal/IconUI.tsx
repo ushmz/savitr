@@ -1,7 +1,9 @@
 import React from 'react';
-import { SearchResult } from './SearchResult';
+
 import { API_ENDPOINT } from 'shared/config';
 import { LinkedPage } from 'shared/types';
+
+import { SearchResult } from './SearchResult';
 
 type IconUIProps = {
   title: string;
@@ -55,7 +57,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
 const styles: { [key: string]: React.CSSProperties } = {
   nudge: {
     marginTop: '10px',
-    padding: '8px 15px',
+    padding: '0 15px 8px',
     border: '1px solid #dadce0',
     borderRadius: '8px',
     position: 'relative',
@@ -63,7 +65,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     transformOrigin: 'top',
   },
   suggestionTitle: {
-    marginLeft: 0,
+    margin: '8px 0',
     color: 'rgba(0, 0, 0, 0.6)',
     fontSize: '14px',
     fontWeight: 300,

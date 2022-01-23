@@ -1,9 +1,14 @@
-import { useForm } from 'react-hook-form';
-import { MDBContainer, MDBCard, MDBCardTitle, MDBCardBody, MDBBtn } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Container from '@mui/material/Container';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from 'shared/provider/authProvider';
 import { toast } from 'react-toastify';
+
+import { useAuth } from 'shared/provider/authProvider';
 
 type SigninParamName = 'externalId' | 'passwd';
 
@@ -39,10 +44,10 @@ export const Signin: React.FC = () => {
   });
 
   return (
-    <MDBContainer>
-      <MDBCard className="mx-auto mt-5" style={{ width: '500px' }}>
-        <MDBCardTitle className="mx-auto mt-3">ログイン</MDBCardTitle>
-        <MDBCardBody>
+    <Container>
+      <Card className="mx-auto mt-5" style={{ width: '500px' }}>
+        <CardHeader className="mx-auto mt-3">ログイン</CardHeader>
+        <CardContent>
           <form onSubmit={onSubmit}>
             <label htmlFor="externalId" className="grey-text font-weight-light">
               ランサーズID（ユーザー名）
@@ -55,7 +60,7 @@ export const Signin: React.FC = () => {
             <input id="passwd" className="mb-3 mt-0 form-control" type="password" {...register('passwd')} />
             {errors.passwd && <p>{errors.passwd.message}</p>}
             <div className="text-center">
-              <MDBBtn
+              <Button
                 type="submit"
                 color="primary"
                 onClick={() => {
@@ -83,14 +88,14 @@ export const Signin: React.FC = () => {
                 ) : (
                   'ログイン'
                 )}
-              </MDBBtn>
+              </Button>
             </div>
           </form>
-        </MDBCardBody>
+        </CardContent>
         <p className="mx-auto my-3" style={{ fontSize: '85%' }}>
           アカウントをお持ちでない方は<Link to="/signup">アカウント登録</Link>
         </p>
-      </MDBCard>
-    </MDBContainer>
+      </Card>
+    </Container>
   );
 };

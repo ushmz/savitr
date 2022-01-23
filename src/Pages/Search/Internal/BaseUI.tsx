@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { SearchResult } from './SearchResult';
 
 type BaseUIProps = {

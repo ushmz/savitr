@@ -1,11 +1,12 @@
 import React from 'react';
-import { MDBContainer } from 'mdbreact';
+
+import Container from 'Components/Container';
 
 export const NotFound: React.FC<{ err?: string; message?: string }> = (props) => {
   return (
-    <MDBContainer className="m-5">
+    <Container>
       <p>申し訳ありません．最初からやり直してください．</p>
       {props.err && <p>{`${props.err}: ${props.message}`}</p>}
-    </MDBContainer>
+    </Container>
   );
 };

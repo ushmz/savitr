@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+
 import { NotFound as Component } from 'Pages/NotFound/NotFound';
 
 type Props = RouteComponentProps<{

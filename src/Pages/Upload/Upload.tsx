@@ -1,7 +1,7 @@
-import { MDBBtn, MDBContainer } from 'mdbreact';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header } from 'Components/Header';
 // import { useDropzone } from 'react-dropzone';
 // import { toast } from 'react-toastify';
 // import { uploadUserFile } from 'shared/apis/apis';
@@ -79,8 +79,7 @@ export const Upload: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <MDBContainer className="my-5">
+      <Container className="my-5">
         <h1>履歴情報のアップロード</h1>
         <p>実験にご協力いただきありがとうございます。このページから履歴情報のアップロードを行ってください。</p>
         <p>
@@ -155,7 +154,7 @@ export const Upload: React.FC = () => {
 		  </div>
 		  </MDBRow>
 		  <MDBRow className="my-3">
-		  <MDBBtn
+		  <Button
 		  color="primary"
 		  type="submit"
 		  onClick={async () => {
@@ -168,10 +167,10 @@ export const Upload: React.FC = () => {
 		  }}
 		  >
 	アップロードする
-	</MDBBtn>
+	</Button>
 	</MDBRow>
 	*/}
-        <MDBBtn
+        <Button
           disabled={!isClicked}
           color="primary"
           onClick={() => {
@@ -179,8 +178,8 @@ export const Upload: React.FC = () => {
           }}
         >
           完了コードの発行
-        </MDBBtn>
-      </MDBContainer>
+        </Button>
+      </Container>
     </>
   );
 };

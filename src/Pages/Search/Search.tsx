@@ -1,10 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+
+import { PageLoadingCenter } from 'Components/Loader';
 import { BaseUI } from 'Pages/Search/Internal/BaseUI';
 import { ControlledUI } from 'Pages/Search/Internal/ControlledUI';
 import { IconUI } from 'Pages/Search/Internal/IconUI';
-import { RatioUI } from 'Pages/Search/Internal/RatioUI';
 import { SerpPagination } from 'Pages/Search/Internal/Pagination';
+import { RatioUI } from 'Pages/Search/Internal/RatioUI';
 import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
 import { createEventLog, LoggingEventType } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
@@ -42,7 +43,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
     <>
       <SearchHeader query={props.task.query} />
       {props.isLoading ? (
-        <ComponentLoaderCenter />
+        <PageLoadingCenter />
       ) : (
         <div>
           <div style={styles.pageIndicator}>{`${props.offset + 1}ページ / 10ページ`}</div>
