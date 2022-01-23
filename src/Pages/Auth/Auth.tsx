@@ -1,9 +1,10 @@
+import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+
 import { useAuth } from 'shared/provider/authProvider';
 import firebase from 'shared/utils/firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const Auth: React.FC = ({ children }) => {
   const auth = useAuth();

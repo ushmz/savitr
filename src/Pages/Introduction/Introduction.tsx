@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { Button } from '@mui/material';
 import Container from '@mui/material/Container';
-import { toast } from 'react-toastify';
 import { SizedText } from 'Components/AdjustedComponents';
-import history from 'shared/utils/browserHistory';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+
 import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 import { getConditionId, getUID, getUserId } from 'shared/utils';
-import { Button } from '@mui/material';
+import history from 'shared/utils/browserHistory';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);

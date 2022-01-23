@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { ComponentLoaderCenter } from 'Components/ComponentLoader';
+import React, { useEffect, useState } from 'react';
+
 import { Completion as Component } from 'Pages/Completion/Completion';
 import { fetchCompletionCode } from 'shared/apis';
 

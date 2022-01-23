@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import React, { useState } from 'react';
+
 import { getPostTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PostTask: React.FC = () => {

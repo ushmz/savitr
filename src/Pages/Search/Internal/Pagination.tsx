@@ -1,12 +1,12 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
 import React, { Dispatch, SetStateAction } from 'react';
+
 import { createEventLog } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
-
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 type PaginationProps = {
   task: TaskInfo;

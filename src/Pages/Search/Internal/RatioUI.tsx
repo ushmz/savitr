@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { LinkedPageDistribution } from 'shared/types';
+
 import { SearchResult } from './SearchResult';
 
 type RatioUIProps = {

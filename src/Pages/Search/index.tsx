@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
+
 import { SearchResultPage as Component } from 'Pages/Search/Search';
 import { fetchSearchResults, fetchTaskInfo, createSerpViewingLog } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';

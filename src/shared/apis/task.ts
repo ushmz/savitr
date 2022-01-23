@@ -1,7 +1,8 @@
 import axios from 'axios';
+
 import { API_ENDPOINT } from 'shared/config';
-import { getJWT } from 'shared/utils';
 import { TaskInfo } from 'shared/types';
+import { getJWT } from 'shared/utils';
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
   const response = await axios.get<TaskInfo>(`${API_ENDPOINT}/api/v1/task/${taskId}`, {

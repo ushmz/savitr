@@ -1,6 +1,7 @@
-import React from 'react';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
+import React from 'react';
+
 import { CROWDSOURCING_SITE } from 'shared/config';
 
 type Props = {

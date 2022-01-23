@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getPreTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
