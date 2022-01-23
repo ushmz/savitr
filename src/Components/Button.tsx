@@ -6,8 +6,8 @@ import React from 'react';
 // const ghblue = '#2467e2';
 
 const CustomButtonRoot = styled('button')`
-  font-family: sans-serif;
-  font-weight: bold;
+  /* font-family: sans-serif; */
+  /* font-weight: bold; */
   font-size: 0.875rem;
   background-color: ${blue[600]};
   padding: 12px 24px;
