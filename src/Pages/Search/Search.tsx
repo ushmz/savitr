@@ -1,6 +1,6 @@
-import { ComponentLoaderCenter } from 'Components/ComponentLoader';
 import React, { Dispatch, SetStateAction } from 'react';
 
+import { PageLoadingCenter } from 'Components/Loader';
 import { BaseUI } from 'Pages/Search/Internal/BaseUI';
 import { ControlledUI } from 'Pages/Search/Internal/ControlledUI';
 import { IconUI } from 'Pages/Search/Internal/IconUI';
@@ -43,7 +43,7 @@ export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
     <>
       <SearchHeader query={props.task.query} />
       {props.isLoading ? (
-        <ComponentLoaderCenter />
+        <PageLoadingCenter />
       ) : (
         <div>
           <div style={styles.pageIndicator}>{`${props.offset + 1}ページ / 10ページ`}</div>

@@ -46,7 +46,7 @@ export const RatioUI: React.FC<RatioUIProps> = (props) => {
 const styles: { [key: string]: React.CSSProperties } = {
   nudge: {
     marginTop: '10px',
-    padding: '8px 15px',
+    padding: '0 15px 8px',
     border: '1px solid #dadce0',
     borderRadius: '8px',
     position: 'relative',
@@ -54,7 +54,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     transformOrigin: 'top',
   },
   suggestionTitle: {
-    marginBottom: '8px',
+    margin: '8px 0',
     color: 'rgba(0, 0, 0, 0.6)',
     fontSize: '14px',
     fontWeight: 300,
