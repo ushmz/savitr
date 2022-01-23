@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router-dom';
+
 import { Introduction as Component } from 'Pages/Introduction/Introduction';
 import { fetchTaskInfo } from 'shared/apis';
 import { TaskInfo } from 'shared/types';

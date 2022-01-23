@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { ContextValue } from 'shared/provider/authProvider';
-import firebase from 'shared/utils/firebase';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { User } from 'firebase/auth';
+import * as React from 'react';
+
+import { ContextValue } from 'shared/provider/authProvider';
+import firebase from 'shared/utils/firebase';
 
 export const useProvideAuth = (): ContextValue => {
   const [user, setUser] = React.useState<User | null>(null);

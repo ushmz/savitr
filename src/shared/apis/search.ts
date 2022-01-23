@@ -1,7 +1,8 @@
 import axios from 'axios';
+
 import { API_ENDPOINT } from 'shared/config';
-import { getJWT } from 'shared/utils';
 import { SerpType, Serp, SerpWithIcon, SerpWithDistribution, SerpSimple } from 'shared/types';
+import { getJWT } from 'shared/utils';
 
 export const makeSearchSesion = async (user: number, taskId: number, conditionId: number): Promise<void> => {
   const response = await axios.post(

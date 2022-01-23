@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { useAuth } from 'shared/provider/authProvider';
 
 export const User: React.FC = () => {

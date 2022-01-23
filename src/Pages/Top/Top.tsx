@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { useAuth } from 'shared/provider/authProvider';
-import { createUser } from 'shared/apis';
-import { CROWDSOURCING_SITE } from 'shared/config';
-import Button from 'Components/SimpleButton';
-import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
+import Button from 'Components/SimpleButton';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { createUser } from 'shared/apis';
+import { CROWDSOURCING_SITE } from 'shared/config';
+import { useAuth } from 'shared/provider/authProvider';
 
 type RegisterParam = {
   externalId: string;
@@ -133,15 +134,7 @@ export const Top: React.FC = () => {
               }}
             >
               {isLoading ? (
-                <CircularProgress
-                  size={48}
-                  sx={{
-                    color: 'snow',
-                    top: '50%',
-                    left: '50%',
-                  }}
-                  color="info"
-                />
+                <CircularProgress size={48} sx={{ color: 'snow', top: '50%', left: '50%' }} color="info" />
               ) : (
                 'タスクを開始する'
               )}

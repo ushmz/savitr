@@ -1,7 +1,9 @@
 import React from 'react';
-import { SearchResult } from './SearchResult';
+
 import { API_ENDPOINT } from 'shared/config';
 import { LinkedPage } from 'shared/types';
+
+import { SearchResult } from './SearchResult';
 
 type IconUIProps = {
   title: string;

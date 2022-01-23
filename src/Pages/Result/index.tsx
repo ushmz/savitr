@@ -1,8 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import useInterval from 'use-interval';
+
 import { createPageViewingLog } from 'shared/apis';
 import { getConditionId, getUserId } from 'shared/utils';
-import useInterval from 'use-interval';
+
 import { ResultDocument as Component } from './ResultDocument';
 
 export const ResultDocument: React.FC = () => {

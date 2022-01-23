@@ -1,19 +1,20 @@
-import React from 'react';
-import { isMobile } from 'react-device-detect';
-import { Route, Router, Switch } from 'react-router-dom';
-import { Auth } from 'Pages/Auth/Auth';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+import { Route, Router, Switch } from 'react-router-dom';
+
+import { Auth } from 'Pages/Auth/Auth';
 import { Completion } from 'Pages/Completion';
 import { Introduction } from 'Pages/Introduction';
+import { NotFound } from 'Pages/NotFound';
 import { PostTask } from 'Pages/PostTask';
 import { PreTask } from 'Pages/PreTask';
+import { ResultDocument } from 'Pages/Result';
 import { Search } from 'Pages/Search';
 import { Top } from 'Pages/Top';
-import { NotFound } from 'Pages/NotFound';
 import history from 'shared/utils/browserHistory';
-import { ResultDocument } from 'Pages/Result';
 
 const Routes: React.FC = () => {
   return isMobile ? (
