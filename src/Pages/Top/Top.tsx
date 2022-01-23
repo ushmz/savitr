@@ -1,13 +1,15 @@
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import Button from 'Components/SimpleButton';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import Button from 'Components/Button';
+import Container from 'Components/Container';
+import { ComponentLoadingCenter } from 'Components/Loader';
 import { createUser } from 'shared/apis';
 import { CROWDSOURCING_SITE } from 'shared/config';
 import { useAuth } from 'shared/provider/authProvider';
@@ -81,67 +83,53 @@ export const Top: React.FC = () => {
   });
 
   return (
-    <Box
-      sx={{
-        maxWidth: '960px',
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        padding: '10px',
-      }}
-    >
-      <h1 className="my-4">検索タスク開始にあたって</h1>
-      <p>本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。</p>
+    <Container>
+      <h1>検索タスク開始にあたって</h1>
+      <Typography paragraph>
+        本ウェブサイトは、{CROWDSOURCING_SITE}にて掲載している検索タスクを行っていただくためのサイトです。
+      </Typography>
 
-      <p>
+      <Typography paragraph>
         本タスクでははじめにアンケートに回答していただきます。続いて検索タスクを行っていただきます。
         最後にもう一度アンケートに回答していただきます。タスク全体の想定時間は 20 分程度を想定しております。
-      </p>
+      </Typography>
 
-      <p>
+      <Typography paragraph>
         タスク中、ページ閲覧ログを収集させていただきます。
         収集したログはすべて匿名化され、静岡大学情報学部における学術研究目的にのみ利用されます。
-      </p>
+      </Typography>
 
-      <p className="font-weight-bold">
+      <Typography paragraph>
         以上に同意していただける方は、以下の入力欄に「{CROWDSOURCING_SITE}ID」を入力し、
         「タスクを開始する」ボタンをクリックしてタスクを開始してください。
-      </p>
+      </Typography>
 
-      <form className="my-5" onSubmit={onSubmit}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            '& .MuiTextField-root': { width: '25ch' },
-          }}
-        >
-          <InputLabel htmlFor="externalId">{CROWDSOURCING_SITE}IDは半角英数字と記号を用いて入力してください</InputLabel>
-          <TextField
-            id="externalId"
-            label={`${CROWDSOURCING_SITE}IDを入力`}
-            margin="dense"
-            pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
-            {...register('externalId')}
-          />
-          {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
-          <Box style={{ marginTop: '10px' }}>
-            <Button
-              style={{ height: '48px', width: '170px' }}
-              type="submit"
-              onClick={() => {
-                setError('externalId', { type: 'manual', message: '必須項目です' });
-              }}
-            >
-              {isLoading ? (
-                <CircularProgress size={48} sx={{ color: 'snow', top: '50%', left: '50%' }} color="info" />
-              ) : (
-                'タスクを開始する'
-              )}
-            </Button>
-          </Box>
+      <form onSubmit={onSubmit}>
+        <InputLabel htmlFor="externalId">
+          {CROWDSOURCING_SITE}を入力（IDは半角英数字と記号を用いて入力してください）
+        </InputLabel>
+        <TextField
+          id="externalId"
+          size="small"
+          pattern="[0-9a-zA-Z-_]*([ \.][0-9a-zA-Z-_]+)*"
+          {...register('externalId')}
+          sx={{ width: '360px' }}
+        />
+        {errors.externalId && <p style={{ color: 'red' }}>{errors.externalId.message}</p>}
+        <Box sx={{ mt: '20px' }}>
+          <Button
+            type="submit"
+            // To avoid changing button size by inner elements(text or progress),
+            // fix button size here.
+            style={{ height: '48px', width: '160px' }}
+            onClick={() => {
+              setError('externalId', { type: 'manual', message: '必須項目です' });
+            }}
+          >
+            {isLoading ? <ComponentLoadingCenter /> : 'タスクを開始する'}
+          </Button>
         </Box>
       </form>
-    </Box>
+    </Container>
   );
 };
