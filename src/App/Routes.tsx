@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import { Auth } from 'Pages/Auth/Auth';
 import { Completion } from 'Pages/Completion';
@@ -14,9 +14,8 @@ import { PreTask } from 'Pages/PreTask';
 import { ResultDocument } from 'Pages/Result';
 import { Search } from 'Pages/Search';
 import { Top } from 'Pages/Top';
-import history from 'shared/utils/browserHistory';
 
-const Routes: React.FC = () => {
+const AppRoutes: React.FC = () => {
   return isMobile ? (
     <>
       <Card className="m-5">
@@ -28,22 +27,62 @@ const Routes: React.FC = () => {
       </Card>
     </>
   ) : (
-    <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={Top} />
-        <Route exact path="/error/:err" component={NotFound} />
-        <Auth>
-          <Route exact path="/introduction/:taskid" component={Introduction} />
-          <Route exact path="/pretask" component={PreTask} />
-          <Route exact path="/posttask" component={PostTask} />
-          <Route exact path="/search/:taskid" component={Search} />
-          <Route exact path="/rslt" component={ResultDocument} />
-          <Route exact path="/compcode" component={Completion} />
-        </Auth>
-        <Route exact path="*" component={NotFound} />
-      </Switch>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Top />} />
+        <Route path="/error/:err" element={<NotFound />} />
+        <Route
+          path="/introduction/:taskid"
+          element={
+            <Auth>
+              <Introduction />
+            </Auth>
+          }
+        />
+        <Route
+          path="/pretask"
+          element={
+            <Auth>
+              <PreTask />
+            </Auth>
+          }
+        />
+        <Route
+          path="/posttask"
+          element={
+            <Auth>
+              <PostTask />
+            </Auth>
+          }
+        />
+        <Route
+          path="/search/:taskid"
+          element={
+            <Auth>
+              <Search />
+            </Auth>
+          }
+        />
+        <Route
+          path="/rslt"
+          element={
+            <Auth>
+              <ResultDocument />
+            </Auth>
+          }
+        />
+        <Route
+          path="/compcode"
+          element={
+            <Auth>
+              <Completion />
+            </Auth>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
-export default Routes;
+export default AppRoutes;

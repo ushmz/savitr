@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { createUser } from 'shared/apis';
@@ -26,7 +26,7 @@ export const Register: React.FC = () => {
     formState: { errors },
   } = useForm<RegisterParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId }) => {
@@ -38,14 +38,14 @@ export const Register: React.FC = () => {
           .signUp(email, v.secret)
           .then(() => {
             setLoading(false);
-            history.push('/upload');
+            navigate('/upload');
           })
           .catch(() => {
             auth
               .signIn(email, v.secret)
               .then(() => {
                 setLoading(false);
-                history.push('/upload');
+                navigate('/upload');
               })
               .catch((resin) => {
                 toast.error(`予期せぬエラーが発生しました : ${resin}`);

@@ -4,7 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Button from 'Components/Button';
@@ -21,7 +21,7 @@ type RegisterParam = {
 
 export const Top: React.FC = () => {
   const auth = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState<boolean>(false);
   const {
     register,
@@ -51,7 +51,7 @@ export const Top: React.FC = () => {
               localStorage.setItem('condition', '' + v.condition);
               localStorage.setItem('group', '' + v.group);
               setLoading(false);
-              history.push('/pretask');
+              navigate('/pretask');
             })
             .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);
@@ -68,7 +68,7 @@ export const Top: React.FC = () => {
               localStorage.setItem('condition', '' + v.condition);
               localStorage.setItem('group', '' + v.group);
               setLoading(false);
-              history.push('/pretask');
+              navigate('/pretask');
             })
             .catch(() => {
               toast.error(`予期せぬエラーが発生しました`);

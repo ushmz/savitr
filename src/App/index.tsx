@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import NormalizeStyle from 'App/NormalizeStyle';
-import Routes from 'App/Routes';
+import AppRoutes from 'App/Routes';
 import { ProvideAuth } from 'shared/provider/authProvider';
 
 const App = (): ReactElement => {
@@ -11,7 +11,7 @@ const App = (): ReactElement => {
     <React.Fragment>
       <ProvideAuth>
         <NormalizeStyle />
-        <Routes />
+        <AppRoutes />
         <ToastContainer />
       </ProvideAuth>
     </React.Fragment>

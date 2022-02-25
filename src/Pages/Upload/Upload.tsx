@@ -1,14 +1,14 @@
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { useDropzone } from 'react-dropzone';
 // import { toast } from 'react-toastify';
 // import { uploadUserFile } from 'shared/apis/apis';
 // import { useAuth } from 'shared/provider/authProvider';
 
 export const Upload: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   // const auth = useAuth();
   // const [uploaded, setUploaded] = useState<File[]>([]);
   const [isClicked, setClicked] = useState<boolean>(false);
@@ -174,7 +174,7 @@ export const Upload: React.FC = () => {
           disabled={!isClicked}
           color="primary"
           onClick={() => {
-            history.push('/upload/completion');
+            navigate('/upload/completion');
           }}
         >
           完了コードの発行
