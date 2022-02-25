@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'Components/Button';
 import Container from 'Components/Container';
@@ -9,7 +9,7 @@ import { getPreTaskEnqueteByGroupId, getUserId } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const group = localStorage.getItem('group') || '';
   const enquete = getPreTaskEnqueteByGroupId(group);
   const user = getUserId();
@@ -50,9 +50,9 @@ export const PreTask: React.FC = () => {
             const sb = localStorage.getItem('standby');
             if (sb) {
               localStorage.removeItem('standby');
-              history.push(`/introduction/${sb}`);
+              navigate(`/introduction/${sb}`);
             } else {
-              history.push('/404');
+              navigate('/404');
             }
           }}
         >

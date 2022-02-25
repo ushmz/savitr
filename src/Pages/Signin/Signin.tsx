@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAuth } from 'shared/provider/authProvider';
@@ -25,7 +25,7 @@ export const Signin: React.FC = () => {
     formState: { errors },
   } = useForm<SigninParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId, passwd }) => {
@@ -35,7 +35,7 @@ export const Signin: React.FC = () => {
       .signIn(email, passwd)
       .then(() => {
         setLoading(false);
-        history.push('/user');
+        navigate('/user');
       })
       .catch((e) => {
         toast.error('ID または パスワードが正しくありません', e);

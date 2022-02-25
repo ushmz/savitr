@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 
@@ -8,9 +8,7 @@ import { fetchSearchResults, fetchTaskInfo, createSerpViewingLog } from 'shared/
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionId, getUserId } from 'shared/utils';
 
-type SearchProp = RouteComponentProps<{ taskid: string }>;
-
-export const Search: React.FC<SearchProp> = (props) => {
+export const Search: React.FC = () => {
   document.title = '検索結果リスト';
   const dummyTask: TaskInfo = {
     id: 0,
@@ -23,7 +21,8 @@ export const Search: React.FC<SearchProp> = (props) => {
   const userId = getUserId();
   const conditionId = getConditionId();
 
-  const taskIdNum = parseInt(props.match.params.taskid);
+  const params = useParams();
+  const taskIdNum = parseInt(params.taskid || '');
   const [resultPages, setResultPages] = useState<Serp[]>([]);
   const [offset, setOffset] = useState<number>(0);
   const [isLoading, setLoading] = useState<boolean>(false);

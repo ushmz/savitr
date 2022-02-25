@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router';
 
 import { PageLoadingCenter } from 'Components/Loader';
 import { useAuth } from 'shared/provider/authProvider';
@@ -23,5 +23,5 @@ export const Auth: React.FC = ({ children }) => {
   if (!authChecked) {
     return <PageLoadingCenter />;
   }
-  return auth.user !== null ? <>{children}</> : <Redirect to="/error/400" />;
+  return auth.user !== null ? <>{children}</> : <Navigate to="/error/400" />;
 };

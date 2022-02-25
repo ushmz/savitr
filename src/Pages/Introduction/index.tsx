@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps, useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Introduction as Component } from 'Pages/Introduction/Introduction';
 import { fetchTaskInfo } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 
-type Props = RouteComponentProps<{
-  taskid?: string;
-}>;
-
-export const Introduction: React.FC<Props> = (props) => {
-  const history = useHistory();
+export const Introduction: React.FC = () => {
+  const navigate = useNavigate();
   const dummyTask: TaskInfo = {
     id: 0,
     query: '',
@@ -21,7 +17,8 @@ export const Introduction: React.FC<Props> = (props) => {
 
   const [task, setTask] = useState<TaskInfo>(dummyTask);
 
-  const taskIdNum = parseInt(props.match.params.taskid || '0');
+  const params = useParams();
+  const taskIdNum = parseInt(params.taskid || '0');
 
   useEffect(() => {
     fetchTaskInfo(taskIdNum)
@@ -29,7 +26,7 @@ export const Introduction: React.FC<Props> = (props) => {
         if (task) setTask(task);
       })
       .catch(() => {
-        history.push('/error/500');
+        navigate('/error/500');
       });
     window.scrollTo(0, 0);
   }, [taskIdNum]);
