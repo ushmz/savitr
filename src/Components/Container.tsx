@@ -7,7 +7,7 @@ const Container: React.FC = ({ children }) => {
       sx={{
         mx: 'auto',
         my: '50px',
-        maxWidth: '960px',
+        maxWidth: '850px',
         display: 'block',
         padding: '10px',
       }}
