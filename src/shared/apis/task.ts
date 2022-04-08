@@ -1,15 +1,9 @@
-import axios from 'axios';
-
-import { API_ENDPOINT } from 'shared/config';
 import { TaskInfo } from 'shared/types';
-import { getJWT } from 'shared/utils';
+
+import { instance } from '.';
 
 export const fetchTaskInfo = async (taskId: number): Promise<TaskInfo | undefined> => {
-  const response = await axios.get<TaskInfo>(`${API_ENDPOINT}/api/v1/task/${taskId}`, {
-    headers: {
-      Authorization: `Bearer ${getJWT()}`,
-    },
-  });
+  const response = await instance.get<TaskInfo>(`/v1/task/${taskId}`);
 
   if (response.status === 200) {
     return response.data;
@@ -29,11 +23,7 @@ export type AnswerParam = {
 };
 
 export const createTaskAnswer = async (param: AnswerParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/task/answer`, param, {
-    headers: {
-      Authorization: `Bearer ${getJWT()}`,
-    },
-  });
+  const response = await instance.post('/v1/task/answer', param);
   if (response.status === 201) {
     return;
   } else {

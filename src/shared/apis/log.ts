@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-import { API_ENDPOINT } from 'shared/config';
-import { getJWT } from 'shared/utils';
+import { instance } from '.';
 
 export type SerpViewingLogParam = {
   user: number;
@@ -10,11 +7,7 @@ export type SerpViewingLogParam = {
 };
 
 export const createSerpViewingLog = async (param: SerpViewingLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/serp`, param, {
-    headers: {
-      Authorization: `Bearer ${getJWT()}`,
-    },
-  });
+  const response = await instance.post('/v1/logs/serp', param);
   if (response.status === 201) {
     return;
   } else {
@@ -31,11 +24,7 @@ export type PageViewingLogParam = {
 };
 
 export const createPageViewingLog = async (param: PageViewingLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/pageview`, param, {
-    headers: {
-      Authorization: `Bearer ${getJWT()}`,
-    },
-  });
+  const response = await instance.post('/v1/logs/pageview', param);
   if (response.status === 201) {
     return;
   } else {
@@ -58,11 +47,7 @@ export type EventLogParam = {
 };
 
 export const createEventLog = async (param: EventLogParam): Promise<void> => {
-  const response = await axios.post(`${API_ENDPOINT}/api/v1/logs/events`, param, {
-    headers: {
-      Authorization: `Bearer ${getJWT()}`,
-    },
-  });
+  const response = await instance.post('/v1/logs/events', param);
   if (response.status === 201) {
     return;
   } else {
