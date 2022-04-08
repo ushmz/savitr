@@ -5,11 +5,6 @@ import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-import { createUser } from 'shared/apis';
-import { useAuth } from 'shared/provider/authProvider';
 
 type RegisterParamName = 'externalId';
 
@@ -26,37 +21,37 @@ export const Register: React.FC = () => {
     formState: { errors },
   } = useForm<RegisterParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const auth = useAuth();
+  // const navigate = useNavigate();
+  // const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId }) => {
-    setLoading(true);
-    createUser(externalId)
-      .then((v) => {
-        const email = externalId + '@savitr.dummy.com';
-        auth
-          .signUp(email, v.secret)
-          .then(() => {
-            setLoading(false);
-            navigate('/upload');
-          })
-          .catch(() => {
-            auth
-              .signIn(email, v.secret)
-              .then(() => {
-                setLoading(false);
-                navigate('/upload');
-              })
-              .catch((resin) => {
-                toast.error(`予期せぬエラーが発生しました : ${resin}`);
-                setLoading(false);
-              });
-          });
-      })
-      .catch((res) => {
-        toast.error(`予期せぬエラーが発生しました : ${res}`);
-        setLoading(false);
-      });
+    // setLoading(true);
+    // createUser(externalId)
+    //   .then((v) => {
+    //     const email = externalId + '@savitr.dummy.com';
+    //     auth
+    //       .signUp(email, v.secret)
+    //       .then(() => {
+    //         setLoading(false);
+    //         navigate('/upload');
+    //       })
+    //       .catch(() => {
+    //         auth
+    //           .signIn(email, v.secret)
+    //           .then(() => {
+    //             setLoading(false);
+    //             navigate('/upload');
+    //           })
+    //           .catch((resin) => {
+    //             toast.error(`予期せぬエラーが発生しました : ${resin}`);
+    //             setLoading(false);
+    //           });
+    //       });
+    //   })
+    //   .catch((res) => {
+    //     toast.error(`予期せぬエラーが発生しました : ${res}`);
+    //     setLoading(false);
+    //   });
   });
 
   return (

@@ -6,7 +6,7 @@ import { useInterval } from 'use-interval';
 import { SearchResultPage as Component } from 'Pages/Search/Search';
 import { fetchSearchResults, fetchTaskInfo, createSerpViewingLog } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
-import { getConditionId, getUserId } from 'shared/utils';
+import { getConditionID, getUserID } from 'shared/utils';
 
 export const Search: React.FC = () => {
   document.title = '検索結果リスト';
@@ -18,8 +18,8 @@ export const Search: React.FC = () => {
     searchUrl: '',
   };
 
-  const userId = getUserId();
-  const conditionId = getConditionId();
+  const userId = getUserID();
+  const conditionId = getConditionID();
 
   const params = useParams();
   const taskIdNum = parseInt(params.taskid || '');

@@ -1,27 +1,8 @@
 import { preTaskUrl, postTaskUrl } from 'shared/config';
 
-export const getJWT = (): string => localStorage.getItem('jwt') || '';
+export * from 'shared/utils/webstorage';
 
-export const getUserId = (): number => {
-  const userstr = localStorage.getItem('user') || '0';
-  return parseInt(userstr);
-};
-
-export const getUID = (): string => {
-  return localStorage.getItem('uid') || '';
-};
-
-export const getConditionId = (): number => {
-  const condstr = localStorage.getItem('condition') || '0';
-  return parseInt(condstr);
-};
-
-export const isExperimentalGroup = (): boolean => {
-  const conditionId = localStorage.getItem('condition') || '';
-  return conditionId !== '6';
-};
-
-export const getPreTaskEnqueteByGroupId = (group: string): string => {
+export const getPreTaskEnqueteURLByGroupId = (group: string): string => {
   switch (group) {
     case '1':
       return preTaskUrl.shopping.icon;
@@ -40,7 +21,7 @@ export const getPreTaskEnqueteByGroupId = (group: string): string => {
   }
 };
 
-export const getPostTaskEnqueteByGroupId = (group: string): string => {
+export const getPostTaskEnqueteURLByGroupId = (group: string): string => {
   switch (group) {
     case '1':
       return postTaskUrl.shopping.icon;

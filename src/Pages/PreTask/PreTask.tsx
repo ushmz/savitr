@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'Components/Button';
 import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
-import { getPreTaskEnqueteByGroupId, getUserId } from 'shared/utils';
+import { getPreTaskEnqueteURLByGroupId, getUserID } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
   const navigate = useNavigate();
   const group = localStorage.getItem('group') || '';
-  const enquete = getPreTaskEnqueteByGroupId(group);
-  const user = getUserId();
+  const enquete = getPreTaskEnqueteURLByGroupId(group);
+  const user = getUserID();
 
   return (
     <Container>

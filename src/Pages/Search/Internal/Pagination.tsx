@@ -6,7 +6,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import { createEventLog } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
-import { getConditionId, getUserId } from 'shared/utils';
+import { getConditionID, getUserID } from 'shared/utils';
 
 type PaginationProps = {
   task: TaskInfo;
@@ -16,13 +16,12 @@ type PaginationProps = {
 };
 
 export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOffset, getTimeOnPage }) => {
-  const user = getUserId();
-  const condition = getConditionId();
+  const user = getUserID();
+  const condition = getConditionID();
 
   const WrapedArrowBackIcon: React.FC<PaginationProps> = (props) => (
     <ArrowBackIcon
       onClick={() => {
-        console.log(props);
         if (!(props.offset <= 0)) {
           setOffset(props.offset - 1);
           createEventLog({
@@ -43,7 +42,6 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
   const WrapedArrowForwordIcon: React.FC<PaginationProps> = (props) => (
     <ArrowForwardIcon
       onClick={() => {
-        console.log(props);
         if (!(props.offset >= 9)) {
           setOffset(props.offset + 1);
           createEventLog({
@@ -73,6 +71,7 @@ export const SerpPagination: React.FC<PaginationProps> = ({ task, offset, setOff
             components={{ previous: WrapedArrowBackIcon, next: WrapedArrowForwordIcon }}
             {...item}
             onClick={() => {
+              if (!item.page) return;
               setOffset(item.page - 1);
               createEventLog({
                 task: task.id,

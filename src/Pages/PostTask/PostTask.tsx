@@ -1,16 +1,18 @@
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'Components/Button';
 import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
-import { getPostTaskEnqueteByGroupId, getUserId } from 'shared/utils';
+import { getPostTaskEnqueteURLByGroupId, getUserID } from 'shared/utils';
 
 export const PostTask: React.FC = () => {
+  const navigate = useNavigate();
   const [clicked, isClicked] = useState<boolean>(false);
   const group = localStorage.getItem('group') || '';
-  const enquete = getPostTaskEnqueteByGroupId(group);
-  const user = getUserId();
+  const enquete = getPostTaskEnqueteURLByGroupId(group);
+  const user = getUserID();
 
   return (
     <Container>
@@ -40,9 +42,9 @@ export const PostTask: React.FC = () => {
 
       {/* 完了コード発行ページへの遷移ボタン */}
       <Box sx={{ my: '24px', display: 'flex', justifyContent: 'center' }}>
-        <a href="/compCode">
-          <Button disabled={!clicked}>完了コード発行</Button>
-        </a>
+        <Button disabled={!clicked} onClick={() => navigate('/compCode')}>
+          完了コード発行
+        </Button>
       </Box>
     </Container>
   );

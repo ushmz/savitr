@@ -5,10 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Container from '@mui/material/Container';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-import { useAuth } from 'shared/provider/authProvider';
+import { Link } from 'react-router-dom';
 
 type SignUpParamName = 'externalId' | 'passwd' | 'passwdConfirm';
 
@@ -27,23 +24,23 @@ export const Signup: React.FC = () => {
     formState: { errors },
   } = useForm<SignUpParam>();
   const [isLoading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const auth = useAuth();
+  // const navigate = useNavigate();
+  // const auth = useAuth();
 
   const onSubmit = handleSubmit(({ externalId, passwd }) => {
-    setLoading(true);
-    const email = externalId + '@savitr.dummy.com';
-    auth
-      .signUp(email, passwd)
-      .then(() => {
-        toast.success('アカウント登録が完了しました');
-        setLoading(false);
-        navigate('/user');
-      })
-      .catch((e) => {
-        toast.error('アカウント登録に失敗しました', e);
-        setLoading(false);
-      });
+    // setLoading(true);
+    // const email = externalId + '@savitr.dummy.com';
+    // auth
+    //   .signUp(email, passwd)
+    //   .then(() => {
+    //     toast.success('アカウント登録が完了しました');
+    //     setLoading(false);
+    //     navigate('/user');
+    //   })
+    //   .catch((e) => {
+    //     toast.error('アカウント登録に失敗しました', e);
+    //     setLoading(false);
+    //   });
   });
 
   return (

@@ -9,7 +9,7 @@ import { RatioUI } from 'Pages/Search/Internal/RatioUI';
 import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
 import { createEventLog, LoggingEventType } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
-import { getConditionId, getUserId } from 'shared/utils';
+import { getConditionID, getUserID } from 'shared/utils';
 
 type SearchResultPageProps = {
   condition: number;
@@ -22,8 +22,8 @@ type SearchResultPageProps = {
 };
 
 export const SearchResultPage: React.FC<SearchResultPageProps> = (props) => {
-  const user = getUserId();
-  const condition = getConditionId();
+  const user = getUserID();
+  const condition = getConditionID();
 
   const createEventHandler = (index: number, event: LoggingEventType) => {
     return () =>

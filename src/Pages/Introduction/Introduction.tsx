@@ -1,6 +1,7 @@
 import { InputLabel, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Button from 'Components/Button';
@@ -8,17 +9,17 @@ import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
 import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
-import { getConditionId, getUID, getUserId } from 'shared/utils';
-import history from 'shared/utils/browserHistory';
+import { getConditionID, getUID, getUserID } from 'shared/utils';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string>('');
   const [reason, setReason] = useState<string>('');
+  const navigate = useNavigate();
 
-  const condition = getConditionId();
+  const condition = getConditionID();
   const progresNumString = props.id <= 6 ? '1' : '2';
-  const userId = getUserId();
+  const userId = getUserID();
   const uid = getUID();
 
   return (
@@ -130,9 +131,9 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               .then(() => toast.success('回答を記録しました'));
             if (taskId) {
               localStorage.removeItem('notyet');
-              history.push(`/introduction/${taskId}`);
+              navigate(`/introduction/${taskId}`);
             } else {
-              history.push('/posttask');
+              navigate('/posttask');
             }
           }}
         >
