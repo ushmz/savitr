@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithCustomToken } from 'firebase/auth';
 import { User } from 'firebase/auth';
 import * as React from 'react';
 
@@ -10,9 +10,9 @@ export const useProvideAuth = (): ContextValue => {
   const [didAuthentication, setAuthentication] = React.useState<boolean>(false);
   const auth = getAuth(firebase);
 
-  const signIn = async (uid: string, password: string) => {
-    //.setPersistence(Persistence.LOCAL)
-    return signInWithEmailAndPassword(auth, uid, password).then(async (res) => {
+  const signIn = async (customToken: string) => {
+    // setPersistence(Persistence.LOCAL)
+    return signInWithCustomToken(auth, customToken).then(async (res) => {
       if (res.user) {
         const token = await res.user.getIdToken(true);
         localStorage.setItem('jwt', token);
@@ -23,8 +23,8 @@ export const useProvideAuth = (): ContextValue => {
   const signUp = async (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password).then(async (res) => {
       if (res.user) {
-        const token = await res.user.getIdToken(true);
-        localStorage.setItem('jwt', token);
+        // const token = await res.user.getIdToken(true);
+        // localStorage.setItem('jwt', token);
       }
     });
   };

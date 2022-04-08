@@ -4,7 +4,7 @@ import React, { createContext } from 'react';
 import { useProvideAuth } from 'shared/hooks/useAuth';
 
 export type ContextValue = {
-  signIn: (uid: string, password: string) => Promise<void | UserCredential>;
+  signIn: (token: string) => Promise<void | UserCredential>;
   signUp: (email: string, password: string) => Promise<void | UserCredential>;
   signOut: () => Promise<void>;
   // sendPasswordResetEmail: (email: string) => Promise<void>;
