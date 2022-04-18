@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { API_ENDPOINT } from 'shared/config';
 import { LinkedPage } from 'shared/types';
 
 import { SearchResult } from './SearchResult';
@@ -16,7 +15,7 @@ type IconUIProps = {
 
 const getIconCache = (origin: string): string => {
   const prsr = new URL(origin);
-  return `${API_ENDPOINT}/statics/${prsr.searchParams.get('h')}.png`;
+  return `public/img/icons/${prsr.hostname}.png`;
 };
 
 export const IconUI: React.FC<IconUIProps> = (props) => {
@@ -34,7 +33,7 @@ export const IconUI: React.FC<IconUIProps> = (props) => {
             <div key={k}>
               <a href={v.url} target="_blank" rel="noreferrer">
                 <img
-                  src={getIconCache(v.icon)}
+                  src={getIconCache(v.url)}
                   onError={(e) => {
                     const target = e.target as HTMLElement;
                     target.style.display = 'none';

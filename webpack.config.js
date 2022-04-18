@@ -60,7 +60,7 @@ module.exports = () => {
             to: path.resolve(__dirname, 'build'),
           },
           {
-            from: 'public/img/samples/**/*.png',
+            from: 'public/img/**/*.png',
             to: path.resolve(__dirname, 'build'),
           },
         ],
