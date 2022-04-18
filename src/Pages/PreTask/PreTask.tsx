@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'Components/Button';
 import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
-import { getPreTaskEnqueteURLByGroupId, getUserID } from 'shared/utils';
+import { getGroupID, getPreTaskEnqueteURLByGroupId, getPrimaryTaskID, getUserID } from 'shared/utils';
 
 export const PreTask: React.FC = () => {
   const [clicked, isClicked] = useState<boolean>(false);
   const navigate = useNavigate();
-  const group = localStorage.getItem('group') || '';
+  const group = getGroupID();
   const enquete = getPreTaskEnqueteURLByGroupId(group);
   const user = getUserID();
 
@@ -29,6 +29,7 @@ export const PreTask: React.FC = () => {
         <strong>開いたままに</strong>してください。
         アンケートへの回答が終了したらアンケートページが表示されているタブを閉じ、この画面からタスクを再開してください。
       </Paragraph>
+      <Paragraph>アンケートページは一度閉じると、もう一度表示することはできません。</Paragraph>
 
       {/* アンケートページへの遷移ボタン */}
       <Box sx={{ my: '24px', display: 'flex', justifyContent: 'center' }}>
@@ -47,9 +48,8 @@ export const PreTask: React.FC = () => {
         <Button
           disabled={!clicked}
           onClick={() => {
-            const sb = localStorage.getItem('standby');
+            const sb = getPrimaryTaskID();
             if (sb) {
-              localStorage.removeItem('standby');
               navigate(`/introduction/${sb}`);
             } else {
               navigate('/404');

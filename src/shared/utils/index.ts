@@ -2,38 +2,38 @@ import { preTaskUrl, postTaskUrl } from 'shared/config';
 
 export * from 'shared/utils/webstorage';
 
-export const getPreTaskEnqueteURLByGroupId = (group: string): string => {
+export const getPreTaskEnqueteURLByGroupId = (group: number): string => {
   switch (group) {
-    case '1':
+    case 1:
       return preTaskUrl.shopping.icon;
-    case '2':
+    case 2:
       return preTaskUrl.desease.icon;
-    case '3':
+    case 3:
       return preTaskUrl.shopping.controled;
-    case '4':
+    case 4:
       return preTaskUrl.desease.controled;
-    case '5':
+    case 5:
       return preTaskUrl.shopping.distribution;
-    case '6':
+    case 6:
       return preTaskUrl.desease.distribution;
     default:
       return '/error/404';
   }
 };
 
-export const getPostTaskEnqueteURLByGroupId = (group: string): string => {
+export const getPostTaskEnqueteURLByGroupId = (group: number): string => {
   switch (group) {
-    case '1':
+    case 1:
       return postTaskUrl.shopping.icon;
-    case '2':
+    case 2:
       return postTaskUrl.desease.icon;
-    case '3':
+    case 3:
       return postTaskUrl.shopping.controled;
-    case '4':
+    case 4:
       return postTaskUrl.desease.controled;
-    case '5':
+    case 5:
       return postTaskUrl.shopping.distribution;
-    case '6':
+    case 6:
       return postTaskUrl.desease.distribution;
     default:
       return '/error/404';

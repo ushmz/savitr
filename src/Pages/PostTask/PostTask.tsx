@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'Components/Button';
 import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
-import { getPostTaskEnqueteURLByGroupId, getUserID } from 'shared/utils';
+import { getGroupID, getPostTaskEnqueteURLByGroupId, getUserID } from 'shared/utils';
 
 export const PostTask: React.FC = () => {
   const navigate = useNavigate();
   const [clicked, isClicked] = useState<boolean>(false);
-  const group = localStorage.getItem('group') || '';
+  const group = getGroupID();
   const enquete = getPostTaskEnqueteURLByGroupId(group);
   const user = getUserID();
 

@@ -18,7 +18,7 @@ export const createSession = async (token: string): Promise<void> => {
   return;
 };
 
-export const fetchCompletionCode = async (id: string): Promise<number> => {
+export const fetchCompletionCode = async (id: number): Promise<number> => {
   const response = await instance.get<number>(`/v1/users/code/${id}`);
   if (response.status === 200) {
     return response.data;

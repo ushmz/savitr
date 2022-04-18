@@ -9,7 +9,7 @@ import Container from 'Components/Container';
 import Paragraph from 'Components/Paragraph';
 import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
-import { getConditionID, getUID, getUserID } from 'shared/utils';
+import { getConditionID, getSecondaryTaskID, getUID, getUserID } from 'shared/utils';
 
 export const Introduction: React.FC<TaskInfo> = (props) => {
   const [clicked, isClicked] = useState<boolean>(false);
@@ -113,7 +113,7 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               toast.error('回答の理由が入力されていません');
               return;
             }
-            const taskId = localStorage.getItem('notyet');
+            const taskId = getSecondaryTaskID();
             createTaskAnswer({
               user: userId,
               uid: uid,
@@ -130,7 +130,6 @@ export const Introduction: React.FC<TaskInfo> = (props) => {
               })
               .then(() => toast.success('回答を記録しました'));
             if (taskId) {
-              localStorage.removeItem('notyet');
               navigate(`/introduction/${taskId}`);
             } else {
               navigate('/posttask');
