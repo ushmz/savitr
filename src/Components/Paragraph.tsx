@@ -1,7 +1,11 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-const Paragraph: React.FC = ({ children }) => {
+type ParagraphProps = {
+  children: React.ReactNode;
+};
+
+const Paragraph: React.FC<ParagraphProps> = ({ children }) => {
   return <Typography sx={{ mt: '-10px', mb: '24px' }}>{children}</Typography>;
 };
 

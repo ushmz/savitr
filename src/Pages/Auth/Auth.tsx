@@ -6,7 +6,11 @@ import { PageLoadingCenter } from 'Components/Loader';
 import { useAuth } from 'shared/provider/authProvider';
 import firebase from 'shared/utils/firebase';
 
-export const Auth: React.FC = ({ children }) => {
+type AuthProps = {
+  children: React.ReactNode;
+};
+
+export const Auth: React.FC<AuthProps> = ({ children }) => {
   const auth = useAuth();
   const [authChecked, setAuthChecked] = useState<boolean>(false);
 

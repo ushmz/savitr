@@ -1,7 +1,11 @@
 import Box from '@mui/material/Box';
 import React from 'react';
 
-const Container: React.FC = ({ children }) => {
+type ContainerProps = {
+  children: React.ReactNode;
+};
+
+const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
     <Box
       sx={{
