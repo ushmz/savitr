@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useStopwatch } from 'react-timer-hook';
 import { useInterval } from 'use-interval';
 
-import { SearchResultPage as Component } from 'Pages/Search/Search';
+import { SearchResultPage as Component } from 'pages/Search/Search';
 import { fetchSearchResults, fetchTaskInfo, createSerpViewingLog } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionID, getUserID } from 'shared/utils';

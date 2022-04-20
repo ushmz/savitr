@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Introduction as Component } from 'Pages/Introduction/Introduction';
+import { Introduction as Component } from 'pages/Introduction/Introduction';
 import { fetchTaskInfo } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 

@@ -43,9 +43,9 @@
         "newlines-between": "always",
         "pathGroupsExcludedImportTypes": ["builtin"],
         "pathGroups": [
-          { "pattern": "App/**/*", "group": "internal" },
-          { "pattern": "Components/**/*", "group": "internal" },
-          { "pattern": "Pages/**/*", "group": "internal" },
+          { "pattern": "app/**/*", "group": "internal" },
+          { "pattern": "components/**/*", "group": "internal" },
+          { "pattern": "pages/**/*", "group": "internal" },
           { "pattern": "shared/**/*", "group": "internal" }
         ]
       }

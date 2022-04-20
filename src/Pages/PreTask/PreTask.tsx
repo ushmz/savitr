@@ -2,9 +2,9 @@ import Box from '@mui/material/Box';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Button from 'Components/Button';
-import Container from 'Components/Container';
-import Paragraph from 'Components/Paragraph';
+import Button from 'components/Button';
+import Container from 'components/Container';
+import Paragraph from 'components/Paragraph';
 import { getGroupID, getPreTaskEnqueteURLByGroupId, getPrimaryTaskID, getUserID } from 'shared/utils';
 
 export const PreTask: React.FC = () => {

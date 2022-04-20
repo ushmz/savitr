@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SearchResult } from './SearchResult';
+import { SearchResult } from 'pages/Search/Internal/SearchResult';
 
 type BaseUIProps = {
   title: string;

@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { SearchResult } from 'pages/Search/Internal/SearchResult';
 import { LinkedPageDistribution } from 'shared/types';
-
-import { SearchResult } from './SearchResult';
 
 type RatioUIProps = {
   title: string;

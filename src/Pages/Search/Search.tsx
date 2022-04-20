@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-import { PageLoadingCenter } from 'Components/Loader';
-import { BaseUI } from 'Pages/Search/Internal/BaseUI';
-import { ControlledUI } from 'Pages/Search/Internal/ControlledUI';
-import { IconUI } from 'Pages/Search/Internal/IconUI';
-import { SerpPagination } from 'Pages/Search/Internal/Pagination';
-import { RatioUI } from 'Pages/Search/Internal/RatioUI';
-import { SearchHeader } from 'Pages/Search/Internal/SearchBarHeader';
+import { PageLoadingCenter } from 'components/Loader';
+import { BaseUI } from 'pages/Search/Internal/BaseUI';
+import { ControlledUI } from 'pages/Search/Internal/ControlledUI';
+import { IconUI } from 'pages/Search/Internal/IconUI';
+import { SerpPagination } from 'pages/Search/Internal/Pagination';
+import { RatioUI } from 'pages/Search/Internal/RatioUI';
+import { SearchHeader } from 'pages/Search/Internal/SearchBarHeader';
 import { createEventLog, LoggingEventType } from 'shared/apis';
 import { Serp, TaskInfo } from 'shared/types';
 import { getConditionID, getUserID } from 'shared/utils';

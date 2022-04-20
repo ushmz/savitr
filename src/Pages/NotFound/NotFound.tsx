@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Container from 'Components/Container';
+import Container from 'components/Container';
 
 export const NotFound: React.FC<{ err?: string; message?: string }> = (props) => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { PageLoadingCenter } from 'Components/Loader';
-import { Completion as Component } from 'Pages/Completion/Completion';
+import { PageLoadingCenter } from 'components/Loader';
+import { Completion as Component } from 'pages/Completion/Completion';
 import { fetchCompletionCode } from 'shared/apis';
 import { getUserID } from 'shared/utils';
 

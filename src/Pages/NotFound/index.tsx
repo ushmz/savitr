@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { NotFound as Component } from 'Pages/NotFound/NotFound';
+import { NotFound as Component } from 'pages/NotFound/NotFound';
 
 export const NotFound: React.FC = () => {
   const params = useParams();

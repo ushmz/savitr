@@ -5,17 +5,17 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Auth } from 'Pages/Auth/Auth';
-import { Completion } from 'Pages/Completion';
-import { Introduction } from 'Pages/Introduction';
-import { NotFound } from 'Pages/NotFound';
-import { PostTask } from 'Pages/PostTask';
-import { PreTask } from 'Pages/PreTask';
-import { ResultDocument } from 'Pages/Result';
-import { Search } from 'Pages/Search';
-import { Top } from 'Pages/Top';
+import { Auth } from 'pages/Auth/Auth';
+import { Completion } from 'pages/Completion';
+import { Introduction } from 'pages/Introduction';
+import { NotFound } from 'pages/NotFound';
+import { PostTask } from 'pages/PostTask';
+import { PreTask } from 'pages/PreTask';
+import { ResultDocument } from 'pages/Result';
+import { Search } from 'pages/Search';
+import { Top } from 'pages/Top';
 
-const AppRoutes: React.FC = () => {
+export const AppRoutes: React.FC = () => {
   return isMobile ? (
     <>
       <Card className="m-5">
@@ -84,5 +84,3 @@ const AppRoutes: React.FC = () => {
     </BrowserRouter>
   );
 };
-
-export default AppRoutes;

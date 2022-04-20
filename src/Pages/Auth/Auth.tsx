@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router';
 
-import { PageLoadingCenter } from 'Components/Loader';
+import { PageLoadingCenter } from 'components/Loader';
 import { useAuth } from 'shared/provider/authProvider';
 import firebase from 'shared/utils/firebase';
 

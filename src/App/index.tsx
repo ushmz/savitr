@@ -1,19 +1,19 @@
 import React, { ReactElement } from 'react';
 import { ToastContainer } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
-import AppRoutes from 'App/Routes';
-import { ProvideAuth } from 'shared/provider/authProvider';
 import 'sanitize.css';
+
+import { AppRoutes } from 'app/Routes';
+import { ProvideAuth } from 'shared/provider/authProvider';
 
 const App = (): ReactElement => {
   return (
-    <React.Fragment>
-      <ProvideAuth>
+    <ProvideAuth>
+      <React.Fragment>
         <AppRoutes />
         <ToastContainer />
-      </ProvideAuth>
-    </React.Fragment>
+      </React.Fragment>
+    </ProvideAuth>
   );
 };
 

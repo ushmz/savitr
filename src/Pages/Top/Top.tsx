@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import Button from 'Components/Button';
-import Container from 'Components/Container';
-import { ComponentLoadingCenter } from 'Components/Loader';
+import Button from 'components/Button';
+import Container from 'components/Container';
+import { ComponentLoadingCenter } from 'components/Loader';
 import { CROWDSOURCING_SITE } from 'shared/config';
 
 type RegisterParam = {

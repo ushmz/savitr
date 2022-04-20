@@ -3,8 +3,8 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-import Container from 'Components/Container';
-import Paragraph from 'Components/Paragraph';
+import Container from 'components/Container';
+import Paragraph from 'components/Paragraph';
 import { CROWDSOURCING_SITE } from 'shared/config';
 
 type Props = {

@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import Button from 'Components/Button';
-import Container from 'Components/Container';
-import Paragraph from 'Components/Paragraph';
+import Button from 'components/Button';
+import Container from 'components/Container';
+import Paragraph from 'components/Paragraph';
 import { createTaskAnswer, makeSearchSesion } from 'shared/apis';
 import { TaskInfo } from 'shared/types';
 import { getConditionID, getSecondaryTaskID, getUID, getUserID } from 'shared/utils';

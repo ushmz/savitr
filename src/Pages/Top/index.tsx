@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Top as Component } from 'Pages/Top/Top';
+import { Top as Component } from 'pages/Top/Top';
 import { createUser } from 'shared/apis';
 import { useAuth } from 'shared/provider/authProvider';
 import {
