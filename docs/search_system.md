@@ -50,11 +50,7 @@ The **Ratio** UI counts the number of sharing destinations for each search resul
 Then, the **Ratio** UI displays the top three categories of sharing destinations with their numbers and ratios of total for each web search result (Figure \ref{fig:UI-example}(b)).
 For the **Control** UI, if a web search result has sharing destinations, the system simply displays a tracker indicator with the result (Figure \ref{fig:control-UI}).
 
-\begin{figure}
-\includegraphics[width=0.60\linewidth]{figures/serp-manipulation.pdf}
-\caption{Manipulation of search result list on SERPs. Search results labeled as `Displayed'' show privacy risks indicators, and search results labeled as `Not displayed'' do not show privacy risks indicators.}
-\label{fig:serp_manipulation}
-\end{figure}
+![](../public/img/serp-manipulation.png)
 
 For all search UIs, we controlled whether the privacy risk indicators would be displayed on the web search results depending on search result ranks.
 As shown in Figure \ref{fig:serp_manipulation}, the search system displayed the risk indicators only for web search results in odd-ranked positions.
