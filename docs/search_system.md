@@ -17,8 +17,8 @@ A SERP presented a list of 10 webpages (i.e., search results) matching the given
 The system paginated 10 SERPs for each query.
 Thus, each participant viewed at most 100 webpages for the given query.
 Although our SERPs imitated the SERPs of common web search engines, we configured the search system such that the participants could not modify the search queries on SERPs for each search task.
-% We needed to fix search results and generate privacy risk indicators for the results prior to conducting the user study so that the system could present web search results with low latency.
-% Consequently, the system displayed a fixed list of 100 webpages for a fixed query in each task.
+We needed to fix search results and generate privacy risk indicators for the results prior to conducting the user study so that the system could present web search results with low latency.
+Consequently, the system displayed a fixed list of 100 webpages for a fixed query in each task.
 There corresponding webpage was displayed when the participants clicked each search result.
 
 Then, we analyzed the third-party cookies of the collected web search results to examine the presence of trackers.
@@ -44,20 +44,29 @@ Then, the IDF of <img style="vertical-align: middle;" src="https://latex.codecog
 
 The **Icon** UI presented favicons to display specific examples of sharing destination websites to which the browsing history on a web search result could be shared.
 For each web search result, the **Icon** UI displays the top five IDF sharing destination websites as popular sharing destinations and the bottom five IDF sharing destinations as unique destinations for the search result.
-<img style="margin:20px auto; width:75%; display:block" src="../public/img/samples/en/5.png">
+
+<p align="center">
+  <img style="margin:20px 0; width:50%;" src="../public/img/samples/en/5.png">
+</p>
 
 The **Ratio** UI presented a summary of the popular categories of potential sharing destinations.
 In addition, the **Ratio** UI presented the number of sharing destinations and their ratios of total in three categories.
 The **Ratio** UI counts the number of sharing destinations for each search result according to the topic categories of SimilarWeb.com.
-Then, the **Ratio** UI displays the top three categories of sharing destinations with their numbers and ratios of total for each web search result (Figure \ref{fig:UI-example}(b)).
-<img style="margin:20px auto; width:75%; display:block" src="../public/img/samples/en/7.png">
+Then, the **Ratio** UI displays the top three categories of sharing destinations with their numbers and ratios of total for each web search result.
+
+<p align="center">
+  <img style="margin:20px 0; width: 50%;" src="../public/img/samples/en/7.png">
+</p>
 
 For the **Control** UI, if a web search result has sharing destinations, the system simply displays a tracker indicator with the result.
-<img style="margin:20px auto; width:75%; display:block" src="../public/img/samples/en/6.png">
+<p align="center">
+  <img style="margin:20px auto; width:50%;" src="../public/img/samples/en/6.png">
+</p>
 
 For all search UIs, we controlled whether the privacy risk indicators would be displayed on the web search results depending on search result ranks.
-
-<img style="margin: 20px auto; width: 75%; display:block" src="../public/img/serp-manipulation.png" />
+<p align="center">
+  <img style="margin: 20px 0; width: 50%;" src="../public/img/serp-manipulation.png" />
+</p>
 
 As shown in figure above, the search system displayed the risk indicators only for web search results in odd-ranked positions.
 This manipulation was implemented to display web search results with and without the risk indicators as equally as possible.
